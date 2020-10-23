@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VDividedBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%"
+	height="100%" xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+	creationComplete="creationCompleteHandler(event)"
+	currentState="flex3">
+	<mx:states>
+		<mx:State name="flex3">
+			<mx:SetProperty target="{formitem5}" name="visible" value="false"/>
+			<mx:SetProperty target="{formitem5}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{form_WSDLUrl}" name="wordWrap" value="false"/>
+		</mx:State>
+		<mx:State name="flex4">
+			<mx:SetProperty target="{formitem5}" name="visible" value="false"/>
+			<mx:SetProperty target="{formitem5}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{form_WSDLUrl}" name="wordWrap" value="false"/>
+		</mx:State>
+		<mx:State name="objC">
+			<mx:SetProperty target="{form_GenerateRequest}" name="visible" value="false"/>
+			<mx:SetProperty target="{form_GenerateRequest}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{form_MakeAllBindable}" name="visible" value="false"/>
+			<mx:SetProperty target="{form_MakeAllBindable}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{platform_Text}" name="text" value="You need to add source files in your project that is included in following &quot;Source and Library&quot; link, please click here to open it."/>
+			<mx:SetProperty target="{form_Options}" name="visible" value="false"/>
+			<mx:SetProperty target="{form_Options}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{formitem1}" name="label" value="Class Name Prefix:"/>
+			<mx:SetProperty target="{form_LocalNamespace}" name="waterMarkText" value="Since Cocoa/iOS does not support namespaces, you can use prefix to escape class names"/>
+		</mx:State>
+		<mx:State name="java">
+			<mx:SetProperty target="{platform_Text}" name="text" value="You need to add jar file in your project that is included in following &quot;Source and Library&quot; link, please click here to open it."/>
+			<mx:SetProperty target="{formitem5}" name="visible" value="false"/>
+			<mx:SetProperty target="{formitem5}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{form_Options}" name="visible" value="false"/>
+			<mx:SetProperty target="{form_Options}" name="includeInLayout" value="false"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import com.neuro.controls.BubbleCommandEvent;
+			import com.neuro.utils.CUtils;
+			
+			import flash.desktop.NativeProcess;
+			import flash.filesystem.File;
+			import flash.html.HTMLLoader;
+			
+			import mx.binding.utils.ChangeWatcher;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.Application;
+			import mx.core.WindowedApplication;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			
+			import wsClasses.WSGenerator;
+		
+			
+			[Bindable]
+			public var currentProject:WSProjectProperties = new WSProjectProperties();
+			
+			public function loadLastProject():void
+			{
+				var f:File = File.applicationStorageDirectory;
+				f = new File(f.nativePath + File.separator + "lastFile.txt");
+				if(f.exists){
+					var fs:FileStream = new FileStream();
+					fs.open(f, FileMode.READ);
+					var fn:String = fs.readUTF();
+					fs.close();
+					load(f);
+				}
+			}
+			
+			
+			
+			private function browseFolderClicked():void{
+				var f:File = File.documentsDirectory;
+				f.browseForDirectory("Folder for Generated Files");
+				f.addEventListener(Event.SELECT, 
+					function(e:Event):void{
+						var d:File = e.target as File;
+						form_Folder.text = d.nativePath;
+					});
+			}
+			
+			private function browseFileClicked():void{
+				var f:File = File.documentsDirectory;
+				f.browseForSave("Save as file");
+				f.addEventListener(Event.SELECT,
+					function(e:Event):void{
+						var d:File = e.target as File;
+						form_FileName.text = d.nativePath;
+					});
+			}
+			
+			public function load(f:File):void
+			{
+				
+				var wp:WSProjectProperties = new WSProjectProperties();
+				wp.load(f);
+				
+				var found:Boolean = false;
+				for each(var obj:Object in availableTypes){
+					if(obj.data == wp.generateType){
+						found = true;
+					}
+				}
+				
+				if(!found){
+					Alert.show(wp.generateType + " is not supported","Error");
+					return;
+				}
+				
+				this.currentFile = f;
+				this.currentProject.load(currentFile);
+				
+				this.callLater(refreshState);
+				
+				this.label = f.name;
+			}
+			
+			private function refreshState():void
+			{
+				this.currentState = currentProject.generateType;
+				
+				// set id...
+				form_Target.selectedIndex = parseIndex(form_Type.selectedItem,currentProject.target);
+			}
+			
+			public function rebind():void{
+				currentProject.folderPath = form_Folder.text;
+				currentProject.generateFilename = form_FileName.text;
+				currentProject.localNamespace = form_LocalNamespace.text;
+				currentProject.makeAllBindable = form_MakeAllBindable.selected;
+				currentProject.wsdlUrl = form_WSDLUrl.text;
+				currentProject.generateType = form_Type.data.toString();
+				currentProject.generateRequest = form_GenerateRequest.selected;
+				currentProject.soapType = form_SoapType.selectedItem.value;
+				if(form_Target.selectedItem==null){
+					currentProject.target = null;
+				}else{
+					currentProject.target = form_Target.selectedItem.type;
+				}
+			}
+			
+			
+			private static var _ac:ArrayCollection = null; 
+			private function get availableTypes():ArrayCollection{
+				if(_ac!=null)
+					return _ac;
+				_ac = new ArrayCollection();
+				
+				if(LICENSE::edition==1 || LICENSE::edition==5 || LICENSE::edition>9){
+					_ac.addItem({ label:"Cocoa (Obj-C)", data:"objC" , type: wsClasses.ObjCGenerator , target: [
+						{label:"Mac", type:"mac", file:"libMac"},
+						{label:"iPhone", type:"iphone", file:"libMac"}
+					] });
+				}
+				
+				if(LICENSE::edition==2 || LICENSE::edition==5 || LICENSE::edition>9){
+					_ac.addItem({ label:"Java", data:"java" , type: wsClasses.JavaGenerator , target:[
+						{label:"JDK",type:"jdk", file:"libJava"},
+						{label:"Android",type:"android", file:"libJavaAndroid"},
+						{label:"Blackberry",type:"blackberry", file:"libJavaBlackberry"}
+					]});
+				}
+				if(LICENSE::edition==4 || LICENSE::edition>9){
+					_ac.addItem({ label:"Flex 3", data:"flex3" , type: wsClasses.AS3Generator, target:[] , file:"libFlash" });
+					_ac.addItem({ label:"Flex 4", data:"flex4" , type: wsClasses.AS4Generator, target:[] , file:"libFlash" });
+				}
+				return _ac;				
+			}
+			
+			[Bindable]
+			public var currentFile:File = null;
+
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				if(currentProject.generateType == ""){
+					// set first..
+					currentProject.generateType = availableTypes.getItemAt(0).data;
+				}
+				refreshState();
+				this.addEventListener(CloseEvent.CLOSE, onClose,false,0,true);
+				linkText.htmlLoader.navigateInSystemBrowser = true;
+				linkText.htmlLoader.placeLoadStringContentInApplicationSandbox = true;
+			}
+			
+			
+			private function onClose(e:CloseEvent):void
+			{
+				if(!isSaved()){
+					Alert.show("This file is not saved, you sure you want to close it?","Close", Alert.YES | Alert.NO, this, onCloseEvent,null, Alert.NO);
+					e.preventDefault();
+				}
+			}
+			
+			private function onCloseEvent(e:CloseEvent):void
+			{
+				if(e.detail == Alert.YES){
+					BubbleCommandEvent.bubble(this,"closeWindow",this);
+				}
+			}
+
+			private function onChanged():void
+			{
+				if(!isSaved()){
+					this.label = "*" + fileName;
+				}else{
+					this.label = fileName;
+				}
+			}
+			
+			public function isSaved():Boolean
+			{
+				if(currentProject.folderPath != form_Folder.text) return false;
+				if(currentProject.generateFilename != form_FileName.text) return false;
+				if(currentProject.localNamespace != form_LocalNamespace.text) return false;
+				if(currentProject.makeAllBindable != form_MakeAllBindable.selected) return false;
+				if(currentProject.wsdlUrl != form_WSDLUrl.text) return false;
+				if(currentProject.generateType != form_Type.data.toString()) return false;
+				if(currentProject.generateRequest != form_GenerateRequest.selected) return false;
+				if(form_Target.selectedItem!=null){
+					if(currentProject.target != form_Target.selectedItem.type) return false;
+				}
+				if(form_SoapType.selectedItem!=null && currentProject.soapType != form_SoapType.selectedItem.value) 
+					return false;
+				return true;
+			}
+			
+			public function get fileName():String{
+				if(currentFile==null)
+					return "Untitled..";
+				return currentFile.name;
+			}
+			
+			public function save(f:File):void
+			{
+				rebind();
+				this.currentFile = f;
+				currentProject.save(f);
+				this.label = f.name;
+			}
+
+			protected function generateButton_clickHandler(event:MouseEvent):void
+			{
+				rebind();
+				var cls:Class = form_Type.selectedItem.type as Class;
+				var clf:ClassFactory = new ClassFactory(cls);
+				var gen:WSGenerator = clf.newInstance() as WSGenerator;
+				
+				currentProject.forAndroid = false;
+				currentProject.forBlackberry = false;
+				currentProject.forIPhone = false;
+				currentProject.forSilverlight = false;
+				
+				// set according to target...
+				switch(currentProject.target){
+					case "iphone":
+						currentProject.forIPhone = true;
+						break;
+					case "android":
+						currentProject.forAndroid = true;
+						break;
+					case "blackberry":
+						currentProject.forBlackberry = true;
+						break;
+					case "silverlight":
+						currentProject.forSilverlight = true;
+						break;
+				}
+				
+				currentProject.generateFiles(gen);
+			}
+
+
+			protected function platform_Link_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var f:File = File.applicationDirectory.resolvePath(form_Target.selectedItem.file);
+				f.openWithDefaultApplication();
+			}
+			
+			private function getFullPath(file:String):String
+			{
+				if(file==null)
+					return null;
+				var f:File = File.applicationDirectory.resolvePath(file);
+				return f.nativePath;
+			}
+			
+			private function getHtml(file:String):String
+			{
+				if(file==null)
+					return "";
+				var f:File = File.applicationDirectory.resolvePath(file);
+				var html:String = "<html><body><a href='file://"+f.nativePath+"' title='"+f.nativePath+"' target='_blank'>Source and Library</a></body></html>";
+				return html;
+			}
+			
+			private function parseIndex(src:Object,target:String):int
+			{
+				var i:int = 0;
+				for each(var obj:Object in form_Type.selectedItem.target){
+					if(obj.type == target)
+						return i;
+					i++;
+				}
+				return 0;
+			}
+
+		]]>
+	</mx:Script>
+	
+	<mx:Form label="Configuration" width="100%">
+		<mx:FormItem label="WSDL Urls:" width="100%" id="formitem8">
+			<mx:TextArea id="form_WSDLUrl" 
+						 text="{currentProject.wsdlUrl}"
+						 change="onChanged()"
+						 width="100%" height="150"/>
+			<mx:Text text="You can add multiple URLs each on new line"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Client Type:" width="100%" direction="horizontal">
+			<ns:ValueComboBox 
+				id="form_Type" 
+				dataField="data" 
+				dataProvider="{availableTypes}"
+				rowCount="{availableTypes.length}"
+				data="{currentProject.generateType}"
+				change="{currentProject.generateType = form_Type.selectedItem.data; refreshState()}"/>
+			<mx:Label text="Soap Version:"/>
+			<mx:HorizontalList 
+				id="form_SoapType"
+				labelField="label"
+				selectedIndex="{currentProject.soapType == 'soap12' ? 1 : 0}"
+				change="onChanged()"
+				height="25"
+				columnWidth="70"
+				 width="160">
+				<mx:dataProvider>
+					<mx:Array>
+						<mx:Object label="Soap 1.1" value="soap11"/>
+						<mx:Object label="Soap 1.2" value="soap12"/>
+					</mx:Array>
+				</mx:dataProvider>
+			</mx:HorizontalList>
+			<mx:Text text="(If WSClient++ does not generate any methods then try Soap 1.1 version)"/>
+		</mx:FormItem>
+		<mx:FormItem width="100%" label="Target:">
+			<mx:HorizontalList id="form_Target" 
+							dataProvider="{form_Type.selectedItem.target}"
+							selectedIndex="{parseIndex(form_Type.selectedItem,currentProject.target)}"
+							columnWidth="100" rowHeight="25"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Package:" id="formitem1" width="100%">
+			<ns:WatermarkedTextInput id="form_LocalNamespace" text="{currentProject.localNamespace}" 
+						  change="onChanged()"
+						  width="100%"/>
+		</mx:FormItem>
+		
+		<mx:FormItem id="form_Options" width="100%" direction="horizontal" label="Options:">
+			<mx:CheckBox id="form_MakeAllBindable" selected="{currentProject.makeAllBindable}" label="Bindable" change="onChanged()"/>
+			<mx:CheckBox label="Generate Request Objects" id="form_GenerateRequest" selected="{currentProject.generateRequest}" change="onChanged()"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Generate Filename" id="formitem5" width="100%" direction="horizontal">
+			<ns:WatermarkedTextInput 
+				isRequired="false" 
+				id="form_FileName" 
+				text="{currentProject.generateFilename}"
+				waterMarkText="Filename without extension"
+				width="100%" change="onChanged()"/>
+			<!--mx:Button label="Browse" click="{browseFileClicked()}"/-->
+		</mx:FormItem>
+	
+		<mx:FormItem label="Folder to Store" width="100%" direction="horizontal">
+			<ns:WatermarkedTextInput 
+				id="form_Folder"
+				isRequired="false"
+				waterMarkText="Folder to generate files in"
+				text="{currentProject.folderPath}" width="100%" change="onChanged()"/>
+			<mx:Button label="Browse" click="{browseFolderClicked()}"/>
+		</mx:FormItem>
+		
+		<mx:FormItem direction="horizontal" width="100%">
+			<mx:Button label="Generate" id="generateButton" click="generateButton_clickHandler(event)"/>
+			<ns:UpdateButton label="Save Settings" bubbleCommand="saveFile" bubbleCommandData="{this}"/>
+		</mx:FormItem>
+		
+		<mx:FormItem label="Platform Libraries:" width="100%">
+			<mx:Text id="platform_Text"></mx:Text>
+			<mx:LinkButton id="platform_Link" visible="{LICENSE::demo==false}" includeInLayout="{LICENSE::demo==false}" label="Source and Library" click="platform_Link_clickHandler(event)"  textDecoration="underline" color="#000CFF"/>
+			<mx:HTML  id="linkText" visible="{LICENSE::demo==true}" includeInLayout="{LICENSE::demo==true}" htmlText="{getHtml(form_Target.selectedItem ? form_Target.selectedItem.file: form_Type.selectedItem.file)}" width="100%" height="100%"/>
+			<mx:Text text="If link above does not open, please find the files at the following location."/>
+			<mx:TextInput id="form_FolderPath" width="100%" text="{getFullPath(form_Target.selectedItem ? form_Target.selectedItem.file : form_Type.selectedItem.file)}"/>
+			<!--mx:HTML  id="linkText" htmlText="{getHtml(form_Target.selectedItem ? form_Target.selectedItem.file: form_Type.selectedItem.file)}" width="100%" height="100%"/-->
+		</mx:FormItem>
+		
+	</mx:Form>
+	<mx:VBox label="Log" width="100%" height="100%">
+		<mx:TextArea width="100%" height="100%" text="{currentProject.log}"/>
+	</mx:VBox>
+
+</mx:VDividedBox>

@@ -1,0 +1,77 @@
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="LicenseService">
+    <annotation name="ActionScriptGeneration">
+      <item name="WSDL-service">LicenseService</item>
+      <item name="ServiceType">WebService</item>
+      <item name="WSDL">http://store.neurospeech.com/Service/LicenseService.asmx?WSDL</item>
+      <item name="Package">services.licenseservice</item>
+      <item name="WSDL-port">LicenseServiceSoap</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">WebService</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="WSDL-endpoint">http://store.neurospeech.com/Service/LicenseService.asmx</item>
+      <item name="LINKED_FILE"></item>
+    </annotation>
+    <function name="GetLicense" return-type="LicenseResult">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="GetLicense">http://tempuri.org/,GetLicense</item>
+        <item name="SOAPAction">http://tempuri.org/GetLicense</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string,string,string,string,string,string</item>
+        <item name="returnType">LicenseResult</item>
+      </annotation>
+      <parameter name="productUID" type="string"/>
+      <parameter name="version" type="string"/>
+      <parameter name="emailAddress" type="string"/>
+      <parameter name="licenseCode" type="string"/>
+      <parameter name="upgradeCode" type="string"/>
+      <parameter name="computerName" type="string"/>
+    </function>
+    <function name="Deactivate" return-type="LicenseResult">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="Deactivate">http://tempuri.org/,Deactivate</item>
+        <item name="SOAPAction">http://tempuri.org/Deactivate</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">long,string</item>
+        <item name="returnType">LicenseResult</item>
+      </annotation>
+      <parameter name="orderID" type="long"/>
+      <parameter name="computerName" type="string"/>
+    </function>
+  </service>
+  <entity name="LicenseResult">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">LicenseResult</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">LicenseService</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="GetLicense">
+      <item name="propertySpecifier">Success,Message,Result</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="Success" type="boolean"/>
+    <property name="Message" type="string"/>
+    <property name="Result" type="string"/>
+  </entity>
+</model>

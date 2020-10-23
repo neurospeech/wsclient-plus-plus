@@ -1,0 +1,7 @@
+﻿
+<#
+
+	string connectionString = "Data Source=tcp:mziazfq7g9.database.windows.net,1433;Initial Catalog=wsclientdb;User ID=wsclient@mziazfq7g9;Password=$neuroline79";
+	//string connectionString = "Data Source=s800;Initial Catalog=Casting800;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework";
+
+#>

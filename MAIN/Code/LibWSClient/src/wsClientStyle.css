@@ -1,0 +1,17 @@
+/* CSS file */
+TitleWindow
+{
+	borderColor: #A8FF9C;
+	borderAlpha: 1.0;
+}
+TabNavigator
+{
+	tabStyleName: tabNavigatorTab;
+}
+.tabNavigatorTab
+{
+	fillAlphas: 1.0, 1.0, 1.0, 1.0;
+	fillColors: #CAE5FF, #97C3FF, #FFFFFF, #FFFFFF;
+}
+	
+

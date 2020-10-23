@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schema3" elementFormDefault="qualified" targetNamespace="http://schema3" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="SampleType">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:element name="SampleType" nillable="true" type="tns:SampleType" />
+</xs:schema>

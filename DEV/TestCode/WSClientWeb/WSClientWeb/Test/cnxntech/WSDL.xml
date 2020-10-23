@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="enlightenOperations"
+targetNamespace="http://cx-labs.net/enlightenOperations/"
+xmlns="http://schemas.xmlsoap.org/wsdl/"
+xmlns:tns="http://cx-labs.net/enlightenOperations/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/">
+
+  <types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://cx-labs.net/enlightenOperations/"
+    elementFormDefault="qualified">
+
+      <xsd:complexType name="Task">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:string"></xsd:element>
+          <xsd:element name="statusCode" type="xsd:string"></xsd:element>
+          <xsd:element name="description" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Status">
+        <xsd:sequence>
+          <xsd:element name="description" type="xsd:string"></xsd:element>
+          <xsd:element name="statusCode" type="xsd:string"></xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="tasks" type="tns:Task"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="SOEvent">
+        <xsd:sequence>
+          <xsd:element name="typeCode" type="xsd:string"></xsd:element>
+          <xsd:element name="creationDate" type="xsd:dateTime"></xsd:element>
+          <xsd:element name="originatingUser" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="assignedUser" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="assignedGroup" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="comments" minOccurs="0" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="UnitAddress">
+        <xsd:sequence>
+          <xsd:element name="lotNumber" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="unitNumber" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="apartmentSuiteNumber" minOccurs="0" type="xsd:string"></xsd:element>
+          <xsd:element name="street" type="xsd:string"></xsd:element>
+          <xsd:element name="city" type="xsd:string"></xsd:element>
+          <xsd:element name="state" type="xsd:string"></xsd:element>
+          <xsd:element name="zipcode" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DeviceInfo">
+        <xsd:sequence>
+          <xsd:element name="deviceType" type="xsd:string"></xsd:element>
+          <xsd:element name="deviceManufacturer" type="xsd:string"></xsd:element>
+          <xsd:element name="deviceModel" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="NotificationCode">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Submitted"/>
+          <xsd:enumeration value="FOC"/>
+          <xsd:enumeration value="Disconnected"/>
+          <xsd:enumeration value="Installed"/>
+          <xsd:enumeration value="Completed"/>
+          <xsd:enumeration value="Rejected"/>
+          <xsd:enumeration value="Warning"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:element name="GetSORequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="soNumber" type="xsd:integer"></xsd:element>
+            <xsd:element name="verification" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="AddCommentToSORequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="soNumber" type="xsd:integer"></xsd:element>
+            <xsd:element name="verification" type="xsd:string"></xsd:element>
+            <xsd:element name="comment" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetFlowthroughDevicesRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="soNumber" type="xsd:integer"></xsd:element>
+            <xsd:element name="verification" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="NotifyRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="referenceTransactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="code" type="tns:NotificationCode"></xsd:element>
+            <xsd:element name="description" type="xsd:string"></xsd:element>
+            <xsd:element name="date" minOccurs="0" type="xsd:date"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="NotificationCompleteRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="referenceTransactionUID" type="xsd:string"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="Acknowledgement">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="status" type="tns:Status"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetSOResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="status" type="tns:Status"></xsd:element>
+            <xsd:element name="typeCode" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="urgency" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="scope" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="soStatus" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="action" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="problemDescription" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="standardProblem" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="servicesAffected" minOccurs="0" type="xsd:string"></xsd:element>
+            <xsd:element name="creationDate" minOccurs="0" type="xsd:dateTime"></xsd:element>
+            <xsd:element name="developmentName" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="address" minOccurs="0" type="tns:UnitAddress"/>
+            <xsd:element name="events" minOccurs="0" maxOccurs="unbounded" type="tns:SOEvent"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="GetFlowthroughDevicesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="transactionUID" type="xsd:string"></xsd:element>
+            <xsd:element name="status" type="tns:Status"></xsd:element>
+            <xsd:element name="devices" minOccurs="0" maxOccurs="unbounded" type="tns:DeviceInfo"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </schema>
+  </types>
+
+  <message name="getSORequest">
+    <part name="parameters" element="tns:GetSORequest"></part>
+  </message>
+  <message name="addCommentToSORequest">
+    <part name="parameters" element="tns:AddCommentToSORequest"></part>
+  </message>
+  <message name="getFlowthroughDevicesRequest">
+    <part name="parameters" element="tns:GetFlowthroughDevicesRequest"></part>
+  </message>
+  <message name="notifyRequest">
+    <part name="parameters" element="tns:NotifyRequest"></part>
+  </message>
+  <message name="notificationCompleteRequest">
+    <part name="parameters" element="tns:NotificationCompleteRequest"></part>
+  </message>
+  <message name="acknowledgement">
+    <part name="parameters" element="tns:Acknowledgement"></part>
+  </message>
+  <message name="getSOResponse">
+    <part name="parameters" element="tns:GetSOResponse"></part>
+  </message>
+  <message name="getFlowthroughDevicesResponse">
+    <part name="parameters" element="tns:GetFlowthroughDevicesResponse"></part>
+  </message>
+
+  <portType name="enlightenOperations_PortType">
+    <operation name="getSO">
+      <documentation>Service definition for get SO</documentation>
+      <input message="tns:getSORequest"></input>
+      <output message="tns:getSOResponse"></output>
+    </operation>
+    <operation name="addCommentToSO">
+      <documentation>Service definition for Add Comment to SO</documentation>
+      <input message="tns:addCommentToSORequest"></input>
+      <output message="tns:acknowledgement"></output>
+    </operation>
+    <operation name="getFlowthroughDevices">
+      <documentation>Service definition for Add Comment to SO</documentation>
+      <input message="tns:getFlowthroughDevicesRequest"></input>
+      <output message="tns:getFlowthroughDevicesResponse"></output>
+    </operation>
+    <operation name="notify">
+      <documentation>Service definition for Notify</documentation>
+      <input message="tns:notifyRequest"></input>
+      <output message="tns:acknowledgement"></output>
+    </operation>
+    <operation name="notificationComplete">
+      <documentation>Service definition for NotificationComplete</documentation>
+      <input message="tns:notificationCompleteRequest"></input>
+      <output message="tns:acknowledgement"></output>
+    </operation>
+  </portType>
+
+  <binding name="enlightenOperations" type="tns:enlightenOperations_PortType">
+    <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getSO">
+      <SOAP:operation soapAction="http://cx-labs.net/enlightenOperations/getSO"/>
+      <input>
+        <SOAP:body use="literal"/>
+      </input>
+      <output>
+        <SOAP:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="addCommentToSO">
+      <SOAP:operation soapAction="http://cx-labs.net/enlightenOperations/addCommentToSO"/>
+      <input>
+        <SOAP:body use="literal"/>
+      </input>
+      <output>
+        <SOAP:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getFlowthroughDevices">
+      <SOAP:operation soapAction="http://cx-labs.net/enlightenOperations/getFlowthroughDevices"/>
+      <input>
+        <SOAP:body use="literal"/>
+      </input>
+      <output>
+        <SOAP:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="notify">
+      <SOAP:operation soapAction="http://cx-labs.net/enlightenOperations/notify"/>
+      <input>
+        <SOAP:body use="literal"/>
+      </input>
+      <output>
+        <SOAP:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="notificationComplete">
+      <SOAP:operation soapAction="http://cx-labs.net/enlightenOperations/notificationComplete"/>
+      <input>
+        <SOAP:body use="literal"/>
+      </input>
+      <output>
+        <SOAP:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="enlightenOperations">
+    <documentation>Supercontroller Operations Daemon Service Definition</documentation>
+    <port name="enlightenOperations" binding="tns:enlightenOperations">
+      <SOAP:address location="http://localhost:8080/axis2/services/enlightenOperations/"/>
+    </port>
+  </service>
+</definitions>

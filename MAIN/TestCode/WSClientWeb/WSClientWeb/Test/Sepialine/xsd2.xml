@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Sepialine.Argos.AppServer.Communication.Interfaces" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Sepialine.Argos.AppServer.Communication.Interfaces" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:import schemaLocation="/Test/Sepialine/xsd3.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+  <xs:import schemaLocation="/Test/Sepialine/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:complexType name="ArrayOfRawPaperJob">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RawPaperJob" nillable="true" type="tns:RawPaperJob"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRawPaperJob" nillable="true" type="tns:ArrayOfRawPaperJob"/>
+  <xs:complexType name="RawPaperJob">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RawJobBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Color" type="xs:int"/>
+          <xs:element minOccurs="0" name="Duplex" type="xs:int"/>
+          <xs:element minOccurs="0" name="HeightInMicrometers" type="xs:int"/>
+          <xs:element minOccurs="0" name="NumberOfCopies" type="xs:int"/>
+          <xs:element minOccurs="0" name="NumberOfPages" type="xs:int"/>
+          <xs:element minOccurs="0" name="PaperSizeName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PaperSizeNameScope" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PrintJobGroupId" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PrintServerFullName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PrinterName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Quality" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="WidthInMicrometers" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RawPaperJob" nillable="true" type="tns:RawPaperJob"/>
+  <xs:complexType name="RawJobBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillingCodeId" nillable="true" type="xs:int"/>
+      <xs:element minOccurs="0" name="BillingComments" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="BillingDateLocal" nillable="true" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="BillingDateUtc" nillable="true" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="ClientMatchingToken" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="DeviceServiceId" nillable="true" type="xs:int"/>
+      <xs:element minOccurs="0" name="ExtendedInfo" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element name="JobSourceId" type="xs:int"/>
+      <xs:element name="Label" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="MediaId" nillable="true" type="xs:int"/>
+      <xs:element minOccurs="0" name="StatusCodeId" nillable="true" type="xs:int"/>
+      <xs:element name="TrackedDateLocal" type="xs:dateTime"/>
+      <xs:element name="TrackedDateUtc" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UserDomainName" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="UserFullMachineName" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="UserMachineIPAddress" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RawJobBase" nillable="true" type="tns:RawJobBase"/>
+  <xs:complexType name="InvalidArgumentFault">
+    <xs:sequence>
+      <xs:element name="ArgumentName" nillable="true" type="xs:string"/>
+      <xs:element name="Details" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InvalidArgumentFault" nillable="true" type="tns:InvalidArgumentFault"/>
+  <xs:complexType name="RawPhoneJob">
+    <xs:sequence>
+      <xs:element name="CallDuration" type="ser:duration"/>
+      <xs:element name="CallEndDateTimeUtc" type="xs:dateTime"/>
+      <xs:element name="DestinationPhoneNumbers" nillable="true" type="q2:ArrayOfstring" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element name="DeviceServiceId" type="xs:int"/>
+      <xs:element minOccurs="0" name="GlobalId" nillable="true" type="xs:string"/>
+      <xs:element name="SourcePhoneNumber" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RawPhoneJob" nillable="true" type="tns:RawPhoneJob"/>
+</xs:schema>

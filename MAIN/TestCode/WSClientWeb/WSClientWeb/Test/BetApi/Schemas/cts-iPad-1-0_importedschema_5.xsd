@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:eCH-0007="http://www.ech.ch/xmlns/eCH-0007/3" xmlns:eCH-0008="http://www.ech.ch/xmlns/eCH-0008/2" xmlns:eCH-0010="http://www.ech.ch/xmlns/eCH-0010/3" xmlns:eCH-0044="http://www.ech.ch/xmlns/eCH-0044/1" xmlns:tns="http://emineo.ch/xmlns/vk/admdata/1/0" xmlns:vk-adm="http://emineo.ch/xmlns/vk/admdata/1/0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://emineo.ch/xmlns/vk/admdata/1/0" version="2.0">
+	<xs:import namespace="http://www.ech.ch/xmlns/eCH-0010/3" schemaLocation="./cts-iPad-1-0_importedschema_1.xsd"/>
+	<xs:import namespace="http://www.ech.ch/xmlns/eCH-0044/1" schemaLocation="./cts-iPad-1-0_importedschema_2.xsd"/>
+	<xs:import namespace="http://www.ech.ch/xmlns/eCH-0008/2" schemaLocation="./cts-iPad-1-0_importedschema_3.xsd"/>
+	<xs:import namespace="http://www.ech.ch/xmlns/eCH-0007/3" schemaLocation="./cts-iPad-1-0_importedschema_4.xsd"/>
+	<xs:simpleType name="ZSRnoType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="masterdataCodeType">
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eanNumberType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="yesNoType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="cardNoVekaType">
+		<xs:restriction base="xs:string">
+			<xs:length value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="phoneNumberType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="emailAddressType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+			<xs:whiteSpace value="collapse"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="languageRegionType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+			<xs:enumeration value="de"/>
+			<xs:enumeration value="fr"/>
+			<xs:enumeration value="it"/>
+			<xs:enumeration value="rm"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="nameType">
+		<xs:sequence>
+			<xs:element name="officialName" type="eCH-0044:baseNameType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="firstname" type="eCH-0044:officialFirstNameType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="billerType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="ean_party" type="tns:eanNumberType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="ZSR" type="tns:ZSRnoType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="invoice_id" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="invoice_date" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="providerType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="ean_party" type="tns:eanNumberType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="ZSR" type="tns:ZSRnoType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="message" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="patientType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="message_query" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="validFrom" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="validUntil" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="cardValidFrom" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="cardValidUntil" type="xs:dateTime"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="language" type="eCH-0008:languageType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="insurance" type="tns:insuranceType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basicData" type="tns:basicDataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="KVG" type="tns:basicInsuranceKVGType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs" type="tns:drugsType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital" type="tns:hospitalType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="vvg_product" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="treatment_date" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="insuranceType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="ean_party" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="BAG_insurance_id" type="xs:integer"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="name" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="description" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="phone" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="e_mail" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="name1" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="name2" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="address" type="eCH-0010:addressInformationType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="dateofimport" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="basicDataType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="message_query" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="cardNoVeka" type="tns:cardNoVekaType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="assuredid" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="svn" type="eCH-0044:vnType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="name" type="tns:nameType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="birthdate" type="eCH-0044:datePartiallyKnownType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="gender" type="eCH-0044:sexType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="address" type="eCH-0010:addressInformationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="basicInsuranceKVGType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="message_query" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_model" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_description" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_region" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_accident" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_military_delay" type="tns:yesNoType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_data_locked_insured" type="tns:yesNoType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="basic_insurance_remark" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="basic_insurance_benefit_delay" type="tns:yesNoType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="basic_insurance_product" type="tns:masterdataType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="masterdataType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="1" name="Code" type="tns:masterdataCodeType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="Text" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="drugsType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="message_query" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs_Hors_Liste" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs_Hors_Liste_accident" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs_complementary" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs_complementary_accident" type="tns:masterdataType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="drugs_remark" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="drugs_benefit_delay" type="tns:yesNoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="hospitalType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" name="message_query" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_unit" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_model" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_accident" type="tns:masterdataType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="hospital_remark" type="xs:string"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_benefit_delay" type="tns:yesNoType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_akutsomatik" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_psychiatry" type="tns:masterdataType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="hospital_list" type="tns:masterdataType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="vkadmDataRoot">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Ein Root-Element wird erstellt umd den
+				Implementationsprozess auf den unterschiedlichen
+				Entwicklungsplattformen zu erleichern.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="patientData" type="vk-adm:patientType"/>
+				<xs:element name="billerData" type="vk-adm:billerType"/>
+				<xs:element name="providerData" type="vk-adm:providerType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

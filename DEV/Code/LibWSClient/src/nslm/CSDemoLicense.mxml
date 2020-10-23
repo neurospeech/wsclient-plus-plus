@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml" 
+				width="520" height="150"
+				title="WSClient++ Demo License"
+				showCloseButton="false"
+				xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+				xmlns:nsl="nsl.*"
+				creationComplete="init(event)"
+				>
+	<mx:Script>
+		<![CDATA[
+
+			
+			import com.adobe.utils.StringUtil;
+			import com.neuro.command.CommandResultEvent;
+			import com.neuro.controls.Time;
+			import com.neuro.utils.MD5;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function cmdRequest_resultHandler(event:CommandResultEvent):void
+			{
+				licence.save();
+			}
+			
+			[Bindable]
+			private var licence:LicenseInfo = new LicenseInfo();
+			
+			
+			protected function init(event:FlexEvent):void
+			{
+				LicenseInfo.globalEditionUID = "com.neurospeech.wsclient.suite";
+				
+				if(loadLicense()){
+					//startTimer();
+					saveStartButton.label = "Start Demo";
+					return;
+				}
+				
+			}
+			
+			private function loadLicense():Boolean
+			{
+				if(licence.demoCode!=null && licence.demoCode!="")
+					return true;
+				return false;
+			}
+			
+			
+			private var timer:Timer = null;
+			
+			private function startTimer():void
+			{
+				timer = new Timer(1000,10);
+				timer.addEventListener(TimerEvent.TIMER, updateCount,false,0,true);
+				timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerComplete,false,0,true);
+				timer.start();
+				theForm.enabled = false;
+			}
+			
+			private function updateCount(e:TimerEvent):void
+			{
+				savePanel.label = "Starting in " + (10- timer.currentCount).toString() + " seconds";
+			}
+			
+			private function timerComplete(e:TimerEvent):void
+			{
+				timer = null;
+				this.closeForm();
+			}
+			
+			protected function saveAndStart_clickHandler(event:MouseEvent):void
+			{
+				startTimer();
+			}
+			
+			
+		]]>
+	</mx:Script>
+	
+	
+	
+	<mx:Form width="100%" height="100%"
+			 label="Request Demo"
+			 id="theForm"
+			 >
+		<mx:FormItem>
+			<ns:NSHyperLink label="Purchase WSClient++ Starting at only $499" navigateUrl="http://www.componentsource.com/products/wsclient/index.html"/>
+		</mx:FormItem>
+		<mx:HRule width="100%"/>
+		<mx:FormItem id="savePanel">
+			<ns:UpdateButton id="saveStartButton" label="Start Demo" width="180"
+							 click="saveAndStart_clickHandler(event)"
+							 />
+		</mx:FormItem>
+	</mx:Form>
+	
+	
+	<ns:FormCommand id="cmdAgreement"
+					callOnInit="{!licence.licenseAgreed}"
+					formClass="{LicenseAgreement}"
+					formDataObject="{{license:licence}}"
+					/>
+	
+</ns:GenericForm>

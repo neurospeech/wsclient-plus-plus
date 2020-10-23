@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-752-. --><xs:schema xmlns:tns="http://WebServices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://WebServices/">
+
+<xs:element name="SHA1HashWS" type="tns:SHA1HashWS" />
+
+<xs:element name="SHA1HashWSResponse" type="tns:SHA1HashWSResponse" />
+
+<xs:element name="getSHA1Hash" type="tns:getSHA1Hash" />
+
+<xs:element name="getSHA1HashResponse" type="tns:getSHA1HashResponse" />
+
+<xs:complexType name="getSHA1Hash">
+<xs:sequence>
+<xs:element name="input" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getSHA1HashResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="SHA1HashWS">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="SHA1HashWSResponse">
+<xs:sequence />
+</xs:complexType>
+</xs:schema>

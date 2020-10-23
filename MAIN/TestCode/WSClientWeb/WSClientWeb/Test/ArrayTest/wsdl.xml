@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://services2.pojo.sample" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://data2.pojo.sample/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services2.pojo.sample">
+  <wsdl:documentation>Please Type your service description here</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://data2.pojo.sample/xsd">
+      <xs:complexType name="Weather2">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="forecast" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="howMuchRain" type="xs:float" />
+          <xs:element minOccurs="0" name="rain" type="xs:boolean" />
+          <xs:element minOccurs="0" name="temperature" type="xs:float" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax22="http://data2.pojo.sample/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services2.pojo.sample">
+      <xs:import namespace="http://data2.pojo.sample/xsd" />
+      <xs:element name="getWeathersResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax22:Weather2" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getWeatherResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="ax22:Weather2" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getWeathersRequest" />
+  <wsdl:message name="getWeathersResponse">
+    <wsdl:part name="parameters" element="ns:getWeathersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getWeatherRequest" />
+  <wsdl:message name="getWeatherResponse">
+    <wsdl:part name="parameters" element="ns:getWeatherResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WeatherService2PortType">
+    <wsdl:operation name="getWeathers">
+      <wsdl:input message="ns:getWeathersRequest" wsaw:Action="urn:getWeathers" />
+      <wsdl:output message="ns:getWeathersResponse" wsaw:Action="urn:getWeathersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getWeather">
+      <wsdl:input message="ns:getWeatherRequest" wsaw:Action="urn:getWeather" />
+      <wsdl:output message="ns:getWeatherResponse" wsaw:Action="urn:getWeatherResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WeatherService2Soap11Binding" type="ns:WeatherService2PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="getWeathers">
+      <soap:operation soapAction="urn:getWeathers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWeather">
+      <soap:operation soapAction="urn:getWeather" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WeatherService2Soap12Binding" type="ns:WeatherService2PortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="getWeathers">
+      <soap12:operation soapAction="urn:getWeathers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWeather">
+      <soap12:operation soapAction="urn:getWeather" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WeatherService2HttpBinding" type="ns:WeatherService2PortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getWeathers">
+      <http:operation location="WeatherService2/getWeathers" />
+      <wsdl:input>
+        <mime:content type="text/xml" part="getWeathers" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="getWeathers" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWeather">
+      <http:operation location="WeatherService2/getWeather" />
+      <wsdl:input>
+        <mime:content type="text/xml" part="getWeather" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content type="text/xml" part="getWeather" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WeatherService2">
+    <wsdl:port name="WeatherService2HttpSoap11Endpoint" binding="ns:WeatherService2Soap11Binding">
+      <soap:address location="http://localhost:8080/Axis2POJOWebServices2/services/WeatherService2.WeatherService2HttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="WeatherService2HttpSoap12Endpoint" binding="ns:WeatherService2Soap12Binding">
+      <soap12:address location="http://localhost:8080/Axis2POJOWebServices2/services/WeatherService2.WeatherService2HttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="WeatherService2HttpEndpoint" binding="ns:WeatherService2HttpBinding">
+      <http:address location="http://localhost:8080/Axis2POJOWebServices2/services/WeatherService2.WeatherService2HttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

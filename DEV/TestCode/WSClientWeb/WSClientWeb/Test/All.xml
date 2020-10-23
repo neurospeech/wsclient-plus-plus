@@ -1,0 +1,1304 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<wsdl:definitions name="IphoneService" 
+                  targetNamespace="http://Iformata.Vnoc.Symphony.Iphone" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                  xmlns:wsa10="http://www.w3.org/2005/08/addressing" 
+                  xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" 
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+                  xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" 
+                  xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" 
+                  xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" 
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+                  xmlns:tns="http://Iformata.Vnoc.Symphony.Iphone" 
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Iformata.Vnoc.Symphony.Iphone/Imports">
+      <xsd:import schemaLocation="/Test/Schema0.wsdl" namespace="http://Iformata.Vnoc.Symphony.Iphone"/>
+      <xsd:import schemaLocation="/Test/Schema3.wsdl" namespace="http://schemas.datacontract.org/2004/07/System"/>
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="/Test/Schema2.wsdl" namespace="Iformata.Vnoc.Symphony.Iphone"/>
+      <xsd:import schemaLocation="/Test/Schema4.wsdl" namespace="Symphony/Framework/Version/1.11.19.09"/>
+      <xsd:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:complexType name="ArrayOfguid">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="guid" type="ser:guid"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfguid" nillable="true" type="tns:ArrayOfguid"/>
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring"/>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="Symphony/Framework/Version/1.11.19.09" xmlns:tns="Symphony/Framework/Version/1.11.19.09" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xsd:complexType name="ArrayOfOffice">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Office" nillable="true" type="tns:Office"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfOffice" nillable="true" type="tns:ArrayOfOffice"/>
+      <xsd:complexType name="Office">
+        <xsd:sequence>
+          <xsd:element name="Address" nillable="true" type="tns:OfficeAddress"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="Latitude" type="xsd:float"/>
+          <xsd:element name="Longitude" type="xsd:float"/>
+          <xsd:element name="NetworkConnections" nillable="true" type="xsd:string"/>
+          <xsd:element name="OrganizationId" type="ser:guid"/>
+          <xsd:element name="Spaces" nillable="true" type="tns:ArrayOfSpace"/>
+          <xsd:element name="Timezone" nillable="true" type="xsd:string"/>
+          <xsd:element name="Type" type="tns:OrganizationOfficeType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Office" nillable="true" type="tns:Office"/>
+      <xsd:complexType name="OfficeAddress">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AddressId" type="xsd:int"/>
+          <xsd:element minOccurs="0" name="City" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Country" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="PostalCode" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="State" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Street" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Street2" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OfficeAddress" nillable="true" type="tns:OfficeAddress"/>
+      <xsd:complexType name="ArrayOfSpace">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Space" nillable="true" type="tns:Space"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfSpace" nillable="true" type="tns:ArrayOfSpace"/>
+      <xsd:complexType name="Space">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AccountId" nillable="true" type="q1:ArrayOfguid" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xsd:element minOccurs="0" name="Capacity" type="xsd:int"/>
+          <xsd:element minOccurs="0" name="EmailId" nillable="true" type="xsd:string"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="IsManaged" type="xsd:boolean"/>
+          <xsd:element name="IsPublic" type="xsd:boolean"/>
+          <xsd:element name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="NetworkConnectivity" nillable="true" type="xsd:string"/>
+          <xsd:element name="Notes" nillable="true" type="xsd:string"/>
+          <xsd:element name="OfficeId" type="ser:guid"/>
+          <xsd:element name="OfficeName" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Photos" nillable="true" type="xsd:base64Binary"/>
+          <xsd:element minOccurs="0" name="RelatedUriAttachments" nillable="true" type="q2:ArrayOfstring" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xsd:element minOccurs="0" name="RoomNumber" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Status" type="tns:VnocSystemStatus"/>
+          <xsd:element name="Type" type="tns:OfficeSpaceType"/>
+          <xsd:element minOccurs="0" name="VnocSystem" nillable="true" type="tns:ArrayOfVnocSystem"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Space" nillable="true" type="tns:Space"/>
+      <xsd:simpleType name="VnocSystemStatus">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Normal">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Minor">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Major">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Critical">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Unknown">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="VnocSystemStatus" nillable="true" type="tns:VnocSystemStatus"/>
+      <xsd:simpleType name="OfficeSpaceType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="BasicConferenceRoom"/>
+          <xsd:enumeration value="Office"/>
+          <xsd:enumeration value="Cubicle"/>
+          <xsd:enumeration value="ConferenceRoom"/>
+          <xsd:enumeration value="Foyer"/>
+          <xsd:enumeration value="BoardRoom"/>
+          <xsd:enumeration value="LectureHall"/>
+          <xsd:enumeration value="TelepresenceRoom">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Audio">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="OfficeSpaceType" nillable="true" type="tns:OfficeSpaceType"/>
+      <xsd:complexType name="ArrayOfVnocSystem">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="VnocSystem" nillable="true" type="tns:VnocSystem"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfVnocSystem" nillable="true" type="tns:ArrayOfVnocSystem"/>
+      <xsd:complexType name="VnocSystem">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Contact" nillable="true" type="xsd:string"/>
+          <xsd:element name="Description" nillable="true" type="xsd:string"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element name="ProductDetail" nillable="true" type="tns:Product"/>
+          <xsd:element name="SpaceId" type="ser:guid"/>
+          <xsd:element name="Status" type="tns:VnocSystemStatus"/>
+          <xsd:element name="SystemDetails" nillable="true" type="tns:Environment"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="VnocSystem" nillable="true" type="tns:VnocSystem"/>
+      <xsd:complexType name="Product">
+        <xsd:sequence>
+          <xsd:element name="Description" nillable="true" type="xsd:string"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="ManufactureId" type="ser:guid"/>
+          <xsd:element name="ManufacturerName" nillable="true" type="xsd:string"/>
+          <xsd:element name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element name="SnmpRules" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Product" nillable="true" type="tns:Product"/>
+      <xsd:complexType name="Environment">
+        <xsd:sequence>
+          <xsd:element name="AudioController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+          <xsd:element name="AuxilarryCamera" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+          <xsd:element name="Display" nillable="true" type="tns:ArrayOfDisplay"/>
+          <xsd:element name="EnvironmentController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="PowerController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+          <xsd:element name="RoomController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+          <xsd:element name="VideoEndPoints" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Environment" nillable="true" type="tns:Environment"/>
+      <xsd:complexType name="ArrayOfVnocSystemComponent">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="VnocSystemComponent" nillable="true" type="tns:VnocSystemComponent"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfVnocSystemComponent" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xsd:complexType name="VnocSystemComponent">
+        <xsd:sequence>
+          <xsd:element name="BandwidthKbps" type="xsd:long"/>
+          <xsd:element name="Category" type="tns:ComponentType"/>
+          <xsd:element name="ConferencePorts" nillable="true" type="tns:ArrayOfConferencePort"/>
+          <xsd:element name="FirmwareVersion" nillable="true" type="xsd:string"/>
+          <xsd:element name="GatewayAddress" nillable="true" type="tns:GatekeeperConfiguration"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="IpAddress" nillable="true" type="xsd:string"/>
+          <xsd:element name="MacAddress" nillable="true" type="xsd:string"/>
+          <xsd:element name="ManagementInterfaces" nillable="true" type="tns:ArrayOfManagementInterface"/>
+          <xsd:element name="ManagementUri" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="PingLatency" type="xsd:long"/>
+          <xsd:element name="Position" type="xsd:int"/>
+          <xsd:element name="ProductDetail" nillable="true" type="tns:Product"/>
+          <xsd:element name="SerialNumber" nillable="true" type="xsd:string"/>
+          <xsd:element name="SnmpCommunity" nillable="true" type="xsd:string"/>
+          <xsd:element name="SoftwareVersion" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="TicketId" type="xsd:long"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="VnocSystemComponent" nillable="true" type="tns:VnocSystemComponent"/>
+      <xsd:simpleType name="ComponentType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Network"/>
+          <xsd:enumeration value="Endpoint"/>
+          <xsd:enumeration value="Room"/>
+          <xsd:enumeration value="Recording"/>
+          <xsd:enumeration value="Gatekeeper"/>
+          <xsd:enumeration value="Controller"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="ComponentType" nillable="true" type="tns:ComponentType"/>
+      <xsd:complexType name="ArrayOfConferencePort">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="ConferencePort" nillable="true" type="tns:ConferencePort"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfConferencePort" nillable="true" type="tns:ArrayOfConferencePort"/>
+      <xsd:complexType name="ConferencePort">
+        <xsd:sequence>
+          <xsd:element name="AudioPotsLine" nillable="true" type="xsd:string"/>
+          <xsd:element name="E164Address" nillable="true" type="xsd:string"/>
+          <xsd:element name="H323Name" nillable="true" type="xsd:string"/>
+          <xsd:element name="Id" type="ser:guid"/>
+          <xsd:element name="IsdnNumber" nillable="true" type="xsd:string"/>
+          <xsd:element name="SipAddress" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ConferencePort" nillable="true" type="tns:ConferencePort"/>
+      <xsd:complexType name="GatekeeperConfiguration">
+        <xsd:sequence>
+          <xsd:element name="GatekeeperUri" nillable="true" type="xsd:string"/>
+          <xsd:element name="PortMaps" nillable="true" type="tns:ArrayOfPortMap"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="GatekeeperConfiguration" nillable="true" type="tns:GatekeeperConfiguration"/>
+      <xsd:complexType name="ArrayOfPortMap">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="PortMap" nillable="true" type="tns:PortMap"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfPortMap" nillable="true" type="tns:ArrayOfPortMap"/>
+      <xsd:complexType name="PortMap">
+        <xsd:sequence>
+          <xsd:element name="Map" type="xsd:int"/>
+          <xsd:element name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element name="Port" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="PortMap" nillable="true" type="tns:PortMap"/>
+      <xsd:complexType name="ArrayOfManagementInterface">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="ManagementInterface" nillable="true" type="tns:ManagementInterface"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfManagementInterface" nillable="true" type="tns:ArrayOfManagementInterface"/>
+      <xsd:complexType name="ManagementInterface">
+        <xsd:sequence>
+          <xsd:element name="Application" type="tns:ManagmentInterfaceMode"/>
+          <xsd:element name="Password" nillable="true" type="xsd:string"/>
+          <xsd:element name="Port" type="xsd:int"/>
+          <xsd:element name="UserName" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ManagementInterface" nillable="true" type="tns:ManagementInterface"/>
+      <xsd:simpleType name="ManagmentInterfaceMode">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Telnet"/>
+          <xsd:enumeration value="SSH"/>
+          <xsd:enumeration value="HTTP"/>
+          <xsd:enumeration value="HTTPS"/>
+          <xsd:enumeration value="Other"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="ManagmentInterfaceMode" nillable="true" type="tns:ManagmentInterfaceMode"/>
+      <xsd:complexType name="ArrayOfDisplay">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Display" nillable="true" type="tns:Display"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfDisplay" nillable="true" type="tns:ArrayOfDisplay"/>
+      <xsd:complexType name="Display">
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="tns:VnocSystemComponent">
+            <xsd:sequence>
+              <xsd:element name="ResolutionHeight" type="xsd:int"/>
+              <xsd:element name="ResolutionWidth" type="xsd:int"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="Display" nillable="true" type="tns:Display"/>
+      <xsd:simpleType name="OrganizationOfficeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="HomeOffice">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="OrganizationHeadquarters">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="RegionalOffice">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="RegionalHeadquarters">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="RetailOffice">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="PangeAirLocation">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="Other">
+            <xsd:annotation>
+              <xsd:appinfo>
+                <ser:EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</ser:EnumerationValue>
+              </xsd:appinfo>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="OrganizationOfficeType" nillable="true" type="tns:OrganizationOfficeType"/>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="Iformata.Vnoc.Symphony.Iphone" xmlns:tns="Iformata.Vnoc.Symphony.Iphone" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:complexType name="LoginResult">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Email" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="TimeDiff" type="xsd:int"/>
+          <xsd:element minOccurs="0" name="TimeZone" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="token" nillable="true" type="tns:Token"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="LoginResult" nillable="true" type="tns:LoginResult"/>
+      <xsd:complexType name="Token">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="SessionId" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="UserId" type="ser:guid"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Token" nillable="true" type="tns:Token"/>
+      <xsd:complexType name="ArrayOfIphoneAccount">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="IphoneAccount" nillable="true" type="tns:IphoneAccount"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfIphoneAccount" nillable="true" type="tns:ArrayOfIphoneAccount"/>
+      <xsd:complexType name="IphoneAccount">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DefaultSetupTime" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Id" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="IsParticipantsAllowed" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="IsSetupTimeReadOnly" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IphoneAccount" nillable="true" type="tns:IphoneAccount"/>
+      <xsd:complexType name="IphoneConference">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AccountId" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="ConfirmationNumber" type="xsd:long"/>
+          <xsd:element minOccurs="0" name="ExternalSpaces" nillable="true" type="tns:ArrayOfExternalSpace"/>
+          <xsd:element minOccurs="0" name="HostSpaceId" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="Notes" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="NotificationOptions" nillable="true" type="tns:ArrayOfNotificationOption"/>
+          <xsd:element minOccurs="0" name="Owner" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Participants" nillable="true" type="tns:ArrayOfParticipant"/>
+          <xsd:element minOccurs="0" name="ReminderOptions" nillable="true" type="tns:ArrayOfReminderOption"/>
+          <xsd:element minOccurs="0" name="Requestor" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Spaces" nillable="true" type="tns:ArrayOfIphoneSpace"/>
+          <xsd:element minOccurs="0" name="Status" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Title" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="UtcEnd" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcSetup" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcStart" type="xsd:dateTime"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IphoneConference" nillable="true" type="tns:IphoneConference"/>
+      <xsd:complexType name="ArrayOfExternalSpace">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="ExternalSpace" nillable="true" type="tns:ExternalSpace"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfExternalSpace" nillable="true" type="tns:ArrayOfExternalSpace"/>
+      <xsd:complexType name="ExternalSpace">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="SpaceName" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ExternalSpace" nillable="true" type="tns:ExternalSpace"/>
+      <xsd:complexType name="ArrayOfNotificationOption">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="NotificationOption" nillable="true" type="tns:NotificationOption"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfNotificationOption" nillable="true" type="tns:ArrayOfNotificationOption"/>
+      <xsd:complexType name="NotificationOption">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="NotificationType" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="NotificationOption" nillable="true" type="tns:NotificationOption"/>
+      <xsd:complexType name="ArrayOfParticipant">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="Participant" nillable="true" type="tns:Participant"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfParticipant" nillable="true" type="tns:ArrayOfParticipant"/>
+      <xsd:complexType name="Participant">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Email" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Participant" nillable="true" type="tns:Participant"/>
+      <xsd:complexType name="ArrayOfReminderOption">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="ReminderOption" nillable="true" type="tns:ReminderOption"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfReminderOption" nillable="true" type="tns:ArrayOfReminderOption"/>
+      <xsd:complexType name="ReminderOption">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="ReminderType" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ReminderOption" nillable="true" type="tns:ReminderOption"/>
+      <xsd:complexType name="ArrayOfIphoneSpace">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="IphoneSpace" nillable="true" type="tns:IphoneSpace"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfIphoneSpace" nillable="true" type="tns:ArrayOfIphoneSpace"/>
+      <xsd:complexType name="IphoneSpace">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Capacity" type="xsd:int"/>
+          <xsd:element minOccurs="0" name="Conflict" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Id" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="IsConflict" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="IsManaged" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="OfficeId" type="ser:guid"/>
+          <xsd:element minOccurs="0" name="OfficeName" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Photos" nillable="true" type="xsd:base64Binary"/>
+          <xsd:element minOccurs="0" name="Type" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IphoneSpace" nillable="true" type="tns:IphoneSpace"/>
+      <xsd:complexType name="ArrayOfFindConferenceCriteria">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="FindConferenceCriteria" nillable="true" type="tns:FindConferenceCriteria"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfFindConferenceCriteria" nillable="true" type="tns:ArrayOfFindConferenceCriteria"/>
+      <xsd:complexType name="FindConferenceCriteria">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="DateRange" nillable="true" type="tns:ConferenceSchedule"/>
+          <xsd:element minOccurs="0" name="SearchCriteria" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="SearchString" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="FindConferenceCriteria" nillable="true" type="tns:FindConferenceCriteria"/>
+      <xsd:complexType name="ConferenceSchedule">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="AllowOvertime" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="UtcEnd" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcSetup" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcStart" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcTeardown" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="UtcTeardownSpecified" type="xsd:boolean"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ConferenceSchedule" nillable="true" type="tns:ConferenceSchedule"/>
+      <xsd:complexType name="ArrayOfIphoneConferenceLite">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="IphoneConferenceLite" nillable="true" type="tns:IphoneConferenceLite"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfIphoneConferenceLite" nillable="true" type="tns:ArrayOfIphoneConferenceLite"/>
+      <xsd:complexType name="IphoneConferenceLite">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="ConferenceNumber" type="xsd:long"/>
+          <xsd:element minOccurs="0" name="End" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="IsMyConference" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="Owner" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Requestor" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Setup" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="Start" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="Status" nillable="true" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Title" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="IphoneConferenceLite" nillable="true" type="tns:IphoneConferenceLite"/>
+      <xsd:complexType name="ArrayOfMeetingDay">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="MeetingDay" nillable="true" type="tns:MeetingDay"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="ArrayOfMeetingDay" nillable="true" type="tns:ArrayOfMeetingDay"/>
+      <xsd:complexType name="MeetingDay">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="isMyMeeting" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="meetingDate" type="xsd:dateTime"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="MeetingDay" nillable="true" type="tns:MeetingDay"/>
+    </xsd:schema>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xsd:element name="anyType" nillable="true" type="xsd:anyType"/>
+      <xsd:element name="anyURI" nillable="true" type="xsd:anyURI"/>
+      <xsd:element name="base64Binary" nillable="true" type="xsd:base64Binary"/>
+      <xsd:element name="boolean" nillable="true" type="xsd:boolean"/>
+      <xsd:element name="byte" nillable="true" type="xsd:byte"/>
+      <xsd:element name="dateTime" nillable="true" type="xsd:dateTime"/>
+      <xsd:element name="decimal" nillable="true" type="xsd:decimal"/>
+      <xsd:element name="double" nillable="true" type="xsd:double"/>
+      <xsd:element name="float" nillable="true" type="xsd:float"/>
+      <xsd:element name="int" nillable="true" type="xsd:int"/>
+      <xsd:element name="long" nillable="true" type="xsd:long"/>
+      <xsd:element name="QName" nillable="true" type="xsd:QName"/>
+      <xsd:element name="short" nillable="true" type="xsd:short"/>
+      <xsd:element name="string" nillable="true" type="xsd:string"/>
+      <xsd:element name="unsignedByte" nillable="true" type="xsd:unsignedByte"/>
+      <xsd:element name="unsignedInt" nillable="true" type="xsd:unsignedInt"/>
+      <xsd:element name="unsignedLong" nillable="true" type="xsd:unsignedLong"/>
+      <xsd:element name="unsignedShort" nillable="true" type="xsd:unsignedShort"/>
+      <xsd:element name="char" nillable="true" type="tns:char"/>
+      <xsd:simpleType name="char">
+        <xsd:restriction base="xsd:int"/>
+      </xsd:simpleType>
+      <xsd:element name="duration" nillable="true" type="tns:duration"/>
+      <xsd:simpleType name="duration">
+        <xsd:restriction base="xsd:duration">
+          <xsd:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xsd:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xsd:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="guid" nillable="true" type="tns:guid"/>
+      <xsd:simpleType name="guid">
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:attribute name="FactoryType" type="xsd:QName"/>
+      <xsd:attribute name="Id" type="xsd:ID"/>
+      <xsd:attribute name="Ref" type="xsd:IDREF"/>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:tns="http://schemas.datacontract.org/2004/07/System" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:complexType name="Exception">
+        <xsd:sequence>
+          <xsd:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="skip"/>
+        </xsd:sequence>
+        <xsd:attribute ref="ser:FactoryType"/>
+      </xsd:complexType>
+      <xsd:element name="Exception" nillable="true" type="tns:Exception"/>
+    </xsd:schema>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://Iformata.Vnoc.Symphony.Iphone">
+      <xsd:import schemaLocation="/Test/Schema2.wsdl" namespace="Iformata.Vnoc.Symphony.Iphone"/>
+      <xsd:import schemaLocation="/Test/Schema4.wsdl" namespace="Symphony/Framework/Version/1.11.19.09"/>
+      <xsd:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:element name="Login">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="userName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="password" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="domain" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="LoginResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="LoginResult" nillable="true" type="q1:LoginResult" xmlns:q1="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOrganizationAccounts">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q2:Token" xmlns:q2="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOrganizationAccountsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindOrganizationAccountsResult" nillable="true" type="q3:ArrayOfIphoneAccount" xmlns:q3="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveConferenceProcess">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iphoneConference" nillable="true" type="q4:IphoneConference" xmlns:q4="Iformata.Vnoc.Symphony.Iphone"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q5:Token" xmlns:q5="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SaveConferenceProcessResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="SaveConferenceProcessResult" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOfficeSpaceConflict">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="conferenceId" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="officeId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="showSpacePhotos" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="showConflict" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="utcStart" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="utcEnd" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q6:Token" xmlns:q6="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOfficeSpaceConflictResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindOfficeSpaceConflictResult" nillable="true" type="q7:ArrayOfIphoneSpace" xmlns:q7="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="criterias" nillable="true" type="q8:ArrayOfFindConferenceCriteria" xmlns:q8="Iformata.Vnoc.Symphony.Iphone"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q9:Token" xmlns:q9="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConferencesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindConferencesResult" nillable="true" type="q10:ArrayOfIphoneConferenceLite" xmlns:q10="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConference">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="conferenceId" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q11:Token" xmlns:q11="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConferenceResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindConferenceResult" nillable="true" type="q12:IphoneConference" xmlns:q12="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckSessionValidity">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q13:Token" xmlns:q13="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CheckSessionValidityResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="CheckSessionValidityResult" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CancelConferenceProcess">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="conferenceId" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q14:Token" xmlns:q14="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="CancelConferenceProcessResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="CancelConferenceProcessResult" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteConferenceProcess">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="conferenceId" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q15:Token" xmlns:q15="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="DeleteConferenceProcessResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="DeleteConferenceProcessResult" type="xsd:boolean"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOrganizationalOffices">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q16:Token" xmlns:q16="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindOrganizationalOfficesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindOrganizationalOfficesResult" nillable="true" type="q17:ArrayOfOffice" xmlns:q17="Symphony/Framework/Version/1.11.19.09"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindSpacesConflict">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="conferenceId" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="utcStart" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="utcEnd" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="spaceIds" nillable="true" type="q18:ArrayOfguid" xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q19:Token" xmlns:q19="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindSpacesConflictResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindSpacesConflictResult" nillable="true" type="q20:ArrayOfIphoneSpace" xmlns:q20="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindActiveConferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q21:Token" xmlns:q21="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindActiveConferencesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindActiveConferencesResult" nillable="true" type="q22:ArrayOfIphoneConferenceLite" xmlns:q22="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindLastConferences">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q23:Token" xmlns:q23="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindLastConferencesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindLastConferencesResult" nillable="true" type="q24:ArrayOfIphoneConferenceLite" xmlns:q24="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchOffices">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q25:Token" xmlns:q25="Iformata.Vnoc.Symphony.Iphone"/>
+            <xsd:element minOccurs="0" name="searchString" nillable="true" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SearchOfficesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="SearchOfficesResult" nillable="true" type="q26:ArrayOfguid" xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConferencesForMonth">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="timeDiff" type="xsd:int"/>
+            <xsd:element minOccurs="0" name="startDate" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="endDate" type="xsd:dateTime"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q27:Token" xmlns:q27="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindConferencesForMonthResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindConferencesForMonthResult" nillable="true" type="q28:ArrayOfMeetingDay" xmlns:q28="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindUsers">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="accountId" type="q29:guid" xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/"/>
+            <xsd:element minOccurs="0" name="token" nillable="true" type="q30:Token" xmlns:q30="Iformata.Vnoc.Symphony.Iphone"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="FindUsersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="FindUsersResult" nillable="true" type="q31:ArrayOfstring" xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IphoneService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_Login_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q1:Exception" xmlns:q1="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationAccounts"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationAccountsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q2:Exception" xmlns:q2="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q3:Exception" xmlns:q3="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOfficeSpaceConflict"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOfficeSpaceConflictResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q4:Exception" xmlns:q4="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q5:Exception" xmlns:q5="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConference"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferenceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q6:Exception" xmlns:q6="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSessionValidity"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSessionValidityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q7:Exception" xmlns:q7="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q8:Exception" xmlns:q8="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q9:Exception" xmlns:q9="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationalOffices"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationalOfficesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q10:Exception" xmlns:q10="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindSpacesConflict"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindSpacesConflictResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q11:Exception" xmlns:q11="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindActiveConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindActiveConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q12:Exception" xmlns:q12="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindLastConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindLastConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q13:Exception" xmlns:q13="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOffices"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOfficesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q14:Exception" xmlns:q14="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesForMonth"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesForMonthResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q15:Exception" xmlns:q15="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUsers"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUsersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q16:Exception" xmlns:q16="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:portType name="IphoneService">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/Login" message="tns:IphoneService_Login_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/LoginResponse" message="tns:IphoneService_Login_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/LoginExceptionFault" name="ExceptionFault" message="tns:IphoneService_Login_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationAccounts">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccounts" message="tns:IphoneService_FindOrganizationAccounts_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccountsResponse" message="tns:IphoneService_FindOrganizationAccounts_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccountsExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOrganizationAccounts_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcess" message="tns:IphoneService_SaveConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcessResponse" message="tns:IphoneService_SaveConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_SaveConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOfficeSpaceConflict">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflict" message="tns:IphoneService_FindOfficeSpaceConflict_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflictResponse" message="tns:IphoneService_FindOfficeSpaceConflict_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflictExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOfficeSpaceConflict_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferences" message="tns:IphoneService_FindConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesResponse" message="tns:IphoneService_FindConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConference">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConference" message="tns:IphoneService_FindConference_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferenceResponse" message="tns:IphoneService_FindConference_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferenceExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConference_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSessionValidity">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidity" message="tns:IphoneService_CheckSessionValidity_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidityResponse" message="tns:IphoneService_CheckSessionValidity_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidityExceptionFault" name="ExceptionFault" message="tns:IphoneService_CheckSessionValidity_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CancelConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcess" message="tns:IphoneService_CancelConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcessResponse" message="tns:IphoneService_CancelConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_CancelConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcess" message="tns:IphoneService_DeleteConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcessResponse" message="tns:IphoneService_DeleteConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_DeleteConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationalOffices">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOffices" message="tns:IphoneService_FindOrganizationalOffices_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOfficesResponse" message="tns:IphoneService_FindOrganizationalOffices_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOfficesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOrganizationalOffices_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindSpacesConflict">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflict" message="tns:IphoneService_FindSpacesConflict_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflictResponse" message="tns:IphoneService_FindSpacesConflict_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflictExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindSpacesConflict_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindActiveConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferences" message="tns:IphoneService_FindActiveConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferencesResponse" message="tns:IphoneService_FindActiveConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindActiveConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindLastConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferences" message="tns:IphoneService_FindLastConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferencesResponse" message="tns:IphoneService_FindLastConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindLastConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SearchOffices">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOffices" message="tns:IphoneService_SearchOffices_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOfficesResponse" message="tns:IphoneService_SearchOffices_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOfficesExceptionFault" name="ExceptionFault" message="tns:IphoneService_SearchOffices_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferencesForMonth">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonth" message="tns:IphoneService_FindConferencesForMonth_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonthResponse" message="tns:IphoneService_FindConferencesForMonth_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonthExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConferencesForMonth_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsers">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsers" message="tns:IphoneService_FindUsers_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsersResponse" message="tns:IphoneService_FindUsers_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsersExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindUsers_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IphoneService" type="tns:IphoneService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/Login" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationAccounts">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccounts" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOfficeSpaceConflict">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflict" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConference">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConference" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSessionValidity">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CancelConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationalOffices">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOffices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindSpacesConflict">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflict" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindActiveConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindLastConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchOffices">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOffices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferencesForMonth">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonth" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsers">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IphoneService">
+    <wsdl:port name="BasicHttpBinding_IphoneService" binding="tns:BasicHttpBinding_IphoneService">
+      <soap:address location="http://if-symphony-05/IphoneService/IPhoneService.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

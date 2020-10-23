@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" layout="absolute" width="400" height="300"
+				creationComplete="genericform1_creationCompleteHandler(event)"
+				>
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+
+			protected function genericform1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.closeForm();
+			}
+
+		]]>
+	</mx:Script>	
+</ns:GenericForm>

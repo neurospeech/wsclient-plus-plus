@@ -1,0 +1,3674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.verint.com/2010/04/12/NextivaWS/" elementFormDefault="qualified" targetNamespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:element name="PtzFlip180Degrees">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CameraID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraID" nillable="true" type="tns:CameraID" />
+  <xs:complexType name="ObjectID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasicObjectID">
+        <xs:sequence>
+          <xs:element name="SiteResourceID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ObjectID" nillable="true" type="tns:ObjectID" />
+  <xs:complexType name="BasicObjectID">
+    <xs:sequence>
+      <xs:element name="ResourceID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BasicObjectID" nillable="true" type="tns:BasicObjectID" />
+  <xs:complexType name="SiteID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BasicObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SiteID" nillable="true" type="tns:SiteID" />
+  <xs:complexType name="SiteBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SiteID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SiteBasicInfo" nillable="true" type="tns:SiteBasicInfo" />
+  <xs:complexType name="SiteInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SiteBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MasterTimeZone" nillable="true" type="tns:ServerTimeZoneInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SiteInfo" nillable="true" type="tns:SiteInfo" />
+  <xs:complexType name="ServerTimeZoneInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BaseUTCOffset" type="xs:double" />
+      <xs:element minOccurs="0" name="CurrentUTCOffset" type="xs:double" />
+      <xs:element minOccurs="0" name="DSTInfo" nillable="true" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q1:ArrayOfKeyValueOfintDSTAdjustmentR6FBy_Pvq" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeZoneId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServerTimeZoneInfo" nillable="true" type="tns:ServerTimeZoneInfo" />
+  <xs:complexType name="DSTAdjustment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Delta" type="xs:double" />
+      <xs:element minOccurs="0" name="From" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="To" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSTAdjustment" nillable="true" type="tns:DSTAdjustment" />
+  <xs:complexType name="CameraBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CameraID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsAudio" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsPtz" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraBasicInfo" nillable="true" type="tns:CameraBasicInfo" />
+  <xs:complexType name="CameraStatus">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CameraBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsOnline" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsRecording" type="xs:boolean" />
+          <xs:element minOccurs="0" name="VideoSignalState" type="tns:CameraStatusVideoSignalStates" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraStatus" nillable="true" type="tns:CameraStatus" />
+  <xs:simpleType name="CameraStatusVideoSignalStates">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoVideoSignal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ColorVideoSignal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BlackAndWhiteVideoSignal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CameraStatusVideoSignalStates" nillable="true" type="tns:CameraStatusVideoSignalStates" />
+  <xs:complexType name="CameraInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CameraBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IntelliStreamCameraNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraInfo" nillable="true" type="tns:CameraInfo" />
+  <xs:complexType name="CameraGroupID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraGroupID" nillable="true" type="tns:CameraGroupID" />
+  <xs:complexType name="CameraGroupBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CameraGroupID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Parent" nillable="true" type="tns:CameraGroupBasicInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraGroupBasicInfo" nillable="true" type="tns:CameraGroupBasicInfo" />
+  <xs:complexType name="CameraGroupInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CameraGroupBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Cameras" nillable="true" type="tns:ArrayOfCameraBasicInfo" />
+          <xs:element minOccurs="0" name="Children" nillable="true" type="tns:ArrayOfCameraGroupBasicInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraGroupInfo" nillable="true" type="tns:CameraGroupInfo" />
+  <xs:complexType name="ArrayOfCameraBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CameraBasicInfo" nillable="true" type="tns:CameraBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCameraBasicInfo" nillable="true" type="tns:ArrayOfCameraBasicInfo" />
+  <xs:complexType name="ArrayOfCameraGroupBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CameraGroupBasicInfo" nillable="true" type="tns:CameraGroupBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCameraGroupBasicInfo" nillable="true" type="tns:ArrayOfCameraGroupBasicInfo" />
+  <xs:complexType name="EventCategoryID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventCategoryID" nillable="true" type="tns:EventCategoryID" />
+  <xs:complexType name="EventCategoryInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EventCategoryID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EventTypes" nillable="true" type="tns:ArrayOfEventTypeInfo" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventCategoryInfo" nillable="true" type="tns:EventCategoryInfo" />
+  <xs:complexType name="ArrayOfEventTypeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventTypeInfo" nillable="true" type="tns:EventTypeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventTypeInfo" nillable="true" type="tns:ArrayOfEventTypeInfo" />
+  <xs:complexType name="EventTypeInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:EventTypeID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventTypeInfo" nillable="true" type="tns:EventTypeInfo" />
+  <xs:complexType name="EventTypeID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventTypeID" nillable="true" type="tns:EventTypeID" />
+  <xs:complexType name="ExportID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExportID" nillable="true" type="tns:ExportID" />
+  <xs:complexType name="ExportInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ExportID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CameraInfo" nillable="true" type="tns:CameraID" />
+          <xs:element minOccurs="0" name="CodecUri" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ExportFilesUri" nillable="true" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q2:ArrayOfstring" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NumberOfExportedFiles" type="xs:int" />
+          <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExportInfo" nillable="true" type="tns:ExportInfo" />
+  <xs:complexType name="ImageID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageID" nillable="true" type="tns:ImageID" />
+  <xs:complexType name="ImageInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageInfo" nillable="true" type="tns:ImageInfo" />
+  <xs:complexType name="PtzPatternID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PtzPatternID" nillable="true" type="tns:PtzPatternID" />
+  <xs:complexType name="PtzPatternInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PtzPatternID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Number" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PtzPatternInfo" nillable="true" type="tns:PtzPatternInfo" />
+  <xs:complexType name="MapID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MapID" nillable="true" type="tns:MapID" />
+  <xs:complexType name="MapBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MapID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MapBasicInfo" nillable="true" type="tns:MapBasicInfo" />
+  <xs:complexType name="MonitorID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MonitorID" nillable="true" type="tns:MonitorID" />
+  <xs:complexType name="MonitorBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MonitorID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MonitorBasicInfo" nillable="true" type="tns:MonitorBasicInfo" />
+  <xs:complexType name="MonitorInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MonitorBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="HasAudioAssociated" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IntelliStreamMonitorNumber" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MonitorInfo" nillable="true" type="tns:MonitorInfo" />
+  <xs:complexType name="PtzPresetID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PtzPresetID" nillable="true" type="tns:PtzPresetID" />
+  <xs:complexType name="PtzPresetInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PtzPresetID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Number" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PtzPresetInfo" nillable="true" type="tns:PtzPresetInfo" />
+  <xs:complexType name="UserID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserID" nillable="true" type="tns:UserID" />
+  <xs:complexType name="UserBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:UserID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserType" type="tns:UserTypes" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserBasicInfo" nillable="true" type="tns:UserBasicInfo" />
+  <xs:simpleType name="UserTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="User" />
+      <xs:enumeration value="Keyboard" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserTypes" nillable="true" type="tns:UserTypes" />
+  <xs:complexType name="WorkspaceID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkspaceID" nillable="true" type="tns:WorkspaceID" />
+  <xs:complexType name="WorkspaceBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:WorkspaceID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Version" type="xs:float" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkspaceBasicInfo" nillable="true" type="tns:WorkspaceBasicInfo" />
+  <xs:complexType name="WorkspaceInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:WorkspaceBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WorkspaceInfo" nillable="true" type="tns:WorkspaceInfo" />
+  <xs:complexType name="AlarmID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmID" nillable="true" type="tns:AlarmID" />
+  <xs:complexType name="AlarmInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Attachments" nillable="true" type="tns:ArrayOfAlarmAttachment" />
+          <xs:element minOccurs="0" name="FileAttachments" nillable="true" type="tns:ArrayOfAlarmFileAttachment" />
+          <xs:element minOccurs="0" name="MetadataAttachments" nillable="true" type="tns:ArrayOfAlarmMetadataAttachment" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmInfo" nillable="true" type="tns:AlarmInfo" />
+  <xs:complexType name="AlarmBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAcknowledgeInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AcknowledgedBy" nillable="true" type="tns:UserBasicInfo" />
+          <xs:element minOccurs="0" name="ClosedTimestamp" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsClosed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Priority" type="xs:int" />
+          <xs:element minOccurs="0" name="Response" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="State" type="tns:AlarmStates" />
+          <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmBasicInfo" nillable="true" type="tns:AlarmBasicInfo" />
+  <xs:complexType name="AlarmAcknowledgeInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Annotation" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmAcknowledgeInfo" nillable="true" type="tns:AlarmAcknowledgeInfo" />
+  <xs:complexType name="AlarmSearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AcknowledgedBy" nillable="true" type="tns:UserBasicInfo" />
+          <xs:element minOccurs="0" name="Annotation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Camera" nillable="true" type="tns:CameraBasicInfo" />
+          <xs:element minOccurs="0" name="ClosedTimestampEnd" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ClosedTimestampStart" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="End" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsClosed" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Priority" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Response" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Start" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="State" nillable="true" type="tns:AlarmStates" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmSearchFilter" nillable="true" type="tns:AlarmSearchFilter" />
+  <xs:simpleType name="AlarmStates">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Invalid">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="New">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Acknowledged">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AlarmStates" nillable="true" type="tns:AlarmStates" />
+  <xs:complexType name="BookmarkID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookmarkID" nillable="true" type="tns:BookmarkID" />
+  <xs:complexType name="BookmarkBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BookmarkID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookmarkBasicInfo" nillable="true" type="tns:BookmarkBasicInfo" />
+  <xs:complexType name="BookmarkInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BookmarkBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Annotation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BookmarkDateTime" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Camera" nillable="true" type="tns:CameraID" />
+          <xs:element minOccurs="0" name="Owner" nillable="true" type="tns:UserBasicInfo" />
+          <xs:element minOccurs="0" name="PostBufferTime" type="xs:int" />
+          <xs:element minOccurs="0" name="PreBufferTime" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookmarkInfo" nillable="true" type="tns:BookmarkInfo" />
+  <xs:complexType name="BookmarkSearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BookmarkID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Annotation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Camera" nillable="true" type="tns:CameraBasicInfo" />
+          <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Owner" nillable="true" type="tns:UserBasicInfo" />
+          <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookmarkSearchFilter" nillable="true" type="tns:BookmarkSearchFilter" />
+  <xs:complexType name="ArrayOfAlarmAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmAttachment" nillable="true" type="tns:AlarmAttachment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmAttachment" nillable="true" type="tns:ArrayOfAlarmAttachment" />
+  <xs:complexType name="AlarmAttachment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAttachmentID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmAttachment" nillable="true" type="tns:AlarmAttachment" />
+  <xs:complexType name="AlarmAttachmentID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmAttachmentID" nillable="true" type="tns:AlarmAttachmentID" />
+  <xs:complexType name="AlarmImageAttachment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAttachment">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmImageAttachment" nillable="true" type="tns:AlarmImageAttachment" />
+  <xs:complexType name="AlarmImageAttachmentData">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmImageAttachment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmImageAttachmentData" nillable="true" type="tns:AlarmImageAttachmentData" />
+  <xs:complexType name="AlarmMetadataAttachment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAttachment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MetaData" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmMetadataAttachment" nillable="true" type="tns:AlarmMetadataAttachment" />
+  <xs:complexType name="AlarmVideoAttachment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAttachment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Camera" nillable="true" type="tns:CameraBasicInfo" />
+          <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmVideoAttachment" nillable="true" type="tns:AlarmVideoAttachment" />
+  <xs:complexType name="AlarmFileAttachment">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmAttachment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmFileAttachment" nillable="true" type="tns:AlarmFileAttachment" />
+  <xs:complexType name="AlarmFileAttachmentData">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlarmFileAttachment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlarmFileAttachmentData" nillable="true" type="tns:AlarmFileAttachmentData" />
+  <xs:complexType name="ArrayOfAlarmFileAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmFileAttachment" nillable="true" type="tns:AlarmFileAttachment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmFileAttachment" nillable="true" type="tns:ArrayOfAlarmFileAttachment" />
+  <xs:complexType name="ArrayOfAlarmMetadataAttachment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmMetadataAttachment" nillable="true" type="tns:AlarmMetadataAttachment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmMetadataAttachment" nillable="true" type="tns:ArrayOfAlarmMetadataAttachment" />
+  <xs:element name="PtzFlip180DegreesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="NextivaWSFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FaultType" type="tns:NextivaWSFaultType" />
+      <xs:element minOccurs="0" name="InnerException" nillable="true" type="tns:NextivaWSFault" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Source" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NextivaWSFault" nillable="true" type="tns:NextivaWSFault" />
+  <xs:simpleType name="NextivaWSFaultType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ApplicationAccessDenied" />
+      <xs:enumeration value="AccessDenied" />
+      <xs:enumeration value="AuthenticationFailed" />
+      <xs:enumeration value="BookmarkPostTimeCannotBeInFuture" />
+      <xs:enumeration value="CameraNotPTZ" />
+      <xs:enumeration value="CannotDeleteBookmarkCreatedByOtherUser" />
+      <xs:enumeration value="MediaLoad_CallerDoesNotHaveAUserSession" />
+      <xs:enumeration value="MediaLoad_MaximumSiteBandwidthReached" />
+      <xs:enumeration value="MediaLoad_MaximumUserBandwidthReached" />
+      <xs:enumeration value="MediaLoad_MaximumPassthroughSessionsReached" />
+      <xs:enumeration value="MediaLoad_MaximumTranscodedSessionsReached" />
+      <xs:enumeration value="MediaLoad_AudioNotAvailable" />
+      <xs:enumeration value="MediaLoad_MediaGatewayServiceNotPresent" />
+      <xs:enumeration value="MediaLoad_NoMediaGatewayAvailable" />
+      <xs:enumeration value="MediaLoad_VideoLanCapacityThresholdReached" />
+      <xs:enumeration value="MediaLoad_Error" />
+      <xs:enumeration value="FailedToAddBookmark" />
+      <xs:enumeration value="FailedToArchiveBookmark" />
+      <xs:enumeration value="FailedToDeleteBookmark" />
+      <xs:enumeration value="GeneralError" />
+      <xs:enumeration value="ImageNotFound" />
+      <xs:enumeration value="InvalidArgument" />
+      <xs:enumeration value="InvalidPTZPanPosition" />
+      <xs:enumeration value="InvalidPTZSpeed" />
+      <xs:enumeration value="InvalidPTZTiltPosition" />
+      <xs:enumeration value="InvalidPTZZoomPosition" />
+      <xs:enumeration value="NextivaServiceCannotBeReached" />
+      <xs:enumeration value="NoCameraRights" />
+      <xs:enumeration value="NoClipsFound" />
+      <xs:enumeration value="PTZAccessDenied" />
+      <xs:enumeration value="PTZIsLocked" />
+      <xs:enumeration value="PTZPriorityTooLow" />
+      <xs:enumeration value="PTZCommandFailure" />
+      <xs:enumeration value="PTZCommandTimeout" />
+      <xs:enumeration value="PTZCommandNotSupported" />
+      <xs:enumeration value="ServerConnectionFailedForVideoQuery" />
+      <xs:enumeration value="SiteMismatch" />
+      <xs:enumeration value="TooManyRemoteUsers" />
+      <xs:enumeration value="TrustNotEstablished" />
+      <xs:enumeration value="UndefinedConnectionMode" />
+      <xs:enumeration value="UnknownConnectionError" />
+      <xs:enumeration value="ValidationAlreadyExists" />
+      <xs:enumeration value="ValidationPropertyMaximumValue" />
+      <xs:enumeration value="ValidationPropertyMinimumValue" />
+      <xs:enumeration value="WebSessionIsInvalidOrNotFound" />
+      <xs:enumeration value="FailedToDeleteWorkspace" />
+      <xs:enumeration value="FailedToSaveWorkspace" />
+      <xs:enumeration value="FailedToGetWorkspaceBasicInfo" />
+      <xs:enumeration value="FailedToGetWorkspaceInfo" />
+      <xs:enumeration value="FailedToDeleteGuardtour" />
+      <xs:enumeration value="FailedToSaveGuardtour" />
+      <xs:enumeration value="FailedToGetGuardtourBasicInfo" />
+      <xs:enumeration value="FailedToGetGuardtourInfo" />
+      <xs:enumeration value="InvalidCustomEventName" />
+      <xs:enumeration value="MissingMandatoryAdvancedParameters" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NextivaWSFaultType" nillable="true" type="tns:NextivaWSFaultType" />
+  <xs:complexType name="CannotDeleteBookmarkCreatedByOtherUserFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CannotDeleteBookmarkCreatedByOtherUserFault" nillable="true" type="tns:CannotDeleteBookmarkCreatedByOtherUserFault" />
+  <xs:complexType name="GeneralErrorFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GeneralErrorFault" nillable="true" type="tns:GeneralErrorFault" />
+  <xs:complexType name="ImageNotFoundFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageNotFoundFault" nillable="true" type="tns:ImageNotFoundFault" />
+  <xs:complexType name="InvalidPTZTiltPositionFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidPTZTiltPositionFault" nillable="true" type="tns:InvalidPTZTiltPositionFault" />
+  <xs:complexType name="FailedToGetGuardtourInfoFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToGetGuardtourInfoFault" nillable="true" type="tns:FailedToGetGuardtourInfoFault" />
+  <xs:complexType name="ApplicationAccessDeniedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ApplicationAccessDeniedFault" nillable="true" type="tns:ApplicationAccessDeniedFault" />
+  <xs:complexType name="AccessDeniedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AccessDeniedFault" nillable="true" type="tns:AccessDeniedFault" />
+  <xs:complexType name="AuthenticationFailedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuthenticationFailedFault" nillable="true" type="tns:AuthenticationFailedFault" />
+  <xs:complexType name="BookmarkPostTimeCannotBeInFutureFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BookmarkPostTimeCannotBeInFutureFault" nillable="true" type="tns:BookmarkPostTimeCannotBeInFutureFault" />
+  <xs:complexType name="CameraNotPTZFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CameraNotPTZFault" nillable="true" type="tns:CameraNotPTZFault" />
+  <xs:complexType name="MediaLoad_CallerDoesNotHaveAUserSessionFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_CallerDoesNotHaveAUserSessionFault" nillable="true" type="tns:MediaLoad_CallerDoesNotHaveAUserSessionFault" />
+  <xs:complexType name="MediaLoad_MaximumSiteBandwidthReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_MaximumSiteBandwidthReachedFault" nillable="true" type="tns:MediaLoad_MaximumSiteBandwidthReachedFault" />
+  <xs:complexType name="MediaLoad_MaximumUserBandwidthReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_MaximumUserBandwidthReachedFault" nillable="true" type="tns:MediaLoad_MaximumUserBandwidthReachedFault" />
+  <xs:complexType name="MediaLoad_MaximumTranscodedSessionsReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_MaximumTranscodedSessionsReachedFault" nillable="true" type="tns:MediaLoad_MaximumTranscodedSessionsReachedFault" />
+  <xs:complexType name="MediaLoad_MaximumPassthroughSessionsReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_MaximumPassthroughSessionsReachedFault" nillable="true" type="tns:MediaLoad_MaximumPassthroughSessionsReachedFault" />
+  <xs:complexType name="MediaLoad_AudioNotAvailableFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_AudioNotAvailableFault" nillable="true" type="tns:MediaLoad_AudioNotAvailableFault" />
+  <xs:complexType name="MediaLoad_MediaGatewayServiceNotPresentFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_MediaGatewayServiceNotPresentFault" nillable="true" type="tns:MediaLoad_MediaGatewayServiceNotPresentFault" />
+  <xs:complexType name="MediaLoad_NoMediaGatewayAvailableFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_NoMediaGatewayAvailableFault" nillable="true" type="tns:MediaLoad_NoMediaGatewayAvailableFault" />
+  <xs:complexType name="MediaLoad_VideoLanCapacityThresholdReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_VideoLanCapacityThresholdReachedFault" nillable="true" type="tns:MediaLoad_VideoLanCapacityThresholdReachedFault" />
+  <xs:complexType name="MediaLoad_ErrorFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MediaLoad_ErrorFault" nillable="true" type="tns:MediaLoad_ErrorFault" />
+  <xs:complexType name="FailedToAddBookmarkFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToAddBookmarkFault" nillable="true" type="tns:FailedToAddBookmarkFault" />
+  <xs:complexType name="FailedToArchiveBookmarkFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToArchiveBookmarkFault" nillable="true" type="tns:FailedToArchiveBookmarkFault" />
+  <xs:complexType name="FailedToDeleteBookmarkFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToDeleteBookmarkFault" nillable="true" type="tns:FailedToDeleteBookmarkFault" />
+  <xs:complexType name="InvalidArgumentFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidArgumentFault" nillable="true" type="tns:InvalidArgumentFault" />
+  <xs:complexType name="InvalidPTZPanPositionFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidPTZPanPositionFault" nillable="true" type="tns:InvalidPTZPanPositionFault" />
+  <xs:complexType name="InvalidPTZSpeedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidPTZSpeedFault" nillable="true" type="tns:InvalidPTZSpeedFault" />
+  <xs:complexType name="TooManyRemoteUsersFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TooManyRemoteUsersFault" nillable="true" type="tns:TooManyRemoteUsersFault" />
+  <xs:complexType name="InvalidPTZZoomPositionFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidPTZZoomPositionFault" nillable="true" type="tns:InvalidPTZZoomPositionFault" />
+  <xs:complexType name="NextivaServiceCannotBeReachedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NextivaServiceCannotBeReachedFault" nillable="true" type="tns:NextivaServiceCannotBeReachedFault" />
+  <xs:complexType name="NoCameraRightsFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NoCameraRightsFault" nillable="true" type="tns:NoCameraRightsFault" />
+  <xs:complexType name="NoClipsFoundFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NoClipsFoundFault" nillable="true" type="tns:NoClipsFoundFault" />
+  <xs:complexType name="PTZAccessDeniedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZAccessDeniedFault" nillable="true" type="tns:PTZAccessDeniedFault" />
+  <xs:complexType name="PTZPriorityTooLowFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZPriorityTooLowFault" nillable="true" type="tns:PTZPriorityTooLowFault" />
+  <xs:complexType name="PTZIsLockedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZIsLockedFault" nillable="true" type="tns:PTZIsLockedFault" />
+  <xs:complexType name="PTZCommandFailureFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZCommandFailureFault" nillable="true" type="tns:PTZCommandFailureFault" />
+  <xs:complexType name="PTZCommandTimeoutFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZCommandTimeoutFault" nillable="true" type="tns:PTZCommandTimeoutFault" />
+  <xs:complexType name="PTZCommandNotSupportedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PTZCommandNotSupportedFault" nillable="true" type="tns:PTZCommandNotSupportedFault" />
+  <xs:complexType name="ServerConnectionFailedForVideoQueryFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServerConnectionFailedForVideoQueryFault" nillable="true" type="tns:ServerConnectionFailedForVideoQueryFault" />
+  <xs:complexType name="SiteMismatchFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SiteMismatchFault" nillable="true" type="tns:SiteMismatchFault" />
+  <xs:complexType name="WebSessionIsInvalidOrNotFoundFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="WebSessionIsInvalidOrNotFoundFault" nillable="true" type="tns:WebSessionIsInvalidOrNotFoundFault" />
+  <xs:complexType name="FailedToGetGuardtourBasicInfoFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToGetGuardtourBasicInfoFault" nillable="true" type="tns:FailedToGetGuardtourBasicInfoFault" />
+  <xs:complexType name="UndefinedConnectionModeFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UndefinedConnectionModeFault" nillable="true" type="tns:UndefinedConnectionModeFault" />
+  <xs:complexType name="UnknownConnectionErrorFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UnknownConnectionErrorFault" nillable="true" type="tns:UnknownConnectionErrorFault" />
+  <xs:complexType name="ValidationAlreadyExistsFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidationAlreadyExistsFault" nillable="true" type="tns:ValidationAlreadyExistsFault" />
+  <xs:complexType name="ValidationPropertyMaximumValueFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidationPropertyMaximumValueFault" nillable="true" type="tns:ValidationPropertyMaximumValueFault" />
+  <xs:complexType name="ValidationPropertyMinimumValueFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ValidationPropertyMinimumValueFault" nillable="true" type="tns:ValidationPropertyMinimumValueFault" />
+  <xs:complexType name="TrustNotEstablishedFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TrustNotEstablishedFault" nillable="true" type="tns:TrustNotEstablishedFault" />
+  <xs:complexType name="FailedToDeleteWorkspaceFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToDeleteWorkspaceFault" nillable="true" type="tns:FailedToDeleteWorkspaceFault" />
+  <xs:complexType name="FailedToSaveWorkspaceFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToSaveWorkspaceFault" nillable="true" type="tns:FailedToSaveWorkspaceFault" />
+  <xs:complexType name="FailedToGetWorkspaceBasicInfoFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToGetWorkspaceBasicInfoFault" nillable="true" type="tns:FailedToGetWorkspaceBasicInfoFault" />
+  <xs:complexType name="FailedToGetWorkspaceInfoFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToGetWorkspaceInfoFault" nillable="true" type="tns:FailedToGetWorkspaceInfoFault" />
+  <xs:complexType name="FailedToDeleteGuardtourFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToDeleteGuardtourFault" nillable="true" type="tns:FailedToDeleteGuardtourFault" />
+  <xs:complexType name="FailedToSaveGuardtourFault">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:NextivaWSFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FailedToSaveGuardtourFault" nillable="true" type="tns:FailedToSaveGuardtourFault" />
+  <xs:element name="PtzGetAbsolutePosition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetAbsolutePositionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetAbsolutePositionResult" nillable="true" type="tns:PtzAbsolutePosition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="PtzAbsolutePosition">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PanInDegrees" type="xs:double" />
+      <xs:element minOccurs="0" name="TiltInDegrees" type="xs:double" />
+      <xs:element minOccurs="0" name="ZoomInPercent" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PtzAbsolutePosition" nillable="true" type="tns:PtzAbsolutePosition" />
+  <xs:element name="PtzSetAbsolutePosition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="absPos" nillable="true" type="tns:PtzAbsolutePosition" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzSetAbsolutePositionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzReboot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzRebootResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LiveMediaQuery">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="quality" type="tns:MediaStreamQuality" />
+        <xs:element minOccurs="0" name="audio" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="MediaStreamQuality">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Low" />
+      <xs:enumeration value="Full" />
+      <xs:enumeration value="Best" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MediaStreamQuality" nillable="true" type="tns:MediaStreamQuality" />
+  <xs:element name="LiveMediaQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LiveMediaQueryResult" nillable="true" xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q3:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LiveMediaStreamToMonitor">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraInfo" />
+        <xs:element minOccurs="0" name="monitor" nillable="true" type="tns:MonitorInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LiveMediaStreamToMonitorResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TourMediaQuery">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="tour" nillable="true" type="tns:TourID" />
+        <xs:element minOccurs="0" name="quality" type="tns:MediaStreamQuality" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TourID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TourID" nillable="true" type="tns:TourID" />
+  <xs:complexType name="TourBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TourID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TourBasicInfo" nillable="true" type="tns:TourBasicInfo" />
+  <xs:complexType name="TourSearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TourBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IntelliStreamTourNumber" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TourSearchFilter" nillable="true" type="tns:TourSearchFilter" />
+  <xs:complexType name="TourInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TourSearchFilter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfTourInfoItem" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TourInfo" nillable="true" type="tns:TourInfo" />
+  <xs:complexType name="ArrayOfTourInfoItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TourInfoItem" nillable="true" type="tns:TourInfoItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTourInfoItem" nillable="true" type="tns:ArrayOfTourInfoItem" />
+  <xs:complexType name="TourInfoItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Camera" nillable="true" type="tns:CameraID" />
+      <xs:element minOccurs="0" name="DwellTimeInSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="Preset" nillable="true" type="tns:PtzPresetID" />
+      <xs:element minOccurs="0" name="SequenceNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TourInfoItem" nillable="true" type="tns:TourInfoItem" />
+  <xs:element name="TourMediaQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TourMediaQueryResult" nillable="true" xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q4:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlaybackMediaQuery">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="quality" type="tns:MediaStreamQuality" />
+        <xs:element minOccurs="0" name="audio" type="xs:boolean" />
+        <xs:element minOccurs="0" name="start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="end" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlaybackMediaQueryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PlaybackMediaQueryResult" nillable="true" xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q5:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SessionKeepAlive">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SessionKeepAliveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SessionKeepAliveResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SessionGetTimeToLive">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SessionGetTimeToLiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SessionGetTimeToLiveResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTimeZoneInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="year" type="xs:int" />
+        <xs:element minOccurs="0" name="yearBack" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTimeZoneInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTimeZoneInfoResult" nillable="true" type="tns:ServerTimeZoneInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkspaceBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:WorkspaceBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkspaceBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetWorkspaceBasicInfoResult" nillable="true" type="tns:ArrayOfWorkspaceBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfWorkspaceBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WorkspaceBasicInfo" nillable="true" type="tns:WorkspaceBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkspaceBasicInfo" nillable="true" type="tns:ArrayOfWorkspaceBasicInfo" />
+  <xs:element name="GetWorkspaceInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workspaceID" nillable="true" type="tns:WorkspaceID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkspaceInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetWorkspaceInfoResult" nillable="true" type="tns:WorkspaceInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveWorkspace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workspace" nillable="true" type="tns:WorkspaceInfo" />
+        <xs:element minOccurs="0" name="replace" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveWorkspaceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveWorkspaceResult" nillable="true" type="tns:WorkspaceBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteWorkspace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="workspaceID" nillable="true" type="tns:WorkspaceID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteWorkspaceResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGuardtourBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:GuardtourBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="GuardtourBasicInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GuardtourID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Version" type="xs:float" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GuardtourBasicInfo" nillable="true" type="tns:GuardtourBasicInfo" />
+  <xs:complexType name="GuardtourID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GuardtourID" nillable="true" type="tns:GuardtourID" />
+  <xs:complexType name="GuardtourInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:GuardtourBasicInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GuardtourInfo" nillable="true" type="tns:GuardtourInfo" />
+  <xs:element name="GetGuardtourBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetGuardtourBasicInfoResult" nillable="true" type="tns:ArrayOfGuardtourBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfGuardtourBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GuardtourBasicInfo" nillable="true" type="tns:GuardtourBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGuardtourBasicInfo" nillable="true" type="tns:ArrayOfGuardtourBasicInfo" />
+  <xs:element name="GetGuardtourInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guardtourID" nillable="true" type="tns:GuardtourID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGuardtourInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetGuardtourInfoResult" nillable="true" type="tns:GuardtourInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveGuardtour">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guardtour" nillable="true" type="tns:GuardtourInfo" />
+        <xs:element minOccurs="0" name="replace" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveGuardtourResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveGuardtourResult" nillable="true" type="tns:GuardtourBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteGuardtour">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="guardtourID" nillable="true" type="tns:GuardtourID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteGuardtourResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAudits">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_filter" nillable="true" type="tns:AuditSearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="AuditSearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SearchFilter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ApplicationNames" nillable="true" type="tns:ArrayOfStringSearch" />
+          <xs:element minOccurs="0" name="ComputerNames" nillable="true" type="tns:ArrayOfStringSearch" />
+          <xs:element minOccurs="0" name="Descriptions" nillable="true" type="tns:ArrayOfStringSearch" />
+          <xs:element minOccurs="0" name="SortingInfo" nillable="true" type="tns:ArrayOfSortPropertyOfAuditSearchPropertiesGUWU9_Pl5" />
+          <xs:element minOccurs="0" name="Timestamps" nillable="true" type="tns:ArrayOfDateRangeSearch" />
+          <xs:element minOccurs="0" name="Usernames" nillable="true" type="tns:ArrayOfStringSearch" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuditSearchFilter" nillable="true" type="tns:AuditSearchFilter" />
+  <xs:complexType name="SearchFilter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MaximumCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchFilter" nillable="true" type="tns:SearchFilter" />
+  <xs:complexType name="ArrayOfStringSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StringSearch" nillable="true" type="tns:StringSearch" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStringSearch" nillable="true" type="tns:ArrayOfStringSearch" />
+  <xs:complexType name="StringSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SearchType" type="tns:StringSearchTypes" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StringSearch" nillable="true" type="tns:StringSearch" />
+  <xs:simpleType name="StringSearchTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WholeStringMatch" />
+      <xs:enumeration value="PartialStringMatch" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StringSearchTypes" nillable="true" type="tns:StringSearchTypes" />
+  <xs:complexType name="ArrayOfSortPropertyOfAuditSearchPropertiesGUWU9_Pl5">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SortPropertyOfAuditSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfAuditSearchPropertiesGUWU9_Pl5" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSortPropertyOfAuditSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:ArrayOfSortPropertyOfAuditSearchPropertiesGUWU9_Pl5" />
+  <xs:complexType name="SortPropertyOfAuditSearchPropertiesGUWU9_Pl5">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="SortPropertyOf{0}{#}" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="AuditSearchProperties" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Direction" type="tns:SortDirections" />
+      <xs:element minOccurs="0" name="Property" type="tns:AuditSearchProperties" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SortPropertyOfAuditSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfAuditSearchPropertiesGUWU9_Pl5" />
+  <xs:simpleType name="SortDirections">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ascending" />
+      <xs:enumeration value="Descending" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SortDirections" nillable="true" type="tns:SortDirections" />
+  <xs:simpleType name="AuditSearchProperties">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Timestamp" />
+      <xs:enumeration value="Description" />
+      <xs:enumeration value="ApplicationName" />
+      <xs:enumeration value="Username" />
+      <xs:enumeration value="ComputerName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuditSearchProperties" nillable="true" type="tns:AuditSearchProperties" />
+  <xs:complexType name="ArrayOfDateRangeSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DateRangeSearch" nillable="true" type="tns:DateRangeSearch" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDateRangeSearch" nillable="true" type="tns:ArrayOfDateRangeSearch" />
+  <xs:complexType name="DateRangeSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DateRangeSearch" nillable="true" type="tns:DateRangeSearch" />
+  <xs:element name="GetAuditsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAuditsResult" nillable="true" type="tns:ArrayOfAuditInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAuditInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AuditInfo" nillable="true" type="tns:AuditInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAuditInfo" nillable="true" type="tns:ArrayOfAuditInfo" />
+  <xs:complexType name="AuditInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AuditID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ApplicationName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ComputerName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuditInfo" nillable="true" type="tns:AuditInfo" />
+  <xs:complexType name="AuditID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AuditID" nillable="true" type="tns:AuditID" />
+  <xs:element name="GetAlerts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_filter" nillable="true" type="tns:HealthCheckAlertSearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="HealthCheckAlertSearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SearchFilter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertIDs" nillable="true" type="tns:ArrayOfAlertID" />
+          <xs:element minOccurs="0" name="AlertStates" nillable="true" type="tns:ArrayOfHealthCheckAlertStates" />
+          <xs:element minOccurs="0" name="Descriptions" nillable="true" type="tns:ArrayOfStringSearch" />
+          <xs:element minOccurs="0" name="EventIDs" nillable="true" type="tns:ArrayOfEventTypeID" />
+          <xs:element minOccurs="0" name="FirstOccurrenceDates" nillable="true" type="tns:ArrayOfDateRangeSearch" />
+          <xs:element minOccurs="0" name="IsAcknowledged" nillable="true" xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q6:ArrayOfboolean" />
+          <xs:element minOccurs="0" name="LastOccurrenceDates" nillable="true" type="tns:ArrayOfDateRangeSearch" />
+          <xs:element minOccurs="0" name="Severitys" nillable="true" type="tns:ArrayOfHealthCheckSeverities" />
+          <xs:element minOccurs="0" name="SortingInfo" nillable="true" type="tns:ArrayOfSortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" />
+          <xs:element minOccurs="0" name="SourceIDs" nillable="true" type="tns:ArrayOfEventSourceID" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HealthCheckAlertSearchFilter" nillable="true" type="tns:HealthCheckAlertSearchFilter" />
+  <xs:complexType name="ArrayOfAlertID">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertID" nillable="true" type="tns:AlertID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlertID" nillable="true" type="tns:ArrayOfAlertID" />
+  <xs:complexType name="AlertID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AlertID" nillable="true" type="tns:AlertID" />
+  <xs:complexType name="HealthCheckAlertInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AlertID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertState" type="tns:HealthCheckAlertStates" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EventID" type="xs:int" />
+          <xs:element minOccurs="0" name="EventText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstOccurrenceDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IsAcknowledged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastOccurrenceDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Severity" type="tns:HealthCheckSeverities" />
+          <xs:element minOccurs="0" name="SourceID" type="xs:int" />
+          <xs:element minOccurs="0" name="SourceText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HealthCheckAlertInfo" nillable="true" type="tns:HealthCheckAlertInfo" />
+  <xs:simpleType name="HealthCheckAlertStates">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Open" />
+      <xs:enumeration value="Closed" />
+      <xs:enumeration value="Informational" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HealthCheckAlertStates" nillable="true" type="tns:HealthCheckAlertStates" />
+  <xs:simpleType name="HealthCheckSeverities">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Critical" />
+      <xs:enumeration value="High" />
+      <xs:enumeration value="Medium" />
+      <xs:enumeration value="Low" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HealthCheckSeverities" nillable="true" type="tns:HealthCheckSeverities" />
+  <xs:complexType name="ArrayOfHealthCheckAlertStates">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HealthCheckAlertStates" type="tns:HealthCheckAlertStates" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHealthCheckAlertStates" nillable="true" type="tns:ArrayOfHealthCheckAlertStates" />
+  <xs:complexType name="ArrayOfEventTypeID">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventTypeID" nillable="true" type="tns:EventTypeID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventTypeID" nillable="true" type="tns:ArrayOfEventTypeID" />
+  <xs:complexType name="ArrayOfHealthCheckSeverities">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HealthCheckSeverities" type="tns:HealthCheckSeverities" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHealthCheckSeverities" nillable="true" type="tns:ArrayOfHealthCheckSeverities" />
+  <xs:complexType name="ArrayOfSortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:ArrayOfSortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" />
+  <xs:complexType name="SortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="SortPropertyOf{0}{#}" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="HealthCheckAlertSearchProperties" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Direction" type="tns:SortDirections" />
+      <xs:element minOccurs="0" name="Property" type="tns:HealthCheckAlertSearchProperties" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfHealthCheckAlertSearchPropertiesGUWU9_Pl5" />
+  <xs:simpleType name="HealthCheckAlertSearchProperties">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ResourceID" />
+      <xs:enumeration value="Description" />
+      <xs:enumeration value="SourceID" />
+      <xs:enumeration value="Severity" />
+      <xs:enumeration value="FirstOccurrenceDate" />
+      <xs:enumeration value="LastOccurrenceDate" />
+      <xs:enumeration value="IsAcknowledged" />
+      <xs:enumeration value="AlertState" />
+      <xs:enumeration value="EventID" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HealthCheckAlertSearchProperties" nillable="true" type="tns:HealthCheckAlertSearchProperties" />
+  <xs:complexType name="ArrayOfEventSourceID">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventSourceID" nillable="true" type="tns:EventSourceID" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventSourceID" nillable="true" type="tns:ArrayOfEventSourceID" />
+  <xs:complexType name="EventSourceID">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EventSourceID" nillable="true" type="tns:EventSourceID" />
+  <xs:element name="GetAlertsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlertsResult" nillable="true" type="tns:ArrayOfHealthCheckAlertInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfHealthCheckAlertInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HealthCheckAlertInfo" nillable="true" type="tns:HealthCheckAlertInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHealthCheckAlertInfo" nillable="true" type="tns:ArrayOfHealthCheckAlertInfo" />
+  <xs:element name="GetAlertHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_filter" nillable="true" type="tns:HealthCheckAlertHistorySearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="HealthCheckAlertHistorySearchFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SearchFilter">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlertIDs" nillable="true" type="tns:ArrayOfAlertID" />
+          <xs:element minOccurs="0" name="Reasons" nillable="true" type="tns:ArrayOfHealthCheckHistoryReasons" />
+          <xs:element minOccurs="0" name="SortingInfo" nillable="true" type="tns:ArrayOfSortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" />
+          <xs:element minOccurs="0" name="Timestamps" nillable="true" type="tns:ArrayOfDateRangeSearch" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HealthCheckAlertHistorySearchFilter" nillable="true" type="tns:HealthCheckAlertHistorySearchFilter" />
+  <xs:complexType name="ArrayOfHealthCheckHistoryReasons">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HealthCheckHistoryReasons" type="tns:HealthCheckHistoryReasons" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHealthCheckHistoryReasons" nillable="true" type="tns:ArrayOfHealthCheckHistoryReasons" />
+  <xs:simpleType name="HealthCheckHistoryReasons">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Added" />
+      <xs:enumeration value="Acknowledged" />
+      <xs:enumeration value="Unacknowleded" />
+      <xs:enumeration value="Cleared" />
+      <xs:enumeration value="ManuallyCleared" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HealthCheckHistoryReasons" nillable="true" type="tns:HealthCheckHistoryReasons" />
+  <xs:complexType name="ArrayOfSortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" nillable="true" type="tns:ArrayOfSortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" />
+  <xs:complexType name="SortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="SortPropertyOf{0}{#}" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="HealthCheckAlertHistorySearchProperties" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Direction" type="tns:SortDirections" />
+      <xs:element minOccurs="0" name="Property" type="tns:HealthCheckAlertHistorySearchProperties" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" nillable="true" type="tns:SortPropertyOfHealthCheckAlertHistorySearchPropertiesGUWU9_Pl5" />
+  <xs:simpleType name="HealthCheckAlertHistorySearchProperties">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ResourceID" />
+      <xs:enumeration value="Reason" />
+      <xs:enumeration value="Timestamp" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HealthCheckAlertHistorySearchProperties" nillable="true" type="tns:HealthCheckAlertHistorySearchProperties" />
+  <xs:element name="GetAlertHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlertHistoryResult" nillable="true" type="tns:ArrayOfHealthCheckAlertHistoryInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfHealthCheckAlertHistoryInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HealthCheckAlertHistoryInfo" nillable="true" type="tns:HealthCheckAlertHistoryInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHealthCheckAlertHistoryInfo" nillable="true" type="tns:ArrayOfHealthCheckAlertHistoryInfo" />
+  <xs:complexType name="HealthCheckAlertHistoryInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ObjectID">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Reason" type="tns:HealthCheckHistoryReasons" />
+          <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HealthCheckAlertHistoryInfo" nillable="true" type="tns:HealthCheckAlertHistoryInfo" />
+  <xs:element name="UpdateAlertsAcknowledgedState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_healthCheckAlerts" nillable="true" type="tns:ArrayOfAlertID" />
+        <xs:element minOccurs="0" name="isAcknowledged" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateAlertsAcknowledgedStateResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TriggerCustomEvent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_customEvent" nillable="true" type="tns:CustomEventInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CustomEventInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AdvancedParameters" nillable="true" type="tns:ArrayOfCustomEventAdvancedParameterInfo" />
+      <xs:element minOccurs="0" name="Attachments" nillable="true" type="tns:ArrayOfCustomEventAttachmentInfo" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomEventInfo" nillable="true" type="tns:CustomEventInfo" />
+  <xs:complexType name="ArrayOfCustomEventAdvancedParameterInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomEventAdvancedParameterInfo" nillable="true" type="tns:CustomEventAdvancedParameterInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomEventAdvancedParameterInfo" nillable="true" type="tns:ArrayOfCustomEventAdvancedParameterInfo" />
+  <xs:complexType name="CustomEventAdvancedParameterInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomEventAdvancedParameterInfo" nillable="true" type="tns:CustomEventAdvancedParameterInfo" />
+  <xs:complexType name="CustomEventAdvancedParameterInfoOfstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="CustomEventAdvancedParameterInfoOf{0}{#}" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustomEventAdvancedParameterInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustomEventAdvancedParameterInfoOfstring" nillable="true" type="tns:CustomEventAdvancedParameterInfoOfstring" />
+  <xs:complexType name="CustomEventAdvancedParameterInfoOfint">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="CustomEventAdvancedParameterInfoOf{0}{#}" Namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustomEventAdvancedParameterInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustomEventAdvancedParameterInfoOfint" nillable="true" type="tns:CustomEventAdvancedParameterInfoOfint" />
+  <xs:complexType name="ArrayOfCustomEventAttachmentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CustomEventAttachmentInfo" nillable="true" type="tns:CustomEventAttachmentInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomEventAttachmentInfo" nillable="true" type="tns:ArrayOfCustomEventAttachmentInfo" />
+  <xs:complexType name="CustomEventAttachmentInfo">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="CustomEventAttachmentInfo" nillable="true" type="tns:CustomEventAttachmentInfo" />
+  <xs:complexType name="CustomEventVideoAttachmentInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustomEventAttachmentInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CameraID" nillable="true" type="tns:CameraID" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustomEventVideoAttachmentInfo" nillable="true" type="tns:CustomEventVideoAttachmentInfo" />
+  <xs:complexType name="CustomEventFileAttachmentInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CustomEventAttachmentInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CustomEventFileAttachmentInfo" nillable="true" type="tns:CustomEventFileAttachmentInfo" />
+  <xs:element name="TriggerCustomEventResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseAlerts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_healthCheckAlerts" nillable="true" type="tns:ArrayOfAlertID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CloseAlertsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTourInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:TourSearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTourInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTourInfoResult" nillable="true" type="tns:ArrayOfTourInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfTourInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TourInfo" nillable="true" type="tns:TourInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTourInfo" nillable="true" type="tns:ArrayOfTourInfo" />
+  <xs:element name="PtzControl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="panSpeed" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="tiltSpeed" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="zoomSpeed" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzControlResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGenericControl">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="ptzOp" type="tns:PtzOperation" />
+        <xs:element minOccurs="0" name="speed" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="PtzOperation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PanRight">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PanLeft">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TiltUp">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TiltDown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZoomTele">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZoomWide">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FocusNear">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FocusFar">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IrisOpen">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IrisClose">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">512</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AllStop">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1024</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PtzOperation" nillable="true" type="tns:PtzOperation" />
+  <xs:element name="PtzGenericControlResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzAllStop">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzAllStopResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzLock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzLockResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUnlock">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUnlockResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzIsLocked">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzIsLockedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzIsLockedResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzFocus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="nFocusSpeed" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzFocusResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzIris">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="nIrisSpeed" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzIrisResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzSetFeatureMode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="feature" type="tns:PtzFeature" />
+        <xs:element minOccurs="0" name="mode" type="tns:PtzFeatureModes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="PtzFeature">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Iris" />
+      <xs:enumeration value="Focus" />
+      <xs:enumeration value="AutoPan" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PtzFeature" nillable="true" type="tns:PtzFeature" />
+  <xs:simpleType name="PtzFeatureModes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Off" />
+      <xs:enumeration value="ON" />
+      <xs:enumeration value="Auto" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PtzFeatureModes" nillable="true" type="tns:PtzFeatureModes" />
+  <xs:element name="PtzSetFeatureModeResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzMenu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="cmd" type="tns:PtzMenuCommand" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="PtzMenuCommand">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Show" />
+      <xs:enumeration value="Hide" />
+      <xs:enumeration value="Up" />
+      <xs:enumeration value="Down" />
+      <xs:enumeration value="Left" />
+      <xs:enumeration value="Right" />
+      <xs:enumeration value="Enter" />
+      <xs:enumeration value="Next" />
+      <xs:enumeration value="Previous" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PtzMenuCommand" nillable="true" type="tns:PtzMenuCommand" />
+  <xs:element name="PtzMenuResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetCapabilities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetCapabilitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetCapabilitiesResult" type="tns:PtzCapabilities" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="PtzCapabilities">
+    <xs:annotation>
+      <xs:appinfo>
+        <ActualType Name="unsignedLong" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PanWithoutSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PanWithSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetPanSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetPanSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AutoPan">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TiltWithoutSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="TiltWithSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetTiltSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetTiltSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">256</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ZoomWithoutSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">512</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ZoomWithSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1024</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetZoomSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2048</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetZoomSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4096</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FocusWithoutSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8192</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FocusWithSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16384</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetFocusSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32768</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetFocusSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65536</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetAutoFocusMode">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">131072</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="IrisWithoutSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">262144</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="IrisWithSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">524288</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetIrisSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1048576</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetIrisSpeed">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2097152</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetAutoIrisMode">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4194304</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GoToPreset">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8388608</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetPreset">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16777216</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ClearPreset">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">33554432</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetNbOfSupportedPresets">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">67108864</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RecordPattern">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">134217728</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RunPattern">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">268435456</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="StopRunningPattern">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">536870912</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ClearPattern">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1073741824</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetNbOfSupportedPatterns">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2147483648</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuOn">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4294967296</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuOff">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8589934592</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuLeft">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">17179869184</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuRight">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">34359738368</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuUp">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">68719476736</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuDown">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">137438953472</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuEnter">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">274877906944</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuPrevious">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">549755813888</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MenuNext">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1099511627776</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetAuxiliary">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2199023255552</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ClearAuxiliary">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4398046511104</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetAuxiliaryState">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8796093022208</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetNbOfSupportedAuxiliaries">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">17592186044416</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AllStop">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">35184372088832</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FlipCamera180Degrees">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">70368744177664</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetCameraToHomePosition">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">140737488355328</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="GetCameraPosition">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">281474976710656</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SetCameraPosition">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">562949953421312</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RebootPtzCamera">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1125899906842624</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CombinedPanTilt">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2251799813685248</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Passthrough">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4503599627370496</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="PtzCapabilities" nillable="true" type="tns:PtzCapabilities" />
+  <xs:element name="IsPtzCapabilitySupported">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AllCapsSupported" type="tns:PtzCapabilities" />
+        <xs:element minOccurs="0" name="OneCap" type="tns:PtzCapabilities" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsPtzCapabilitySupportedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsPtzCapabilitySupportedResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetPresetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:PtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetPresetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetPresetInfoResult" nillable="true" type="tns:ArrayOfPtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfPtzPresetInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PtzPresetInfo" nillable="true" type="tns:PtzPresetInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPtzPresetInfo" nillable="true" type="tns:ArrayOfPtzPresetInfo" />
+  <xs:element name="PtzCreateAndSavePresetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="strName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzCreateAndSavePresetInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzCreateAndSavePresetInfoResult" nillable="true" type="tns:PtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUpdatePresetInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="update" nillable="true" type="tns:PtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUpdatePresetInfoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzDeletePreset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="del" nillable="true" type="tns:PtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzDeletePresetResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedPreset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedPresetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetNumberOfSupportedPresetResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGotoPreset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="preset" nillable="true" type="tns:PtzPresetInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGotoPresetResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetPatternInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetPatternInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetPatternInfoResult" nillable="true" type="tns:ArrayOfPtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfPtzPatternInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PtzPatternInfo" nillable="true" type="tns:PtzPatternInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPtzPatternInfo" nillable="true" type="tns:ArrayOfPtzPatternInfo" />
+  <xs:element name="PtzCreateAndSavePatternInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="strName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="nNumber" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzCreateAndSavePatternInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzCreateAndSavePatternInfoResult" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUpdatePatternInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="update" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzUpdatePatternInfoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzDeletePattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="del" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzDeletePatternResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedPatternResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetNumberOfSupportedPatternResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStartRecordingPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="pattern" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStartRecordingPatternResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStopRecordingPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="pattern" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStopRecordingPatternResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzRunPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="pattern" nillable="true" type="tns:PtzPatternInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzRunPatternResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStopPattern">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzStopPatternResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedAuxiliaries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzGetNumberOfSupportedAuxiliariesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PtzGetNumberOfSupportedAuxiliariesResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzSetAuxiliary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="nAuxiliary" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzSetAuxiliaryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzClearAuxiliary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="nAuxiliary" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzClearAuxiliaryResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzMoveToHomePosition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="camera" nillable="true" type="tns:CameraID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PtzMoveToHomePositionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptionKey">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetEncryptionKeyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetEncryptionKeyResult" nillable="true" type="tns:RsaPublicKey" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="RsaPublicKey">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Exponent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modulus" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RsaPublicKey" nillable="true" type="tns:RsaPublicKey" />
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoginResult" nillable="true" type="tns:LoginInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="LoginInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Limited" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Remote" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SessionID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginInfo" nillable="true" type="tns:LoginInfo" />
+  <xs:element name="TokenLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="authenticationToken" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TokenLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TokenLoginResult" nillable="true" type="tns:LoginInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WindowsLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="principal" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WindowsLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="WindowsLoginResult" nillable="true" type="tns:LoginInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Logout">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LogoutResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:CameraBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraBasicInfoResult" nillable="true" type="tns:ArrayOfCameraBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:CameraInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraInfoResult" nillable="true" type="tns:ArrayOfCameraInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfCameraInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CameraInfo" nillable="true" type="tns:CameraInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCameraInfo" nillable="true" type="tns:ArrayOfCameraInfo" />
+  <xs:element name="GetCameraStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:CameraBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraStatusResult" nillable="true" type="tns:ArrayOfCameraStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfCameraStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CameraStatus" nillable="true" type="tns:CameraStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCameraStatus" nillable="true" type="tns:ArrayOfCameraStatus" />
+  <xs:element name="GetCameraStillImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="dateAndTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="format" type="tns:StillImageFormat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="StillImageFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="JpegLow" />
+      <xs:enumeration value="JpegMedium" />
+      <xs:enumeration value="JpegHigh" />
+      <xs:enumeration value="JpegMaximum" />
+      <xs:enumeration value="Png24" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StillImageFormat" nillable="true" type="tns:StillImageFormat" />
+  <xs:element name="GetCameraStillImageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraStillImageResult" nillable="true" type="tns:StillImageInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="StillImageInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="DataType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StillImageInfo" nillable="true" type="tns:StillImageInfo" />
+  <xs:element name="GetMonitorBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:MonitorBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMonitorBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMonitorBasicInfoResult" nillable="true" type="tns:ArrayOfMonitorBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfMonitorBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MonitorBasicInfo" nillable="true" type="tns:MonitorBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMonitorBasicInfo" nillable="true" type="tns:ArrayOfMonitorBasicInfo" />
+  <xs:element name="GetMonitorInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:MonitorInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMonitorInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetMonitorInfoResult" nillable="true" type="tns:ArrayOfMonitorInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfMonitorInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MonitorInfo" nillable="true" type="tns:MonitorInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMonitorInfo" nillable="true" type="tns:ArrayOfMonitorInfo" />
+  <xs:element name="GetCameraGroupBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:CameraGroupBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraGroupBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraGroupBasicInfoResult" nillable="true" type="tns:ArrayOfCameraGroupBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraGroupInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:CameraGroupBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCameraGroupInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCameraGroupInfoResult" nillable="true" type="tns:ArrayOfCameraGroupInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfCameraGroupInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CameraGroupInfo" nillable="true" type="tns:CameraGroupInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCameraGroupInfo" nillable="true" type="tns:ArrayOfCameraGroupInfo" />
+  <xs:element name="Export">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="tns:CameraID" />
+        <xs:element minOccurs="0" name="start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="end" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="exportOptions" type="tns:ExportNextivaOptions" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="ExportNextivaOptions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="ExportCodec" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ExportNextivaOptions" nillable="true" type="tns:ExportNextivaOptions" />
+  <xs:element name="ExportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExportResult" nillable="true" type="tns:ExportInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExportUpdateStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" nillable="true" type="tns:ExportID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExportUpdateStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ExportUpdateStatusResult" nillable="true" type="tns:ExportStatusInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ExportStatusInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProgressInPercent" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusCode" type="tns:ExportStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExportStatusInfo" nillable="true" type="tns:ExportStatusInfo" />
+  <xs:simpleType name="ExportStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="StoppedFailed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StoppedCanceled">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StoppedInvalidFiles">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StoppedMultipleFileResolutions">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DoesNotExist">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotStarted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InProgress">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StoppedSuccess">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">100</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ExportStatus" nillable="true" type="tns:ExportStatus" />
+  <xs:element name="ExportDisposeServerResources">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="exportInfo" nillable="true" type="tns:ExportID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExportDisposeServerResourcesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAndSaveBookmark">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="oInfo" nillable="true" type="tns:BookmarkInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateAndSaveBookmarkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateAndSaveBookmarkResult" nillable="true" type="tns:BookmarkInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBookmark">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="oInfo" nillable="true" type="tns:BookmarkID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBookmarkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBookmark">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:BookmarkSearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBookmarkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetBookmarkResult" nillable="true" type="tns:ArrayOfBookmarkInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfBookmarkInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookmarkInfo" nillable="true" type="tns:BookmarkInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookmarkInfo" nillable="true" type="tns:ArrayOfBookmarkInfo" />
+  <xs:element name="GetUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:UserBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetUserResult" nillable="true" type="tns:ArrayOfUserBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfUserBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserBasicInfo" nillable="true" type="tns:UserBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserBasicInfo" nillable="true" type="tns:ArrayOfUserBasicInfo" />
+  <xs:element name="HasAccessRight">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="right" type="tns:AccessRight" />
+        <xs:element minOccurs="0" name="accessType" type="tns:AccessType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="AccessRight">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Alarm">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Bookmark">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ExportVideo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LiveVideo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PtzMenu">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PtzControl">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PtzLock">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RecordedVideo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StillImage">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AccessRight" nillable="true" type="tns:AccessRight" />
+  <xs:simpleType name="AccessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Deny" />
+      <xs:enumeration value="Allow" />
+      <xs:enumeration value="Modify" />
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Create" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AccessType" nillable="true" type="tns:AccessType" />
+  <xs:element name="HasAccessRightResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HasAccessRightResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccessRights">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccessRightsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAccessRightsResult" nillable="true" xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" type="q7:ArrayOfKeyValueOfAccessRightArrayOfAccessTypezEVzh0ZM" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAccessType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccessType" type="tns:AccessType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAccessType" nillable="true" type="tns:ArrayOfAccessType" />
+  <xs:element name="GetAlarmBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:AlarmSearchFilter" />
+        <xs:element minOccurs="0" name="maxCount" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAlarmBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlarmBasicInfoResult" nillable="true" type="tns:ArrayOfAlarmBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAlarmBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmBasicInfo" nillable="true" type="tns:AlarmBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmBasicInfo" nillable="true" type="tns:ArrayOfAlarmBasicInfo" />
+  <xs:element name="GetAlarmInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:AlarmSearchFilter" />
+        <xs:element minOccurs="0" name="maxCount" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAlarmInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlarmInfoResult" nillable="true" type="tns:ArrayOfAlarmInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAlarmInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmInfo" nillable="true" type="tns:AlarmInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmInfo" nillable="true" type="tns:ArrayOfAlarmInfo" />
+  <xs:element name="GetAlarmFileAttachmentData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="file" nillable="true" type="tns:AlarmAttachmentID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAlarmFileAttachmentDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlarmFileAttachmentDataResult" nillable="true" type="tns:AlarmFileAttachmentData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAlarmImageAttachmentData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="image" nillable="true" type="tns:AlarmAttachmentID" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAlarmImageAttachmentDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetAlarmImageAttachmentDataResult" nillable="true" type="tns:AlarmImageAttachmentData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeAlarm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="alarmToAck" nillable="true" type="tns:AlarmAcknowledgeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeAlarmResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeMultipleAlarms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="alarmsToAck" nillable="true" type="tns:ArrayOfAlarmAcknowledgeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAlarmAcknowledgeInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlarmAcknowledgeInfo" nillable="true" type="tns:AlarmAcknowledgeInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlarmAcknowledgeInfo" nillable="true" type="tns:ArrayOfAlarmAcknowledgeInfo" />
+  <xs:element name="AcknowledgeMultipleAlarmsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnAcknowledgeAlarm">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="alarmToUnAck" nillable="true" type="tns:AlarmAcknowledgeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnAcknowledgeAlarmResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnAcknowledgeMultipleAlarms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="alarmsToUnAck" nillable="true" type="tns:ArrayOfAlarmAcknowledgeInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnAcknowledgeMultipleAlarmsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTourBasicInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:TourSearchFilter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTourBasicInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetTourBasicInfoResult" nillable="true" type="tns:ArrayOfTourBasicInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfTourBasicInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TourBasicInfo" nillable="true" type="tns:TourBasicInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTourBasicInfo" nillable="true" type="tns:ArrayOfTourBasicInfo" />
+</xs:schema>

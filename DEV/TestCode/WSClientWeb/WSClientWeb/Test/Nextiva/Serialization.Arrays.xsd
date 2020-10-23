@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" />
+  <xs:complexType name="ArrayOfKeyValueOfintDSTAdjustmentR6FBy_Pvq">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfintDSTAdjustmentR6FBy_Pvq">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" type="xs:int" />
+            <xs:element name="Value" nillable="true" xmlns:q1="http://schemas.verint.com/2010/04/12/NextivaWS/" type="q1:DSTAdjustment" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfintDSTAdjustmentR6FBy_Pvq" nillable="true" type="tns:ArrayOfKeyValueOfintDSTAdjustmentR6FBy_Pvq" />
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:complexType name="ArrayOfboolean">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="boolean" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfboolean" nillable="true" type="tns:ArrayOfboolean" />
+  <xs:complexType name="ArrayOfKeyValueOfAccessRightArrayOfAccessTypezEVzh0ZM">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfAccessRightArrayOfAccessTypezEVzh0ZM">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" xmlns:q2="http://schemas.verint.com/2010/04/12/NextivaWS/" type="q2:AccessRight" />
+            <xs:element name="Value" nillable="true" xmlns:q3="http://schemas.verint.com/2010/04/12/NextivaWS/" type="q3:ArrayOfAccessType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKeyValueOfAccessRightArrayOfAccessTypezEVzh0ZM" nillable="true" type="tns:ArrayOfKeyValueOfAccessRightArrayOfAccessTypezEVzh0ZM" />
+</xs:schema>

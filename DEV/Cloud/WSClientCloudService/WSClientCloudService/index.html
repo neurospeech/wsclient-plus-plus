@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="scripts/style/atoms.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.11.1.min.js"></script>
+    <script src="scripts/atoms.min.js"></script>
+
+    <script type="text/javascript">
+        WebAtoms.dispatcher.callLater(function () {
+            setInterval(function () {
+                appScope.setValue("_v", appScope._v + 1);
+            },5000);
+        });
+    </script>
+
+    <style>
+        body{
+            overflow:hidden;
+        }
+    </style>
+
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <script type="text/javascript/scope">
+            ({
+                types: [
+                    {
+                        label: "Java",
+                        value: "java",
+                        targets: [
+                            { label: "Android", value: "android" },
+                            { label: "Blackberry", value: "blackberry" },
+                            { label: "JDK", value: "desktop" }
+                        ]
+                    },
+                    {
+                        label: "Cocoa/Obj-C",
+                        value: "objc",
+                        targets: [
+                            { label: "iPhone/iPad", value: "iphone" },
+                            { label: "Mac", value: "mac" }
+                        ]
+                    }
+                ],
+                job: {
+                    JobStatus: 'Ready',
+                    wsdl: "",
+                    outputType: "java",
+                    outputTarget: "android",
+                    outputPackage: "wsclient.gen",
+                    outputPrefix: "WS",
+                    ResultUrl: '',
+                    JobID: 0,
+                    error: ''
+                },
+                request: {
+                },
+                validate: function (w) {
+                    if (!w)
+                        return 'Please enter WSDL URL';
+                    if (/\.asmx$/i.test(w))
+                        return 'Please add ?WSDL at end of the URL';
+                    return '';
+                }
+            })
+        </script>
+
+        <div
+            atom-data="{$scope.job}"
+            atom-merge="[ { data: { error: $scope.validate($data.wsdl) } } ]"
+            atom-name="theForm"
+             atom-type="AtomForm"
+             atom-post-url="/api/jobs/create"
+             atom-dock="Fill">
+            <h1>WSClient Demo Code Generator</h1>
+            <hr />
+           
+            <h3>
+            
+             <span 
+                atom-type="AtomToggleButtonBar"
+                atom-name="typeList"
+                atom-value="$[data.outputType]"
+                atom-items="{$scope.types}"></span>
+             <span 
+                atom-type="AtomToggleButtonBar"
+                atom-name="targetList"
+                atom-value="$[data.outputTarget]"
+                atom-items="[$scope.typeList.selectedItem.targets]"></span>
+            </h3> 
+            <h3>
+            <input placeholder="WSDL URL" style="width:500px;" type="text" atom-value="$[data.wsdl](keyup,keypress,keydown,blur)" /></h3>
+            <h3 style-display="[/java/i.test($data.outputType) ? '' : 'none']" >Java Package Name</h3>
+                <input style-display="[/java/i.test($data.outputType) ? '' : 'none']" type="text" atom-value="$[data.outputPackage]" />
+            <h3 style-display="[/objc/i.test($data.outputType) ? '' : 'none']" >Cocoa Class Prefix</h3>
+                <input type="text" style-display="[/objc/i.test($data.outputType) ? '' : 'none']" atom-value="$[data.outputPrefix]" />
+            <button 
+                atom-is-enabled="[$data.wsdl]"
+                type="submit">Generate</button>
+            <span 
+                style-display="[$data.error ? '' : 'none']"
+                style="background-color:yellow; color:gray;"
+                atom-text="[$data.error]"></span>
+            <div 
+                atom-type="AtomControl"
+                atom-merge="[ /success|failed|ready/i.test($data.JobStatus) ? undefined : Atom.resolve( { data: AtomPromise.json('/api/jobs/status/' + $data.JobID, { _v: $appScope._v } ).showProgress(false) }).showProgress(false)]"
+                >
+                <div style-display="[$data.JobID ? '' : 'none']">
+                    <div style-display="[/success/i.test($data.JobStatus) ? '' : 'none']"
+                        style="background-color:yellow; color:gray;text-align:center">Demo Version: Only First Two Methods are Generated
+                        <br />
+                        <a href="http://wsclient.neurospeech.com/purchase" target="_top"><button>Purchase Full Version</button></a>
+                        <a href="https://www.mashape.com/neurospeech/wsclient#!pricing" target="_top"><button>Pay as You Go $1/Code Generation</button></a>
+                    </div>
+                    <h3 atom-text="[$data.ResultUrl ? 'Download' : 'Processing...']"></h3>
+                    <a style-display="[$data.ResultUrl ? '' : 'none']" atom-href="[$data.ResultUrl]" atom-text="[$data.ResultUrl]"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					label="Demo News"
+					creationComplete="onCreationComplete(event)"
+					>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import wsClasses.License;
+			protected function onCloseButtonClicked(event:MouseEvent):void
+			{
+				WSClient.closeProject(this);				
+			}
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				htmlContainer.htmlLoader.navigateInSystemBrowser = true;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%">
+		
+	<mx:HTML 
+			width="100%" 
+			height="100%" 
+			paddingBottom="4" 
+			paddingLeft="4" 
+			paddingRight="4" 
+			paddingTop="4"
+			location="https://neurospeech-store.800casting.com/app/demo/index/{License.productUID}"
+			id="htmlContainer"
+			>
+		
+	</mx:HTML>
+	<s:HGroup horizontalAlign="right" width="100%">
+		<s:Button label="Close" click="onCloseButtonClicked(event)" icon="DeleteIcon.png"/>
+	</s:HGroup>
+	</s:VGroup>
+</s:NavigatorContent>

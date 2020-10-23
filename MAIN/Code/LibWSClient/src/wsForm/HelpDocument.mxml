@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:VBox 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	label="Help"
+	 xmlns:lib="http://ns.neurospeech.com/neuro/flex/lib"
+	 creationComplete="creationCompleteHandler(event)"
+	 >
+	
+	<mx:Script>
+		<![CDATA[
+			import flash.filesystem.File;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.utils.StringUtil;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				try{
+				var f:File = File.applicationDirectory.resolvePath("helpDocument.html");
+				htmlContainer.location = "file://" + f.nativePath;
+				}catch(e:Error){
+					Alert.show(e.toString());
+				}
+				
+			}
+
+
+
+		]]>
+	</mx:Script>
+	<mx:HBox width="100%" backgroundColor="#565656" paddingBottom="2" paddingLeft="2" paddingRight="2" paddingTop="2" cornerRadius="5">
+		<lib:InsertButton label="Create New Configuration File" 
+						  color="#000000" fillAlphas="[1.0, 1.0, 1.0, 1.0]"
+						  bubbleCommand="createNew"
+						  />
+		<lib:OpenButton label="Open Configuration File"
+						color="#000000" fillAlphas="[1.0, 1.0, 1.0, 1.0]"
+						bubbleCommand="openFile"
+						/>
+		<mx:Spacer width="100%"/>
+		<mx:Text text="WSClient++ Documentation"  fontSize="14" fontWeight="bold" color="#FFFFFF"/>
+	</mx:HBox>
+	<mx:HTML 
+		width="100%" 
+		height="100%" 
+		id="htmlContainer"
+		paddingLeft="5"
+		paddingBottom="5"
+		/>
+	
+</mx:VBox>

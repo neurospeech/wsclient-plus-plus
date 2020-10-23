@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div atom-dock="Fill" style="overflow:auto">
+
+    <script type="text/javascript">
+        ({
+            start: 0,
+            size: 100,
+            orderBy: 'JobID DESC'
+        })
+    </script>
+
+    <div 
+        atom-type="AtomItemsControl"
+        atom-items="{AtomPromise.json('/admin/entity/wsjob/query',{ 
+            orderBy:$scope.orderBy,
+            start: $scope.start,
+            size: $scope.size
+        })}"
+        >
+        <table>
+            <thead>
+                <tr>
+                    <th>Job ID</th>
+                    <th>User ID</th>
+                    <th>WSDL</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody atom-presenter="itemsPresenter">
+                <tr atom-template="itemTemplate">
+                    <td atom-text="{$data.JobID}"></td>
+                    <td atom-text="{$data.OwnerID}"></td>
+                    <td>
+                        <a 
+                            atom-text="{$data.WSDLUrl}"
+                            atom-href="{$data.WSDLUrl}"></a>
+                    </td>
+                    <td atom-text="{$data.StartTime}"></td>
+                    <td>
+                        <a 
+                            atom-text="{$data.JobStatus}"
+                            atom-href="{$data.ResultUrl}"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

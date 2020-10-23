@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       xmlns:mx="library://ns.adobe.com/flex/mx"					   
+					   invoke="onInvoke(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+		import flash.events.InvokeEvent;
+		import flash.filesystem.File;
+		import flash.filesystem.FileStream;
+		import wsClasses.JavaGenerator;
+		import wsClasses.License;
+		import wsClasses.ObjCGenerator;
+		import wsClasses.SoapService;
+		import wsClasses.WSGenerator;
+		import wsForm.WSProjectProperties;
+		
+		[Bindable]
+		public var project:WSProjectProperties  = new WSProjectProperties();
+		
+		public function runApp(config:String, demo:Boolean , log:String):void
+		{
+			var logFile:File = new File(log);
+			
+			// start generating...
+			
+			try{
+			
+				License.demo = demo;
+				
+				var f:File = new File(config);
+				project.load(f);
+				
+				var gen:WSGenerator = null;
+				
+				if ( /objc/i.test(project.generateType)) {
+					gen = new ObjCGenerator();
+				}
+				if (/java/i.test(project.generateType)) {
+					gen = new JavaGenerator();
+				}
+				
+				project.resultFunc = function():void { 
+					var fs:FileStream = new FileStream();
+					fs.open(logFile, "append");
+					fs.writeMultiByte(project.log,File.systemCharset);
+					fs.close();
+					stage.nativeWindow.close();
+				};
+				
+				project.generateFiles(gen);
+			}catch (er:Error) {
+				project.log = er.toString();
+				var fs:FileStream = new FileStream();
+				fs.open(logFile, "append");
+					fs.writeMultiByte(project.log,File.systemCharset);
+				fs.close();
+				stage.nativeWindow.close();
+			}
+		}
+		
+		public function onInvoke(e:InvokeEvent):void
+		{
+			if (e.arguments.length) {
+				var config:String = e.arguments[0];
+				
+				var d:String = e.arguments[1];
+				
+				var demo:Boolean = /demo/i.test(d);
+				
+				var log:String = e.arguments[2];
+				
+				
+				runApp(config, demo, log);
+			}
+		}
+		
+		public function onClick(e:flash.events.Event):void
+		{
+			runApp("D:\\LiveProjects\\NeuroSpeech\\WSClient\\DEV\\Cloud\\WSClientServiceApp\\input.json",true, "D:\\LiveProjects\\NeuroSpeech\\WSClient\\DEV\\Cloud\\WSClientServiceApp\\log.txt");
+		}
+		
+		]]>
+	</fx:Script>
+	
+	<s:TextArea text="{project.log}" ></s:TextArea>
+	
+	<s:Button click="onClick(event)"></s:Button>
+	
+</s:WindowedApplication>

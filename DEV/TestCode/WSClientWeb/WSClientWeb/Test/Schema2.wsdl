@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="Iformata.Vnoc.Symphony.Iphone" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="Iformata.Vnoc.Symphony.Iphone" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:complexType name="LoginResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="TimeDiff" type="xs:int"/>
+      <xs:element minOccurs="0" name="TimeZone" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="token" nillable="true" type="tns:Token"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginResult" nillable="true" type="tns:LoginResult"/>
+  <xs:complexType name="Token">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SessionId" type="ser:guid"/>
+      <xs:element minOccurs="0" name="UserId" type="ser:guid"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Token" nillable="true" type="tns:Token"/>
+  <xs:complexType name="ArrayOfIphoneAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IphoneAccount" nillable="true" type="tns:IphoneAccount"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfIphoneAccount" nillable="true" type="tns:ArrayOfIphoneAccount"/>
+  <xs:complexType name="IphoneAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DefaultSetupTime" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id" type="ser:guid"/>
+      <xs:element minOccurs="0" name="IsParticipantsAllowed" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IsSetupTimeReadOnly" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IphoneAccount" nillable="true" type="tns:IphoneAccount"/>
+  <xs:complexType name="IphoneConference">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="ser:guid"/>
+      <xs:element minOccurs="0" name="ConfirmationNumber" type="xs:long"/>
+      <xs:element minOccurs="0" name="ExternalSpaces" nillable="true" type="tns:ArrayOfExternalSpace"/>
+      <xs:element minOccurs="0" name="HostSpaceId" type="ser:guid"/>
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="NotificationOptions" nillable="true" type="tns:ArrayOfNotificationOption"/>
+      <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Participants" nillable="true" type="tns:ArrayOfParticipant"/>
+      <xs:element minOccurs="0" name="ReminderOptions" nillable="true" type="tns:ArrayOfReminderOption"/>
+      <xs:element minOccurs="0" name="Requestor" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Spaces" nillable="true" type="tns:ArrayOfIphoneSpace"/>
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="UtcEnd" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcSetup" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcStart" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IphoneConference" nillable="true" type="tns:IphoneConference"/>
+  <xs:complexType name="ArrayOfExternalSpace">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExternalSpace" nillable="true" type="tns:ExternalSpace"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfExternalSpace" nillable="true" type="tns:ArrayOfExternalSpace"/>
+  <xs:complexType name="ExternalSpace">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SpaceName" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExternalSpace" nillable="true" type="tns:ExternalSpace"/>
+  <xs:complexType name="ArrayOfNotificationOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NotificationOption" nillable="true" type="tns:NotificationOption"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNotificationOption" nillable="true" type="tns:ArrayOfNotificationOption"/>
+  <xs:complexType name="NotificationOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NotificationType" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NotificationOption" nillable="true" type="tns:NotificationOption"/>
+  <xs:complexType name="ArrayOfParticipant">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Participant" nillable="true" type="tns:Participant"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParticipant" nillable="true" type="tns:ArrayOfParticipant"/>
+  <xs:complexType name="Participant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Participant" nillable="true" type="tns:Participant"/>
+  <xs:complexType name="ArrayOfReminderOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReminderOption" nillable="true" type="tns:ReminderOption"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReminderOption" nillable="true" type="tns:ArrayOfReminderOption"/>
+  <xs:complexType name="ReminderOption">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReminderType" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReminderOption" nillable="true" type="tns:ReminderOption"/>
+  <xs:complexType name="ArrayOfIphoneSpace">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IphoneSpace" nillable="true" type="tns:IphoneSpace"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfIphoneSpace" nillable="true" type="tns:ArrayOfIphoneSpace"/>
+  <xs:complexType name="IphoneSpace">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Capacity" type="xs:int"/>
+      <xs:element minOccurs="0" name="Conflict" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Id" type="ser:guid"/>
+      <xs:element minOccurs="0" name="IsConflict" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="IsManaged" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="OfficeId" type="ser:guid"/>
+      <xs:element minOccurs="0" name="OfficeName" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Photos" nillable="true" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IphoneSpace" nillable="true" type="tns:IphoneSpace"/>
+  <xs:complexType name="ArrayOfFindConferenceCriteria">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FindConferenceCriteria" nillable="true" type="tns:FindConferenceCriteria"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFindConferenceCriteria" nillable="true" type="tns:ArrayOfFindConferenceCriteria"/>
+  <xs:complexType name="FindConferenceCriteria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateRange" nillable="true" type="tns:ConferenceSchedule"/>
+      <xs:element minOccurs="0" name="SearchCriteria" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="SearchString" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FindConferenceCriteria" nillable="true" type="tns:FindConferenceCriteria"/>
+  <xs:complexType name="ConferenceSchedule">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowOvertime" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="UtcEnd" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcSetup" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcStart" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcTeardown" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="UtcTeardownSpecified" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConferenceSchedule" nillable="true" type="tns:ConferenceSchedule"/>
+  <xs:complexType name="ArrayOfIphoneConferenceLite">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IphoneConferenceLite" nillable="true" type="tns:IphoneConferenceLite"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfIphoneConferenceLite" nillable="true" type="tns:ArrayOfIphoneConferenceLite"/>
+  <xs:complexType name="IphoneConferenceLite">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConferenceNumber" type="xs:long"/>
+      <xs:element minOccurs="0" name="End" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="IsMyConference" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Requestor" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Setup" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Start" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IphoneConferenceLite" nillable="true" type="tns:IphoneConferenceLite"/>
+  <xs:complexType name="ArrayOfMeetingDay">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MeetingDay" nillable="true" type="tns:MeetingDay"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMeetingDay" nillable="true" type="tns:ArrayOfMeetingDay"/>
+  <xs:complexType name="MeetingDay">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="isMyMeeting" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="meetingDate" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MeetingDay" nillable="true" type="tns:MeetingDay"/>
+</xs:schema>

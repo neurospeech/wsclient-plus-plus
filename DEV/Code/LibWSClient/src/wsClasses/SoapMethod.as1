@@ -1,0 +1,57 @@
+package wsClasses
+{
+	public class SoapMethod
+	{
+		private var service:SoapService;
+		
+		public function SoapMethod(s:SoapService)
+		{
+			service = s;
+		}
+		
+		public var name:String = "";
+		
+		public var headerType:SoapType = null;
+		
+		public var returnType:SoapType = new SoapType();
+		
+		public var multipleReturns:Boolean = false;
+		
+		public var soapAction:String = "";
+		
+		public var signature:String = "";
+		
+		public var parameters:Array = [];
+		
+		public var inputMessageName:String = "";
+		public var outputMessageName:String = "";
+		
+		public function get requestName():String{
+			return "Request_" + service.name + "_" + name;
+		}
+		
+		public function get resultEventName():String
+		{
+			return "ResultEvent_"+ service.name + "_" + name ;
+		}
+		
+		public function get hasArrayParameter():Boolean{
+			for each(var sp:SoapMember in parameters){
+				if(sp.type.isArray)
+					return true;
+			}
+			return false;
+		}
+
+		public function stripNamespaces():void
+		{
+			var i:int = inputMessageName.indexOf(":");
+			if(i!=-1)
+				inputMessageName = inputMessageName.substr(i+1);
+			i = outputMessageName.indexOf(":");
+			if(i!=-1)
+				outputMessageName = outputMessageName.substr(i+1);
+		}
+		
+	}
+}

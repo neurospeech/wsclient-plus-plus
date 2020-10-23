@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+  <wsdl:import namespace="http://schemas.verint.com/2010/04/12/NextivaWS/" />
+  <wsdl:types/>
+  <wsdl:binding name="BasicHttpBinding_IService" type="i0:IService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="PtzGetAbsolutePosition">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetAbsolutePosition" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetAbsolutePosition">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAbsolutePosition" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzReboot">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzReboot" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LiveMediaQuery">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaQuery" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LiveMediaStreamToMonitor">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaStreamToMonitor" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TourMediaQuery">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TourMediaQuery" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PlaybackMediaQuery">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PlaybackMediaQuery" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SessionKeepAlive">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionKeepAlive" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SessionGetTimeToLive">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionGetTimeToLive" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeZoneInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTimeZoneInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkspaceBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkspaceInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWorkspace">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveWorkspace" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorkspace">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteWorkspace" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuardtourBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuardtourInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveGuardtour">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveGuardtour" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGuardtour">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteGuardtour" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzControl">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzControl" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGenericControl">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGenericControl" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzAllStop">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzAllStop" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzLock">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzLock" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUnlock">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUnlock" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzIsLocked">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIsLocked" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzFocus">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFocus" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzIris">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIris" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetFeatureMode">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetFeatureMode" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzMenu">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMenu" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetCapabilities">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetCapabilities" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsPtzCapabilitySupported">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/IsPtzCapabilitySupported" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetPresetInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPresetInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzCreateAndSavePresetInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePresetInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUpdatePresetInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePresetInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzDeletePreset">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePreset" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedPreset">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPreset" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGotoPreset">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGotoPreset" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetPatternInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPatternInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzCreateAndSavePatternInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePatternInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUpdatePatternInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePatternInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzDeletePattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedPattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStartRecordingPattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStartRecordingPattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStopRecordingPattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopRecordingPattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzRunPattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRunPattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStopPattern">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopPattern" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedAuxiliaries">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedAuxiliaries" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetAuxiliary">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAuxiliary" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzClearAuxiliary">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzClearAuxiliary" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzMoveToHomePosition">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMoveToHomePosition" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PtzFlip180Degrees">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFlip180Degrees" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Ping" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptionKey">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetEncryptionKey" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Login" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TokenLogin">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TokenLogin" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="WindowsLogin">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/WindowsLogin" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Logout" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraStatus">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStatus" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraStillImage">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStillImage" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraGroupBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraGroupInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Export" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ExportUpdateStatus">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportUpdateStatus" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ExportDisposeServerResources">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportDisposeServerResources" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAndSaveBookmark">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/CreateAndSaveBookmark" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookmark">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteBookmark" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmark">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetBookmark" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetUser" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="HasAccessRight">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/HasAccessRight" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccessRights">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAccessRights" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmImageAttachmentData">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmImageAttachmentData" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeAlarm">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeAlarm" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeMultipleAlarms">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeMultipleAlarms" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UnAcknowledgeAlarm">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeAlarm" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UnAcknowledgeMultipleAlarms">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeMultipleAlarms" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTourBasicInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourBasicInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTourInfo">
+      <soap:operation soapAction="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourInfo" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NextivaWSFaultFault">
+        <soap:fault name="NextivaWSFaultFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

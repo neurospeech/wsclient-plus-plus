@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="IphoneService" targetNamespace="http://Iformata.Vnoc.Symphony.Iphone" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:tns="http://Iformata.Vnoc.Symphony.Iphone" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Iformata.Vnoc.Symphony.Iphone/Imports">
+      <xsd:import schemaLocation="/Test/Schema0.wsdl" namespace="http://Iformata.Vnoc.Symphony.Iphone"/>
+      <xsd:import schemaLocation="/Test/Schema3.wsdl" namespace="http://schemas.datacontract.org/2004/07/System"/>
+      <xsd:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="/Test/Schema2.wsdl" namespace="Iformata.Vnoc.Symphony.Iphone"/>
+      <xsd:import schemaLocation="/Test/Schema4.wsdl" namespace="Symphony/Framework/Version/1.11.19.09"/>
+      <xsd:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IphoneService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_Login_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q1:Exception" xmlns:q1="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationAccounts"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationAccountsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationAccounts_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q2:Exception" xmlns:q2="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SaveConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q3:Exception" xmlns:q3="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOfficeSpaceConflict"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOfficeSpaceConflictResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOfficeSpaceConflict_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q4:Exception" xmlns:q4="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q5:Exception" xmlns:q5="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConference"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferenceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConference_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q6:Exception" xmlns:q6="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSessionValidity"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSessionValidityResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CheckSessionValidity_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q7:Exception" xmlns:q7="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_CancelConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q8:Exception" xmlns:q8="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConferenceProcess"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConferenceProcessResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_DeleteConferenceProcess_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q9:Exception" xmlns:q9="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationalOffices"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindOrganizationalOfficesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindOrganizationalOffices_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q10:Exception" xmlns:q10="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindSpacesConflict"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindSpacesConflictResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindSpacesConflict_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q11:Exception" xmlns:q11="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindActiveConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindActiveConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindActiveConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q12:Exception" xmlns:q12="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindLastConferences"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindLastConferencesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindLastConferences_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q13:Exception" xmlns:q13="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOffices"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchOfficesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_SearchOffices_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q14:Exception" xmlns:q14="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesForMonth"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindConferencesForMonthResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindConferencesForMonth_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q15:Exception" xmlns:q15="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindUsers"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindUsersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IphoneService_FindUsers_ExceptionFault_FaultMessage">
+    <wsdl:part name="detail" element="q16:Exception" xmlns:q16="http://schemas.datacontract.org/2004/07/System"/>
+  </wsdl:message>
+  <wsdl:portType name="IphoneService">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/Login" message="tns:IphoneService_Login_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/LoginResponse" message="tns:IphoneService_Login_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/LoginExceptionFault" name="ExceptionFault" message="tns:IphoneService_Login_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationAccounts">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccounts" message="tns:IphoneService_FindOrganizationAccounts_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccountsResponse" message="tns:IphoneService_FindOrganizationAccounts_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccountsExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOrganizationAccounts_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcess" message="tns:IphoneService_SaveConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcessResponse" message="tns:IphoneService_SaveConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_SaveConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOfficeSpaceConflict">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflict" message="tns:IphoneService_FindOfficeSpaceConflict_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflictResponse" message="tns:IphoneService_FindOfficeSpaceConflict_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflictExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOfficeSpaceConflict_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferences" message="tns:IphoneService_FindConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesResponse" message="tns:IphoneService_FindConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConference">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConference" message="tns:IphoneService_FindConference_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferenceResponse" message="tns:IphoneService_FindConference_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferenceExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConference_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSessionValidity">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidity" message="tns:IphoneService_CheckSessionValidity_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidityResponse" message="tns:IphoneService_CheckSessionValidity_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidityExceptionFault" name="ExceptionFault" message="tns:IphoneService_CheckSessionValidity_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CancelConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcess" message="tns:IphoneService_CancelConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcessResponse" message="tns:IphoneService_CancelConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_CancelConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConferenceProcess">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcess" message="tns:IphoneService_DeleteConferenceProcess_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcessResponse" message="tns:IphoneService_DeleteConferenceProcess_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcessExceptionFault" name="ExceptionFault" message="tns:IphoneService_DeleteConferenceProcess_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationalOffices">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOffices" message="tns:IphoneService_FindOrganizationalOffices_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOfficesResponse" message="tns:IphoneService_FindOrganizationalOffices_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOfficesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindOrganizationalOffices_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindSpacesConflict">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflict" message="tns:IphoneService_FindSpacesConflict_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflictResponse" message="tns:IphoneService_FindSpacesConflict_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflictExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindSpacesConflict_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindActiveConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferences" message="tns:IphoneService_FindActiveConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferencesResponse" message="tns:IphoneService_FindActiveConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindActiveConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindLastConferences">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferences" message="tns:IphoneService_FindLastConferences_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferencesResponse" message="tns:IphoneService_FindLastConferences_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferencesExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindLastConferences_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SearchOffices">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOffices" message="tns:IphoneService_SearchOffices_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOfficesResponse" message="tns:IphoneService_SearchOffices_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOfficesExceptionFault" name="ExceptionFault" message="tns:IphoneService_SearchOffices_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferencesForMonth">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonth" message="tns:IphoneService_FindConferencesForMonth_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonthResponse" message="tns:IphoneService_FindConferencesForMonth_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonthExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindConferencesForMonth_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsers">
+      <wsdl:input wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsers" message="tns:IphoneService_FindUsers_InputMessage"/>
+      <wsdl:output wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsersResponse" message="tns:IphoneService_FindUsers_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsersExceptionFault" name="ExceptionFault" message="tns:IphoneService_FindUsers_ExceptionFault_FaultMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IphoneService" type="tns:IphoneService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/Login" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationAccounts">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationAccounts" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SaveConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOfficeSpaceConflict">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOfficeSpaceConflict" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConference">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConference" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSessionValidity">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CheckSessionValidity" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CancelConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/CancelConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConferenceProcess">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/DeleteConferenceProcess" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindOrganizationalOffices">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindOrganizationalOffices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindSpacesConflict">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindSpacesConflict" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindActiveConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindActiveConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindLastConferences">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindLastConferences" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchOffices">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/SearchOffices" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindConferencesForMonth">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindConferencesForMonth" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FindUsers">
+      <soap:operation soapAction="http://Iformata.Vnoc.Symphony.Iphone/IphoneService/FindUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault name="ExceptionFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IphoneService">
+    <wsdl:port name="BasicHttpBinding_IphoneService" binding="tns:BasicHttpBinding_IphoneService">
+      <soap:address location="http://if-symphony-05/IphoneService/IPhoneService.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

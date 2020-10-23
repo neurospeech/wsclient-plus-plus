@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://lexisnexis.com/PM/Sync" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://lexisnexis.com/PM/Sync" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://lexisnexis.com/PM/Sync/Imports">
+      <xsd:import schemaLocation="/LexisNexis/xsd0.xml" namespace="http://lexisnexis.com/PM/Sync" />
+      <xsd:import schemaLocation="/LexisNexis/xsd7.xml" namespace="http://lexisnexis.com/PM/" />
+      <xsd:import schemaLocation="/LexisNexis/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="/LexisNexis/xsd2.xml" namespace="http://www.lexisnexis.com/PM/Calendar" />
+      <xsd:import schemaLocation="/LexisNexis/xsd3.xml" namespace="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" />
+      <xsd:import schemaLocation="/LexisNexis/xsd4.xml" namespace="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.Framework.Contracts" />
+      <xsd:import schemaLocation="/LexisNexis/xsd5.xml" namespace="http://www.lexisnexis.com/PM/Contact" />
+      <xsd:import schemaLocation="/LexisNexis/xsd6.xml" namespace="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" />
+      <xsd:import schemaLocation="/LexisNexis/xsd8.xml" namespace="http://schemas.datacontract.org/2004/07/System.Net" />
+      <xsd:import schemaLocation="/LexisNexis/xsd9.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISyncService_SynchronizeContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeContacts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeContacts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://lexisnexis.com/PM/" name="detail" element="q1:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeContacts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://lexisnexis.com/PM/" name="detail" element="q2:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeCalendar_InputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeCalendar" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeCalendar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeCalendarResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeCalendar_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://lexisnexis.com/PM/" name="detail" element="q3:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeCalendar_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://lexisnexis.com/PM/" name="detail" element="q4:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeTasks" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeTasks_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://lexisnexis.com/PM/" name="detail" element="q5:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SynchronizeTasks_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://lexisnexis.com/PM/" name="detail" element="q6:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateContactSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateContactSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateContactSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateContactSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateContactSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://lexisnexis.com/PM/" name="detail" element="q7:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateContactSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://lexisnexis.com/PM/" name="detail" element="q8:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateCalendarSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCalendarSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateCalendarSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateCalendarSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateCalendarSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://lexisnexis.com/PM/" name="detail" element="q9:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateCalendarSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://lexisnexis.com/PM/" name="detail" element="q10:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateTaskSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTaskSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateTaskSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTaskSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateTaskSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://lexisnexis.com/PM/" name="detail" element="q11:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_CreateTaskSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://lexisnexis.com/PM/" name="detail" element="q12:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialContactSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialContactSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialContactSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialContactSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialContactSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://lexisnexis.com/PM/" name="detail" element="q13:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialContactSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://lexisnexis.com/PM/" name="detail" element="q14:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialCalendarSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialCalendarSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialCalendarSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialCalendarSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialCalendarSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://lexisnexis.com/PM/" name="detail" element="q15:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialCalendarSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://lexisnexis.com/PM/" name="detail" element="q16:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialTaskSync_InputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialTaskSync" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialTaskSync_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FinalizeInitialTaskSyncResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialTaskSync_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://lexisnexis.com/PM/" name="detail" element="q17:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_FinalizeInitialTaskSync_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://lexisnexis.com/PM/" name="detail" element="q18:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateContactVersions_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactVersions" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateContactVersions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateContactVersionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateContactVersions_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://lexisnexis.com/PM/" name="detail" element="q19:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateContactVersions_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://lexisnexis.com/PM/" name="detail" element="q20:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateCalendarVersions_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCalendarVersions" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateCalendarVersions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCalendarVersionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateCalendarVersions_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://lexisnexis.com/PM/" name="detail" element="q21:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateCalendarVersions_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://lexisnexis.com/PM/" name="detail" element="q22:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateTaskVersions_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTaskVersions" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateTaskVersions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTaskVersionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateTaskVersions_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://lexisnexis.com/PM/" name="detail" element="q23:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_UpdateTaskVersions_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://lexisnexis.com/PM/" name="detail" element="q24:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactSyncLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactSyncLink" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactSyncLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactSyncLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactSyncLink_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://lexisnexis.com/PM/" name="detail" element="q25:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactSyncLink_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://lexisnexis.com/PM/" name="detail" element="q26:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddCalendarSyncLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCalendarSyncLink" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddCalendarSyncLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCalendarSyncLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddCalendarSyncLink_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://lexisnexis.com/PM/" name="detail" element="q27:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddCalendarSyncLink_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://lexisnexis.com/PM/" name="detail" element="q28:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddTaskSyncLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskSyncLink" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddTaskSyncLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTaskSyncLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddTaskSyncLink_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q29="http://lexisnexis.com/PM/" name="detail" element="q29:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddTaskSyncLink_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q30="http://lexisnexis.com/PM/" name="detail" element="q30:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage">
+    <wsdl:part name="parameters" element="tns:IfContactLinkExistsUpdateForReplicaAndReturnLinkedID" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q31="http://lexisnexis.com/PM/" name="detail" element="q31:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q32="http://lexisnexis.com/PM/" name="detail" element="q32:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage">
+    <wsdl:part name="parameters" element="tns:IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q33="http://lexisnexis.com/PM/" name="detail" element="q33:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q34="http://lexisnexis.com/PM/" name="detail" element="q34:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage">
+    <wsdl:part name="parameters" element="tns:IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q35="http://lexisnexis.com/PM/" name="detail" element="q35:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q36="http://lexisnexis.com/PM/" name="detail" element="q36:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetAllowedContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllowedContacts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetAllowedContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllowedContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetAllowedContacts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q37="http://lexisnexis.com/PM/" name="detail" element="q37:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetAllowedContacts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q38="http://lexisnexis.com/PM/" name="detail" element="q38:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SetAllowedContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAllowedContacts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SetAllowedContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAllowedContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SetAllowedContacts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q39="http://lexisnexis.com/PM/" name="detail" element="q39:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_SetAllowedContacts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q40="http://lexisnexis.com/PM/" name="detail" element="q40:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactConflicts_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactConflicts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactConflicts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddContactConflictsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactConflicts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q41="http://lexisnexis.com/PM/" name="detail" element="q41:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_AddContactConflicts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q42="http://lexisnexis.com/PM/" name="detail" element="q42:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetContactConflicts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactConflicts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetContactConflicts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactConflictsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetContactConflicts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q43="http://lexisnexis.com/PM/" name="detail" element="q43:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetContactConflicts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q44="http://lexisnexis.com/PM/" name="detail" element="q44:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ResolveContactConflict_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResolveContactConflict" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ResolveContactConflict_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResolveContactConflictResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ResolveContactConflict_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q45="http://lexisnexis.com/PM/" name="detail" element="q45:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ResolveContactConflict_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q46="http://lexisnexis.com/PM/" name="detail" element="q46:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateContactLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateContactLink" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateContactLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateContactLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateContactLink_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q47="http://lexisnexis.com/PM/" name="detail" element="q47:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateContactLink_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q48="http://lexisnexis.com/PM/" name="detail" element="q48:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsContactSyncing_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsContactSyncing" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsContactSyncing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsContactSyncingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsContactSyncing_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q49="http://lexisnexis.com/PM/" name="detail" element="q49:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsContactSyncing_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q50="http://lexisnexis.com/PM/" name="detail" element="q50:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateCalendarLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateCalendarLink" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateCalendarLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateCalendarLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateCalendarLink_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q51="http://lexisnexis.com/PM/" name="detail" element="q51:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_DeactivateCalendarLink_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q52="http://lexisnexis.com/PM/" name="detail" element="q52:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsCalendarSyncing_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsCalendarSyncing" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsCalendarSyncing_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsCalendarSyncingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsCalendarSyncing_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q53="http://lexisnexis.com/PM/" name="detail" element="q53:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_IsCalendarSyncing_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q54="http://lexisnexis.com/PM/" name="detail" element="q54:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_RefreshMagellanContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshMagellanContacts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_RefreshMagellanContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshMagellanContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_RefreshMagellanContacts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q55="http://lexisnexis.com/PM/" name="detail" element="q55:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_RefreshMagellanContacts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q56="http://lexisnexis.com/PM/" name="detail" element="q56:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearAllowedContacts_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearAllowedContacts" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearAllowedContacts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearAllowedContactsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearAllowedContacts_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q57="http://lexisnexis.com/PM/" name="detail" element="q57:ServiceError" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearAllowedContacts_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q58="http://lexisnexis.com/PM/" name="detail" element="q58:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearCurrentContactSyncLinks_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearCurrentContactSyncLinks" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearCurrentContactSyncLinks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearCurrentContactSyncLinksResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearCurrentContactSyncLinks_ApplicationErrorsFault_FaultMessage">
+    <wsdl:part xmlns:q59="http://lexisnexis.com/PM/" name="detail" element="q59:ApplicationErrors" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ClearCurrentContactSyncLinks_ServiceErrorFault_FaultMessage">
+    <wsdl:part xmlns:q60="http://lexisnexis.com/PM/" name="detail" element="q60:ServiceError" />
+  </wsdl:message>
+  <wsdl:portType name="ISyncService">
+    <wsdl:operation name="SynchronizeContacts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContacts" message="tns:ISyncService_SynchronizeContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContactsResponse" message="tns:ISyncService_SynchronizeContacts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContactsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_SynchronizeContacts_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContactsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_SynchronizeContacts_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeCalendar">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendar" message="tns:ISyncService_SynchronizeCalendar_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendarResponse" message="tns:ISyncService_SynchronizeCalendar_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendarServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_SynchronizeCalendar_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendarApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_SynchronizeCalendar_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeTasks">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasks" message="tns:ISyncService_SynchronizeTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasksResponse" message="tns:ISyncService_SynchronizeTasks_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasksApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_SynchronizeTasks_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasksServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_SynchronizeTasks_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSync" message="tns:ISyncService_CreateContactSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSyncResponse" message="tns:ISyncService_CreateContactSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_CreateContactSync_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_CreateContactSync_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCalendarSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSync" message="tns:ISyncService_CreateCalendarSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSyncResponse" message="tns:ISyncService_CreateCalendarSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_CreateCalendarSync_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_CreateCalendarSync_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTaskSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSync" message="tns:ISyncService_CreateTaskSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSyncResponse" message="tns:ISyncService_CreateTaskSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_CreateTaskSync_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_CreateTaskSync_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialContactSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSync" message="tns:ISyncService_FinalizeInitialContactSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSyncResponse" message="tns:ISyncService_FinalizeInitialContactSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_FinalizeInitialContactSync_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_FinalizeInitialContactSync_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialCalendarSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSync" message="tns:ISyncService_FinalizeInitialCalendarSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSyncResponse" message="tns:ISyncService_FinalizeInitialCalendarSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_FinalizeInitialCalendarSync_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_FinalizeInitialCalendarSync_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialTaskSync">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSync" message="tns:ISyncService_FinalizeInitialTaskSync_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSyncResponse" message="tns:ISyncService_FinalizeInitialTaskSync_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSyncApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_FinalizeInitialTaskSync_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSyncServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_FinalizeInitialTaskSync_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactVersions">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersions" message="tns:ISyncService_UpdateContactVersions_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersionsResponse" message="tns:ISyncService_UpdateContactVersions_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersionsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_UpdateContactVersions_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersionsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_UpdateContactVersions_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCalendarVersions">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersions" message="tns:ISyncService_UpdateCalendarVersions_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersionsResponse" message="tns:ISyncService_UpdateCalendarVersions_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersionsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_UpdateCalendarVersions_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersionsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_UpdateCalendarVersions_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaskVersions">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersions" message="tns:ISyncService_UpdateTaskVersions_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersionsResponse" message="tns:ISyncService_UpdateTaskVersions_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersionsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_UpdateTaskVersions_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersionsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_UpdateTaskVersions_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddContactSyncLink">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLink" message="tns:ISyncService_AddContactSyncLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLinkResponse" message="tns:ISyncService_AddContactSyncLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLinkApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_AddContactSyncLink_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLinkServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_AddContactSyncLink_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCalendarSyncLink">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLink" message="tns:ISyncService_AddCalendarSyncLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLinkResponse" message="tns:ISyncService_AddCalendarSyncLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLinkApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_AddCalendarSyncLink_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLinkServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_AddCalendarSyncLink_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskSyncLink">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLink" message="tns:ISyncService_AddTaskSyncLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLinkResponse" message="tns:ISyncService_AddTaskSyncLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLinkApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_AddTaskSyncLink_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLinkServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_AddTaskSyncLink_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedID" message="tns:ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" message="tns:ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_IfContactLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID" message="tns:ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" message="tns:ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID" message="tns:ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDResponse" message="tns:ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowedContacts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContacts" message="tns:ISyncService_GetAllowedContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContactsResponse" message="tns:ISyncService_GetAllowedContacts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContactsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_GetAllowedContacts_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContactsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_GetAllowedContacts_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAllowedContacts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContacts" message="tns:ISyncService_SetAllowedContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContactsResponse" message="tns:ISyncService_SetAllowedContacts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContactsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_SetAllowedContacts_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContactsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_SetAllowedContacts_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddContactConflicts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflicts" message="tns:ISyncService_AddContactConflicts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflictsResponse" message="tns:ISyncService_AddContactConflicts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflictsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_AddContactConflicts_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflictsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_AddContactConflicts_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactConflicts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflicts" message="tns:ISyncService_GetContactConflicts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflictsResponse" message="tns:ISyncService_GetContactConflicts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflictsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_GetContactConflicts_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflictsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_GetContactConflicts_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResolveContactConflict">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflict" message="tns:ISyncService_ResolveContactConflict_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflictResponse" message="tns:ISyncService_ResolveContactConflict_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflictServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_ResolveContactConflict_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflictApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_ResolveContactConflict_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateContactLink">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLink" message="tns:ISyncService_DeactivateContactLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLinkResponse" message="tns:ISyncService_DeactivateContactLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLinkServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_DeactivateContactLink_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLinkApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_DeactivateContactLink_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsContactSyncing">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncing" message="tns:ISyncService_IsContactSyncing_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncingResponse" message="tns:ISyncService_IsContactSyncing_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncingApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_IsContactSyncing_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncingServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_IsContactSyncing_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateCalendarLink">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLink" message="tns:ISyncService_DeactivateCalendarLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLinkResponse" message="tns:ISyncService_DeactivateCalendarLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLinkApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_DeactivateCalendarLink_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLinkServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_DeactivateCalendarLink_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCalendarSyncing">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncing" message="tns:ISyncService_IsCalendarSyncing_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncingResponse" message="tns:ISyncService_IsCalendarSyncing_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncingApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_IsCalendarSyncing_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncingServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_IsCalendarSyncing_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshMagellanContacts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContacts" message="tns:ISyncService_RefreshMagellanContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContactsResponse" message="tns:ISyncService_RefreshMagellanContacts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContactsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_RefreshMagellanContacts_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContactsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_RefreshMagellanContacts_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearAllowedContacts">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContacts" message="tns:ISyncService_ClearAllowedContacts_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContactsResponse" message="tns:ISyncService_ClearAllowedContacts_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContactsServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_ClearAllowedContacts_ServiceErrorFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContactsApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_ClearAllowedContacts_ApplicationErrorsFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearCurrentContactSyncLinks">
+      <wsdl:input wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinks" message="tns:ISyncService_ClearCurrentContactSyncLinks_InputMessage" />
+      <wsdl:output wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinksResponse" message="tns:ISyncService_ClearCurrentContactSyncLinks_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinksApplicationErrorsFault" name="ApplicationErrorsFault" message="tns:ISyncService_ClearCurrentContactSyncLinks_ApplicationErrorsFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinksServiceErrorFault" name="ServiceErrorFault" message="tns:ISyncService_ClearCurrentContactSyncLinks_ServiceErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

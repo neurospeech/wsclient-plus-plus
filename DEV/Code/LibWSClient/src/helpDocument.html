@@ -1,0 +1,301 @@
+<html>
+<head>
+<title>WSClient++ Documentation</title>
+<style type="text/css">
+body
+{
+    font-family:Verdana;
+    font-size:10pt;
+}
+    .style1
+    {
+        color: #33CC33;
+    }
+	.style2
+	{
+		color: #FF0000;
+	}
+</style>
+</head>
+<body>
+    <a id="top"></a>
+
+    <ul>
+        <li><a href="#program">WSClient++ Program</a></li>
+        <li><a href="#configuration">WSClient++ Configuration File Editor</a></li>
+        <li><a href="#baseurl">Web Service BaseURL</a></li>
+		<li> For iPhone/iOS
+			<ul>
+				<li><a href="#cocoa">Cocoa Synchronous Sample Code</a></li>
+				<li><a href="#cocoa-async">Cocoa Asynchronous Sample Code</a></li>
+<!--				<li><a href="#cocoa-timeout">Cocoa Http Timeout</a></li>
+				<li><a href="#cocoa-headers">Cocoa Custom Http Headers</a></li>
+-->			</ul>
+		</li>
+		<li>For Android/Blackberry
+		<ul>
+			<li><a href="#java">Java Synchronous Sample Code</a></li>
+			<li><a href="#java-async">Java Asynchronous Sample Code</a></li>
+<!--			<li><a href="#java-timeout">Java Http Timeout (Android Only)</a></li>
+			<li><a href="#java-headers">Java Custom Http Headers</a></li>
+-->		</ul>
+		</li>
+    </ul>
+    <h3>
+        <a id="program">WSClient++ Program</a></h3>
+    <p>
+        WSClient++ is a program that manages WSClient++ Configuration files and 
+        generates code specified in configuration files. Files with extension 
+        &quot;.wsclient&quot; can be opened/saved from this program and the configuration is saved 
+        in pure json file format. This program can be accessed via &quot;Start menu&quot; in 
+        windows and in Applications folder in Mac. Please note, not all formats may be 
+        supported as per the license you have bought.</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3><a id="configuration">WSClient++ Configuration File Editor</a></h3>
+    <p>
+        WSClient++ Configuration file editor is a tab appears in the program after you 
+        open or create new wsclient configuration file. Configuration file has following 
+        properties, please note not all the properties apply to every platform, but a 
+        substantial knowedge of platform is needed to understand the requirements.</p>
+    <h4>
+        WSDL Property</h4>
+    <p>
+        WSDL is a text property, which can contain multiline list of URLof WSDL. You can 
+        type multiple WSDL url in this box, one in each line, the program will query 
+        each of WSDL and generate the code. It is not always best practice to generate 
+        all WSDL client in one namespace/package. Only if the return types are same and 
+        share same inheritance hierarchy throughout entire list of WSDL provided, then 
+        only multiple WSDL urls must be used in one namespace/package.</p>
+    <p>
+        Each web service generated will connect to relative url not including the host 
+        name, in order to specify hostname to connect to, please see &quot;Web Service 
+        Runtime Address (URL)&quot;</p>
+    <h4>
+        Type Property</h4>
+    <p>
+        This drop down identifies the language of the generated code. Please note 
+        basedon the type selected, you may need to add additional references / source 
+        code in your project. Following is the list of prerequisits that you need to do 
+        in order to use generated code in your project.</p>
+    <ul>
+        <li>Cocoa: For iPhone and Mac development, we have shipped required header(.h) and 
+            objective-c(.m) source code in respective folder once you open the &quot;Platform 
+            Libraries&quot; link. Please copy these files and include them in your XCode project.</li>
+        <li>Java: For Android and Blackberry development, we have shipped required Java 
+            Libraries (.jar) files. For Android, you have to include wsclient.android.jar 
+            file in your Android eclipse project. For Blackberry, you have to include 
+            wsclient.blackberry.jar files in your Blackberry eclipse project. For 
+            desktop/server java applications, you can use wsclient.jar library.</li>
+        <li>Flex/Flash: For Flash Development platform, (Flex 3.0, Flex 4.0) we have 
+            included Shockwave Component Library named wsclient3.swc for Flex 3.0 and 
+            wsclient4.swc for Flex 4.0, you have to include corresponding library in your 
+            project. </li>
+    </ul>
+    <h4>
+        Filename Property</h4>
+    <p>
+        You have to specify name of filename to be generated, this is only applicable to 
+        Cocoa source code type only. Your source will be generated in corresponding .h 
+        and .m files appended to filename you have specified.</p>
+    <h4>
+        Folder Property</h4>
+    <p>
+        The generated source code will be saved in this folder you have specified, if 
+        files with same name exists they will be deleted.</p>
+    <h4>
+        Namespace/Package Property</h4>
+    <p>
+        For Java, C# and Flash/Flex, all the generated source code will be generated 
+        with specified package/namespace. Please note you have to carefully map your 
+        &quot;Folder&quot; and namespace so that they meet platform requirements. For best 
+        practice, first generate package in your eclipse, keep same name of the package 
+        and right click on package name and specify &quot;Folder Property&quot; as the physical 
+        folder specified in the properties window.&nbsp;
+    </p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3><a id="baseurl">Web Service Base URL</a></h3>
+    <p>
+        There are two properties available in each of the client, Base Url and Global 
+        Base Url. In the application start up code of your project, you must specify 
+        Base Url as mentioned below. Base Url can be set two ways.</p>
+    <ol>
+        <li>You can set service.baseUrl to each instance of service.</li>
+        <li>Or you can set SoapWebService.globalBaseUrl property only once, that will be 
+            used to connect to your server.</li>
+    </ol>
+    <p>
+        If you have specified SoapWebService.globalBaseUrl, you can still override this 
+        behaviour in each service instance by setting service.baseUrl property.</p>
+    <p>
+        Base URL must only contain (http) or (https) and domain name as specified below. 
+        No additional slash after the domain name, you can include the port number if 
+        its not 80.</p>
+    <p>
+        http://myHost.myServer.com<br />
+        https://myHost.myServer.com<br />
+        http://myHost.myServer.com:99<br />
+        https://myHost.myServer.com:99</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="cocoa">Cocoa Synchronous Sample Code</a></h3>
+    <p>
+        MyWebService* ws = [MyWebService service];<br /><br />
+		<span class="style1">// [ws setHttpTimeout: 3000];</span><br />
+		<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// [SoapWebService setGlobalBaseUrl: @&quot;http://domain.com&quot;];
+        </span>
+        <br class="style1" />
+        <span class="style1">// //set base url only for this service</span><br 
+            class="style1" />
+        <span class="style1">//
+        [ws setBaseUrl: @&quot;http://domain.com&quot;];</span><br />
+        NSError* error = nil;<br />
+        Result* rs = [ws callMethod: p1 param2:p2 error:&amp;error];<br />
+        if(error != nil){<br />
+&nbsp;&nbsp; // process error message....<br />
+        &nbsp;&nbsp; NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultString&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultCode&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultDetail&quot;]); <br />
+&nbsp;&nbsp;         SoapResponse* sr = [[error userInfo] valueForKey:@&quot;soapResponse&quot;]; <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[sr rawHttpResponse]);<br />
+&nbsp;&nbsp; return....<br />
+        }<br />
+        .. use Result</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="cocoa-async">Cocoa Asynchronous Sample Code</a></h3>
+    <p>
+        -(void) onError: (NSError*) error{<br />
+&nbsp;&nbsp; ... process error...<br />
+        &nbsp;&nbsp; NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultString&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultCode&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultDetail&quot;]); <br />
+&nbsp;&nbsp;         SoapResponse* sr = [[error userInfo] valueForKey:@&quot;soapResponse&quot;]; <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[sr rawHttpResponse]);<br />
+        }<br />
+        <br />
+        -(void) onCallMethod:(MyWebServiceAsync*)service 
+        result:(Result*) r{
+        &nbsp;&nbsp;<br /> ... process result... 
+        you will get returned header here...<br />
+        }<br />
+        <br />
+        -(void) callService{<br />
+&nbsp;&nbsp; MyWebServiceAsync* ws = [MyWebServiceAsync service];<br />
+        <span class="style1">&nbsp;&nbsp; // // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">&nbsp;&nbsp; // [SoapWebService setGlobalBaseUrl: 
+        @&quot;http://domain.com&quot;]; </span>
+        <br class="style1" />
+        <span class="style1">&nbsp;&nbsp; // //set base url only for this service</span><br 
+            class="style1" />
+        <span class="style1">&nbsp;&nbsp; //
+        [ws setBaseUrl: @&quot;http://domain.com&quot;];</span><br />
+&nbsp;&nbsp; [ws setDelegate: self]; // dont forget to set delegate<br />
+&nbsp;&nbsp; [ws callMethod: p1 parame2:p2];<br />
+        }</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+<!--	<h3><a id="cocoa-timeout">Cocoa Http Timeout</a></h3>
+	<p>
+		In order to set Http Timeout value, call setHttpTimeout method on your webservice instance as shown below. 
+		For more information, please check NSMutableHttpRequest.setHttpTimeout method.
+		<p>
+			[ws setHttpTimeout: 3000];
+		</p>
+	</p>
+	<p>
+	<a href="#top">^ Top</a>
+	</p>
+	<h3><a id="cocoa-headers">Cocoa Custom Http Headers</a></h3>
+	<p>
+		In order to send custom Http Headers (for Basic Auth in HTTP etc), please set a dictionary with headers on your web service as shown below.
+		<p>
+			NSMutableDictionary headers = [[[NSMutableDictionary alloc] init] autorelease];<br />
+			[headers setObject: <span class="style2">@"myUsername"</span> forKey: <span class="style2">@"username"</span>];<br />
+			[headers setObject: <span class="style2">@"myPassword"</span> forKey: <span class="style2">@"password"</span>];<br />
+			[ws setHttpHeaders: headers];<br />
+		</p>
+	</p>
+	<p>
+	<a href="#top">^ Top</a>
+	</p>-->
+    <h3>
+        <a id="java">Java Synchronous Sample Code</a></h3>
+    <p>
+        MyWebService service = new MyWebService();<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// SoapWebService.setGlobalBaseUrl(&quot;http://domain.com&quot;);</span><br 
+            class="style1" />
+        <span class="style1">// // set base url for only this service</span><br 
+            class="style1" />
+        <span class="style1">// service.setBaseUrl(&quot;http://domain.com&quot;);</span><br />
+        Result rs = service.callMethod(p1,p2);</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="java-async">Java Asynchronous Sample Code</a></h3>
+    <p>
+        MyWebServiceAsync service = new MyWebServiceAsync();<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// SoapWebService.setGlobalBaseUrl(&quot;http://domain.com&quot;);</span><br 
+            class="style1" />
+        <span class="style1">// // set base url for only this service</span><br 
+            class="style1" />
+        <span class="style1">// service.setBaseUrl(&quot;http://domain.com&quot;);</span><br />
+        service.callMethod( p1, p2,
+        <br />
+&nbsp;&nbsp; service.new CallMethodResult(){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Anonymous inline class<br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void onResult(Result rs){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void onError(Exception ex){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+        <br />
+&nbsp;&nbsp; }<br />
+        );</p>
+    
+    <p>
+        <a href="#top">^ Top</a></p>
+<!--    <h3>
+		<a id="java-timeout">Java Http Timeout (Android Only)</a>
+	</h3>
+	<p>
+		You can set two timeout values, ConnectionTimeout and SocketTimeout as per your need.
+		<p>
+			ws.setConnectionTimeout(3000);
+			ws.setSocketTimeout(5000);
+		</p>
+	</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+		<a id="java-headers">Java Custom Http Headers</a>
+	</h3>
+	<p>
+		In order to set custom headers (for basic auth etc), you can create a Hashtable and set it on webservice as shown below.
+		<p>
+			Hashtable headers = new Hashtable();<br />
+			headers.put(<span class="style2">"username"</span>,<span class="style2">"myUsername"</span>);<br />
+			headers.put(<span class="style2">"password"</span>,<span class="style2">"myPassword"</span>);<br />
+			ws.setHttpHeaders(headers);
+		</p>
+	</p>
+    <p>
+        <a href="#top">^ Top</a></p>-->
+</body>
+</html>

@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{80A84E58-C87D-4E2D-BA7C-B999598BC4E9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSClientWeb</RootNamespace>
+    <AssemblyName>WSClientWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+    <SilverlightApplicationList>{BC484770-1FA3-4072-BD66-C9AB2F6C3015}|..\SLTest\SLTest.csproj|ClientBin|False</SilverlightApplicationList>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Erp.Objects">
+      <HintPath>C:\Program Files (x86)\NeuroSpeech Technologies\Erp.Objects\Erp.Objects.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NSWeb">
+      <HintPath>..\..\..\..\..\FileAtoms\MAIN\Library\NSWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientBin\SLTest.xap" />
+    <Content Include="Global.asax" />
+    <Content Include="OrderService.svc" />
+    <Content Include="Service\HeaderedService.asmx" />
+    <Content Include="Silverlight.js" />
+    <Content Include="SLTestTestPage.aspx" />
+    <Content Include="SLTestTestPage.html" />
+    <Content Include="Test3\Test.xml" />
+    <Content Include="Test\All.xml" />
+    <Content Include="Test\ArrayTest\wsdl.xml" />
+    <Content Include="Test\AudioCodes\xsd0.xml" />
+    <Content Include="Test\AudioCodes\xsd1.xml" />
+    <Content Include="Test\AudioCodes\xsd2.xml" />
+    <Content Include="Test\AudioCodes\xsd3.xml" />
+    <Content Include="Test\cnxntech\WSDL.xml" />
+    <Content Include="Test\EMTK\xsd.xml" />
+    <Content Include="Test\Epicor\Inventory.xml" />
+    <Content Include="Test\Epicor\Test.xml" />
+    <Content Include="Test\Epicor\WSDL.xml" />
+    <Content Include="Test\Hulbert\wsdl.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\Sepialine\All.xml" />
+    <Content Include="Test\Sepialine\WSDL.xml" />
+    <Content Include="Test\Sepialine\xsd0.xml" />
+    <Content Include="Test\Sepialine\xsd1.xml" />
+    <Content Include="Test\Sepialine\xsd2.xml" />
+    <Content Include="Test\Sepialine\xsd3.xml" />
+    <Content Include="Test\WcfTest1\Mobile.wsdl0.xml" />
+    <Content Include="Test\WcfTest1\Mobile.xsd0.xml" />
+    <Content Include="Test\WcfTest1\Mobile.xsd1.xml" />
+    <Content Include="Test\Weather\WSDL.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="OrderService.svc.cs">
+      <DependentUpon>OrderService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\HeaderedService.asmx.cs">
+      <DependentUpon>HeaderedService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Test\Nextiva\NextivaWS.cs">
+      <DependentUpon>NextivaWS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\Schema0.wsdl" />
+    <Content Include="Test\Schema1.wsdl" />
+    <Content Include="Test\Schema2.wsdl" />
+    <Content Include="Test\Schema3.wsdl" />
+    <Content Include="Test\Schema4.wsdl" />
+    <Content Include="Test\Schema5.wsdl" />
+    <Content Include="Test\Test.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\IOTest.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test2\Test.wsdl" />
+    <Content Include="Test2\types.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\Alcatel\Test.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\Bitwink\Test.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\BetApi\Schemas\cts-iPad-1-0_importedschema_1.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\BetApi\Schemas\cts-iPad-1-0_importedschema_2.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\BetApi\Schemas\cts-iPad-1-0_importedschema_3.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\BetApi\Schemas\cts-iPad-1-0_importedschema_4.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\BetApi\Schemas\cts-iPad-1-0_importedschema_5.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\BetApi\Test.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\FedEx\PickupService_v2.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\Base64\Mob.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="eki\Sample.wsdl">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LexisNexis\wsdl0.xml" />
+    <Content Include="LexisNexis\xsd0.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd7.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd3.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd6.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd4.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd9.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd1.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd8.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\tempuri.org.wsdl" />
+    <Content Include="LexisNexis\xsd2.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="LexisNexis\xsd5.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\EMTK\emtk.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\WcfTest1\main.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\Base64\spud.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Test\SalesForce\enterprise.wsdl" />
+    <Content Include="Test\SalesForce\HCPDataService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Test\AudioCodes\abs.wsdl" />
+    <Content Include="Test\Nextiva\NextivaWS.wsdl">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\Nextiva\NextivaWS.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\Nextiva\Serialization.Arrays.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\Nextiva\Serialization.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Test\noser\calculateLeasingRate.wsdl" />
+    <Content Include="Test\noser\getProducts.wsdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3143</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

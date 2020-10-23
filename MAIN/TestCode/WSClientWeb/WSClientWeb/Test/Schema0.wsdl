@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://Iformata.Vnoc.Symphony.Iphone" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Iformata.Vnoc.Symphony.Iphone">
+  <xs:import schemaLocation="/Test/Schema2.wsdl" namespace="Iformata.Vnoc.Symphony.Iphone"/>
+  <xs:import schemaLocation="/Test/Schema4.wsdl" namespace="Symphony/Framework/Version/1.11.19.09"/>
+  <xs:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+  <xs:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:element name="Login">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="domain" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LoginResult" nillable="true" type="q1:LoginResult" xmlns:q1="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOrganizationAccounts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q2:Token" xmlns:q2="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOrganizationAccountsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindOrganizationAccountsResult" nillable="true" type="q3:ArrayOfIphoneAccount" xmlns:q3="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveConferenceProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="iphoneConference" nillable="true" type="q4:IphoneConference" xmlns:q4="Iformata.Vnoc.Symphony.Iphone"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q5:Token" xmlns:q5="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SaveConferenceProcessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SaveConferenceProcessResult" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOfficeSpaceConflict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="conferenceId" type="xs:long"/>
+        <xs:element minOccurs="0" name="officeId" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="showSpacePhotos" type="xs:boolean"/>
+        <xs:element minOccurs="0" name="showConflict" type="xs:boolean"/>
+        <xs:element minOccurs="0" name="utcStart" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="utcEnd" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q6:Token" xmlns:q6="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOfficeSpaceConflictResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindOfficeSpaceConflictResult" nillable="true" type="q7:ArrayOfIphoneSpace" xmlns:q7="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="criterias" nillable="true" type="q8:ArrayOfFindConferenceCriteria" xmlns:q8="Iformata.Vnoc.Symphony.Iphone"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q9:Token" xmlns:q9="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConferencesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindConferencesResult" nillable="true" type="q10:ArrayOfIphoneConferenceLite" xmlns:q10="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConference">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="conferenceId" type="xs:long"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q11:Token" xmlns:q11="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConferenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindConferenceResult" nillable="true" type="q12:IphoneConference" xmlns:q12="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSessionValidity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q13:Token" xmlns:q13="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSessionValidityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckSessionValidityResult" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelConferenceProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="conferenceId" type="xs:long"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q14:Token" xmlns:q14="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelConferenceProcessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CancelConferenceProcessResult" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteConferenceProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="conferenceId" type="xs:long"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q15:Token" xmlns:q15="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteConferenceProcessResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteConferenceProcessResult" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOrganizationalOffices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q16:Token" xmlns:q16="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindOrganizationalOfficesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindOrganizationalOfficesResult" nillable="true" type="q17:ArrayOfOffice" xmlns:q17="Symphony/Framework/Version/1.11.19.09"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindSpacesConflict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="conferenceId" type="xs:long"/>
+        <xs:element minOccurs="0" name="utcStart" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="utcEnd" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="spaceIds" nillable="true" type="q18:ArrayOfguid" xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q19:Token" xmlns:q19="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindSpacesConflictResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindSpacesConflictResult" nillable="true" type="q20:ArrayOfIphoneSpace" xmlns:q20="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindActiveConferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q21:Token" xmlns:q21="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindActiveConferencesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindActiveConferencesResult" nillable="true" type="q22:ArrayOfIphoneConferenceLite" xmlns:q22="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindLastConferences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q23:Token" xmlns:q23="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindLastConferencesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindLastConferencesResult" nillable="true" type="q24:ArrayOfIphoneConferenceLite" xmlns:q24="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchOffices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q25:Token" xmlns:q25="Iformata.Vnoc.Symphony.Iphone"/>
+        <xs:element minOccurs="0" name="searchString" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchOfficesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SearchOfficesResult" nillable="true" type="q26:ArrayOfguid" xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConferencesForMonth">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="timeDiff" type="xs:int"/>
+        <xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q27:Token" xmlns:q27="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindConferencesForMonthResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindConferencesForMonthResult" nillable="true" type="q28:ArrayOfMeetingDay" xmlns:q28="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindUsers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="accountId" type="q29:guid" xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/"/>
+        <xs:element minOccurs="0" name="token" nillable="true" type="q30:Token" xmlns:q30="Iformata.Vnoc.Symphony.Iphone"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindUsersResult" nillable="true" type="q31:ArrayOfstring" xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

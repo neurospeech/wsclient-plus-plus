@@ -1,0 +1,931 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:i0="http://lexisnexis.com/PM/Sync" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SynchronizationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="CustomBinding_ISyncService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://lexisnexis.com/PM/Sync" location="/LexisNexis/wsdl0.xml" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_ISyncService" type="i0:ISyncService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SynchronizeContacts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeCalendar">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeTasks">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCalendarSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTaskSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialContactSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialCalendarSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialTaskSync">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSync" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactVersions">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCalendarVersions">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaskVersions">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactSyncLink">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddCalendarSyncLink">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskSyncLink">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowedContacts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetAllowedContacts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactConflicts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflicts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactConflicts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflicts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveContactConflict">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflict" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateContactLink">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsContactSyncing">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateCalendarLink">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLink" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsCalendarSyncing">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshMagellanContacts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ClearAllowedContacts">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ClearCurrentContactSyncLinks">
+      <soap:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomBinding_ISyncService" type="i0:ISyncService">
+    <wsp:PolicyReference URI="#CustomBinding_ISyncService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SynchronizeContacts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeCalendar">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeCalendar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeTasks">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SynchronizeTasks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateContactSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCalendarSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateCalendarSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTaskSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/CreateTaskSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialContactSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialContactSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialCalendarSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialCalendarSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FinalizeInitialTaskSync">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/FinalizeInitialTaskSync" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateContactVersions">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateContactVersions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCalendarVersions">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateCalendarVersions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTaskVersions">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/UpdateTaskVersions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactSyncLink">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddContactSyncLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddCalendarSyncLink">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddCalendarSyncLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddTaskSyncLink">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddTaskSyncLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfContactLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllowedContacts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/GetAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetAllowedContacts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/SetAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactConflicts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/AddContactConflicts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactConflicts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/GetContactConflicts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ResolveContactConflict">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ResolveContactConflict" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateContactLink">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateContactLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsContactSyncing">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IsContactSyncing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateCalendarLink">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/DeactivateCalendarLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsCalendarSyncing">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/IsCalendarSyncing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshMagellanContacts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/RefreshMagellanContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ClearAllowedContacts">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ClearAllowedContacts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ClearCurrentContactSyncLinks">
+      <soap12:operation soapAction="http://lexisnexis.com/PM/Sync/ISyncService/ClearCurrentContactSyncLinks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApplicationErrorsFault">
+        <soap12:fault use="literal" name="ApplicationErrorsFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceErrorFault">
+        <soap12:fault use="literal" name="ServiceErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SynchronizationService">
+    <wsdl:port name="BasicHttpBinding_ISyncService" binding="tns:BasicHttpBinding_ISyncService">
+      <soap:address location="http://magdev3.legal.regn.net/Services/SyncService.svc" />
+    </wsdl:port>
+    <wsdl:port name="CustomBinding_ISyncService" binding="tns:CustomBinding_ISyncService">
+      <soap12:address location="http://magdev3.legal.regn.net/Services/SyncService.svc/binary" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://magdev3.legal.regn.net/Services/SyncService.svc/binary</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

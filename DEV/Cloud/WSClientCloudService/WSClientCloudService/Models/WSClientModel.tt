@@ -1,0 +1,611 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@  include file="WebAtoms.Entity.ttinclude" #>
+<#@  include file="ConnectionString.ttinclude" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Text" #>
+<#@ output extension=".edmx" #><#
+
+	EAContainer container = new EAContainer();
+	container.ConnectionString = connectionString;
+	container.Provider = "System.Data.SqlClient";
+	container.Name = "WSClientModel";
+	container.Namespace = "WSClientCloudService.Models";
+	container.ContainerName = "WSClientModelEntities";
+	container.IgnoreTables = "sysdiagrams,audititems";
+
+	container.Refresh();
+
+	EdmxGenerator gen = new EdmxGenerator();
+	gen.Container = container;
+
+	System.IO.StringWriter sw = new System.IO.StringWriter();
+	gen.Save(sw);
+
+
+	this.GenerationEnvironment.Clear();
+
+	this.Write(sw.ToString());
+
+#><#+ 
+
+
+
+
+
+     public class Edmx
+    {
+        public static string EDMXVersion = "2.0";
+
+        public static XNamespace edmx = "http://schemas.microsoft.com/ado/2008/10/edmx";
+
+        public static XNamespace ssdl = "http://schemas.microsoft.com/ado/2009/02/edm/ssdl";
+
+        public static XNamespace store = "http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator";
+
+        public static XNamespace csdl = "http://schemas.microsoft.com/ado/2008/09/edm";
+
+        public static XNamespace annotation = "http://schemas.microsoft.com/ado/2009/02/edm/annotation";
+
+        public static XNamespace map = "http://schemas.microsoft.com/ado/2008/09/mapping/cs";
+    }
+
+    public class EdmxGenerator
+    {
+
+        public EAContainer Container { get; set; }
+
+        public virtual void Generate(XElement root)
+        {
+            XElement runTime = new XElement(Edmx.edmx + "Runtime");
+            root.Add(runTime);
+
+            GenerateStorageModel(runTime);
+            GenerateConceptualModel(runTime);
+            GenerateMappingModel(runTime);
+
+            GenerateDesigner(root);
+        }
+
+        private void GenerateDesigner(XElement root)
+        {
+            EdmxDesignerGenerator designer = new EdmxDesignerGenerator();
+            designer.Container = this.Container;
+            designer.Generate(root);
+        }
+
+        public virtual void GenerateStorageModel(XElement runTime)
+        {
+            EdmxStoreGenerator model = new EdmxStoreGenerator();
+            model.Container = this.Container;
+            model.Generate(runTime);
+        }
+
+        public virtual void GenerateConceptualModel(XElement runTime)
+        {
+            EdmxConceptGenerator model = new EdmxConceptGenerator();
+            model.Container = this.Container;
+            model.Generate(runTime);
+        }
+
+        public virtual void GenerateMappingModel(XElement runTime)
+        {
+            EdmxMapGenerator model = new EdmxMapGenerator();
+            model.Container = this.Container;
+            model.Generate(runTime);
+        }
+
+        public void Save(System.IO.TextWriter writer)
+        {
+            XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "true"));
+            XElement root = new XElement(Edmx.edmx + "Edmx");
+            root.SetAttributeValue(XNamespace.Xmlns + "edmx", Edmx.edmx.NamespaceName);
+            //root.SetAttributeValue(XNamespace.Xmlns + "ssdl", ssdl.NamespaceName);
+            //root.SetAttributeValue(XNamespace.Xmlns + "csdl", Edmx.csdl.NamespaceName);
+            root.SetAttributeValue(XName.Get("Version"), Edmx.EDMXVersion);
+            doc.Add(root);
+            Generate(root);
+            doc.Save(writer, SaveOptions.OmitDuplicateNamespaces);
+        }
+    }
+
+    public static class XHelper
+    {
+        public static void SetAttribute(XElement e, string name, string value)
+        {
+            e.SetAttributeValue(XName.Get(name), value);
+        }
+    }
+
+	    public class EdmxMapGenerator : EdmxGenerator
+    {
+        public override void Generate(XElement runTime)
+        {
+            XElement mappings = new XElement(Edmx.edmx + "Mappings");
+            runTime.Add(mappings);
+
+            XElement mapping = new XElement(Edmx.map + "Mapping",
+                    new XAttribute("xmlns", Edmx.map.NamespaceName)
+                );
+            mapping.SetAttributeValue("Space", "C-S");
+            mappings.Add(mapping);
+
+            XElement container = new XElement(Edmx.map + "EntityContainerMapping");
+            container.SetAttributeValue("StorageEntityContainer", Container.Name + "StoreContainer");
+            container.SetAttributeValue("CdmEntityContainer", Container.ContainerName);
+            mapping.Add(container);
+
+            foreach (var item in Container.Entities)
+            {
+                GenerateEntitySetMapping(container, item);
+            }
+        }
+
+        public void GenerateEntitySetMapping(XElement container, EAEntity obj)
+        {
+            if (!obj.Include)
+                return;
+
+            XElement entitySetMapping = new XElement(Edmx.map + "EntitySetMapping");
+            entitySetMapping.SetAttributeValue("Name", EAContainerBuilder.ToPlural(obj.Name));
+            container.Add(entitySetMapping);
+
+            XElement entityTypeMapping = new XElement(Edmx.map + "EntityTypeMapping");
+            entityTypeMapping.SetAttributeValue("TypeName", Container.Name + "." + obj.Name);
+            entitySetMapping.Add(entityTypeMapping);
+
+            XElement mappingFragment = new XElement(Edmx.map + "MappingFragment");
+            mappingFragment.SetAttributeValue("StoreEntitySet", obj.TableName);
+            entityTypeMapping.Add(mappingFragment);
+
+            foreach (var item in obj.ActiveProperties)
+            {
+                XElement scalarProperty = new XElement(Edmx.map + "ScalarProperty");
+                scalarProperty.SetAttributeValue("Name", item.FieldName);
+                scalarProperty.SetAttributeValue("ColumnName", item.FieldName);
+                mappingFragment.Add(scalarProperty);
+            }
+        }
+    }
+ 
+     public class EdmxDesignerGenerator : EdmxGenerator
+    {
+        public override void Generate(XElement root)
+        {
+            XElement designer = new XElement(Edmx.edmx + "Designer");
+            root.Add(designer);
+
+            XElement connection = new XElement(Edmx.edmx + "Connection");
+            designer.Add(connection);
+
+            XElement designerInfo = new XElement(Edmx.edmx + "DesignerInfoPropertySet");            
+            connection.Add(designerInfo);
+
+            AddProperty(designerInfo, "MetadataArtifactProcessing", "EmbedInOutputAssembly");
+
+            XElement options = new XElement(Edmx.edmx + "Options");
+            designerInfo = new XElement(Edmx.edmx + "DesignerInfoPropertySet");
+            AddProperty(designerInfo, "ValidateOnBuild", "true");
+            AddProperty(designerInfo, "EnablePluralization", "True");
+            AddProperty(designerInfo, "IncludeForeignKeysInModel", "True");
+            AddProperty(designerInfo, "CodeGenerationStrategy", "None");
+
+            designer.Add(options);
+
+            options.Add(designerInfo);
+
+            XElement diagrams = new XElement(Edmx.edmx + "Diagrams");
+            designer.Add(diagrams);
+
+            //XElement diagram = new XElement(Edmx.edmx + "Diagram");
+            //diagram.SetAttributeValue("Name", Container.Name);
+            //diagrams.Add(diagram);
+        }
+
+        private static void AddProperty(XElement designerInfo, string name, string value)
+        {
+            XElement designerProperty = new XElement(Edmx.edmx + "DesignerProperty");
+            designerProperty.SetAttributeValue("Name", name);
+            designerProperty.SetAttributeValue("Value", value);
+            designerInfo.Add(designerProperty);
+        }
+    }
+
+    public class EdmxStoreGenerator : EdmxGenerator
+    {
+        public override void Generate(XElement runTime)
+        {
+            XElement storage = new XElement(Edmx.edmx + "StorageModels");
+            runTime.Add(storage);
+
+            XElement schema = new XElement(Edmx.ssdl + "Schema",
+                    new XAttribute("xmlns", Edmx.ssdl.NamespaceName)
+                );
+            schema.SetAttributeValue(XNamespace.Xmlns + "store", Edmx.store.NamespaceName);
+
+            schema.SetAttributeValue("Namespace", Container.Name + ".Store");
+            schema.SetAttributeValue("Alias", "Self");
+            schema.SetAttributeValue("Provider", "System.Data.SqlClient");
+            schema.SetAttributeValue("ProviderManifestToken", "2008");
+            storage.Add(schema);
+
+
+            XElement container = new XElement(Edmx.ssdl + "EntityContainer");
+            container.SetAttributeValue("Name", Container.Name + "StoreContainer");
+            schema.Add(container);
+
+            foreach (var item in Container.Entities)
+            {
+                GenerateObject(container, item);
+            }
+
+            foreach (var association in Container.Associations)
+            {
+                GenerateAssociationSet(container, association);
+            }
+
+            foreach (var entity in Container.Entities)
+            {
+                GenerateEntityType(schema, entity);
+            }
+
+            foreach (var association in Container.Associations)
+            {
+                GenerateAssociation(schema, association);
+            }
+
+        }
+
+        public void GenerateObject(XElement container,EAEntity item)
+        {
+            if (!item.Include)
+                return;
+
+            XElement entitySet = new XElement(Edmx.ssdl + "EntitySet");
+            entitySet.SetAttributeValue("Name", item.TableName);
+            entitySet.SetAttributeValue("EntityType", Container.Name + ".Store." + item.TableName);
+            entitySet.SetAttributeValue(Edmx.store + "Type", "Tables");
+           // entitySet.SetAttributeValue("Schema", "dbo");
+            entitySet.SetAttributeValue("Schema", item.Schema);
+            container.Add(entitySet);           
+
+        }
+
+        public void GenerateAssociationSet(XElement container,EAAssociation ass)
+        {
+            XElement associationSet = new XElement(Edmx.ssdl + "AssociationSet");
+            associationSet.SetAttributeValue("Name", ass.Name);
+            associationSet.SetAttributeValue("Association", Container.Name + ".Store." + ass.Name);
+            container.Add(associationSet);
+
+            XElement end = new XElement(Edmx.ssdl + "End");
+            end.SetAttributeValue("Role", ass.PrincipalRole);
+            end.SetAttributeValue("EntitySet", ass.PrimaryTable);
+            associationSet.Add(end);
+
+            end = new XElement(Edmx.ssdl + "End");
+            end.SetAttributeValue("Role", ass.DependentRole);
+            end.SetAttributeValue("EntitySet", ass.DependentTable);
+            associationSet.Add(end);
+
+        }
+
+        public void GenerateEntityType(XElement schema, EAEntity obj)
+        {
+            if (!obj.Include)
+                return;
+
+            XElement entityType = new XElement(Edmx.ssdl + "EntityType");
+            entityType.SetAttributeValue("Name", obj.TableName);
+            schema.Add(entityType);
+
+            XElement key = new XElement(Edmx.ssdl + "Key");
+            entityType.Add(key);
+
+            foreach (var item in obj.Properties.Where(x => x.IsPrimary))
+            {
+                XElement propertyRef = new XElement(Edmx.ssdl + "PropertyRef");
+                propertyRef.SetAttributeValue("Name", item.Name);
+                key.Add(propertyRef);
+            }
+
+            foreach (var columns in obj.ActiveProperties)
+            {
+                XElement property = new XElement(Edmx.ssdl + "Property");
+                property.SetAttributeValue("Name", columns.Name);
+                property.SetAttributeValue("Type", TypeHelper.ToStorageType(columns));
+                if (!columns.IsNullable)
+                    property.SetAttributeValue("Nullable", "false");
+                if(columns.IsIdentity)
+                    property.SetAttributeValue("StoreGeneratedPattern", "Identity");
+                if (columns.Length != -1 && (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String || columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Binary))
+                    property.SetAttributeValue("MaxLength", columns.Length);
+                if(columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Decimal)
+                    property.SetAttributeValue("Scale", columns.Scale);
+                entityType.Add(property);
+            }
+        }
+
+        //public static bool IsMaxLength(EAEntityProperty columns)
+        //{
+        //    if (columns.Length == 0)
+        //        return true;
+        //    if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String || columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Binary)
+        //        return true;
+        //    if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String && columns.Length == int.MaxValue)
+        //    {
+        //        return true;
+        //    }
+        //    if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String && columns.Length == int.MaxValue / 2)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        public void GenerateAssociation(XElement schema, EAAssociation ass)
+        {
+            XElement association = new XElement(Edmx.ssdl + "Association");
+            association.SetAttributeValue("Name", ass.Name);
+            schema.Add(association);
+
+            EAEntity depend = Container.Entities.First(x => x.TableName == ass.DependentTable);
+            EANavigationProperty nav = depend.NavigationProperties.First(x => x.Association == ass.Name && x.ToRole == ass.PrincipalRole);
+
+            XElement end = new XElement(Edmx.ssdl + "End");
+            end.SetAttributeValue("Role", ass.PrincipalRole);
+            end.SetAttributeValue("Type", Container.Name + ".Store." + ass.PrimaryTable);
+            end.SetAttributeValue("Multiplicity", ToString(nav.Multiplicity));
+            association.Add(end);
+
+            EAEntity primary = Container.Entities.First(x => x.TableName == ass.PrimaryTable);
+            nav = primary.NavigationProperties.First(x => x.Association == ass.Name && x.ToRole == ass.DependentRole);
+
+            end = new XElement(Edmx.ssdl + "End");
+            end.SetAttributeValue("Role", ass.DependentRole);
+            end.SetAttributeValue("Type", Container.Name + ".Store." + ass.DependentTable);
+            end.SetAttributeValue("Multiplicity", ToString(nav.Multiplicity));
+            association.Add(end);
+
+            XElement refConstraint = new XElement(Edmx.ssdl + "ReferentialConstraint");
+            association.Add(refConstraint);
+
+            XElement principal = new XElement(Edmx.ssdl + "Principal");
+            principal.SetAttributeValue("Role", ass.PrincipalRole);
+            refConstraint.Add(principal);
+
+            XElement propertyRef = new XElement(Edmx.ssdl + "PropertyRef");
+            propertyRef.SetAttributeValue("Name", ass.PrimaryColumn);
+            principal.Add(propertyRef);
+
+            XElement dependent = new XElement(Edmx.ssdl + "Dependent");
+            dependent.SetAttributeValue("Role", ass.DependentRole);
+            refConstraint.Add(dependent);
+
+            propertyRef = new XElement(Edmx.ssdl + "PropertyRef");
+            propertyRef.SetAttributeValue("Name", ass.DependentColumn);
+            dependent.Add(propertyRef);
+        }
+
+
+        private string ToString(EAMultiplicity m)
+        {
+            switch (m)
+            {
+                case EAMultiplicity.ZeroOrOne:
+                    return "0..1";
+                case EAMultiplicity.One:
+                    return "1";
+                case EAMultiplicity.Many:
+                    return "*";
+            }
+            return "";
+        }
+
+    }
+     public class EdmxConceptGenerator : EdmxGenerator
+    {
+        public override void Generate(XElement runTime)
+        {
+            XElement conceptual = new XElement(Edmx.edmx + "ConceptualModels");
+            runTime.Add(conceptual);
+
+            XElement schema = new XElement(Edmx.csdl + "Schema",
+                    new XAttribute("xmlns", Edmx.csdl.NamespaceName)
+                );
+            schema.SetAttributeValue(XNamespace.Xmlns + "annotation", Edmx.annotation.NamespaceName);
+            schema.SetAttributeValue("Namespace", Container.Name);
+            schema.SetAttributeValue("Alias", "Self");
+            conceptual.Add(schema);
+
+            XElement container = new XElement(Edmx.csdl + "EntityContainer");
+            container.SetAttributeValue("Name", Container.ContainerName);
+            container.SetAttributeValue(Edmx.annotation + "LazyLoadingEnabled", "true");
+            schema.Add(container);
+
+            foreach (var entitySet in Container.Entities)
+            {
+                GenerateEntitySet(container, entitySet);
+            }
+
+            foreach (var association in Container.Associations)
+            {
+                GenerateAssociationSet(container, association);
+            }
+
+            foreach (var entityType in Container.Entities)
+            {
+                GenerateEntityType(schema, entityType);
+            }
+
+            foreach (var association in Container.Associations)
+            {
+                GenerateAssociation(schema, association);
+            }
+        }        
+
+        public void GenerateEntitySet(XElement container, EAEntity item)
+        {
+            if (!item.Include)
+                return;
+
+            XElement entitySet = new XElement(Edmx.csdl + "EntitySet");
+            entitySet.SetAttributeValue("Name",EAContainerBuilder.ToPlural(item.Name));
+            entitySet.SetAttributeValue("EntityType", Container.Name + "." + item.Name);            
+            container.Add(entitySet);
+        }
+
+        public void GenerateAssociationSet(XElement container, EAAssociation associate)
+        {
+            XElement associationSet = new XElement(Edmx.csdl + "AssociationSet");
+            associationSet.SetAttributeValue("Name", associate.Name);            
+            associationSet.SetAttributeValue("Association", Container.Name + "." + associate.Name);
+            container.Add(associationSet);
+
+            EAEntity primary = Container.Entities.First(x => x.TableName == associate.PrimaryTable);
+
+            XElement end = new XElement(Edmx.csdl + "End");
+            end.SetAttributeValue("Role", associate.PrincipalRole);
+            end.SetAttributeValue("EntitySet", EAContainerBuilder.ToPlural(primary.Name));
+            associationSet.Add(end);
+
+            EAEntity depend = Container.Entities.First(x => x.TableName == associate.DependentTable);
+
+            end = new XElement(Edmx.csdl + "End");
+            end.SetAttributeValue("Role",associate.DependentRole);
+            end.SetAttributeValue("EntitySet", EAContainerBuilder.ToPlural(depend.Name));            
+            associationSet.Add(end);
+        }
+
+        public void GenerateEntityType(XElement schema, EAEntity obj)
+        {
+            if (!obj.Include)
+                return;
+
+            XElement entityType = new XElement(Edmx.csdl + "EntityType");
+            entityType.SetAttributeValue("Name", obj.Name);
+            schema.Add(entityType);
+
+            XElement key = new XElement(Edmx.csdl + "Key");
+            entityType.Add(key);
+
+            foreach (var item in obj.Properties.Where(x => x.IsPrimary))
+            {
+                XElement propertyRef = new XElement(Edmx.csdl + "PropertyRef");
+                propertyRef.SetAttributeValue("Name", item.Name);
+                key.Add(propertyRef);
+            }
+
+            foreach (var columns in obj.ActiveProperties)
+            {
+                XElement property = new XElement(Edmx.csdl + "Property");
+                property.SetAttributeValue("Name", columns.Name);
+                property.SetAttributeValue("Type", TypeHelper.ToConceptualType(columns));
+                if (!columns.IsNullable)
+                    property.SetAttributeValue("Nullable", "false");
+                if (columns.IsIdentity)
+                    property.SetAttributeValue(Edmx.annotation + "StoreGeneratedPattern", "Identity");
+
+                if (columns.Length == -1 && (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String || columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Binary))
+                    property.SetAttributeValue("MaxLength", "Max");
+                else {
+                    if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String || columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Binary)
+                        property.SetAttributeValue("MaxLength", columns.Length);
+                }
+                //MaxLength for text--> nvarchar(max)??????????????????
+
+                if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.String)
+                {
+                    if (columns.Unicode != null)
+                    {
+                        property.SetAttributeValue("Unicode", columns.Unicode.Value.ToString().ToLower());
+                    }
+                    property.SetAttributeValue("FixedLength", "false");
+                    //property.SetAttributeValue("Unicode", "true");
+                }
+
+                if (columns.EdmType == System.Data.Metadata.Edm.PrimitiveTypeKind.Decimal)
+                {
+                    property.SetAttributeValue("Precision", columns.Precision); //Precision??????????????
+                    property.SetAttributeValue("Scale", columns.Scale);
+                }
+                entityType.Add(property);
+            }
+
+            foreach (var item in obj.NavigationProperties)
+            {
+                XElement navigation = new XElement(Edmx.csdl + "NavigationProperty");
+                navigation.SetAttributeValue("Name", item.Name);
+                navigation.SetAttributeValue("Relationship", Container.Name + "." + item.Association);
+                navigation.SetAttributeValue("FromRole", item.FromRole);
+                navigation.SetAttributeValue("ToRole", item.ToRole);
+                entityType.Add(navigation);
+            }
+
+        }
+
+        public void GenerateAssociation(XElement schema, EAAssociation ass)
+        {
+            XElement association = new XElement(Edmx.csdl + "Association");
+            association.SetAttributeValue("Name", ass.Name);
+            schema.Add(association);
+
+            EAEntity primary = Container.Entities.First(x => x.TableName == ass.PrimaryTable);
+            EAEntity depend = Container.Entities.First(x => x.TableName == ass.DependentTable);
+            EANavigationProperty nav = depend.NavigationProperties.First(x => x.Association == ass.Name && x.ToRole == ass.PrincipalRole);
+
+            XElement end = new XElement(Edmx.csdl + "End");
+            end.SetAttributeValue("Type", Container.Name + "." + primary.Name);
+            end.SetAttributeValue("Role", ass.PrincipalRole);
+            end.SetAttributeValue("Multiplicity", ToString(nav.Multiplicity));
+            association.Add(end);
+
+            nav = primary.NavigationProperties.First(x => x.Association == ass.Name && x.ToRole == ass.DependentRole);
+
+            XComment c = new XComment(nav.Name);
+            association.Add(c);
+
+            end = new XElement(Edmx.csdl + "End");
+            end.SetAttributeValue("Type", Container.Name + "." + depend.Name);
+            end.SetAttributeValue("Role", ass.DependentRole);
+            end.SetAttributeValue("Multiplicity", ToString(nav.Multiplicity));
+            association.Add(end);
+
+            XElement refConstraint = new XElement(Edmx.csdl + "ReferentialConstraint");
+            association.Add(refConstraint);
+
+            XElement principal = new XElement(Edmx.csdl + "Principal");
+            principal.SetAttributeValue("Role", ass.PrincipalRole);
+            refConstraint.Add(principal);
+
+            EAEntityProperty pp = primary.Properties.First(x => x.FieldName == ass.PrimaryColumn);
+
+            XElement propertyRef = new XElement(Edmx.csdl + "PropertyRef");
+            propertyRef.SetAttributeValue("Name", pp.Name);
+            principal.Add(propertyRef);
+
+            XElement dependent = new XElement(Edmx.csdl + "Dependent");
+            dependent.SetAttributeValue("Role", ass.DependentRole);
+            refConstraint.Add(dependent);
+
+            EAEntityProperty dp = depend.Properties.First(x=>x.FieldName== ass.DependentColumn);
+
+            propertyRef = new XElement(Edmx.csdl + "PropertyRef");
+            propertyRef.SetAttributeValue("Name", dp.Name);
+            dependent.Add(propertyRef);
+        }
+
+        private string ToString(EAMultiplicity m)
+        {
+            switch (m)
+            {
+                case EAMultiplicity.ZeroOrOne:
+                    return "0..1";
+                case EAMultiplicity.One:
+                    return "1";
+                case EAMultiplicity.Many:
+                    return "*";
+            }
+            return "";
+        }
+    }
+ #>

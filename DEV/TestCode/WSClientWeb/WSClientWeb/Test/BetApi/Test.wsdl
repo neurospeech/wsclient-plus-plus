@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://emineo.ch/vk/cts/ipad" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="cts-iPad-1.0" targetNamespace="http://emineo.ch/vk/cts/ipad">
+	<wsdl:types>
+		<xsd:schema xmlns:vk-adm="http://emineo.ch/xmlns/vk/admdata/1/0" targetNamespace="http://emineo.ch/vk/cts/ipad">
+			<xsd:import namespace="http://www.ech.ch/xmlns/eCH-0010/3" schemaLocation="./Schemas/cts-iPad-1-0_importedschema_1.xsd"/>
+			<xsd:import namespace="http://www.ech.ch/xmlns/eCH-0044/1" schemaLocation="./Schemas/cts-iPad-1-0_importedschema_2.xsd"/>
+			<xsd:import namespace="http://www.ech.ch/xmlns/eCH-0008/2" schemaLocation="./Schemas/cts-iPad-1-0_importedschema_3.xsd"/>
+			<xsd:import namespace="http://www.ech.ch/xmlns/eCH-0007/3" schemaLocation="./Schemas/cts-iPad-1-0_importedschema_4.xsd"/>
+			<xsd:import namespace="http://emineo.ch/xmlns/vk/admdata/1/0" schemaLocation="./Schemas/cts-iPad-1-0_importedschema_5.xsd"/>
+			
+			<xsd:simpleType name="clientType">
+				<xsd:restriction base="xsd:token">
+					<xsd:maxLength value="3"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:complexType name="getPatientRequest">
+				<xsd:sequence>
+					<xsd:element name="client" type="tns:clientType"/>
+					<xsd:element name="cardData" type="xsd:hexBinary"/>
+					<xsd:element name="callVeka" type="xsd:boolean"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="getPatientResponse">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="vekaQueryReturnCode" type="xsd:int"/>
+					<xsd:element minOccurs="0" name="vekaQueryReturnMessage" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="patient" type="vk-adm:patientType"/>
+					<xsd:element minOccurs="0" name="generalError" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="cardDataError" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="vekaCallError" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:element name="getPatientRequest" type="tns:getPatientRequest"/>
+			<xsd:element name="getPatientResponse" type="tns:getPatientResponse"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="getPatientRequest">
+		<wsdl:part element="tns:getPatientRequest" name="getPatientRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPatientResponse">
+		<wsdl:part element="tns:getPatientResponse" name="getPatientResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="CtsIpadServicePortType">
+		<wsdl:operation name="getPatient">
+			<wsdl:input message="tns:getPatientRequest"/>
+			<wsdl:output message="tns:getPatientResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="cts-iPad-1.0-SOAP" type="tns:CtsIpadServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getPatient">
+			<soap:operation soapAction="http://emineo.ch/vk/cts/iPad/getPatient"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="CtsIpadService">
+		<wsdl:port binding="tns:cts-iPad-1.0-SOAP" name="CtsIpadServicePort">
+			<soap:address location="http://KAPPA.eminet.local:50800/CtsIpadService/CtsIpadServicePortTypeImplBean"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

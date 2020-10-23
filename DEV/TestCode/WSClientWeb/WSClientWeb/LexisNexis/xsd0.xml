@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://lexisnexis.com/PM/Sync" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="/LexisNexis/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="/LexisNexis/xsd2.xml" namespace="http://www.lexisnexis.com/PM/Calendar" />
+  <xs:import schemaLocation="/LexisNexis/xsd5.xml" namespace="http://www.lexisnexis.com/PM/Contact" />
+  <xs:import schemaLocation="/LexisNexis/xsd9.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="SynchronizeContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://lexisnexis.com/PM/Sync" minOccurs="0" name="changes" nillable="true" type="q1:ItemChangeCollection" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ItemChangeCollection">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="ItemChange" nillable="true" type="q2:ItemChange" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q3="http://lexisnexis.com/PM/Sync" name="ItemChangeCollection" nillable="true" type="q3:ItemChangeCollection" />
+  <xs:complexType name="ItemChange">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://lexisnexis.com/PM/Sync" minOccurs="0" name="ChangeType" type="q4:ChangeType" />
+      <xs:element xmlns:q5="http://lexisnexis.com/PM/Sync" minOccurs="0" name="Fields" nillable="true" type="q5:FieldCollection" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RemoteID" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q6="http://lexisnexis.com/PM/Sync" name="ItemChange" nillable="true" type="q6:ItemChange" />
+  <xs:simpleType name="ChangeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Create" />
+      <xs:enumeration value="Update" />
+      <xs:enumeration value="Delete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q7="http://lexisnexis.com/PM/Sync" name="ChangeType" nillable="true" type="q7:ChangeType" />
+  <xs:complexType name="FieldCollection">
+    <xs:sequence>
+      <xs:element xmlns:q8="http://lexisnexis.com/PM/Sync" minOccurs="0" name="List" nillable="true" type="q8:ArrayOfBaseField" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q9="http://lexisnexis.com/PM/Sync" name="FieldCollection" nillable="true" type="q9:FieldCollection" />
+  <xs:complexType name="ArrayOfBaseField">
+    <xs:sequence>
+      <xs:element xmlns:q10="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="BaseField" nillable="true" type="q10:BaseField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q11="http://lexisnexis.com/PM/Sync" name="ArrayOfBaseField" nillable="true" type="q11:ArrayOfBaseField" />
+  <xs:complexType name="BaseField">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q12="http://lexisnexis.com/PM/Sync" name="BaseField" nillable="true" type="q12:BaseField" />
+  <xs:complexType name="FieldCollectionCollectionField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://lexisnexis.com/PM/Sync" base="q13:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="q13:ArrayOfFieldCollection" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q14="http://lexisnexis.com/PM/Sync" name="FieldCollectionCollectionField" nillable="true" type="q14:FieldCollectionCollectionField" />
+  <xs:complexType name="ArrayOfFieldCollection">
+    <xs:sequence>
+      <xs:element xmlns:q15="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="FieldCollection" nillable="true" type="q15:FieldCollection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q16="http://lexisnexis.com/PM/Sync" name="ArrayOfFieldCollection" nillable="true" type="q16:ArrayOfFieldCollection" />
+  <xs:complexType name="PhoneField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q17="http://lexisnexis.com/PM/Sync" base="q17:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="q17:PhoneNumber" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q18="http://lexisnexis.com/PM/Sync" name="PhoneField" nillable="true" type="q18:PhoneField" />
+  <xs:complexType name="PhoneNumber">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountryCode" type="xs:short" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q19="http://lexisnexis.com/PM/Sync" name="PhoneNumber" nillable="true" type="q19:PhoneNumber" />
+  <xs:complexType name="StringField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q20="http://lexisnexis.com/PM/Sync" base="q20:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q21="http://lexisnexis.com/PM/Sync" name="StringField" nillable="true" type="q21:StringField" />
+  <xs:complexType name="IntField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q22="http://lexisnexis.com/PM/Sync" base="q22:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q23="http://lexisnexis.com/PM/Sync" name="IntField" nillable="true" type="q23:IntField" />
+  <xs:complexType name="BoolField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q24="http://lexisnexis.com/PM/Sync" base="q24:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q25="http://lexisnexis.com/PM/Sync" name="BoolField" nillable="true" type="q25:BoolField" />
+  <xs:complexType name="RecurrencePatternField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q26="http://lexisnexis.com/PM/Sync" base="q26:BaseField">
+        <xs:sequence>
+          <xs:element xmlns:q27="http://www.lexisnexis.com/PM/Calendar" minOccurs="0" name="Value" nillable="true" type="q27:RecurrencePatternContract" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q28="http://lexisnexis.com/PM/Sync" name="RecurrencePatternField" nillable="true" type="q28:RecurrencePatternField" />
+  <xs:complexType name="PhoneCollectionField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q29="http://lexisnexis.com/PM/Sync" base="q29:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="q29:ArrayOfPhoneNumber" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q30="http://lexisnexis.com/PM/Sync" name="PhoneCollectionField" nillable="true" type="q30:PhoneCollectionField" />
+  <xs:complexType name="ArrayOfPhoneNumber">
+    <xs:sequence>
+      <xs:element xmlns:q31="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="PhoneNumber" nillable="true" type="q31:PhoneNumber" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q32="http://lexisnexis.com/PM/Sync" name="ArrayOfPhoneNumber" nillable="true" type="q32:ArrayOfPhoneNumber" />
+  <xs:complexType name="DateTimeField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q33="http://lexisnexis.com/PM/Sync" base="q33:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q34="http://lexisnexis.com/PM/Sync" name="DateTimeField" nillable="true" type="q34:DateTimeField" />
+  <xs:complexType name="EmailCollectionField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q35="http://lexisnexis.com/PM/Sync" base="q35:BaseField">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="q35:ArrayOfEmailAddress" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q36="http://lexisnexis.com/PM/Sync" name="EmailCollectionField" nillable="true" type="q36:EmailCollectionField" />
+  <xs:complexType name="ArrayOfEmailAddress">
+    <xs:sequence>
+      <xs:element xmlns:q37="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="EmailAddress" nillable="true" type="q37:EmailAddress" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q38="http://lexisnexis.com/PM/Sync" name="ArrayOfEmailAddress" nillable="true" type="q38:ArrayOfEmailAddress" />
+  <xs:complexType name="EmailAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailType" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q39="http://lexisnexis.com/PM/Sync" name="EmailAddress" nillable="true" type="q39:EmailAddress" />
+  <xs:complexType name="AddressField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q40="http://lexisnexis.com/PM/Sync" base="q40:BaseField">
+        <xs:sequence>
+          <xs:element xmlns:q41="http://www.lexisnexis.com/PM/Contact" minOccurs="0" name="Value" nillable="true" type="q41:AddressContract" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q42="http://lexisnexis.com/PM/Sync" name="AddressField" nillable="true" type="q42:AddressField" />
+  <xs:complexType name="NullField">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q43="http://lexisnexis.com/PM/Sync" base="q43:BaseField">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q44="http://lexisnexis.com/PM/Sync" name="NullField" nillable="true" type="q44:NullField" />
+  <xs:element name="SynchronizeContactsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://lexisnexis.com/PM/Sync" minOccurs="0" name="SynchronizeContactsResult" nillable="true" type="q45:ItemChangeCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronizeCalendar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://lexisnexis.com/PM/Sync" minOccurs="0" name="changes" nillable="true" type="q46:ItemChangeCollection" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronizeCalendarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://lexisnexis.com/PM/Sync" minOccurs="0" name="SynchronizeCalendarResult" nillable="true" type="q47:ItemChangeCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronizeTasks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://lexisnexis.com/PM/Sync" minOccurs="0" name="changes" nillable="true" type="q48:ItemChangeCollection" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SynchronizeTasksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://lexisnexis.com/PM/Sync" minOccurs="0" name="SynchronizeTasksResult" nillable="true" type="q49:ItemChangeCollection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateContactSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateContactSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateCalendarSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateCalendarSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateTaskSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateTaskSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialContactSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialContactSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialCalendarSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialCalendarSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialTaskSync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FinalizeInitialTaskSyncResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateContactVersions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://lexisnexis.com/PM/Sync" minOccurs="0" name="versions" nillable="true" type="q50:ArrayOfItemVersion" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfItemVersion">
+    <xs:sequence>
+      <xs:element xmlns:q51="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="ItemVersion" nillable="true" type="q51:ItemVersion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q52="http://lexisnexis.com/PM/Sync" name="ArrayOfItemVersion" nillable="true" type="q52:ArrayOfItemVersion" />
+  <xs:complexType name="ItemVersion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RemoteID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q53="http://lexisnexis.com/PM/Sync" name="ItemVersion" nillable="true" type="q53:ItemVersion" />
+  <xs:element name="UpdateContactVersionsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCalendarVersions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q54="http://lexisnexis.com/PM/Sync" minOccurs="0" name="versions" nillable="true" type="q54:ArrayOfItemVersion" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCalendarVersionsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTaskVersions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q55="http://lexisnexis.com/PM/Sync" minOccurs="0" name="versions" nillable="true" type="q55:ArrayOfItemVersion" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTaskVersionsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddContactSyncLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="localID" type="ser:guid" />
+        <xs:element minOccurs="0" name="localTimestamp" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remoteTimestamp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddContactSyncLinkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddContactSyncLinkResult" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCalendarSyncLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="localID" type="ser:guid" />
+        <xs:element minOccurs="0" name="localTimestamp" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remoteTimestamp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCalendarSyncLinkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddCalendarSyncLinkResult" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTaskSyncLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="localID" type="ser:guid" />
+        <xs:element minOccurs="0" name="localTimestamp" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="remoteTimestamp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTaskSyncLinkResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddTaskSyncLinkResult" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="linkID" nillable="true" type="ser:guid" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IfContactLinkExistsUpdateForReplicaAndReturnLinkedIDResult" nillable="true" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="linkID" nillable="true" type="ser:guid" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IfCalendarLinkExistsUpdateForReplicaAndReturnLinkedIDResult" nillable="true" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="linkID" nillable="true" type="ser:guid" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IfTaskLinkExistsUpdateForReplicaAndReturnLinkedIDResult" nillable="true" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllowedContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllowedContactsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://lexisnexis.com/PM/Sync" minOccurs="0" name="GetAllowedContactsResult" nillable="true" type="q56:ArrayOfAllowedContact" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAllowedContact">
+    <xs:sequence>
+      <xs:element xmlns:q57="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="AllowedContact" nillable="true" type="q57:AllowedContact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q58="http://lexisnexis.com/PM/Sync" name="ArrayOfAllowedContact" nillable="true" type="q58:ArrayOfAllowedContact" />
+  <xs:complexType name="AllowedContact">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+      <xs:element minOccurs="0" name="ContactID" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q59="http://lexisnexis.com/PM/Sync" name="AllowedContact" nillable="true" type="q59:AllowedContact" />
+  <xs:element name="SetAllowedContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://lexisnexis.com/PM/Sync" minOccurs="0" name="allowedContacts" nillable="true" type="q60:ArrayOfAllowedContact" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetAllowedContactsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddContactConflicts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://lexisnexis.com/PM/Sync" minOccurs="0" name="conflicts" nillable="true" type="q61:ArrayOfConflict" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfConflict">
+    <xs:sequence>
+      <xs:element xmlns:q62="http://lexisnexis.com/PM/Sync" minOccurs="0" maxOccurs="unbounded" name="Conflict" nillable="true" type="q62:Conflict" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q63="http://lexisnexis.com/PM/Sync" name="ArrayOfConflict" nillable="true" type="q63:ArrayOfConflict" />
+  <xs:complexType name="Conflict">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocalID" type="ser:guid" />
+      <xs:element minOccurs="0" name="RemoteID" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element xmlns:q64="http://lexisnexis.com/PM/Sync" name="Conflict" nillable="true" type="q64:Conflict" />
+  <xs:element name="AddContactConflictsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetContactConflicts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetContactConflictsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://lexisnexis.com/PM/Sync" minOccurs="0" name="GetContactConflictsResult" nillable="true" type="q65:ArrayOfConflict" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResolveContactConflict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="localID" type="ser:guid" />
+        <xs:element minOccurs="0" name="remoteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="replicaID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResolveContactConflictResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeactivateContactLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="contactId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applicationID" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeactivateContactLinkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsContactSyncing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="contactId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q66="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="applicationIDs" nillable="true" type="q66:ArrayOfshort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsContactSyncingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q67="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsContactSyncingResult" nillable="true" type="q67:ArrayOfshort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeactivateCalendarLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calendarId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="instanceDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="applicationID" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeactivateCalendarLinkResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsCalendarSyncing">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="calendarId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="instanceDate" nillable="true" type="xs:dateTime" />
+        <xs:element xmlns:q68="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="applicationIDs" nillable="true" type="q68:ArrayOfshort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsCalendarSyncingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q69="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsCalendarSyncingResult" nillable="true" type="q69:ArrayOfshort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefreshMagellanContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefreshMagellanContactsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearAllowedContacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearAllowedContactsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearCurrentContactSyncLinks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="replicaId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearCurrentContactSyncLinksResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

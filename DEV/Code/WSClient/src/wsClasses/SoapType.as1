@@ -1,0 +1,81 @@
+package wsClasses
+{
+	public class SoapType
+	{
+		public function SoapType()
+		{
+		}
+		
+		public var wsType:String = "void";
+		public var wsNameSpace:String = "";
+		//public var wsFullType:String = "";
+		public var isArray:Boolean = false;
+		public var isInlineArray:Boolean = false;
+		//public var name:String = "";
+		
+		public var restriction:SoapRestriction = null;
+		
+		/*public var retain:Boolean = false;
+		public var copy:Boolean = false;*/
+		
+		public var isValueType:Boolean = false;
+		
+		public var isDate:Boolean = false;
+		
+		public var nativeType:String = "";
+		
+		//public var nativeObjectType:String = "";
+		
+		
+		public var defaultValue:String = null;
+		
+		public function get isVoid():Boolean{
+			return wsType == "void";
+		}
+		
+		public function get isObjectType():Boolean{
+			return isArray || !isValueType;
+		}
+		
+		public function get isCustom():Boolean
+		{
+			return wsNameSpace!="" && wsNameSpace != "s";
+		}
+
+		public function get isString():Boolean{
+			return wsType.toLowerCase()=="string";
+		}
+		
+		public var targetNamespace:String = null;
+		
+		public function getNamespaceString(def:String = "null"):String
+		{
+			if(targetNamespace==null || targetNamespace.length==0)
+				return def;
+			return '"' + targetNamespace + '"';
+		}
+
+		public var fnLoadFromService:Function = null;
+		public var fnToStringValue:Function = null;
+		public var fnSerialize:Function = null;
+		public var fnDeserialize:Function = null;
+		
+		public function loadFromService(root:String, name:String , attribute:Boolean):String{
+			if(fnLoadFromService==null)
+				return "No LoadFrom Service for " + this.wsType;
+			return fnLoadFromService.call(null,root, name ,attribute);
+		}
+
+		public function toStringValue(member:String):String{
+			return fnToStringValue.call(null,member);
+		}
+		
+		public function serialize(stream:String, name:String):String{
+			return fnSerialize.call(null,stream,name);
+		}
+
+		public function deserialize(stream:String, name:String):String{
+			return fnDeserialize.call(null,stream,name);
+		}
+	}
+}

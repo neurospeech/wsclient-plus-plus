@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://transoma.com/activator/wsdl/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://transoma.com/activator/wsdl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types />
+  <wsdl:message name="ActivatorSoapIn">
+    <wsdl:part name="xml_request" type="s:string" />
+    <wsdl:part name="waveform" type="s:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="ActivatorSoapOut">
+    <wsdl:part name="xml_response" type="s:string" />
+    <wsdl:part name="success" type="s:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="Activator">
+    <wsdl:operation name="xfer" parameterOrder="xml_request waveform xml_response success">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Transfer Activator data to the service center.</documentation>
+      <wsdl:input name="Activator" message="tns:ActivatorSoapIn" />
+      <wsdl:output name="Activator" message="tns:ActivatorSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Activator" type="tns:Activator">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="xfer">
+      <soap:operation soapAction="http://transoma.com/activator/soap/" style="rpc" />
+      <wsdl:input name="Activator">
+        <soap:body use="encoded" namespace="http://transoma.com/activator/wsdl/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="Activator">
+        <soap:body use="encoded" namespace="http://transoma.com/activator/wsdl/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Spud">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Activator to Service Center Interface</documentation>
+    <wsdl:port name="Activator" binding="tns:Activator">
+      <soap:address location="http://localhost/spud/Spud.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

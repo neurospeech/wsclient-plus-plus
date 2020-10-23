@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://lexisnexis.com/PM/" elementFormDefault="qualified" targetNamespace="http://lexisnexis.com/PM/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="/LexisNexis/xsd8.xml" namespace="http://schemas.datacontract.org/2004/07/System.Net" />
+  <xs:import schemaLocation="/LexisNexis/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ServiceError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceError" nillable="true" type="tns:ServiceError" />
+  <xs:complexType name="ApplicationErrors">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Errors" nillable="true" type="tns:ArrayOfApplicationError" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Net" minOccurs="0" name="HttpStatusCode" type="q1:HttpStatusCode" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ApplicationErrors" nillable="true" type="tns:ApplicationErrors" />
+  <xs:complexType name="ArrayOfApplicationError">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApplicationError" nillable="true" type="tns:ApplicationError" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfApplicationError" nillable="true" type="tns:ArrayOfApplicationError" />
+  <xs:complexType name="ApplicationError">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCategory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ApplicationError" nillable="true" type="tns:ApplicationError" />
+</xs:schema>

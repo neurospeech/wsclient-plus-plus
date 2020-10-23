@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+    //
+    //============================================================================
+    //
+    //                          U N C L A S S I F I E D
+    //
+    //****************************************************************************
+    //
+    // Copyright 2009-2011 General Dynamics Advanced Information Systems, Inc.
+    // Unpublished-rights reserved under the Copyright Laws of the
+    // United States.
+    //
+    //****************************************************************************
+    // 
+    //        Name:    emtk-externaleventservice.wsdl
+    //       Ident:    emtk-externaleventservice.wsdl
+    //   Edit Date:    09 Mar 11
+    // 
+    //****************************************************************************
+    //  Revision    History:
+    //  Version     Basis  Person               Date       Reason
+    //  =======     ====== ===================  =========  ==========================
+    //  EMTK-1789    12315  Tam Tran            18 Jun 09  EMTK-RFI-030
+    //               1. Initial Release
+    //  EMTK-2313	 13408  Betty Tjandra		05 May 10  PY-R1-140
+    //				 1. Added new Soap operations.
+    //				 rfiUpdate
+    //				 rfiStateUpdate
+    //				 rfiRelatedNominationsUpdate
+    //				 rfiRelatedRequirementsUpdate
+    //  EMTK-3038    12228  Julie Laird         09 Mar 11
+    //               1. Added requestPackageUpdate
+    //  EMTK-3146   14628   Shirley Kao         19 Apr 11 THYN-12 
+    //              THYNE-P1-200
+    //              1. Added new Soap Operations.
+    //              
+    //****************************************************************************
+    // 
+    //  Description:
+    //  The wsdl definition for the External Event subsystem.
+    //
+    //****************************************************************************
+-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    name="externaleventservice"
+    targetNamespace="http://www.gdais.com/emtk/wsdl/externaleventservice/"    
+    xmlns:tns="http://www.gdais.com/emtk/wsdl/externaleventservice/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+              
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+            <xsd:import namespace="http://www.gdais.com/emtk/wsdl/externaleventservice/"
+                schemaLocation="xsd.xml" >
+            </xsd:import>
+        </xsd:schema>
+    </wsdl:types>
+    
+    <wsdl:message name="exploitationRequirementSatisfiedRequest">
+        <wsdl:part name="exploitationRequirementSatisfied" 
+            element="tns:exploitationRequirementSatisfiedRequest" />
+    </wsdl:message>
+    <wsdl:message name="exploitationRequirementSatisfiedResponse">
+        <wsdl:part name="exploitationRequirementSatisfied" element="tns:exploitationRequirementSatisfiedResponse" />
+    </wsdl:message>
+    <wsdl:message name="exploitationTaskCompletedRequest">
+        <wsdl:part name="exploitationTaskCompleted" element="tns:exploitationTaskCompletedRequest" />
+    </wsdl:message>
+    <wsdl:message name="exploitationTaskCompletedResponse">
+        <wsdl:part name="exploitationTaskCompleted" element="tns:exploitationTaskCompletedResponse" />
+    </wsdl:message>
+    <wsdl:message name="rfiUpdateRequest">
+ 		<wsdl:part name="rfiUpdate" element="tns:rfiUpdateRequest" />
+    </wsdl:message>
+    <wsdl:message name="rfiUpdateResponse">
+ 		<wsdl:part name="rfiUpdate" element="tns:rfiResponse" />
+    </wsdl:message>
+    <wsdl:message name="rfiUpdateStateRequest">
+ 		<wsdl:part name="rfiUpdateState" element="tns:rfiUpdateStateRequest" />
+    </wsdl:message>
+    <wsdl:message name="rfiUpdateStateResponse">
+ 		<wsdl:part name="rfiUpdateState" element="tns:rfiResponse" />
+    </wsdl:message>
+    
+    <wsdl:message name="rfiRelatedNominationUpdateRequest">
+ 		<wsdl:part name="rfiRelatedNominationUpdate" element="tns:rfiRelatedNominationUpdateRequest" />
+    </wsdl:message>
+    <wsdl:message name="rfiRelatedNominationUpdateResponse">
+ 		<wsdl:part name="rfiRelatedNominationUpdate" element="tns:rfiResponse" />
+    </wsdl:message>
+    
+    <wsdl:message name="rfiRelatedRequirementUpdateRequest">
+ 		<wsdl:part name="rfiRelatedRequirementUpdate" element="tns:rfiRelatedRequirementUpdateRequest" />
+    </wsdl:message>
+    <wsdl:message name="rfiRelatedRequirementUpdateResponse">
+ 		<wsdl:part name="rfiRelatedRequirementUpdate" element="tns:rfiResponse" />
+    </wsdl:message>
+    
+    <wsdl:message name="requestPackageUpdateRequest">
+        <wsdl:part name="requestPackageUpdate" 
+                   element="tns:requestPackageUpdateRequest" />
+    </wsdl:message>
+    <wsdl:message name="requestPackageUpdateResponse">
+        <wsdl:part name="requestPackageUpdate" 
+                   element="tns:requestPackageUpdateResponse" />
+    </wsdl:message>
+    
+    <wsdl:message name="exploitationTaskUpdateRequest">
+        <wsdl:part name="exploitationTaskStatusUpdate" element="tns:exploitationTaskUpdateRequest" />
+    </wsdl:message>
+    
+    <wsdl:message name="exploitationTaskUpdateResponse">
+        <wsdl:part name="exploitationTaskStatusUpdate" element="tns:exploitationTaskResponse" />
+    </wsdl:message>
+
+    <wsdl:message name="multimediaProductUpdateRequest">
+        <wsdl:part name="multimediaProductStateUpdate" element="tns:multimediaProductUpdateRequest" />
+    </wsdl:message>
+    
+    <wsdl:message name="multimediaProductResponse">
+        <wsdl:part name="multimediaProductStateUpdate" element="tns:multimediaProductResponse" />
+    </wsdl:message>
+
+    <wsdl:portType name="externaleventservicePortType">
+        <wsdl:operation name="exploitationRequirementSatisfied">
+            <wsdl:input message="tns:exploitationRequirementSatisfiedRequest" />
+            <wsdl:output message="tns:exploitationRequirementSatisfiedResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="exploitationTaskCompleted">
+            <wsdl:input message="tns:exploitationTaskCompletedRequest" />
+            <wsdl:output message="tns:exploitationTaskCompletedResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rfiUpdate">
+            <wsdl:input message="tns:rfiUpdateRequest" />
+            <wsdl:output message="tns:rfiUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rfiStateUpdate">
+            <wsdl:input message="tns:rfiUpdateStateRequest" />
+            <wsdl:output message="tns:rfiUpdateStateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rfiRelatedNominationsUpdate">
+            <wsdl:input message="tns:rfiRelatedNominationUpdateRequest" />
+            <wsdl:output message="tns:rfiRelatedNominationUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="rfiRelatedRequirementsUpdate">
+            <wsdl:input message="tns:rfiRelatedRequirementUpdateRequest" />
+            <wsdl:output message="tns:rfiRelatedRequirementUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="requestPackageUpdate">
+            <wsdl:input message="tns:requestPackageUpdateRequest" />
+            <wsdl:output message="tns:requestPackageUpdateResponse" />
+        </wsdl:operation>  
+        <wsdl:operation name="exploitationTaskStatusUpdate">
+            <wsdl:input message="tns:exploitationTaskUpdateRequest" />
+            <wsdl:output message="tns:exploitationTaskUpdateResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="multimediaProductStateUpdate">
+            <wsdl:input message="tns:multimediaProductUpdateRequest" />
+            <wsdl:output message="tns:multimediaProductResponse" />
+        </wsdl:operation>  
+    </wsdl:portType>
+    
+    <wsdl:binding name="externaleventserviceBinding" 
+        type="tns:externaleventservicePortType">
+        <soap:binding style="document" 
+            transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="exploitationRequirementSatisfied">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/exploitationRequirementSatisfied" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exploitationTaskCompleted">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/exploitationTaskCompleted" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rfiUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/rfiUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rfiStateUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/rfiStateUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rfiRelatedNominationsUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/rfiRelatedNominationsUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="rfiRelatedRequirementsUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/rfiRelatedRequirementsUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="requestPackageUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/requestPackageUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="exploitationTaskStatusUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/exploitationTaskStatusUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="multimediaProductStateUpdate">
+            <soap:operation
+                soapAction="http://www.gdais.com/emtk/wsdl/externaleventservice/multimediaProductStateUpdate" />        
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+        
+    <wsdl:service name="ExternalEventWebService">
+        <wsdl:port name="externaleventservicePort"
+            binding="tns:externaleventserviceBinding">
+            <soap:address location="http://flora.rd.ideas.gd-ais.com:8090/emtk-externaleventservice-ws/emtk-externaleventservice-ws"/>
+        </wsdl:port>
+    </wsdl:service>       
+</wsdl:definitions>
+<!--
+//
+//                          U N C L A S S I F I E D
+//============================================================================
+-->

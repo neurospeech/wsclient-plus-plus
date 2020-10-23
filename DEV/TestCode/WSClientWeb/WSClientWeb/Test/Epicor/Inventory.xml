@@ -1,0 +1,2208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://foo.com/Services" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://foo.com/Services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Foo Inventory Services</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://foo.com/Services">
+      <s:element name="InventoryProductSearchByUPC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UPC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InventoryProductSearchByUPCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryProductSearchByUPCResult" type="tns:ProductSearchResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProductSearchResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ProductSearchList" type="tns:ArrayOfProductSearchData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ServiceResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseCode" type="tns:ResponseCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResponseCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="AuthenticationFailure" />
+          <s:enumeration value="DatabaseError" />
+          <s:enumeration value="DeviceUnknown" />
+          <s:enumeration value="PasswordChangeRequired" />
+          <s:enumeration value="InternalError" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfProductSearchData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductSearchData" nillable="true" type="tns:ProductSearchData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductSearchData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Merchant" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LookupInventoryByItemNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumberMatch" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByItemNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LookupInventoryByItemNumberResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InventoryLookupResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InventoryList" type="tns:ArrayOfInventoryData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfInventoryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InventoryData" nillable="true" type="tns:InventoryData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InventoryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sales" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="LookupInventoryByDescription">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DescriptionMatch" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByDescriptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LookupInventoryByDescriptionResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByItemNumberAndStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumberMatch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByItemNumberAndStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LookupInventoryByItemNumberAndStoreResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByDescriptionAndStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DescriptionMatch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LookupInventoryByDescriptionAndStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LookupInventoryByDescriptionAndStoreResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InventoryInquiryByItemNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InventoryInquiryByItemNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryInquiryByItemNumberResult" type="tns:InventoryInquiryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InventoryInquiryResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="InventoryInquiryList" type="tns:ArrayOfInventoryInquiryData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfInventoryInquiryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InventoryInquiryData" nillable="true" type="tns:InventoryInquiryData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InventoryInquiryData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Store" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="QOH" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="QOO" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="UPC" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InventoryInquiryByUPC">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UPC" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InventoryInquiryByUPCResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InventoryInquiryByUPCResult" type="tns:InventoryInquiryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyForDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="Interval">
+        <s:restriction base="s:string">
+          <s:enumeration value="Hourly" />
+          <s:enumeration value="Daily" />
+          <s:enumeration value="Weekly" />
+          <s:enumeration value="Monthly" />
+          <s:enumeration value="Yearly" />
+          <s:enumeration value="All" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Top100ItemsSoldByCompanyForDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByCompanyForDepartmentResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyForClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyForClassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByCompanyForClassResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyForDepartmentClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyForDepartmentClassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByCompanyForDepartmentClassResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByCompanyResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByStoreForDepartmentResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForClassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByStoreForClassResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForDepartmentClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Class" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreForDepartmentClassResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByStoreForDepartmentClassResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldByStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldByStoreResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSold">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Top100ItemsSoldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Top100ItemsSoldResult" type="tns:InventoryLookupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemSalesByAllStores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="interval" type="tns:Interval" />
+            <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemSalesByAllStoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemSalesByAllStoresResult" type="tns:ItemSalesByStoreResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemSalesByStoreResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="SalesData" type="tns:ArrayOfItemSalesByStoreData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemSalesByStoreData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemSalesByStoreData" nillable="true" type="tns:ItemSalesByStoreData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemSalesByStoreData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetSales" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemStatusChartForDefaultStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Interval" type="tns:Interval" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemStatusChartForDefaultStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemStatusChartForDefaultStoreResult" type="tns:ImageServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ImageServiceResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ImageAsBase64" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ItemStatusChartForStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Interval" type="tns:Interval" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemStatusChartForStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemStatusChartForStoreResult" type="tns:ImageServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemPriceForStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemPriceForStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemPriceForStoreResult" type="tns:ItemPriceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemPriceResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ItemPriceData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemPriceData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetailPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PromoPrice" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnHand" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnOrder" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoyaltyPrice" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemPriceForDefaultStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemPriceForDefaultStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemPriceForDefaultStoreResult" type="tns:ItemPriceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemDetailsForStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemDetailsForStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemDetailsForStoreResult" type="tns:ItemDetailsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemDetailsResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Details" type="tns:ItemDetailsData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemDetailsData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReplacementCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AverageCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ListPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RetailPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PromoPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="GpPercent" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ItemProfit" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryVendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MfgVendor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PopularityCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderPoint" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Discontinued" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location3" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoyaltyPrice" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemDetailsForDefaultStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemDetailsForDefaultStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemDetailsForDefaultStoreResult" type="tns:ItemDetailsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemQuantitiesForStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemQuantitiesForStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemQuantitiesForStoreResult" type="tns:ItemQuantityStoreResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemQuantityStoreResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QuantityList" type="tns:ArrayOfItemQuantityStoreData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemQuantityStoreData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemQuantityStoreData" nillable="true" type="tns:ItemQuantityStoreData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemQuantityStoreData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnHand" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnOrder" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Committed" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Available" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemQuantitiesAllStores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemQuantitiesAllStoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemQuantitiesAllStoresResult" type="tns:ItemQuantityStoreResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemQuantitiesForCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemQuantitiesForCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemQuantitiesForCompanyResult" type="tns:ItemQuantityCompanyResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemQuantityCompanyResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QuantityData" type="tns:ItemQuantityCompanyData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemQuantityCompanyData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnHand" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OnOrder" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Committed" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Available" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StoreOnHand" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StoreOnOrder" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StoreCommitted" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StoreAvailable" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemSalesForCompany">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemSalesForCompanyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemSalesForCompanyResult" type="tns:ItemSalesResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemSalesResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesData" type="tns:ItemSalesData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemSalesData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="YTDUnits" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="YTDSales" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="YTDGrossProfit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LYUnits" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LYSales" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LYGrossProfit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="L12Units" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="L12Sales" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="L12GrossProfit" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemSalesForStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AuthenticationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemSalesForStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemSalesForStoreResult" type="tns:ItemSalesStoreResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemSalesStoreResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ServiceResponse">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemDescription" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SalesData" type="tns:ItemSalesStoreData" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemSalesStoreData">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemSalesData">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="StoreNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ProductSearchResponse" nillable="true" type="tns:ProductSearchResponse" />
+      <s:element name="InventoryLookupResponse" nillable="true" type="tns:InventoryLookupResponse" />
+      <s:element name="InventoryInquiryResponse" nillable="true" type="tns:InventoryInquiryResponse" />
+      <s:element name="ItemSalesByStoreResponse" nillable="true" type="tns:ItemSalesByStoreResponse" />
+      <s:element name="ImageServiceResponse" nillable="true" type="tns:ImageServiceResponse" />
+      <s:element name="ItemPriceResponse" nillable="true" type="tns:ItemPriceResponse" />
+      <s:element name="ItemDetailsResponse" nillable="true" type="tns:ItemDetailsResponse" />
+      <s:element name="ItemQuantityStoreResponse" nillable="true" type="tns:ItemQuantityStoreResponse" />
+      <s:element name="ItemQuantityCompanyResponse" nillable="true" type="tns:ItemQuantityCompanyResponse" />
+      <s:element name="ItemSalesResponse" nillable="true" type="tns:ItemSalesResponse" />
+      <s:element name="ItemSalesStoreResponse" nillable="true" type="tns:ItemSalesStoreResponse" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InventoryProductSearchByUPCSoapIn">
+    <wsdl:part name="parameters" element="tns:InventoryProductSearchByUPC" />
+  </wsdl:message>
+  <wsdl:message name="InventoryProductSearchByUPCSoapOut">
+    <wsdl:part name="parameters" element="tns:InventoryProductSearchByUPCResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByItemNumber" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByItemNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByDescription" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberAndStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByItemNumberAndStore" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberAndStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByItemNumberAndStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionAndStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByDescriptionAndStore" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionAndStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:LookupInventoryByDescriptionAndStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByItemNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:InventoryInquiryByItemNumber" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByItemNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:InventoryInquiryByItemNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByUPCSoapIn">
+    <wsdl:part name="parameters" element="tns:InventoryInquiryByUPC" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByUPCSoapOut">
+    <wsdl:part name="parameters" element="tns:InventoryInquiryByUPCResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForDepartment" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForClassSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForClass" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForClassSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentClassSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForDepartmentClass" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentClassSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyForDepartmentClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompany" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForDepartment" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForClassSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForClass" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForClassSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentClassSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForDepartmentClass" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentClassSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreForDepartmentClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStore" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldByStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldSoapIn">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSold" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldSoapOut">
+    <wsdl:part name="parameters" element="tns:Top100ItemsSoldResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesByAllStoresSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemSalesByAllStores" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesByAllStoresSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemSalesByAllStoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForDefaultStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemStatusChartForDefaultStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForDefaultStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemStatusChartForDefaultStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemStatusChartForStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemStatusChartForStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemPriceForStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemPriceForStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForDefaultStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemPriceForDefaultStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForDefaultStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemPriceForDefaultStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemDetailsForStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemDetailsForStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForDefaultStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemDetailsForDefaultStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForDefaultStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemDetailsForDefaultStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesForStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesForStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesAllStoresSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesAllStores" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesAllStoresSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesAllStoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesForCompany" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:ItemQuantitiesForCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForCompanySoapIn">
+    <wsdl:part name="parameters" element="tns:ItemSalesForCompany" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForCompanySoapOut">
+    <wsdl:part name="parameters" element="tns:ItemSalesForCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemSalesForStore" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemSalesForStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="InventoryProductSearchByUPCHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="UPC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InventoryProductSearchByUPCHttpPostOut">
+    <wsdl:part name="Body" element="tns:ProductSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumberMatch" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="DescriptionMatch" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberAndStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumberMatch" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByItemNumberAndStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionAndStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="DescriptionMatch" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LookupInventoryByDescriptionAndStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByItemNumberHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByItemNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryInquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByUPCHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="UPC" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InventoryInquiryByUPCHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryInquiryResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Department" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForClassHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Class" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForClassHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentClassHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Department" type="s:string" />
+    <wsdl:part name="Class" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyForDepartmentClassHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByCompanyHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Department" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForClassHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Class" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForClassHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentClassHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+    <wsdl:part name="Department" type="s:string" />
+    <wsdl:part name="Class" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreForDepartmentClassHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldByStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Top100ItemsSoldHttpPostOut">
+    <wsdl:part name="Body" element="tns:InventoryLookupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesByAllStoresHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="interval" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesByAllStoresHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemSalesByStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForDefaultStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="Interval" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForDefaultStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ImageServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+    <wsdl:part name="Interval" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemStatusChartForStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ImageServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForDefaultStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemPriceForDefaultStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForDefaultStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemDetailsForDefaultStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemQuantityStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesAllStoresHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesAllStoresHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemQuantityStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForCompanyHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemQuantitiesForCompanyHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemQuantityCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForCompanyHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForCompanyHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemSalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForStoreHttpPostIn">
+    <wsdl:part name="AuthenticationID" type="s:string" />
+    <wsdl:part name="ItemNumber" type="s:string" />
+    <wsdl:part name="StoreNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemSalesForStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemSalesStoreResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InventorySoap">
+    <wsdl:operation name="InventoryProductSearchByUPC">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Product Search</wsdl:documentation>
+      <wsdl:input message="tns:InventoryProductSearchByUPCSoapIn" />
+      <wsdl:output message="tns:InventoryProductSearchByUPCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByItemNumberSoapIn" />
+      <wsdl:output message="tns:LookupInventoryByItemNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching Description</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByDescriptionSoapIn" />
+      <wsdl:output message="tns:LookupInventoryByDescriptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumberAndStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching ItemNumber and Store</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByItemNumberAndStoreSoapIn" />
+      <wsdl:output message="tns:LookupInventoryByItemNumberAndStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescriptionAndStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching Description and Store</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByDescriptionAndStoreSoapIn" />
+      <wsdl:output message="tns:LookupInventoryByDescriptionAndStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByItemNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:InventoryInquiryByItemNumberSoapIn" />
+      <wsdl:output message="tns:InventoryInquiryByItemNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByUPC">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by UPC</wsdl:documentation>
+      <wsdl:input message="tns:InventoryInquiryByUPCSoapIn" />
+      <wsdl:output message="tns:InventoryInquiryByUPCSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Department</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForDepartmentSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Class</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForClassSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartmentClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Department/Class ByClass</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForDepartmentClassSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForDepartmentClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanySoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForDepartmentSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForClassSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartmentClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForDepartmentClassSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForDepartmentClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSold">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Default Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldSoapIn" />
+      <wsdl:output message="tns:Top100ItemsSoldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesByAllStores">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Item Net Sales By Store</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesByAllStoresSoapIn" />
+      <wsdl:output message="tns:ItemSalesByAllStoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns Item Status Details Chart</wsdl:documentation>
+      <wsdl:input message="tns:ItemStatusChartForDefaultStoreSoapIn" />
+      <wsdl:output message="tns:ItemStatusChartForDefaultStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns Item Status Details Chart</wsdl:documentation>
+      <wsdl:input message="tns:ItemStatusChartForStoreSoapIn" />
+      <wsdl:output message="tns:ItemStatusChartForStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory price information for ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemPriceForStoreSoapIn" />
+      <wsdl:output message="tns:ItemPriceForStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory price information for ItemNumber by default store</wsdl:documentation>
+      <wsdl:input message="tns:ItemPriceForDefaultStoreSoapIn" />
+      <wsdl:output message="tns:ItemPriceForDefaultStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemDetailsForStoreSoapIn" />
+      <wsdl:output message="tns:ItemDetailsForStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemDetailsForDefaultStoreSoapIn" />
+      <wsdl:output message="tns:ItemDetailsForDefaultStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesForStoreSoapIn" />
+      <wsdl:output message="tns:ItemQuantitiesForStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesAllStores">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesAllStoresSoapIn" />
+      <wsdl:output message="tns:ItemQuantitiesAllStoresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesForCompanySoapIn" />
+      <wsdl:output message="tns:ItemQuantitiesForCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesForCompanySoapIn" />
+      <wsdl:output message="tns:ItemSalesForCompanySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesForStoreSoapIn" />
+      <wsdl:output message="tns:ItemSalesForStoreSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="InventoryHttpPost">
+    <wsdl:operation name="InventoryProductSearchByUPC">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Product Search</wsdl:documentation>
+      <wsdl:input message="tns:InventoryProductSearchByUPCHttpPostIn" />
+      <wsdl:output message="tns:InventoryProductSearchByUPCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByItemNumberHttpPostIn" />
+      <wsdl:output message="tns:LookupInventoryByItemNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescription">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching Description</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByDescriptionHttpPostIn" />
+      <wsdl:output message="tns:LookupInventoryByDescriptionHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumberAndStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching ItemNumber and Store</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByItemNumberAndStoreHttpPostIn" />
+      <wsdl:output message="tns:LookupInventoryByItemNumberAndStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescriptionAndStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of Inventory by matching Description and Store</wsdl:documentation>
+      <wsdl:input message="tns:LookupInventoryByDescriptionAndStoreHttpPostIn" />
+      <wsdl:output message="tns:LookupInventoryByDescriptionAndStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByItemNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:InventoryInquiryByItemNumberHttpPostIn" />
+      <wsdl:output message="tns:InventoryInquiryByItemNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByUPC">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by UPC</wsdl:documentation>
+      <wsdl:input message="tns:InventoryInquiryByUPCHttpPostIn" />
+      <wsdl:output message="tns:InventoryInquiryByUPCHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Department</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForDepartmentHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForDepartmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Class</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForClassHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForClassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartmentClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company For Department/Class ByClass</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyForDepartmentClassHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyForDepartmentClassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Company</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByCompanyHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByCompanyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForDepartmentHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForDepartmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForClassHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForClassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartmentClass">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreForDepartmentClassHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreForDepartmentClassHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldByStoreHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldByStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSold">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Top 100 Items Sold By Default Store</wsdl:documentation>
+      <wsdl:input message="tns:Top100ItemsSoldHttpPostIn" />
+      <wsdl:output message="tns:Top100ItemsSoldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesByAllStores">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Item Net Sales By Store</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesByAllStoresHttpPostIn" />
+      <wsdl:output message="tns:ItemSalesByAllStoresHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns Item Status Details Chart</wsdl:documentation>
+      <wsdl:input message="tns:ItemStatusChartForDefaultStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemStatusChartForDefaultStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns Item Status Details Chart</wsdl:documentation>
+      <wsdl:input message="tns:ItemStatusChartForStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemStatusChartForStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory price information for ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemPriceForStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemPriceForStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory price information for ItemNumber by default store</wsdl:documentation>
+      <wsdl:input message="tns:ItemPriceForDefaultStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemPriceForDefaultStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemDetailsForStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemDetailsForStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForDefaultStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemDetailsForDefaultStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemDetailsForDefaultStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesForStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemQuantitiesForStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesAllStores">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesAllStoresHttpPostIn" />
+      <wsdl:output message="tns:ItemQuantitiesAllStoresHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemQuantitiesForCompanyHttpPostIn" />
+      <wsdl:output message="tns:ItemQuantitiesForCompanyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForCompany">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesForCompanyHttpPostIn" />
+      <wsdl:output message="tns:ItemSalesForCompanyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForStore">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets an Inventory item for inquiry by ItemNumber</wsdl:documentation>
+      <wsdl:input message="tns:ItemSalesForStoreHttpPostIn" />
+      <wsdl:output message="tns:ItemSalesForStoreHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InventorySoap" type="tns:InventorySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InventoryProductSearchByUPC">
+      <soap:operation soapAction="http://foo.com/Services/InventoryProductSearchByUPC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumber">
+      <soap:operation soapAction="http://foo.com/Services/LookupInventoryByItemNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescription">
+      <soap:operation soapAction="http://foo.com/Services/LookupInventoryByDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumberAndStore">
+      <soap:operation soapAction="http://foo.com/Services/LookupInventoryByItemNumberAndStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescriptionAndStore">
+      <soap:operation soapAction="http://foo.com/Services/LookupInventoryByDescriptionAndStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByItemNumber">
+      <soap:operation soapAction="http://foo.com/Services/InventoryInquiryByItemNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByUPC">
+      <soap:operation soapAction="http://foo.com/Services/InventoryInquiryByUPC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartment">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForClass">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartmentClass">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForDepartmentClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompany">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartment">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForClass">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartmentClass">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForDepartmentClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStore">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSold">
+      <soap:operation soapAction="http://foo.com/Services/Top100ItemsSold" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesByAllStores">
+      <soap:operation soapAction="http://foo.com/Services/ItemSalesByAllStores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForDefaultStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemStatusChartForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemStatusChartForStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemPriceForStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForDefaultStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemPriceForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemDetailsForStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForDefaultStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemDetailsForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemQuantitiesForStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesAllStores">
+      <soap:operation soapAction="http://foo.com/Services/ItemQuantitiesAllStores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForCompany">
+      <soap:operation soapAction="http://foo.com/Services/ItemQuantitiesForCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForCompany">
+      <soap:operation soapAction="http://foo.com/Services/ItemSalesForCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForStore">
+      <soap:operation soapAction="http://foo.com/Services/ItemSalesForStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InventorySoap12" type="tns:InventorySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InventoryProductSearchByUPC">
+      <soap12:operation soapAction="http://foo.com/Services/InventoryProductSearchByUPC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumber">
+      <soap12:operation soapAction="http://foo.com/Services/LookupInventoryByItemNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescription">
+      <soap12:operation soapAction="http://foo.com/Services/LookupInventoryByDescription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumberAndStore">
+      <soap12:operation soapAction="http://foo.com/Services/LookupInventoryByItemNumberAndStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescriptionAndStore">
+      <soap12:operation soapAction="http://foo.com/Services/LookupInventoryByDescriptionAndStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByItemNumber">
+      <soap12:operation soapAction="http://foo.com/Services/InventoryInquiryByItemNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByUPC">
+      <soap12:operation soapAction="http://foo.com/Services/InventoryInquiryByUPC" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartment">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForClass">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartmentClass">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompanyForDepartmentClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompany">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartment">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForClass">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartmentClass">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStoreForDepartmentClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStore">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSoldByStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSold">
+      <soap12:operation soapAction="http://foo.com/Services/Top100ItemsSold" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesByAllStores">
+      <soap12:operation soapAction="http://foo.com/Services/ItemSalesByAllStores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForDefaultStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemStatusChartForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemStatusChartForStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemPriceForStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForDefaultStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemPriceForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemDetailsForStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForDefaultStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemDetailsForDefaultStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemQuantitiesForStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesAllStores">
+      <soap12:operation soapAction="http://foo.com/Services/ItemQuantitiesAllStores" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForCompany">
+      <soap12:operation soapAction="http://foo.com/Services/ItemQuantitiesForCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForCompany">
+      <soap12:operation soapAction="http://foo.com/Services/ItemSalesForCompany" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForStore">
+      <soap12:operation soapAction="http://foo.com/Services/ItemSalesForStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InventoryHttpPost" type="tns:InventoryHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="InventoryProductSearchByUPC">
+      <http:operation location="/InventoryProductSearchByUPC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumber">
+      <http:operation location="/LookupInventoryByItemNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescription">
+      <http:operation location="/LookupInventoryByDescription" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByItemNumberAndStore">
+      <http:operation location="/LookupInventoryByItemNumberAndStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookupInventoryByDescriptionAndStore">
+      <http:operation location="/LookupInventoryByDescriptionAndStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByItemNumber">
+      <http:operation location="/InventoryInquiryByItemNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InventoryInquiryByUPC">
+      <http:operation location="/InventoryInquiryByUPC" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartment">
+      <http:operation location="/Top100ItemsSoldByCompanyForDepartment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForClass">
+      <http:operation location="/Top100ItemsSoldByCompanyForClass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompanyForDepartmentClass">
+      <http:operation location="/Top100ItemsSoldByCompanyForDepartmentClass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByCompany">
+      <http:operation location="/Top100ItemsSoldByCompany" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartment">
+      <http:operation location="/Top100ItemsSoldByStoreForDepartment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForClass">
+      <http:operation location="/Top100ItemsSoldByStoreForClass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStoreForDepartmentClass">
+      <http:operation location="/Top100ItemsSoldByStoreForDepartmentClass" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSoldByStore">
+      <http:operation location="/Top100ItemsSoldByStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Top100ItemsSold">
+      <http:operation location="/Top100ItemsSold" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesByAllStores">
+      <http:operation location="/ItemSalesByAllStores" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForDefaultStore">
+      <http:operation location="/ItemStatusChartForDefaultStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemStatusChartForStore">
+      <http:operation location="/ItemStatusChartForStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForStore">
+      <http:operation location="/ItemPriceForStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemPriceForDefaultStore">
+      <http:operation location="/ItemPriceForDefaultStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForStore">
+      <http:operation location="/ItemDetailsForStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemDetailsForDefaultStore">
+      <http:operation location="/ItemDetailsForDefaultStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForStore">
+      <http:operation location="/ItemQuantitiesForStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesAllStores">
+      <http:operation location="/ItemQuantitiesAllStores" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemQuantitiesForCompany">
+      <http:operation location="/ItemQuantitiesForCompany" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForCompany">
+      <http:operation location="/ItemSalesForCompany" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemSalesForStore">
+      <http:operation location="/ItemSalesForStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Inventory">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">foo Inventory Services</wsdl:documentation>
+    <wsdl:port name="InventorySoap" binding="tns:InventorySoap">
+      <soap:address location="http://192.168.1.10/fooSOA/1.0/Inventory.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InventorySoap12" binding="tns:InventorySoap12">
+      <soap12:address location="http://192.168.1.10/fooSOA/1.0/Inventory.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InventoryHttpPost" binding="tns:InventoryHttpPost">
+      <http:address location="http://192.168.1.10/fooSOA/1.0/Inventory.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

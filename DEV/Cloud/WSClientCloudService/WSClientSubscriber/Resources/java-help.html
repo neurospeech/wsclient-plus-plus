@@ -1,0 +1,139 @@
+﻿
+<html>
+<head>
+<title>WSClient++ Documentation</title>
+<style type="text/css">
+body
+{
+    font-family:Verdana;
+    font-size:10pt;
+}
+    .style1
+    {
+        color: #33CC33;
+    }
+	.style2
+	{
+		color: #FF0000;
+	}
+</style>
+</head>
+<body>
+    <a id="top"></a>
+
+    <ul>
+        <li><a href="#program">WSClient++ Android/Blackberry/Mobile SDK</a></li>
+        <li><a href="#baseurl">Web Service BaseURL</a></li>
+		<li>For Android/Blackberry
+		<ul>
+			<li><a href="#java">Java Synchronous Sample Code</a></li>
+			<li><a href="#java-async">Java Asynchronous Sample Code</a></li>
+			<li><a href="#java-timeout">Java Http Timeout (Android Only)</a></li>
+			<li><a href="#java-headers">Java Custom Http Headers</a></li>
+		</ul>
+		</li>
+    </ul>
+    <h3>
+        <a id="program">WSClient++ A</a>ndroid/Blackberry/Mobile SDK</h3>
+    <p>
+        WSClient++ SDK provides SOAP Client Stubs to connect to XML SOAP Web Services on Android/Blackberry and any other Java based Mobile Platforms. Once the source code is generated, you can include generated files in your project to get started.</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3><a id="baseurl">Web Service Base URL</a></h3>
+    <p>
+        There are two properties available in each of the client, Base Url and Global 
+        Base Url. In the application start up code of your project, you must specify 
+        Base Url as mentioned below. Base Url can be set two ways.</p>
+    <ol>
+        <li>You can set service.baseUrl to each instance of service.</li>
+        <li>Or you can set SoapWebService.globalBaseUrl property only once, that will be 
+            used to connect to your server.</li>
+    </ol>
+    <p>
+        If you have specified SoapWebService.globalBaseUrl, you can still override this 
+        behaviour in each service instance by setting service.baseUrl property.</p>
+    <p>
+        Base URL must only contain (http) or (https) and domain name as specified below. 
+        No additional slash after the domain name, you can include the port number if 
+        its not 80.</p>
+    <p>
+        http://myHost.myServer.com<br />
+        https://myHost.myServer.com<br />
+        http://myHost.myServer.com:99<br />
+        https://myHost.myServer.com:99</p>
+    <p>
+        <a href="#top">^ Top</a> </p>
+    <h3>
+        <a id="java">Java Synchronous Sample Code</a></h3>
+    <p>
+        MyWebService service = new MyWebService();<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// SoapWebService.setGlobalBaseUrl(&quot;http://domain.com&quot;);</span><br 
+            class="style1" />
+        <span class="style1">// // set base url for only this service</span><br 
+            class="style1" />
+        <span class="style1">// service.setBaseUrl(&quot;http://domain.com&quot;);</span><br />
+        Result rs = service.callMethod(p1,p2);</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="java-async">Java Asynchronous Sample Code</a></h3>
+    <p>
+        MyWebServiceAsync service = new MyWebServiceAsync();<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// SoapWebService.setGlobalBaseUrl(&quot;http://domain.com&quot;);</span><br 
+            class="style1" />
+        <span class="style1">// // set base url for only this service</span><br 
+            class="style1" />
+        <span class="style1">// service.setBaseUrl(&quot;http://domain.com&quot;);</span><br />
+        service.callMethod( p1, p2,
+        <br />
+&nbsp;&nbsp; service.new CallMethodResult(){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //Anonymous inline class<br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void onResult(Result rs){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; public void onError(Exception ex){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />
+        <br />
+&nbsp;&nbsp; }<br />
+        );</p>
+    
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+		<a id="java-timeout">Java Http Timeout (Android Only)</a>
+	</h3>
+	<p>
+		You can set two timeout values, ConnectionTimeout and SocketTimeout as per your need.
+		<p>
+			ws.setConnectionTimeout(3000);
+			ws.setSocketTimeout(5000);
+		</p>
+	</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+		<a id="java-headers">Java Custom Http Headers</a>
+	</h3>
+	<p>
+		In order to set custom headers (for basic auth etc), you can create a Hashtable and set it on webservice as shown below.
+		<p>
+			Hashtable headers = new Hashtable();<br />
+			headers.put(<span class="style2">"username"</span>,<span class="style2">"myUsername"</span>);<br />
+			<span class="style1">// Password should be encoded using Base64 for Basic AUTH</span><br />
+			headers.put(<span class="style2">"password"</span>,<span class="style2">"myPassword"</span>);<br />
+			ws.setHttpHeaders(headers);
+		</p>
+	</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+</body>
+</html>

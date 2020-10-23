@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="700" height="500" creationComplete="onCreationComplete(event)"
+			   title="License Agreement">
+	<s:layout>
+		<s:VerticalLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import spark.components.Application;
+
+			private var licenseFile:File = null;
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				licenseFile = File.applicationStorageDirectory.resolvePath("license-agreement.html");
+				if(licenseFile.exists){
+					this.closeMe();
+					return;
+				}
+			
+				PopUpManager.centerPopUp(this);
+				
+				try{
+					var f:File = File.applicationDirectory.resolvePath("licenseAgreement.html");
+					htmlContainer.location = "file://" + f.nativePath;
+				}catch(e:Error){
+					Alert.show(e.toString());
+				}
+				
+			}
+			
+			private function closeMe():void
+			{
+				PopUpManager.removePopUp(this);
+				var app:Application = FlexGlobals.topLevelApplication as Application;
+				var lm:LicenseManager = new LicenseManager();
+				lm.quitAfterValidation = true;
+				PopUpManager.addPopUp(lm,app,true);
+			}
+			
+			protected function approveButtonClicked(event:MouseEvent):void
+			{
+				var fs:FileStream = new FileStream();
+				fs.open(licenseFile, FileMode.WRITE);
+				fs.writeUTF("Terms Agreed");
+				fs.close();
+				closeMe();
+			}
+			
+			protected function cancelButtonClicked(event:MouseEvent):void
+			{
+				WSClient.current.close();				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+	</fx:Declarations>
+	<s:controlBarContent>
+		<s:Button label="Agree" icon="ApproveIcon.png" click="approveButtonClicked(event)"/>
+		<s:Button label="Cancel" icon="DeleteIcon.png" click="cancelButtonClicked(event)"/>
+	</s:controlBarContent>
+	<mx:HTML width="100%" height="100%" id="htmlContainer"/>
+</s:TitleWindow>

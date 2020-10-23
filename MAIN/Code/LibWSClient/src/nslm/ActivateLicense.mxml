@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml"
+				xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib"
+				title="Activate License"
+				width="500" height="300"
+				showCloseButton="false" xmlns:nsl="nsl.*"
+				creationComplete="creationCompleteHandler(event)"
+				>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.neuro.command.CommandResultEvent;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function updateButton_clickHandler(event:MouseEvent):void
+			{
+				license.licenceCode = form_License.text;
+				license.emailAddress = form_Email.text;
+			
+				license.startVerify();
+			}
+			
+			[Bindable]
+			public var license:LicenseInfo = new LicenseInfo();
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				license.addEventListener("verified",onVerified,false,0,true);
+				license.addEventListener("error",onVerificationError,false,0,true);
+				license.addEventListener("found",onFound,false,0,true);
+				license.startVerify();
+			}
+			
+			private function onFound(e:Event):void
+			{
+				if(license.licenceCode != "")
+					cmdActivate.invokeCommand();
+			}
+			
+			private function onVerified(event:Event):void
+			{
+				this.closeForm();
+			}
+			
+			private function onVerificationError(e:Event):void
+			{
+				Alert.show("Verification failed");
+			}
+			
+			protected function cmdActivate_resultHandler(event:CommandResultEvent):void
+			{
+				license.activationCode = WS.LastResult_ActivateLicense.Result;
+				license.startVerify();
+			}
+			
+			
+		]]>
+	</mx:Script>
+	
+	
+	<mx:Form width="100%" height="100%">
+		<mx:FormHeading label="Activation Requires Internet" width="100%"/>
+		<mx:FormItem label="Email Address:" width="100%">
+			<ns:RequiredTextInput id="form_Email" width="100%" text="{license.emailAddress}"/>
+		</mx:FormItem>
+		<mx:FormItem label="License Code:" width="100%">
+			<ns:RequiredTextInput id="form_License" width="100%" text="{license.licenceCode}"/>
+			<mx:Text text="Please enter license code you received in your Order Email"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<ns:UpdateButton id="updateButton" label="Save and Start" click="updateButton_clickHandler(event)"/>
+		</mx:FormItem>
+		<mx:FormItem required="true" width="100%">
+			<mx:Text text="If you have downloaded this application from RegNow for first time, then please click on menu 'Help\Update' to get latest version." width="100%"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<nsl:LicenseService id="WS">
+		<nsl:Request_ActivateLicense>
+			<nsl:Request_LicenseService_ActivateLicense>
+				<nsl:computerName>{license.computerName}</nsl:computerName>
+				<nsl:editionUID>{license.editionUID}</nsl:editionUID>
+				<nsl:emailAddress>{license.emailAddress}</nsl:emailAddress>
+				<nsl:licenseCode>{license.licenceCode}</nsl:licenseCode>
+			</nsl:Request_LicenseService_ActivateLicense>
+		</nsl:Request_ActivateLicense>
+	</nsl:LicenseService>
+	
+	<ns:NSWSCommand
+		id="cmdActivate"
+		commandInvoke="{event.token = WS.ActivateLicense_send()}"
+		result="cmdActivate_resultHandler(event)"
+		/>
+	
+	<ns:FormCommand id="cmdAgreement"
+					callOnInit="{!license.licenseAgreed}"
+					formClass="{LicenseAgreement}"
+					formDataObject="{{license:license}}"
+					/>
+</ns:GenericForm>

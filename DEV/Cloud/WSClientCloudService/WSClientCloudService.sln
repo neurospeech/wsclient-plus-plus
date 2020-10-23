@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSClientCloudService", "WSClientCloudService\WSClientCloudService.csproj", "{A8F43C3B-4361-48C4-82A6-6D766F2695BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSClientSubscriber", "WSClientSubscriber\WSClientSubscriber.csproj", "{D3378B73-61AB-44EA-A841-D6F5646655B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuroSpeech.WebAtoms.4.5", "..\..\..\..\WebAtoms\DEV\Source\NeuroSpeech.WebAtoms\NeuroSpeech.WebAtoms\NeuroSpeech.WebAtoms.4.5.csproj", "{C72D67C1-EC8C-4BEC-A07C-361B7C735ACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4AEF984B-C904-40EA-9EB7-675C55F3E7DA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.800casting.com/tfs/neurospeech
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WSClientCloudService\\WSClientCloudService.csproj
+		SccProjectName1 = WSClientCloudService
+		SccLocalPath1 = WSClientCloudService
+		SccProjectUniqueName2 = WSClientSubscriber\\WSClientSubscriber.csproj
+		SccProjectName2 = WSClientSubscriber
+		SccLocalPath2 = WSClientSubscriber
+		SccProjectUniqueName3 = ..\\..\\..\\..\\WebAtoms\\DEV\\Source\\NeuroSpeech.WebAtoms\\NeuroSpeech.WebAtoms\\NeuroSpeech.WebAtoms.4.5.csproj
+		SccProjectName3 = ../../../../WebAtoms/DEV/Source/NeuroSpeech.WebAtoms/NeuroSpeech.WebAtoms
+		SccLocalPath3 = ..\\..\\..\\..\\WebAtoms\\DEV\\Source\\NeuroSpeech.WebAtoms\\NeuroSpeech.WebAtoms
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8F43C3B-4361-48C4-82A6-6D766F2695BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F43C3B-4361-48C4-82A6-6D766F2695BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F43C3B-4361-48C4-82A6-6D766F2695BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F43C3B-4361-48C4-82A6-6D766F2695BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3378B73-61AB-44EA-A841-D6F5646655B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3378B73-61AB-44EA-A841-D6F5646655B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3378B73-61AB-44EA-A841-D6F5646655B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3378B73-61AB-44EA-A841-D6F5646655B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72D67C1-EC8C-4BEC-A07C-361B7C735ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72D67C1-EC8C-4BEC-A07C-361B7C735ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72D67C1-EC8C-4BEC-A07C-361B7C735ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72D67C1-EC8C-4BEC-A07C-361B7C735ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

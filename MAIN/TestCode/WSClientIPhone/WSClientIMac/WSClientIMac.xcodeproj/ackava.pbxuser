@@ -1,0 +1,215 @@
+// !$*UTF8*$!
+{
+	256AC3D80F4B6AC300CF3369 /* WSClientIMacAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 562}}";
+			sepNavSelRange = "{155, 23}";
+			sepNavVisRange = "{0, 329}";
+		};
+	};
+	256AC3D90F4B6AC300CF3369 /* WSClientIMacAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 650}}";
+			sepNavSelRange = "{585, 0}";
+			sepNavVisRange = "{174, 878}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 399E5BF41276EEAD000FF92B /* WSClientIMac */;
+		activeTarget = 8D1107260486CEB800E47090 /* WSClientIMac */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* WSClientIMac */,
+		);
+		codeSenseManager = 399E5C071276EEB4000FF92B /* Code sense */;
+		executables = (
+			399E5BF41276EEAD000FF92B /* WSClientIMac */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					884,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 316270552;
+			PBXWorkspaceStateSaveDate = 316270552;
+		};
+		perUserProjectItems = {
+			3924055412CB8FD200E1BC7D /* PBXTextBookmark */ = 3924055412CB8FD200E1BC7D /* PBXTextBookmark */;
+			3924055512CB8FD200E1BC7D /* PBXTextBookmark */ = 3924055512CB8FD200E1BC7D /* PBXTextBookmark */;
+			393D95C612D9E7F00052B29C /* PBXTextBookmark */ = 393D95C612D9E7F00052B29C /* PBXTextBookmark */;
+			393D95C712D9E7F00052B29C /* PBXTextBookmark */ = 393D95C712D9E7F00052B29C /* PBXTextBookmark */;
+			393D95D912D9E7FD0052B29C /* PBXTextBookmark */ = 393D95D912D9E7FD0052B29C /* PBXTextBookmark */;
+			399E5C181276EFD6000FF92B /* PBXTextBookmark */ = 399E5C181276EFD6000FF92B /* PBXTextBookmark */;
+			399E5C351276F108000FF92B /* PBXTextBookmark */ = 399E5C351276F108000FF92B /* PBXTextBookmark */;
+		};
+		sourceControlManager = 399E5C061276EEB4000FF92B /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	3924055412CB8FD200E1BC7D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* WSClientIMacAppDelegate.m */;
+		name = "WSClientIMacAppDelegate.m: 26";
+		rLen = 0;
+		rLoc = 585;
+		rType = 0;
+		vrLen = 878;
+		vrLoc = 174;
+	};
+	3924055512CB8FD200E1BC7D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 399E5C0E1276EF66000FF92B /* fm.m */;
+		name = "fm.m: 235";
+		rLen = 0;
+		rLoc = 5199;
+		rType = 0;
+		vrLen = 1347;
+		vrLoc = 4204;
+	};
+	393D95C612D9E7F00052B29C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 399E5C081276EED3000FF92B /* NSWSDL.h */;
+		name = "NSWSDL.h: 250";
+		rLen = 0;
+		rLoc = 6370;
+		rType = 0;
+		vrLen = 1768;
+		vrLoc = 4602;
+	};
+	393D95C712D9E7F00052B29C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 399E5C091276EED3000FF92B /* NSWSDL.m */;
+		name = "NSWSDL.m: 446";
+		rLen = 0;
+		rLoc = 44;
+		rType = 0;
+		vrLen = 812;
+		vrLoc = 0;
+	};
+	393D95D912D9E7FD0052B29C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 399E5C091276EED3000FF92B /* NSWSDL.m */;
+		name = "NSWSDL.m: 923";
+		rLen = 0;
+		rLoc = 22396;
+		rType = 0;
+		vrLen = 936;
+		vrLoc = 21460;
+	};
+	399E5BF41276EEAD000FF92B /* WSClientIMac */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = WSClientIMac;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	399E5C061276EEB4000FF92B /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	399E5C071276EEB4000FF92B /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	399E5C081276EED3000FF92B /* NSWSDL.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1160, 2847}}";
+			sepNavSelRange = "{6370, 0}";
+			sepNavVisRange = "{4602, 1768}";
+		};
+	};
+	399E5C091276EED3000FF92B /* NSWSDL.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 11128}}";
+			sepNavSelRange = "{22396, 0}";
+			sepNavVisRange = "{21460, 936}";
+		};
+	};
+	399E5C0D1276EF66000FF92B /* fm.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 1261}}";
+			sepNavSelRange = "{1275, 0}";
+			sepNavVisRange = "{814, 799}";
+		};
+	};
+	399E5C0E1276EF66000FF92B /* fm.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1062, 5005}}";
+			sepNavSelRange = "{5199, 0}";
+			sepNavVisRange = "{4204, 1347}";
+		};
+	};
+	399E5C181276EFD6000FF92B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* WSClientIMacAppDelegate.h */;
+		name = "WSClientIMacAppDelegate.h: 9";
+		rLen = 23;
+		rLoc = 155;
+		rType = 0;
+		vrLen = 329;
+		vrLoc = 0;
+	};
+	399E5C351276F108000FF92B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 399E5C0D1276EF66000FF92B /* fm.h */;
+		name = "fm.h: 60";
+		rLen = 0;
+		rLoc = 1275;
+		rType = 0;
+		vrLen = 799;
+		vrLoc = 814;
+	};
+	8D1107260486CEB800E47090 /* WSClientIMac */ = {
+		activeExec = 0;
+		executables = (
+			399E5BF41276EEAD000FF92B /* WSClientIMac */,
+		);
+	};
+}

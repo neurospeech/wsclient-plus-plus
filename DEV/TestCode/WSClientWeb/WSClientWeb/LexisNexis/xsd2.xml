@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://www.lexisnexis.com/PM/Calendar" elementFormDefault="qualified" targetNamespace="http://www.lexisnexis.com/PM/Calendar" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="/LexisNexis/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="/LexisNexis/xsd3.xml" namespace="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" />
+  <xs:complexType name="RecurrencePatternContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q1:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue3" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="DayOfMonth" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="DayOfWeek" nillable="true" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="DurationValue" type="xs:short" />
+          <xs:element minOccurs="0" name="EndTime" type="xs:short" />
+          <xs:element minOccurs="0" name="EndTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="InstanceCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IntervalValue" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MonthOfYearCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="OccurrenceValue" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="PatternEndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PatternStartDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecurrenceTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="StartTime" type="xs:short" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecurrencePatternContract" nillable="true" type="tns:RecurrencePatternContract" />
+  <xs:complexType name="AppointmentContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q2:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AllDayEventIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="AppointmentAssignments" nillable="true" type="tns:ArrayOfAppointmentAssignmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="AppointmentLinks" nillable="true" type="tns:ArrayOfAppointmentLinkContract" />
+          <xs:element minOccurs="0" name="AppointmentRecipients" nillable="true" type="tns:ArrayOfAppointmentRecipientContract" />
+          <xs:element minOccurs="0" name="AppointmentRecurrenceExceptions" nillable="true" type="tns:ArrayOfAppointmentRecurrenceExceptionContract" />
+          <xs:element minOccurs="0" name="AppointmentReminders" nillable="true" type="tns:ArrayOfAppointmentReminderContract" />
+          <xs:element minOccurs="0" name="AppointmentTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="BodyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue3" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ImportanceCode" type="xs:int" />
+          <xs:element minOccurs="0" name="LocationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="OwnerID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrivateIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RecurrenceIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RecurrencePattern" nillable="true" type="tns:RecurrencePatternContract" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="ShowAsCode" type="xs:int" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SubjectText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentContract" nillable="true" type="tns:AppointmentContract" />
+  <xs:complexType name="ArrayOfAppointmentAssignmentContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentAssignmentContract" nillable="true" type="tns:AppointmentAssignmentContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentAssignmentContract" nillable="true" type="tns:ArrayOfAppointmentAssignmentContract" />
+  <xs:complexType name="AppointmentAssignmentContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q3:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessedOn" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentAssignmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="AssignedUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SharedOn" nillable="true" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentAssignmentContract" nillable="true" type="tns:AppointmentAssignmentContract" />
+  <xs:complexType name="ArrayOfAppointmentLinkContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentLinkContract" nillable="true" type="tns:AppointmentLinkContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentLinkContract" nillable="true" type="tns:ArrayOfAppointmentLinkContract" />
+  <xs:complexType name="AppointmentLinkContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q4:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="AppointmentLinkID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecordInstanceID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordTypeID" type="xs:int" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentLinkContract" nillable="true" type="tns:AppointmentLinkContract" />
+  <xs:complexType name="ArrayOfAppointmentRecipientContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentRecipientContract" nillable="true" type="tns:AppointmentRecipientContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentRecipientContract" nillable="true" type="tns:ArrayOfAppointmentRecipientContract" />
+  <xs:complexType name="AppointmentRecipientContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q5:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AllDayEventIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="BodyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="ContactID" nillable="true" type="ser:guid" />
+          <xs:element minOccurs="0" name="EmailText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ImportanceCode" type="xs:int" />
+          <xs:element minOccurs="0" name="LocationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="OrganizerEmailID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganizerIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="PrivateIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RecipientID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ResolvedIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="ShowAsCode" type="xs:int" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SubjectText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserDeletedIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentRecipientContract" nillable="true" type="tns:AppointmentRecipientContract" />
+  <xs:complexType name="CodeValueContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q6:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AppointmentRecipients" nillable="true" type="tns:ArrayOfAppointmentRecipientContract" />
+          <xs:element minOccurs="0" name="AppointmentRecipients1" nillable="true" type="tns:ArrayOfAppointmentRecipientContract" />
+          <xs:element minOccurs="0" name="AppointmentRecipients2" nillable="true" type="tns:ArrayOfAppointmentRecipientContract" />
+          <xs:element minOccurs="0" name="AppointmentRecurrenceExceptions" nillable="true" type="tns:ArrayOfAppointmentRecurrenceExceptionContract" />
+          <xs:element minOccurs="0" name="AppointmentRecurrenceExceptions1" nillable="true" type="tns:ArrayOfAppointmentRecurrenceExceptionContract" />
+          <xs:element minOccurs="0" name="Appointments" nillable="true" type="tns:ArrayOfAppointmentContract" />
+          <xs:element minOccurs="0" name="Appointments1" nillable="true" type="tns:ArrayOfAppointmentContract" />
+          <xs:element minOccurs="0" name="Appointments2" nillable="true" type="tns:ArrayOfAppointmentContract" />
+          <xs:element minOccurs="0" name="Appointments3" nillable="true" type="tns:ArrayOfAppointmentContract" />
+          <xs:element minOccurs="0" name="CodeType" nillable="true" type="tns:CodeTypeContract" />
+          <xs:element minOccurs="0" name="CodeTypeID" type="xs:short" />
+          <xs:element minOccurs="0" name="CodeValueDisplayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValueID" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValueName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ConstantLookupValue" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecurrencePatterns" nillable="true" type="tns:ArrayOfRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="RecurrencePatterns1" nillable="true" type="tns:ArrayOfRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="RecurrencePatterns2" nillable="true" type="tns:ArrayOfRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="RecurrencePatterns3" nillable="true" type="tns:ArrayOfRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:short" />
+          <xs:element minOccurs="0" name="TaskInstances" nillable="true" type="tns:ArrayOfTaskInstanceContract" />
+          <xs:element minOccurs="0" name="TaskInstances1" nillable="true" type="tns:ArrayOfTaskInstanceContract" />
+          <xs:element minOccurs="0" name="TaskInstances2" nillable="true" type="tns:ArrayOfTaskInstanceContract" />
+          <xs:element minOccurs="0" name="TaskRecurrencePatterns" nillable="true" type="tns:ArrayOfTaskRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="TaskRecurrencePatterns1" nillable="true" type="tns:ArrayOfTaskRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="TaskRecurrencePatterns2" nillable="true" type="tns:ArrayOfTaskRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="TaskRecurrencePatterns3" nillable="true" type="tns:ArrayOfTaskRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="Tasks" nillable="true" type="tns:ArrayOfTaskContract" />
+          <xs:element minOccurs="0" name="Tasks1" nillable="true" type="tns:ArrayOfTaskContract" />
+          <xs:element minOccurs="0" name="Tasks2" nillable="true" type="tns:ArrayOfTaskContract" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CodeValueContract" nillable="true" type="tns:CodeValueContract" />
+  <xs:complexType name="ArrayOfAppointmentRecurrenceExceptionContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentRecurrenceExceptionContract" nillable="true" type="tns:AppointmentRecurrenceExceptionContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentRecurrenceExceptionContract" nillable="true" type="tns:ArrayOfAppointmentRecurrenceExceptionContract" />
+  <xs:complexType name="AppointmentRecurrenceExceptionContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q7:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AllDayEventIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="BodyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ExceptionDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ImportanceCode" type="xs:int" />
+          <xs:element minOccurs="0" name="InstanceDeletedIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LocationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="ShowAsCode" type="xs:int" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SubjectText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentRecurrenceExceptionContract" nillable="true" type="tns:AppointmentRecurrenceExceptionContract" />
+  <xs:complexType name="ArrayOfAppointmentContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentContract" nillable="true" type="tns:AppointmentContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentContract" nillable="true" type="tns:ArrayOfAppointmentContract" />
+  <xs:complexType name="CodeTypeContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q8:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodeTypeID" type="xs:short" />
+          <xs:element minOccurs="0" name="CodeTypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValues" nillable="true" type="tns:ArrayOfCodeValueContract" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Preferences" nillable="true" type="tns:ArrayOfPreferenceContract" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CodeTypeContract" nillable="true" type="tns:CodeTypeContract" />
+  <xs:complexType name="ArrayOfCodeValueContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CodeValueContract" nillable="true" type="tns:CodeValueContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCodeValueContract" nillable="true" type="tns:ArrayOfCodeValueContract" />
+  <xs:complexType name="ArrayOfPreferenceContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreferenceContract" nillable="true" type="tns:PreferenceContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPreferenceContract" nillable="true" type="tns:ArrayOfPreferenceContract" />
+  <xs:complexType name="PreferenceContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q9:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ApplicationFunctionID" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeType" nillable="true" type="tns:CodeTypeContract" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PreferenceID" type="xs:int" />
+          <xs:element minOccurs="0" name="PreferenceLookupCode" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="PreferenceName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PreferenceValues" nillable="true" type="tns:ArrayOfPreferenceValueContract" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="UserPreferenceValues" nillable="true" type="tns:ArrayOfUserPreferenceValueContract" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PreferenceContract" nillable="true" type="tns:PreferenceContract" />
+  <xs:complexType name="ArrayOfPreferenceValueContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PreferenceValueContract" nillable="true" type="tns:PreferenceValueContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPreferenceValueContract" nillable="true" type="tns:ArrayOfPreferenceValueContract" />
+  <xs:complexType name="PreferenceValueContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q10:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Preference" nillable="true" type="tns:PreferenceContract" />
+          <xs:element minOccurs="0" name="PreferenceID" type="xs:int" />
+          <xs:element minOccurs="0" name="PreferenceValue1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PreferenceValueID" type="ser:guid" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:short" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PreferenceValueContract" nillable="true" type="tns:PreferenceValueContract" />
+  <xs:complexType name="ArrayOfUserPreferenceValueContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserPreferenceValueContract" nillable="true" type="tns:UserPreferenceValueContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserPreferenceValueContract" nillable="true" type="tns:ArrayOfUserPreferenceValueContract" />
+  <xs:complexType name="UserPreferenceValueContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q11:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Preference" nillable="true" type="tns:PreferenceContract" />
+          <xs:element minOccurs="0" name="PreferenceID" type="xs:int" />
+          <xs:element minOccurs="0" name="PreferenceValue" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:short" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserPreferenceID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserPreferenceValueContract" nillable="true" type="tns:UserPreferenceValueContract" />
+  <xs:complexType name="ArrayOfRecurrencePatternContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RecurrencePatternContract" nillable="true" type="tns:RecurrencePatternContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRecurrencePatternContract" nillable="true" type="tns:ArrayOfRecurrencePatternContract" />
+  <xs:complexType name="ArrayOfTaskInstanceContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskInstanceContract" nillable="true" type="tns:TaskInstanceContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskInstanceContract" nillable="true" type="tns:ArrayOfTaskInstanceContract" />
+  <xs:complexType name="TaskInstanceContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q12:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BodyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CategoryCode" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="DueDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ImportanceCode" type="xs:int" />
+          <xs:element minOccurs="0" name="LocationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PrivateIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SubjectText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+          <xs:element minOccurs="0" name="TaskStatusCode" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskInstanceContract" nillable="true" type="tns:TaskInstanceContract" />
+  <xs:complexType name="TaskContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q13:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BodyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CategoryCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="DueDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ImportanceCode" type="xs:int" />
+          <xs:element minOccurs="0" name="LocationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="OwnerID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentTaskID" nillable="true" type="ser:guid" />
+          <xs:element minOccurs="0" name="PrivateIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RecurrenceIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="SubjectText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Task1" nillable="true" type="tns:ArrayOfTaskContract" />
+          <xs:element minOccurs="0" name="Task2" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskAssignments" nillable="true" type="tns:ArrayOfTaskAssignmentContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+          <xs:element minOccurs="0" name="TaskInstanceAssignments" nillable="true" type="tns:ArrayOfTaskInstanceAssignmentContract" />
+          <xs:element minOccurs="0" name="TaskInstances" nillable="true" type="tns:ArrayOfTaskInstanceContract" />
+          <xs:element minOccurs="0" name="TaskLinks" nillable="true" type="tns:ArrayOfTaskLinkContract" />
+          <xs:element minOccurs="0" name="TaskRecurrencePattern" nillable="true" type="tns:TaskRecurrencePatternContract" />
+          <xs:element minOccurs="0" name="TaskReminders" nillable="true" type="tns:ArrayOfTaskReminderContract" />
+          <xs:element minOccurs="0" name="TaskStatusCode" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskContract" nillable="true" type="tns:TaskContract" />
+  <xs:complexType name="ArrayOfTaskContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskContract" nillable="true" type="tns:TaskContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskContract" nillable="true" type="tns:ArrayOfTaskContract" />
+  <xs:complexType name="ArrayOfTaskAssignmentContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskAssignmentContract" nillable="true" type="tns:TaskAssignmentContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskAssignmentContract" nillable="true" type="tns:ArrayOfTaskAssignmentContract" />
+  <xs:complexType name="TaskAssignmentContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q14="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q14:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessedOn" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+          <xs:element minOccurs="0" name="AssignedToUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SharedOn" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskAssignmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskAssignmentContract" nillable="true" type="tns:TaskAssignmentContract" />
+  <xs:complexType name="ArrayOfTaskInstanceAssignmentContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskInstanceAssignmentContract" nillable="true" type="tns:TaskInstanceAssignmentContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskInstanceAssignmentContract" nillable="true" type="tns:ArrayOfTaskInstanceAssignmentContract" />
+  <xs:complexType name="TaskInstanceAssignmentContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q15="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q15:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssignedUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+          <xs:element minOccurs="0" name="TaskInstanceAssignmentID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskInstanceAssignmentContract" nillable="true" type="tns:TaskInstanceAssignmentContract" />
+  <xs:complexType name="ArrayOfTaskLinkContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskLinkContract" nillable="true" type="tns:TaskLinkContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskLinkContract" nillable="true" type="tns:ArrayOfTaskLinkContract" />
+  <xs:complexType name="TaskLinkContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q16="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q16:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecordInstanceID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RecordTypeID" type="xs:int" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+          <xs:element minOccurs="0" name="TaskLinkID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskLinkContract" nillable="true" type="tns:TaskLinkContract" />
+  <xs:complexType name="TaskRecurrencePatternContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q17="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q17:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue3" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="DayOfMonth" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="DayOfWeek" nillable="true" type="xs:unsignedByte" />
+          <xs:element minOccurs="0" name="EndTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="InstanceCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IntervalValue" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="MonthOfYearCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="OccurrenceValue" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="PatternEndDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PatternStartDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RecurrenceTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskRecurrencePatternContract" nillable="true" type="tns:TaskRecurrencePatternContract" />
+  <xs:complexType name="ArrayOfTaskReminderContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskReminderContract" nillable="true" type="tns:TaskReminderContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskReminderContract" nillable="true" type="tns:ArrayOfTaskReminderContract" />
+  <xs:complexType name="TaskReminderContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q18="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q18:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ReminderDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Task" nillable="true" type="tns:TaskContract" />
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskReminderContract" nillable="true" type="tns:TaskReminderContract" />
+  <xs:complexType name="ArrayOfTaskRecurrencePatternContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskRecurrencePatternContract" nillable="true" type="tns:TaskRecurrencePatternContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskRecurrencePatternContract" nillable="true" type="tns:ArrayOfTaskRecurrencePatternContract" />
+  <xs:complexType name="ArrayOfAppointmentReminderContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppointmentReminderContract" nillable="true" type="tns:AppointmentReminderContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppointmentReminderContract" nillable="true" type="tns:ArrayOfAppointmentReminderContract" />
+  <xs:complexType name="AppointmentReminderContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q19="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.CalendarService.Contracts.DataContracts" base="q19:CalendarBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Appointment" nillable="true" type="tns:AppointmentContract" />
+          <xs:element minOccurs="0" name="AppointmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ReminderDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppointmentReminderContract" nillable="true" type="tns:AppointmentReminderContract" />
+</xs:schema>

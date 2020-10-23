@@ -1,0 +1,12 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+s|Form s|FormItem
+{
+	skinClass: ClassReference("wsForm.wsFormItemSkin");
+}
+s|Form{
+	verticalGap:2;
+	 skinClass: ClassReference("wsForm.wsFormSkin")
+}
+

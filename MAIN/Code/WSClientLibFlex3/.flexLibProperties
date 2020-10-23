@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" version="3">
+  <includeClasses>
+    <classEntry path="com.neuro.service.SoapRequest"/>
+    <classEntry path="com.neuro.service.SoapResponse"/>
+    <classEntry path="com.neuro.service.Soap12WebService"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

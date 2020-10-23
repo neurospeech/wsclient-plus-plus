@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="Symphony/Framework/Version/1.11.19.09" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="Symphony/Framework/Version/1.11.19.09" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/">
+  <xs:import schemaLocation="/Test/Schema1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+  <xs:import schemaLocation="/Test/Schema5.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+  <xs:complexType name="ArrayOfOffice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Office" nillable="true" type="tns:Office"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOffice" nillable="true" type="tns:ArrayOfOffice"/>
+  <xs:complexType name="Office">
+    <xs:sequence>
+      <xs:element name="Address" nillable="true" type="tns:OfficeAddress"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="Latitude" type="xs:float"/>
+      <xs:element name="Longitude" type="xs:float"/>
+      <xs:element name="NetworkConnections" nillable="true" type="xs:string"/>
+      <xs:element name="OrganizationId" type="ser:guid"/>
+      <xs:element name="Spaces" nillable="true" type="tns:ArrayOfSpace"/>
+      <xs:element name="Timezone" nillable="true" type="xs:string"/>
+      <xs:element name="Type" type="tns:OrganizationOfficeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Office" nillable="true" type="tns:Office"/>
+  <xs:complexType name="OfficeAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressId" type="xs:int"/>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Street2" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OfficeAddress" nillable="true" type="tns:OfficeAddress"/>
+  <xs:complexType name="ArrayOfSpace">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Space" nillable="true" type="tns:Space"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSpace" nillable="true" type="tns:ArrayOfSpace"/>
+  <xs:complexType name="Space">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" nillable="true" type="q1:ArrayOfguid" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element minOccurs="0" name="Capacity" type="xs:int"/>
+      <xs:element minOccurs="0" name="EmailId" nillable="true" type="xs:string"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="IsManaged" type="xs:boolean"/>
+      <xs:element name="IsPublic" type="xs:boolean"/>
+      <xs:element name="Name" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="NetworkConnectivity" nillable="true" type="xs:string"/>
+      <xs:element name="Notes" nillable="true" type="xs:string"/>
+      <xs:element name="OfficeId" type="ser:guid"/>
+      <xs:element name="OfficeName" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Photos" nillable="true" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="RelatedUriAttachments" nillable="true" type="q2:ArrayOfstring" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element minOccurs="0" name="RoomNumber" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Status" type="tns:VnocSystemStatus"/>
+      <xs:element name="Type" type="tns:OfficeSpaceType"/>
+      <xs:element minOccurs="0" name="VnocSystem" nillable="true" type="tns:ArrayOfVnocSystem"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Space" nillable="true" type="tns:Space"/>
+  <xs:simpleType name="VnocSystemStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Minor">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Major">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Critical">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="VnocSystemStatus" nillable="true" type="tns:VnocSystemStatus"/>
+  <xs:simpleType name="OfficeSpaceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BasicConferenceRoom"/>
+      <xs:enumeration value="Office"/>
+      <xs:enumeration value="Cubicle"/>
+      <xs:enumeration value="ConferenceRoom"/>
+      <xs:enumeration value="Foyer"/>
+      <xs:enumeration value="BoardRoom"/>
+      <xs:enumeration value="LectureHall"/>
+      <xs:enumeration value="TelepresenceRoom">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Audio">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OfficeSpaceType" nillable="true" type="tns:OfficeSpaceType"/>
+  <xs:complexType name="ArrayOfVnocSystem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VnocSystem" nillable="true" type="tns:VnocSystem"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVnocSystem" nillable="true" type="tns:ArrayOfVnocSystem"/>
+  <xs:complexType name="VnocSystem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Contact" nillable="true" type="xs:string"/>
+      <xs:element name="Description" nillable="true" type="xs:string"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="Name" nillable="true" type="xs:string"/>
+      <xs:element name="ProductDetail" nillable="true" type="tns:Product"/>
+      <xs:element name="SpaceId" type="ser:guid"/>
+      <xs:element name="Status" type="tns:VnocSystemStatus"/>
+      <xs:element name="SystemDetails" nillable="true" type="tns:Environment"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VnocSystem" nillable="true" type="tns:VnocSystem"/>
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element name="Description" nillable="true" type="xs:string"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="ManufactureId" type="ser:guid"/>
+      <xs:element name="ManufacturerName" nillable="true" type="xs:string"/>
+      <xs:element name="Name" nillable="true" type="xs:string"/>
+      <xs:element name="SnmpRules" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Product" nillable="true" type="tns:Product"/>
+  <xs:complexType name="Environment">
+    <xs:sequence>
+      <xs:element name="AudioController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xs:element name="AuxilarryCamera" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xs:element name="Display" nillable="true" type="tns:ArrayOfDisplay"/>
+      <xs:element name="EnvironmentController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="PowerController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xs:element name="RoomController" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+      <xs:element name="VideoEndPoints" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Environment" nillable="true" type="tns:Environment"/>
+  <xs:complexType name="ArrayOfVnocSystemComponent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VnocSystemComponent" nillable="true" type="tns:VnocSystemComponent"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVnocSystemComponent" nillable="true" type="tns:ArrayOfVnocSystemComponent"/>
+  <xs:complexType name="VnocSystemComponent">
+    <xs:sequence>
+      <xs:element name="BandwidthKbps" type="xs:long"/>
+      <xs:element name="Category" type="tns:ComponentType"/>
+      <xs:element name="ConferencePorts" nillable="true" type="tns:ArrayOfConferencePort"/>
+      <xs:element name="FirmwareVersion" nillable="true" type="xs:string"/>
+      <xs:element name="GatewayAddress" nillable="true" type="tns:GatekeeperConfiguration"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="IpAddress" nillable="true" type="xs:string"/>
+      <xs:element name="MacAddress" nillable="true" type="xs:string"/>
+      <xs:element name="ManagementInterfaces" nillable="true" type="tns:ArrayOfManagementInterface"/>
+      <xs:element name="ManagementUri" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="PingLatency" type="xs:long"/>
+      <xs:element name="Position" type="xs:int"/>
+      <xs:element name="ProductDetail" nillable="true" type="tns:Product"/>
+      <xs:element name="SerialNumber" nillable="true" type="xs:string"/>
+      <xs:element name="SnmpCommunity" nillable="true" type="xs:string"/>
+      <xs:element name="SoftwareVersion" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="TicketId" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VnocSystemComponent" nillable="true" type="tns:VnocSystemComponent"/>
+  <xs:simpleType name="ComponentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Network"/>
+      <xs:enumeration value="Endpoint"/>
+      <xs:enumeration value="Room"/>
+      <xs:enumeration value="Recording"/>
+      <xs:enumeration value="Gatekeeper"/>
+      <xs:enumeration value="Controller"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ComponentType" nillable="true" type="tns:ComponentType"/>
+  <xs:complexType name="ArrayOfConferencePort">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConferencePort" nillable="true" type="tns:ConferencePort"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConferencePort" nillable="true" type="tns:ArrayOfConferencePort"/>
+  <xs:complexType name="ConferencePort">
+    <xs:sequence>
+      <xs:element name="AudioPotsLine" nillable="true" type="xs:string"/>
+      <xs:element name="E164Address" nillable="true" type="xs:string"/>
+      <xs:element name="H323Name" nillable="true" type="xs:string"/>
+      <xs:element name="Id" type="ser:guid"/>
+      <xs:element name="IsdnNumber" nillable="true" type="xs:string"/>
+      <xs:element name="SipAddress" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConferencePort" nillable="true" type="tns:ConferencePort"/>
+  <xs:complexType name="GatekeeperConfiguration">
+    <xs:sequence>
+      <xs:element name="GatekeeperUri" nillable="true" type="xs:string"/>
+      <xs:element name="PortMaps" nillable="true" type="tns:ArrayOfPortMap"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GatekeeperConfiguration" nillable="true" type="tns:GatekeeperConfiguration"/>
+  <xs:complexType name="ArrayOfPortMap">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PortMap" nillable="true" type="tns:PortMap"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPortMap" nillable="true" type="tns:ArrayOfPortMap"/>
+  <xs:complexType name="PortMap">
+    <xs:sequence>
+      <xs:element name="Map" type="xs:int"/>
+      <xs:element name="Name" nillable="true" type="xs:string"/>
+      <xs:element name="Port" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PortMap" nillable="true" type="tns:PortMap"/>
+  <xs:complexType name="ArrayOfManagementInterface">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ManagementInterface" nillable="true" type="tns:ManagementInterface"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfManagementInterface" nillable="true" type="tns:ArrayOfManagementInterface"/>
+  <xs:complexType name="ManagementInterface">
+    <xs:sequence>
+      <xs:element name="Application" type="tns:ManagmentInterfaceMode"/>
+      <xs:element name="Password" nillable="true" type="xs:string"/>
+      <xs:element name="Port" type="xs:int"/>
+      <xs:element name="UserName" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ManagementInterface" nillable="true" type="tns:ManagementInterface"/>
+  <xs:simpleType name="ManagmentInterfaceMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Telnet"/>
+      <xs:enumeration value="SSH"/>
+      <xs:enumeration value="HTTP"/>
+      <xs:enumeration value="HTTPS"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ManagmentInterfaceMode" nillable="true" type="tns:ManagmentInterfaceMode"/>
+  <xs:complexType name="ArrayOfDisplay">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Display" nillable="true" type="tns:Display"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDisplay" nillable="true" type="tns:ArrayOfDisplay"/>
+  <xs:complexType name="Display">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:VnocSystemComponent">
+        <xs:sequence>
+          <xs:element name="ResolutionHeight" type="xs:int"/>
+          <xs:element name="ResolutionWidth" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Display" nillable="true" type="tns:Display"/>
+  <xs:simpleType name="OrganizationOfficeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HomeOffice">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OrganizationHeadquarters">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RegionalOffice">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RegionalHeadquarters">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RetailOffice">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PangeAirLocation">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrganizationOfficeType" nillable="true" type="tns:OrganizationOfficeType"/>
+</xs:schema>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsForm:WSApplication 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:wsForm="wsForm.*"
+	xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib"
+	>
+	<mx:Style source="AppStyle.css"/>
+</wsForm:WSApplication>
+

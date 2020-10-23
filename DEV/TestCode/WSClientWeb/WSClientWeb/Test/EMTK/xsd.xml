@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	//
+	//==========================================================================
+	//
+	//                          U N C L A S S I F I E D
+	//
+    //**************************************************************************
+    //
+    // Copyright 2009-2011 General Dynamics Advanced Information Systems, Inc.
+    // Unpublished-rights reserved under the Copyright Laws of the
+    // United States.
+    //
+    // $Id: emtk-externaleventservice.xsd 30477 2011-04-21 17:56:38Z ideas\shirley.kao $
+    //**************************************************************************
+    // 
+    //        Name:    emtk-externaleventservice.xsd
+    //       Ident:    emtk-externaleventservice.xsd
+    //   Edit Date:    09 Mar 11
+    // 
+    //**************************************************************************
+	//  Revision History:
+	//  Version    Basis  Person               Date       Reason
+	//  =========  ====== ===================  =========  ======================
+    //  EMTK-1789  12312  Tam Tran           16 Jun 09    EMTK-RFI-030
+    //             1. Initial release
+    //	EMTK-2313  13408  Betty Tjandra		   05 May 10  PY-R1-140
+    //			   Added several new elements and types.
+    //	EMTK-2313  13408  Betty Tjandra		   09 Jun 10  PY-R1-140
+    //			   Added assignee to RFIRelatedRequestType
+    //	EMTK-2479  13408  Betty Tjandra        22 Jun 10
+    //			   1. Modified the element object not to user referenct to 
+    //			   complexType due to the new spring.
+    //  EMTK-3037  12228  Julie Laird          09 Mar 11
+    //             1. Added requestPackageUpdateRequest
+    //  EMTK-3146  14628  Shirley Kao          19 Apr 11 THYN-12
+    //             1. Added exploitationTaskUpdateRequest
+    //             2. Added exploitationTaskResponse
+    //             3. Added multimediaProductUpdateRequest
+    //             4. Added multimediaProductResponse
+	//**************************************************************************
+	// 
+	//  Description:
+	//  Type and element definitions for the External Event Web Service.
+	//
+	//**************************************************************************
+-->
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified" attributeFormDefault="qualified"
+	targetNamespace="http://www.gdais.com/emtk/wsdl/externaleventservice/"
+	xmlns:tns="http://www.gdais.com/emtk/wsdl/externaleventservice/">
+	
+	<complexType name="baseRequest">
+		<annotation>
+            <documentation>
+			     The abstract web service request type containing the common 
+			     request information such as userID and password..
+            </documentation>
+        </annotation>
+        <sequence>
+            <element name="userID" type="string"/>
+            <element name="password" type="string"/>
+         </sequence>	
+    </complexType>
+      
+    <complexType name="baseResponse">
+        <annotation>
+            <documentation>
+                The abstract web service response type containing the common 
+                response information such as error messages, if any.
+			</documentation>
+        </annotation>	
+        <sequence>
+            <element name="msgs" type="string" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    
+    <element name="exploitationRequirementSatisfiedRequest">
+        <annotation>
+            <documentation>
+				The request element for exploitationRequireSatisfied operation.
+			</documentation>
+        </annotation>
+        <complexType>
+            <complexContent>
+                <extension base="tns:baseRequest">
+                    <sequence>
+                        <element name="bENumber" type="string" 
+                            minOccurs="1" maxOccurs="1"/>
+				        <element name="suffix" type="string" 
+				            minOccurs="1" maxOccurs="1"/>
+                        <element name="requirementId" type="string" 
+                            minOccurs="1" maxOccurs="1"/>
+                        <element name="sequenceNumber" type="string" 
+                            minOccurs="1" maxOccurs="1"/>
+                        <element name="dateLastSatisfied" type="dateTime" 
+                            minOccurs="1" maxOccurs="1"/>
+                        <element name="dueDate" type="dateTime" 
+                            minOccurs="1" maxOccurs="1"/>	
+                        <element name="stopDate" type="dateTime" 
+                            minOccurs="1" maxOccurs="1"/>      
+                        <element name="frequencyDays" type="string" 
+                            minOccurs="0" maxOccurs="1"/>
+                        <element name="frequencyTime" type="string" 
+                            minOccurs="0" maxOccurs="1"/>
+ 
+				    </sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+    </element>
+    
+	<element name="exploitationRequirementSatisfiedResponse">
+        <annotation>
+            <documentation>
+				The response element for the exploitationRequirementSatisfied 
+				operation. 
+            </documentation>
+        </annotation>
+        <complexType>
+            <complexContent>
+                <extension base="tns:baseResponse">
+				    <sequence />
+				</extension>
+			</complexContent>
+        </complexType>
+    </element>
+    <element name="exploitationTaskCompletedRequest">
+        <annotation>
+            <documentation>
+				The request element for the exploitationTaskCompleted operation.
+			</documentation>
+        </annotation>
+        <complexType>
+            <complexContent>
+                <extension base="tns:baseRequest">
+                    <sequence>
+                        <element name="taskId" type="string" 
+                            minOccurs="1" maxOccurs="1"/>
+                        <element name="dateCompleted" type="dateTime" 
+                            minOccurs="1" maxOccurs="1"/>
+		            </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="exploitationTaskCompletedResponse">
+        <annotation>
+            <documentation>
+				The response element for exploitationTaskCompleted operation. 
+            </documentation>
+        </annotation>
+        <complexType>
+            <complexContent>
+                <extension base="tns:baseResponse">
+                    <sequence />
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="rfiUpdateRequest">
+        <complexType>
+	    	<annotation>
+	    		<documentation>
+	    			The request consists of the RFI workflow approval parameters.
+	    		</documentation>
+	    	</annotation>
+	    	<complexContent>
+	    		<extension base="tns:baseRequest">
+					<sequence>
+						<element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+						<element name="assignee" type="string" minOccurs="1" maxOccurs="1" />
+						<element name="rfiState" type="string" minOccurs="1" maxOccurs="1" />
+					</sequence>
+		    	</extension>
+	    	</complexContent>
+	    </complexType>
+    </element>
+    <element name="rfiResponse">
+	    <complexType>
+	    	<annotation>
+	    		<documentation>
+	    			The response consists of the RFI workflow approval response message.
+	    		</documentation>
+	    	</annotation>
+	    		<complexContent>
+	    			<extension base="tns:baseResponse">
+						<sequence />
+		    		</extension>
+	    		</complexContent>
+	    </complexType>
+	</element>    
+    <element name="rfiUpdateStateRequest" >
+	    <complexType >
+	    	<annotation>
+	    		<documentation>
+	    			The request consists of the RFI workflow approval parameters.
+	    		</documentation>
+	    	</annotation>
+	    	<complexContent>
+	    		<extension base="tns:baseRequest">
+					<sequence>
+						<element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+						<element name="assignee" type="string" minOccurs="1" maxOccurs="1" />
+						<element name="rfiState" type="string" minOccurs="1" maxOccurs="1" />
+					</sequence>
+		    	</extension>
+	    	</complexContent>
+	    </complexType>
+    </element>
+    <element name="rfiRelatedNominationUpdateRequest">
+    <complexType>
+    	<annotation>
+    		<documentation>
+    			The request consists of the RFI workflow approval parameters.
+    		</documentation>
+    	</annotation>
+    	<complexContent>
+    		<extension base="tns:baseRequest">
+				<sequence>
+					<element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="rfiState" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="State" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="assignee" type="string" minOccurs="0" maxOccurs="1" />
+				</sequence>
+	    	</extension>
+    	</complexContent>
+    </complexType>
+	</element>    
+    <element name="rfiRelatedRequirementUpdateRequest">
+        <complexType>
+    	<annotation>
+    		<documentation>
+    			The request consists of the workflow processID.
+    		</documentation>
+    	</annotation>
+    	<complexContent>
+    		<extension base="tns:baseRequest">
+				<sequence>
+					<element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="rfiState" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="State" type="string" minOccurs="1" maxOccurs="1" />
+					<element name="assignee" type="string" minOccurs="0" maxOccurs="1" />
+				</sequence>
+	    	</extension>
+    	</complexContent>
+	</complexType>    
+    </element> 
+    
+    <!-- ============= REQUEST PACKAGE UPDATE DEFINITION ============= -->
+    <element name="requestPackageUpdateRequest">
+        <complexType>
+	        <annotation>
+	        </annotation>
+	        <complexContent>
+	            <extension base="tns:baseRequest">
+	                <sequence>
+	                    <element name="processID" type="string" 
+	                        minOccurs="1" maxOccurs="1">
+	                        <annotation>
+	                            <documentation>
+	                                The identifier of the workflow process 
+	                                instance associated with this update. 
+	                            </documentation>
+	                        </annotation>
+	                    </element>
+	                    <element name="rfiUpdate" type="tns:rfiUpdate">
+	                        <annotation>
+	                            <documentation>
+	                            </documentation>
+	                        </annotation>
+	                    </element>
+	                    <element name="nominationUpdate" 
+	                             type="tns:collectionNominationUpdate">
+	                        <annotation>
+	                            <documentation>
+	                            </documentation>
+	                        </annotation>
+	                    </element>
+	                    <element name="collectionRequirementUpdate" 
+	                             type="tns:requirementUpdate">
+	                        <annotation>
+	                            <documentation>
+	                            </documentation>
+	                        </annotation>
+	                    </element>
+	                    <element name="exploitationRequirementUpdate" 
+	                             type="tns:requirementUpdate">
+	                        <annotation>
+	                            <documentation>
+	                            </documentation>
+	                        </annotation>
+	                    </element>
+	                </sequence>
+	            </extension>
+	        </complexContent>
+	    </complexType>
+    </element>
+    
+    <complexType name="rfiUpdate">
+        <annotation></annotation>
+        <sequence>
+            <element name="rfiState" type="string" 
+                     minOccurs="1" maxOccurs="1" />
+            <element name="assignee" type="string" 
+                     minOccurs="0" maxOccurs="1" />
+        </sequence>
+    </complexType>
+     
+    <complexType name="collectionNominationUpdate">
+        <annotation></annotation>
+        <sequence>
+            <element name="nominationState" type="string" 
+                     minOccurs="1" maxOccurs="1" />   
+        </sequence>
+    </complexType>
+    
+    <complexType name="requirementUpdate">
+        <annotation></annotation>
+        <sequence>
+            <element name="requirementState" type="string" 
+                     minOccurs="1" maxOccurs="1" />   
+        </sequence>
+    </complexType>
+    
+    <element name="requestPackageUpdateResponse">
+        <complexType>
+            <annotation>
+                <documentation>
+                    The response consists...
+                </documentation>
+            </annotation>
+            <complexContent>
+                <extension base="tns:baseResponse">
+                    <sequence />
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="exploitationTaskUpdateRequest">
+        <complexType>
+            <annotation>
+                <documentation>
+                    The request consists of the workflow processID, exploitation State.
+                </documentation>
+            </annotation>
+            <complexContent>
+                <extension base="tns:baseRequest">
+                    <sequence>
+                        <element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+                        <element name="exploitationStatus" type="string" minOccurs="1" maxOccurs="1" />
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="exploitationTaskResponse">
+        <complexType>
+            <annotation>
+                <documentation>
+                    The response consists of the exploitation task response message.
+                </documentation>
+            </annotation>
+                <complexContent>
+                    <extension base="tns:baseResponse">
+                        <sequence />
+                    </extension>
+                </complexContent>
+        </complexType>
+    </element>   
+    <element name="multimediaProductUpdateRequest">
+        <complexType>
+            <annotation>
+                <documentation>
+                    The request consists of the workflow processID, multimedia product State.
+                </documentation>
+            </annotation>
+            <complexContent>
+                <extension base="tns:baseRequest">
+                    <sequence>
+                        <element name="processID" type="string" minOccurs="1" maxOccurs="1" />
+                        <element name="multimediaProdState" type="string" minOccurs="1" maxOccurs="1" />
+                    </sequence>
+                </extension>
+            </complexContent>
+        </complexType>
+    </element>
+    <element name="multimediaProductResponse">
+        <complexType>
+            <annotation>
+                <documentation>
+                    The response consists of the multimedia product response message.
+                </documentation>
+            </annotation>
+                <complexContent>
+                    <extension base="tns:baseResponse">
+                        <sequence />
+                    </extension>
+                </complexContent>
+        </complexType>
+    </element>    
+</schema>
+<!--
+//
+//                          U N C L A S S I F I E D
+//============================================================================
+-->

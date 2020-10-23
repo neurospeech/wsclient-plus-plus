@@ -1,0 +1,80 @@
+package wsClasses
+{
+	public class SoapClass
+	{
+		public function SoapClass()
+		{
+		}
+		
+		public var elements:Array = [];
+		
+		public var name:String = null;
+		
+		public var className:String = null;
+		
+		public var members:Array = [];
+		
+		public var baseName:String = "";
+		
+		public var wsName:String = "";
+		
+		public var isArray:Boolean = false;
+		
+		public var arrayTypeName:String = "";
+		
+		public var targetNamespace:String = null;
+		
+		public function get hasCustomType():Boolean{
+			if(name==null || name=="")
+				return false;
+			if(this.isDerived)
+				return true;
+			for each(var sm:SoapMember in members){
+				if(sm.type.isCustom)
+					return true;
+			}
+			return false;
+		}
+		
+		public function hasDependentType(types:Array):Boolean
+		{
+			if(this.isDerived && !hasTypeName(types,baseName))
+				return false;
+			for each(var sm:SoapMember in members)
+				if(sm.type.isCustom && !hasTypeName(types,sm.type.wsType))
+					return false;
+			return true;
+		}
+		
+		private function hasTypeName(types:Array,n:String):Boolean{
+			for each(var sc:SoapClass in types){
+				if(sc.name == n)
+					return true;
+			}
+			return false;
+		}
+		
+		public function matchesTypeName(n:String):Boolean{
+			if(name == n)
+				return true;
+			for each(var e:String in elements){
+				if(e==n)
+					return true;
+			}
+			return false;
+		}
+		
+		public function get isDerived():Boolean{
+			return baseName != null && baseName != ""; 
+		}
+		
+		public function get hasArrayMember():Boolean{
+			for each(var sm:SoapMember in members){
+				if(sm.type.isArray)
+					return true;
+			}
+			return false;
+		}
+
+	}
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   creationComplete="creationCompleteHandler(event)"
+					   >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var interfaces:ArrayCollection = new ArrayCollection();
+
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				if(NetworkInfo.isSupported){
+					for each(var n:NetworkInterface in NetworkInfo.networkInfo.findInterfaces()){
+						interfaces.addItem(n);
+					}
+				}else{
+					Alert.show("not supported!!");
+				}
+			}
+			
+			protected function getAddresses(obj:Object):ArrayCollection
+			{
+				var n:NetworkInterface = obj as NetworkInterface;
+				if(n==null)
+					return null;
+				var ac:ArrayCollection = new ArrayCollection();
+				for each(var ni:InterfaceAddress in n.addresses){
+					ac.addItem(ni);
+				}
+				return ac;
+			}
+
+		]]>
+	</fx:Script>
+
+	<mx:VDividedBox>
+		
+		<mx:DataGrid id="grid" dataProvider="{interfaces}">
+			<mx:columns>
+				<mx:DataGridColumn dataField="name"/>
+				<mx:DataGridColumn dataField="displayName"/>
+				<mx:DataGridColumn dataField="hardwareAddress"/>
+				<mx:DataGridColumn dataField="active"/>
+			</mx:columns>
+		</mx:DataGrid>
+		
+		<mx:DataGrid dataProvider="{getAddresses(grid.selectedItem)}">
+			<mx:columns>
+				<mx:DataGridColumn dataField="address"/>
+				<mx:DataGridColumn dataField="broadcast"/>
+				<mx:DataGridColumn dataField="ipVersion"/>
+			</mx:columns>
+		</mx:DataGrid>
+	
+	</mx:VDividedBox>
+</s:WindowedApplication>

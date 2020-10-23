@@ -1,0 +1,347 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@  include file="WebAtoms.Entity.ttinclude" #>
+<#@  include file="ConnectionString.ttinclude" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xaml" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Text" #>
+<# 
+
+	Container = new EAContainer();
+	Container.ConnectionString = connectionString;
+	Container.Provider = "System.Data.SqlClient";
+	Container.Name = "WSClientModel";
+	Container.Namespace = "WSClientCloudService.Models";
+	Container.ContainerName = "WSClientModelEntities";
+	Container.IgnoreTables = "sysdiagrams,audititems";
+
+	Container.Refresh();
+#>
+using System;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity.Core.EntityClient;
+using System.ComponentModel;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using NeuroSpeech.WebAtoms.Entity;
+using System.Reflection;
+using System.Linq.Expressions;
+using System.Web;
+using System.Security.Cryptography;
+
+
+[assembly: EdmSchemaAttribute()]
+/// Relationship Metadata
+#region EDM Relationship Metadata
+
+<# foreach(EAAssociation a in Container.Associations) { 
+            EAEntity depend = Container.Entities.First(x => x.TableName == a.DependentTable);
+            EANavigationProperty nav = depend.NavigationProperties.First(x => x.Association == a.Name && x.ToRole == a.PrincipalRole);
+			if(nav== null)
+				throw new Exception("Failed for "+ a.Name);
+            EAEntity primary = Container.Entities.First(x => x.TableName == a.PrimaryTable);
+            EANavigationProperty nav1 = primary.NavigationProperties.First(x => x.Association == a.Name && x.ToRole == a.DependentRole); 
+			if(nav1== null)
+				throw new Exception("Failed for primary "+ a.Name);
+	#>[assembly: EdmRelationshipAttribute("<#= Container.Name #>", "<#= a.Name #>", "<#= a.PrincipalRole #>", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.<#= nav.Multiplicity #>, typeof(<#= Container.Namespace #>.<#= primary.Name #>), "<#= a.DependentRole #>", System.Data.Entity.Core.Metadata.Edm.RelationshipMultiplicity.<#= nav1.Multiplicity #>, typeof(<#= Container.Namespace #>.<#= depend.Name#>), true)]
+<# } #>
+
+#endregion
+
+namespace <#= Container.Namespace #>
+{
+   
+   #region Contexts
+   
+   /// <summary>
+   /// No Metadata Documentation available.
+   /// </summary>
+   public partial class <#= Container.ContainerName #> : AtomObjectContext 
+   {
+		#region Constructors
+		
+		/// <summary>
+		/// Initializes a new <#= Container.ContainerName #> object using the connection string found in the '<#= Container.ContainerName #>' section of the application configuration file.
+		/// </summary>
+	    public <#= Container.ContainerName #>() : base("name=<#= Container.ContainerName #>", "<#= Container.ContainerName #>")
+	    {
+			this.ContextOptions.LazyLoadingEnabled = true;
+	        OnContextCreated();
+	    }
+		
+		/// <summary>
+		/// Initialize a new <#= Container.ContainerName #> object.
+		/// </summary>
+	    public <#= Container.ContainerName #>(string connectionString) : base(connectionString, "<#= Container.ContainerName #>")
+	    {
+			this.ContextOptions.LazyLoadingEnabled = true;
+	        OnContextCreated();
+	    }
+		
+        /// <summary>
+        /// Initialize a new <#= Container.ContainerName #> object.
+        /// </summary>
+	    public <#= Container.ContainerName #>(EntityConnection connection) : base(connection, "<#= Container.ContainerName #>")
+	    {
+			this.ContextOptions.LazyLoadingEnabled = true;
+	        OnContextCreated();
+	    }
+		
+		#endregion
+		
+		#region Partial Methods
+		
+    	partial void OnContextCreated();		
+		
+		#endregion
+		
+		#region ObjectSet Properties
+		
+		<# foreach(EAEntity obj in Container.ActiveEntities) { 
+
+			#>
+        
+		/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+		public ObjectSet<<#= obj.Name #>> <#= obj.EntitySet #>
+		{
+			get
+			{
+				if((_<#= obj.EntitySet #> == null))
+				{
+					_<#= obj.EntitySet #> = base.CreateObjectSet<<#= obj.Name #>>("<#= obj.EntitySet #>");
+				}
+				return _<#= obj.EntitySet #>;
+			}
+		}
+		private ObjectSet<<#= obj.Name #>> _<#= obj.EntitySet #>;
+
+	    <# } #>
+		
+		#endregion
+		
+		
+		
+   }
+   #endregion
+
+   #region Entities
+   
+   
+   <# foreach(EAEntity obj in Container.ActiveEntities) { 
+
+		string baseTypeName = obj.BaseType;
+		if(string.IsNullOrWhiteSpace(baseTypeName)){
+			baseTypeName = "AtomEntity";
+		}
+	#>
+   
+   /// <summary>
+   /// No Metadata Documentation available.
+   /// </summary>
+   [EdmEntityTypeAttribute(NamespaceName="<#= Container.Name #>", Name="<#= obj.Name #>")]
+   [Serializable()]
+   [DataContractAttribute(IsReference=true)]
+   // Adding Metadata Type
+   public partial class <#= obj.Name #> : <#= baseTypeName #>
+   {	    
+   
+
+		#region Primitive Properties
+		
+		<# foreach(var item in obj.ActiveProperties) {
+				String cType = TypeHelper.ToClrType(item);
+			
+			bool isReference = cType == "String" || cType == "Byte[]";
+			#>
+		
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=<#= item.IsPrimary.ToString().ToLower() #>, IsNullable=<#= ToStringConvertor(item) #>)]
+
+		<# 
+			foreach(EAEntityProperty p in item.RelatedProperties)
+			{ 
+				
+			#>
+			[NeuroSpeech.WebAtoms.Entity.Audit.FKProperty("<#= p.ObjectName  #>","<#= p.Name #>")]
+			<# } 
+			
+			if(!item.Serialize) {#>
+		[XmlIgnore]
+		[System.Web.Script.Serialization.ScriptIgnore]
+		<# } else { #>
+        [DataMemberAttribute()]
+		<# } #>
+		
+		<#= WriterMetadataAttributes(item) #>
+
+		public virtual global::System.<#= cType #> <#= item.Name #>
+		{
+			get
+			{
+				return <#= ToPrivate(item.Name) #>;
+			}
+			set
+			{
+				if(<#= ToPrivate(item.Name) #> == value)
+					return;
+				On<#= item.Name #>Changing(value);
+				ReportPropertyChanging("<#= item.Name #>");
+				<# if(isReference) { #>
+				
+				_<#= item.Name #> = StructuralObject.SetValidValue(value, true);
+				<# } else { #>
+				
+				_<#= item.Name #> = StructuralObject.SetValidValue(value);
+				<# } #>
+				ReportPropertyChanged("<#= item.Name #>");
+				On<#= item.Name #>Changed();
+			}
+		}
+		private global::System.<#= cType #> <#= ToPrivate(item.Name) #>;
+		partial void On<#= item.Name #>Changing(global::System.<#= cType #> value);
+		partial void On<#= item.Name #>Changed();		
+		
+		<# } #>
+	
+		#endregion
+		
+		#region Navigation Properties	
+		<# foreach(var item in obj.NavigationProperties) { #>		
+		
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("<#= Container.Name #>", "<#= item.Association #>", "<#= item.ToRole#>")]
+		<# if(item.Multiplicity == EAMultiplicity.Many) { #>		
+		public EntityCollection<<#= item.Type #>> <#= item.Name #>
+		{
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole #>");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole#>", value);
+                }
+            }			
+		}<# } else {  #>				
+		public <#= item.Type #> <#= item.Name #>
+		{
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole #>").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole #>").Value = value;
+            }
+			
+		}	
+
+		/// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        public EntityReference<<#= item.Type #>> <#= item.Name #>Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole #>");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<<#= item.Type #>>("<#= Container.Name #>.<#= item.Association #>", "<#= item.ToRole #>", value);
+                }
+            }
+        }		
+		<# } #>
+		
+		<# } #>		
+		#endregion
+		
+   }
+   
+   		
+   <# } #>
+   #endregion
+   
+}
+
+ <#+
+	public EAContainer Container {get; set;}
+	
+	public String ContextName{
+		get{
+			return Container.Name + "Entities";
+		}
+	}
+	
+	private String ToPrivate(String text)
+	{
+		return "_" + text;
+	}
+	
+	private string GetIdentityString(EAEntity obj){
+		EAEntityProperty p = obj.Properties.First(x=>x.IsPrimary);
+		return p.Name;
+	}
+	
+	private String ToStringConvertor(EAEntityProperty property)
+	{
+		if(property.IsNullable)
+		{
+			return "true";
+		}
+		else
+			return "false";
+	}
+	public String WriterMetadataAttributes(EAEntityProperty p)
+	{
+		StringBuilder sb = new StringBuilder();
+		if(!string.IsNullOrWhiteSpace(p.Label))
+		{
+			sb.AppendLine("[System.ComponentModel.DataAnnotations.Display(Name=\"" + p.Label + "\")]");
+		}
+		if(p.IsRequired)
+		{
+			sb.AppendLine("[System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings =true)]");
+		}
+		if(p.StartRange != p.EndRange)
+		{
+			sb.AppendFormat("[System.ComponentModel.DataAnnotations.Range({0}, {1})]\r\n", p.StartRange,p.EndRange);
+		}
+		if(!string.IsNullOrWhiteSpace(p.RegularExpression))
+		{
+			sb.AppendFormat("[System.ComponentModel.DataAnnotations.RegularExpression(@\"{0}\")]\r\n", p.RegularExpression);
+		}
+		if(p.Length>0){
+			sb.AppendFormat("[System.ComponentModel.DataAnnotations.StringLength({0}, ErrorMessage=@\"{1}.{2} cannot exceed {0} characters\")]\r\n", p.Length,p.ObjectName, p.Name);
+		}
+		return sb.ToString();
+	}
+
+	
+#>

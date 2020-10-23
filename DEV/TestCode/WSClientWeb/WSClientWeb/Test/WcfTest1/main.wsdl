@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="MobileService" targetNamespace="http://Florence.BusinessServiceLayer.Model/2011/Mobile" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://Florence.BusinessServiceLayer.Model/2011/Mobile" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://tempuri.org/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsdl:import namespace="http://tempuri.org/" location="Mobile.wsdl0.xml"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Imports">
+      <xsd:import schemaLocation="Mobile.xsd0.xml" namespace="http://Florence.BusinessServiceLayer.Model/2011/Mobile"/>
+      <xsd:import schemaLocation="Mobile.xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetOffersRequest">
+    <wsdl:part name="parameters" element="tns:GetOffersRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetOffersResponse">
+    <wsdl:part name="parameters" element="tns:GetOffersResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CreateLoyaltyAccountRequest">
+    <wsdl:part name="parameters" element="tns:CreateLoyaltyAccountRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CreateLoyaltyAccountResponse">
+    <wsdl:part name="parameters" element="tns:CreateLoyaltyAccountResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CreateOfferRequest">
+    <wsdl:part name="parameters" element="tns:CreateOfferRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CreateOfferResponse">
+    <wsdl:part name="parameters" element="tns:CreateOfferResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CustomerLoginRequest">
+    <wsdl:part name="parameters" element="tns:CustomerLoginRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CustomerLoginResponse">
+    <wsdl:part name="parameters" element="tns:CustomerLoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="TestRequest">
+    <wsdl:part name="parameters" element="tns:TestRequest"/>
+  </wsdl:message>
+  <wsdl:message name="TestResponse">
+    <wsdl:part name="parameters" element="tns:TestResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="Mobile">
+    <wsdl:operation name="GetOffers">
+      <wsdl:input wsaw:Action="GetOffers" name="GetOffersRequest" message="tns:GetOffersRequest"/>
+      <wsdl:output wsaw:Action="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Mobile/GetOffersResponse" name="GetOffersResponse" message="tns:GetOffersResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoyaltyAccount">
+      <wsdl:input wsaw:Action="CreateLoyaltyAccount" name="CreateLoyaltyAccountRequest" message="tns:CreateLoyaltyAccountRequest"/>
+      <wsdl:output wsaw:Action="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Mobile/CreateLoyaltyAccountResponse" name="CreateLoyaltyAccountResponse" message="tns:CreateLoyaltyAccountResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOffer">
+      <wsdl:input wsaw:Action="CreateOffer" name="CreateOfferRequest" message="tns:CreateOfferRequest"/>
+      <wsdl:output wsaw:Action="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Mobile/CreateOfferResponse" name="CreateOfferResponse" message="tns:CreateOfferResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CustomerLogin">
+      <wsdl:input wsaw:Action="CustomerLogin" name="CustomerLoginRequest" message="tns:CustomerLoginRequest"/>
+      <wsdl:output wsaw:Action="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Mobile/CustomerLoginResponse" name="CustomerLoginResponse" message="tns:CustomerLoginResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="TestOperation">
+      <wsdl:input wsaw:Action="TestOperation" name="TestRequest" message="tns:TestRequest"/>
+      <wsdl:output wsaw:Action="http://Florence.BusinessServiceLayer.Model/2011/Mobile/Mobile/TestOperationResponse" name="TestResponse" message="tns:TestResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="MobileService">
+    <wsdl:port name="BasicHttpBinding_Mobile" binding="i0:BasicHttpBinding_Mobile">
+      <soap:address location="http://localhost:15360/Florence.Bsl.Svc.Host/Mobile.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

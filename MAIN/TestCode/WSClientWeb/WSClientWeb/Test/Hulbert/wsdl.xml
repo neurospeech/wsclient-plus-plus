@@ -1,0 +1,2571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://localhost/ICSProofServer/services/RD3WS" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://localhost/ICSProofServer/services/RD3WS" xmlns:intf="http://localhost/ICSProofServer/services/RD3WS" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="urn:RD3WS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><wsdl:types><schema targetNamespace="urn:RD3WS" xmlns="http://www.w3.org/2001/XMLSchema"><import namespace="http://schemas.xmlsoap.org/soap/encoding/"/><complexType name="UserStruct"><sequence><element name="uid" type="xsd:int"/><element name="username" nillable="true" type="xsd:string"/><element name="firstName" nillable="true" type="xsd:string"/><element name="lastName" nillable="true" type="xsd:string"/><element name="company" nillable="true" type="xsd:string"/><element name="address1" nillable="true" type="xsd:string"/><element name="address2" nillable="true" type="xsd:string"/><element name="city" nillable="true" type="xsd:string"/><element name="state" nillable="true" type="xsd:string"/><element name="zip" nillable="true" type="xsd:string"/><element name="phone" nillable="true" type="xsd:string"/><element name="country" nillable="true" type="xsd:string"/><element name="dateCreated" nillable="true" type="xsd:string"/><element name="lastKnownIP" nillable="true" type="xsd:string"/><element name="role" nillable="true" type="xsd:string"/><element name="rolePermissions" nillable="true" type="xsd:string"/><element name="globalPermissions" nillable="true" type="xsd:string"/><element name="lastLogin" nillable="true" type="xsd:string"/><element name="email" nillable="true" type="xsd:string"/><element name="GUIVersion" nillable="true" type="xsd:string"/><element name="GUIPlatform" nillable="true" type="xsd:string"/><element name="xmlPrefs" nillable="true" type="xsd:string"/><element name="securityTicket" nillable="true" type="xsd:string"/><element name="errorMessage" nillable="true" type="xsd:string"/><element name="task" nillable="true" type="xsd:string"/><element name="approvalDefinitionXML" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="SignoffStruct"><sequence><element name="SignoffID" type="xsd:int"/><element name="signoffType" nillable="true" type="xsd:string"/><element name="ObjectID" type="xsd:int"/><element name="Username" nillable="true" type="xsd:string"/><element name="uid" type="xsd:int"/><element name="date" nillable="true" type="xsd:string"/><element name="Status" nillable="true" type="xsd:string"/><element name="infoXML" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="CalibrationStruct"><sequence><element name="lastCalibDate" nillable="true" type="xsd:string"/><element name="nativeLuminance" type="xsd:float"/><element name="x" type="xsd:float"/><element name="y" type="xsd:float"/><element name="luminance" type="xsd:float"/><element name="deltaE" type="xsd:float"/><element name="avgDeltaE" type="xsd:float"/><element name="maxDeltaE" type="xsd:float"/><element name="proofingDevice" nillable="true" type="xsd:string"/><element name="deviceSerial" nillable="true" type="xsd:string"/><element name="displayID" type="xsd:int"/><element name="targetTemp" nillable="true" type="xsd:string"/><element name="fingerprint" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ImageStruct"><sequence><element name="JPX_Hdr" type="xsd:base64Binary"/><element name="imageData" type="xsd:base64Binary"/><element name="thumbNail" type="xsd:base64Binary"/><element name="imageID" type="xsd:int"/><element name="proofImageID" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/><element name="imageLocation" nillable="true" type="xsd:string"/><element name="imageType" nillable="true" type="xsd:string"/><element name="width" type="xsd:int"/><element name="height" type="xsd:int"/><element name="dpi" type="xsd:int"/><element name="xres" type="xsd:int"/><element name="yres" type="xsd:int"/><element name="samplesPerPixel" type="xsd:int"/><element name="pixelSize" type="xsd:int"/><element name="numChannels" type="xsd:int"/><element name="bitsPerChannel" type="xsd:int"/><element name="srcProfID" type="xsd:int"/><element name="simProfID" type="xsd:int"/><element name="useSimProfile" type="xsd:boolean"/><element name="customProfID" type="xsd:int"/><element name="useCustomProfile" type="xsd:boolean"/><element name="selected" type="xsd:boolean"/><element name="opened" type="xsd:boolean"/><element name="fileSize" type="xsd:int"/><element name="dateAdded" nillable="true" type="xsd:string"/><element name="Username" nillable="true" type="xsd:string"/><element name="User_uid" type="xsd:int"/><element name="renderingIntent" nillable="true" type="xsd:string"/><element name="resolution" type="xsd:float"/><element name="xScroll" type="xsd:int"/><element name="yScroll" type="xsd:int"/><element name="linked" type="xsd:boolean"/><element name="matte" type="xsd:int"/><element name="scale" type="xsd:int"/><element name="magnification" type="xsd:int"/><element name="SortLocation" type="xsd:float"/><element name="locked" nillable="true" type="xsd:string"/><element name="dateLocked" nillable="true" type="xsd:string"/><element name="lockedBy" nillable="true" type="xsd:string"/><element name="lockedBy_uid" nillable="true" type="xsd:string"/><element name="PDFID1" nillable="true" type="xsd:string"/><element name="PDFID2" nillable="true" type="xsd:string"/><element name="colorSpace" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="IntegerHash"><sequence><element name="oldID" type="xsd:int"/><element name="newID" type="xsd:int"/></sequence></complexType><complexType name="ProofStruct"><sequence><element name="ProofID" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/><element name="numImages" type="xsd:int"/><element name="activeImageID" type="xsd:int"/><element name="contentOnly" type="xsd:boolean"/><element name="whitePointCode1" type="xsd:int"/><element name="whitePointCode2" type="xsd:int"/><element name="whitePointCode3" type="xsd:int"/><element name="whitePointCode4" type="xsd:int"/><element name="useMaxLum" type="xsd:boolean"/><element name="lumValue" type="xsd:float"/><element name="illuminantCode" type="xsd:int"/><element name="tileImages" type="xsd:boolean"/><element name="syncViews" type="xsd:boolean"/><element name="syncIntents" type="xsd:boolean"/><element name="syncSimProf" type="xsd:boolean"/><element name="hideScrolls" type="xsd:boolean"/><element name="showRulers" type="xsd:boolean"/><element name="finished" type="xsd:boolean"/><element name="creatorID" type="xsd:int"/><element name="creatorUsername" nillable="true" type="xsd:string"/><element name="creatorHumanName" nillable="true" type="xsd:string"/><element name="requireCalibration" type="xsd:boolean"/><element name="autoLockImages" nillable="true" type="xsd:string"/><element name="inkCoverage" type="xsd:int"/><element name="jdfURL" nillable="true" type="xsd:string"/><element name="jdfContents" nillable="true" type="xsd:string"/><element name="viewBooth" nillable="true" type="xsd:string"/><element name="lampType" nillable="true" type="xsd:string"/><element name="defaultProfileFingerprint" nillable="true" type="xsd:string"/><element name="defaultProfileName" nillable="true" type="xsd:string"/><element name="defaultRenderingIntent" nillable="true" type="xsd:string"/><element name="created" nillable="true" type="xsd:string"/><element name="dateInvited" nillable="true" type="xsd:string"/><element name="dueDate" nillable="true" type="xsd:string"/><element name="finishedDate" nillable="true" type="xsd:string"/><element name="status" nillable="true" type="xsd:string"/><element name="notes" nillable="true" type="xsd:string"/><element name="tags" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="HotFolder"><sequence><element name="id" type="xsd:int"/><element name="humanReadableName" nillable="true" type="xsd:string"/><element name="inputFolder" nillable="true" type="xsd:string"/><element name="outputFolder" nillable="true" type="xsd:string"/><element name="profileHandling" nillable="true" type="xsd:string"/><element name="defaultCMYKProfileFingerprint" nillable="true" type="xsd:string"/><element name="cmykHumanReadableName" nillable="true" type="xsd:string"/><element name="defaultRGBProfileFingerprint" nillable="true" type="xsd:string"/><element name="rgbHumanReadableName" nillable="true" type="xsd:string"/><element name="ripAntialiasing" type="xsd:boolean"/><element name="ripPreserveSpots" type="xsd:boolean"/><element name="ripDPI" type="xsd:int"/><element name="ripStartPage" type="xsd:int"/><element name="ripEndPage" type="xsd:int"/><element name="error" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="RIPProgressStruct"><sequence><element name="CurrentImage" type="xsd:int"/><element name="TotalImages" type="xsd:int"/><element name="ProofImageID" type="xsd:int"/><element name="CurrentChannel" nillable="true" type="xsd:string"/><element name="CurrentFileName" nillable="true" type="xsd:string"/><element name="PercentComplete" type="xsd:int"/><element name="Phase" nillable="true" type="xsd:string"/><element name="Error" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ChannelStruct"><sequence><element name="proofImageID" type="xsd:int"/><element name="sortOrder" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="origName" nillable="true" type="xsd:string"/><element name="type" nillable="true" type="xsd:string"/><element name="colorData" nillable="true" type="xsd:string"/><element name="visible" type="xsd:boolean"/><element name="invert" type="xsd:boolean"/></sequence></complexType><complexType name="Role"><sequence><element name="name" nillable="true" type="xsd:string"/><element name="rolePermissions" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="JPXStruct"><sequence><element name="JPX_Hdr" type="xsd:base64Binary"/></sequence></complexType><complexType name="ReturnTicket"><sequence><element name="expires" nillable="true" type="xsd:string"/><element name="username" nillable="true" type="xsd:string"/><element name="uid" type="xsd:int"/><element name="isValid" type="xsd:boolean"/><element name="ticketMD5" nillable="true" type="xsd:string"/><element name="optionalID" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ImageStruct2"><sequence><element name="imageID" type="xsd:int"/><element name="proofImageID" type="xsd:int"/><element name="parentFileID" type="xsd:int"/><element name="parentFileVersion" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/><element name="imageLocation" nillable="true" type="xsd:string"/><element name="width" type="xsd:int"/><element name="height" type="xsd:int"/><element name="dpi" type="xsd:int"/><element name="samplesPerPixel" type="xsd:int"/><element name="numChannels" type="xsd:int"/><element name="bitsPerChannel" type="xsd:int"/><element name="srcProfID" type="xsd:int"/><element name="simProfID" type="xsd:int"/><element name="useSimProfile" type="xsd:boolean"/><element name="customProfID" type="xsd:int"/><element name="useCustomProfile" type="xsd:boolean"/><element name="selected" type="xsd:boolean"/><element name="opened" type="xsd:boolean"/><element name="fileSize" type="xsd:int"/><element name="dateAdded" nillable="true" type="xsd:string"/><element name="Username" nillable="true" type="xsd:string"/><element name="User_uid" type="xsd:int"/><element name="renderingIntent" nillable="true" type="xsd:string"/><element name="resolution" type="xsd:float"/><element name="xScroll" type="xsd:int"/><element name="yScroll" type="xsd:int"/><element name="linked" type="xsd:boolean"/><element name="matte" type="xsd:int"/><element name="scale" type="xsd:int"/><element name="magnification" type="xsd:int"/><element name="SortLocation" type="xsd:float"/><element name="locked" type="xsd:boolean"/><element name="dateLocked" nillable="true" type="xsd:string"/><element name="lockedBy" nillable="true" type="xsd:string"/><element name="lockedBy_uid" type="xsd:int"/><element name="PDFID1" nillable="true" type="xsd:string"/><element name="PDFID2" nillable="true" type="xsd:string"/><element name="rotation" type="xsd:int"/><element name="pdfPath" nillable="true" type="xsd:string"/><element name="isClone" type="xsd:boolean"/><element name="outputIntent" nillable="true" type="xsd:string"/><element name="imageStatus" nillable="true" type="xsd:string"/><element name="imageStatusIcon" nillable="true" type="xsd:string"/><element name="pageNumber" type="xsd:int"/><element name="totalPages" type="xsd:int"/><element name="status" nillable="true" type="xsd:string"/><element name="parentFileLocked" type="xsd:boolean"/></sequence></complexType><complexType name="EmailLogStruct"><sequence><element name="proofID" type="xsd:int"/><element name="date" nillable="true" type="xsd:string"/><element name="fromEmail" nillable="true" type="xsd:string"/><element name="toEmail" nillable="true" type="xsd:string"/><element name="subject" nillable="true" type="xsd:string"/><element name="message" nillable="true" type="xsd:string"/><element name="template" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="NoteStruct"><sequence><element name="replies" nillable="true" type="impl:ArrayOf_tns1_NoteStruct"/><element name="NoteID" type="xsd:int"/><element name="ParentNoteID" type="xsd:int"/><element name="ObjectID" type="xsd:int"/><element name="noteNumber" type="xsd:int"/><element name="noteType" nillable="true" type="xsd:string"/><element name="signoffStatus" nillable="true" type="xsd:string"/><element name="Username" nillable="true" type="xsd:string"/><element name="uid" type="xsd:int"/><element name="firstName" nillable="true" type="xsd:string"/><element name="lastName" nillable="true" type="xsd:string"/><element name="createDate" nillable="true" type="xsd:string"/><element name="modDate" nillable="true" type="xsd:string"/><element name="markupXML" nillable="true" type="xsd:string"/><element name="deleted" type="xsd:boolean"/><element name="pageNumber" type="xsd:int"/><element name="lockObjectForUser" type="xsd:boolean"/><element name="fileVersion" type="xsd:int"/><element name="fileName" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ThumbnailStruct"><sequence><element name="rawData" type="xsd:base64Binary"/></sequence></complexType><complexType name="FileStruct"><sequence><element name="FileID" type="xsd:int"/><element name="ParentJobID" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/><element name="path" nillable="true" type="xsd:string"/><element name="PDFID1" nillable="true" type="xsd:string"/><element name="PDFID2" nillable="true" type="xsd:string"/><element name="status" nillable="true" type="xsd:string"/><element name="oemStatus" nillable="true" type="xsd:string"/><element name="locked" type="xsd:boolean"/><element name="version" type="xsd:int"/><element name="startingNoteNumber" type="xsd:int"/></sequence></complexType><complexType name="BuddyGroupStruct"><sequence><element name="buddyList" nillable="true" type="impl:ArrayOf_tns1_UserStruct"/><element name="id" type="xsd:int"/><element name="owner_id" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="FilterComparison"><sequence><element name="id" type="xsd:int"/><element name="filterID" type="xsd:int"/><element name="field" nillable="true" type="xsd:string"/><element name="comparison" nillable="true" type="xsd:string"/><element name="value1" nillable="true" type="xsd:string"/><element name="value2" nillable="true" type="xsd:string"/><element name="delta" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="SignoffStruct2"><sequence><element name="criticalDisplays" nillable="true" type="impl:ArrayOf_tns1_CalibrationStruct"/><element name="proofImageID" type="xsd:int"/><element name="Username" nillable="true" type="xsd:string"/><element name="Username_uid" type="xsd:int"/><element name="dateChanged" nillable="true" type="xsd:string"/><element name="Status" nillable="true" type="xsd:string"/><element name="Note" nillable="true" type="xsd:string"/><element name="srcProfID" type="xsd:int"/><element name="simProfID" type="xsd:int"/><element name="useSimProf" type="xsd:boolean"/><element name="proofingProduct" nillable="true" type="xsd:string"/><element name="proofingProductVersion" nillable="true" type="xsd:string"/><element name="proofingOS" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ProfileStruct"><sequence><element name="rawData" type="xsd:base64Binary"/><element name="ProfileID" type="xsd:int"/><element name="Fingerprint" nillable="true" type="xsd:string"/><element name="Name" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ProofUserStruct"><sequence><element name="baseUserInfo" nillable="true" type="tns1:UserStruct"/><element name="proofOpen" type="xsd:boolean"/><element name="lastCalibDate" nillable="true" type="xsd:string"/><element name="permissions" type="xsd:int"/><element name="signOffStatus" type="xsd:int"/><element name="signOffDate" nillable="true" type="xsd:string"/><element name="wantsToBeEditor" type="xsd:boolean"/><element name="calibStatus" type="xsd:int"/><element name="statusFlags" type="xsd:int"/><element name="lastCalib" type="xsd:double"/><element name="whitePointCode" type="xsd:int"/><element name="lumValue" type="xsd:float"/><element name="illuminant" type="xsd:int"/><element name="achievedLum" type="xsd:float"/><element name="navViewTop" type="xsd:int"/><element name="navViewLeft" type="xsd:int"/><element name="navViewBottom" type="xsd:int"/><element name="navViewRight" type="xsd:int"/><element name="imgWinDimV" type="xsd:int"/><element name="imgWinDimH" type="xsd:int"/><element name="SeatInstructions" nillable="true" type="xsd:string"/><element name="CalibText" nillable="true" type="xsd:string"/><element name="dateInvited" nillable="true" type="xsd:string"/><element name="emailWasSent" type="xsd:boolean"/></sequence></complexType><complexType name="ProofLogStruct"><sequence><element name="ProofID" type="xsd:int"/><element name="DateCreated" nillable="true" type="xsd:string"/><element name="Username" nillable="true" type="xsd:string"/><element name="EventCode" nillable="true" type="xsd:string"/><element name="Info" nillable="true" type="xsd:string"/></sequence></complexType><complexType name="ProofImageStruct"><sequence><element name="imageID" type="xsd:int"/><element name="name" nillable="true" type="xsd:string"/><element name="description" nillable="true" type="xsd:string"/><element name="renderingIntent" nillable="true" type="xsd:string"/><element name="srcProfID" type="xsd:int"/><element name="srcProfName" nillable="true" type="xsd:string"/><element name="simProfID" type="xsd:int"/><element name="simProfName" nillable="true" type="xsd:string"/><element name="customProfID" type="xsd:int"/><element name="customProfName" nillable="true" type="xsd:string"/><element name="signedOff" type="xsd:boolean"/><element name="dateAdded" nillable="true" type="xsd:string"/><element name="Username" nillable="true" type="xsd:string"/><element name="User_uid" type="xsd:int"/><element name="resolution" type="xsd:float"/></sequence></complexType><complexType name="JPEG2000Struct"><sequence><element name="fileData" type="xsd:base64Binary"/></sequence></complexType></schema><schema targetNamespace="http://localhost/ICSProofServer/services/RD3WS" xmlns="http://www.w3.org/2001/XMLSchema"><import namespace="http://schemas.xmlsoap.org/soap/encoding/"/><complexType name="ArrayOf_tns1_NoteStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:NoteStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_UserStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:UserStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_CalibrationStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:CalibrationStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_xsd_int"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:int[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ProofLogStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ProofLogStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ProofUserStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ProofUserStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_xsd_string"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ImageStruct2"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ImageStruct2[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_FileStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:FileStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_BuddyGroupStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:BuddyGroupStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ProofStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ProofStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_FilterComparison"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:FilterComparison[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ChannelStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ChannelStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_ProfileStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:ProfileStruct[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_Role"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:Role[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_HotFolder"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:HotFolder[]"/></restriction></complexContent></complexType><complexType name="ArrayOf_tns1_EmailLogStruct"><complexContent><restriction base="soapenc:Array"><attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:EmailLogStruct[]"/></restriction></complexContent></complexType></schema></wsdl:types>
+  <message name="hasBeenConfiguredRequest">
+  </message>
+  <message name="S_isValidSignoffResponse">
+    <part name="S_isValidSignoffReturn" type="xsd:boolean"/>
+  </message>
+  <message name="sendAuditToTserverResponse">
+    <part name="sendAuditToTserverReturn" type="xsd:string"/>
+  </message>
+  <message name="S_getUsersForProofIDResponse">
+    <part name="S_getUsersForProofIDReturn" type="impl:ArrayOf_tns1_ProofUserStruct"/>
+  </message>
+  <message name="S_APISetProofUserTaskRequest">
+    <part name="username" type="xsd:string"/>
+    <part name="proofID" type="xsd:int"/>
+    <part name="taskName" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_closeProofResponse">
+  </message>
+  <message name="S_APIDeleteSessionResponse">
+  </message>
+  <message name="S_APIAppendNoteToObjectResponse">
+    <part name="S_APIAppendNoteToObjectReturn" type="xsd:int"/>
+  </message>
+  <message name="S_updateUserCalibration2Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="calibStatus" type="xsd:int"/>
+    <part name="illum" type="xsd:int"/>
+    <part name="statusFlags" type="xsd:int"/>
+    <part name="achievedLum" type="xsd:float"/>
+    <part name="lastCalib" type="xsd:double"/>
+    <part name="calibText" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_IsValidTicketForProofRequest">
+    <part name="ProofID" type="xsd:int"/>
+    <part name="ProofImageID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APILogoutResponse">
+  </message>
+  <message name="S_setProofImageLockResponse">
+  </message>
+  <message name="S_APIGetAllNotesForAllFilePagesInJobResponse">
+    <part name="S_APIGetAllNotesForAllFilePagesInJobReturn" type="impl:ArrayOf_tns1_NoteStruct"/>
+  </message>
+  <message name="S_getProof2Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="ExecuteHotfolderRequest">
+    <part name="inFilePath" type="xsd:string"/>
+    <part name="inOriginalPath" type="xsd:string"/>
+  </message>
+  <message name="S_getChannelsForProofImageResponse">
+    <part name="S_getChannelsForProofImageReturn" type="impl:ArrayOf_tns1_ChannelStruct"/>
+  </message>
+  <message name="S_APIGetTaskDefinitionResponse">
+    <part name="S_APIGetTaskDefinitionReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APIListAllUsersRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getProofLogResponse">
+    <part name="S_getProofLogReturn" type="impl:ArrayOf_tns1_ProofLogStruct"/>
+  </message>
+  <message name="S_getChannelForProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="name" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIDeleteBuddiesResponse">
+  </message>
+  <message name="S_APIAuthenticateTicketRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="digestToHexStringRequest">
+    <part name="inDigest" type="xsd:base64Binary"/>
+  </message>
+  <message name="S_updateProofSettingsResponse">
+  </message>
+  <message name="S_isValidCalibrationRequest">
+    <part name="inCalibration" type="tns1:CalibrationStruct"/>
+    <part name="fingerprint" type="xsd:string"/>
+  </message>
+  <message name="S_createProofResponse">
+    <part name="S_createProofReturn" type="xsd:int"/>
+  </message>
+  <message name="S_IsValidTicketForObjectRequest">
+    <part name="objectID" type="xsd:int"/>
+    <part name="objectType" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateFileStatusResponse">
+  </message>
+  <message name="S_APICreateUserRequest">
+    <part name="username" type="xsd:string"/>
+    <part name="password" type="xsd:string"/>
+    <part name="role" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_reserveImageIDRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getImagesForProofID3Response">
+    <part name="S_getImagesForProofID3Return" type="impl:ArrayOf_tns1_ImageStruct2"/>
+  </message>
+  <message name="isRasterFormatRequest">
+    <part name="imageFilePath" type="xsd:string"/>
+  </message>
+  <message name="S_IsValidTicketForObjectResponse">
+    <part name="S_IsValidTicketForObjectReturn" type="tns1:ReturnTicket"/>
+  </message>
+  <message name="S_updateProofImagesHint2Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageIDs" type="impl:ArrayOf_xsd_int"/>
+    <part name="fieldName" type="xsd:string"/>
+    <part name="strValue" type="xsd:string"/>
+    <part name="floatValue" type="xsd:float"/>
+    <part name="intValue" type="xsd:int"/>
+    <part name="boolValue" type="xsd:boolean"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="imageServerURLResponse">
+    <part name="imageServerURLReturn" type="xsd:string"/>
+  </message>
+  <message name="S_setChannelForProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inChannel" type="tns1:ChannelStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_putImageInProof3Response">
+    <part name="S_putImageInProof3Return" type="xsd:int"/>
+  </message>
+  <message name="S_APIUpdateFilterRequest">
+    <part name="filterID" type="xsd:int"/>
+    <part name="filterName" type="xsd:string"/>
+    <part name="combine" type="xsd:string"/>
+    <part name="comparisonList" type="impl:ArrayOf_tns1_FilterComparison"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_createAdministratorRequest">
+    <part name="username" type="xsd:string"/>
+    <part name="password" type="xsd:string"/>
+  </message>
+  <message name="S_installRIPLicenseResponse">
+    <part name="S_installRIPLicenseReturn" type="xsd:int"/>
+  </message>
+  <message name="getRIPPathRequest">
+  </message>
+  <message name="CallPSRIPRequest">
+    <part name="inPDF" type="xsd:string"/>
+    <part name="outTIFF" type="xsd:string"/>
+    <part name="inProgressBasePath" type="xsd:string"/>
+    <part name="inDPI" type="xsd:int"/>
+    <part name="inSeps" type="xsd:boolean"/>
+    <part name="inFormat" type="xsd:string"/>
+    <part name="inPageRange" type="xsd:string"/>
+    <part name="inAntiAlias" type="xsd:boolean"/>
+    <part name="inPreserveSpots" type="xsd:boolean"/>
+    <part name="inProfilePaths" type="xsd:string"/>
+    <part name="iccOutProfilePath" type="xsd:string"/>
+  </message>
+  <message name="S_APIExecFilterRequest">
+    <part name="filterID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_addProfileRecord2Request">
+    <part name="inProfile" type="tns1:ProfileStruct"/>
+    <part name="unusedSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="CallICSTilerRequest">
+    <part name="inFile" type="xsd:string"/>
+    <part name="outFolder" type="xsd:string"/>
+    <part name="inProgressBasePath" type="xsd:string"/>
+    <part name="waitForReturn" type="xsd:boolean"/>
+    <part name="deleteInFile" type="xsd:boolean"/>
+    <part name="extractProfileTo" type="xsd:string"/>
+    <part name="invertSpots" type="xsd:boolean"/>
+  </message>
+  <message name="S_APIGetRolesResponse">
+    <part name="S_APIGetRolesReturn" type="impl:ArrayOf_tns1_Role"/>
+  </message>
+  <message name="S_APIDeleteSessionRequest">
+    <part name="sessionID" type="xsd:int"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getImagesForProofID3Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APISetSessionCallbacksResponse">
+  </message>
+  <message name="S_APIListFiltersRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="getProfileListRequest">
+  </message>
+  <message name="S_APIGetPagesForSessionRequest">
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_deleteProofResponse">
+    <part name="S_deleteProofReturn" type="xsd:int"/>
+  </message>
+  <message name="S_APIGetPagesForFileRequest">
+    <part name="inFileID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_finishProofResponse">
+  </message>
+  <message name="sendForgottenPasswordEmailRequest">
+    <part name="username" type="xsd:string"/>
+  </message>
+  <message name="S_deleteArchivedProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIAppendNoteToObjectRequest">
+    <part name="inNote" type="tns1:NoteStruct"/>
+    <part name="task" type="xsd:string"/>
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APISetRolesResponse">
+  </message>
+  <message name="S_getServerPrefsRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetBuddiesResponse">
+    <part name="S_APIGetBuddiesReturn" type="impl:ArrayOf_tns1_UserStruct"/>
+  </message>
+  <message name="extractEmbeddedProfileRequest">
+    <part name="inPDFPath" type="xsd:string"/>
+  </message>
+  <message name="S_updateUserCalibration3Response">
+    <part name="S_updateUserCalibration3Return" type="impl:ArrayOf_xsd_int"/>
+  </message>
+  <message name="S_getProfileListForProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setCallbackResponse">
+  </message>
+  <message name="S_APIClearEmailLogResponse">
+  </message>
+  <message name="CallPSRIPResponse">
+  </message>
+  <message name="S_APICreateFilterResponse">
+  </message>
+  <message name="S_updateUserCalibration2Response">
+  </message>
+  <message name="S_profileFingerprintExists2Request">
+    <part name="fingerprint" type="xsd:string"/>
+  </message>
+  <message name="S_getChannelsForProofResponse">
+    <part name="S_getChannelsForProofReturn" type="impl:ArrayOf_tns1_ChannelStruct"/>
+  </message>
+  <message name="S_deleteImagesResponse">
+    <part name="S_deleteImagesReturn" type="xsd:int"/>
+  </message>
+  <message name="S_checkRIPLicenseResponse">
+    <part name="S_checkRIPLicenseReturn" type="xsd:string"/>
+  </message>
+  <message name="S_cloneProofImageResponse">
+  </message>
+  <message name="ExecuteHotfolderResponse">
+  </message>
+  <message name="S_APIDeleteNotesRequest">
+    <part name="notesList" type="impl:ArrayOf_xsd_int"/>
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIAuthenticateUserResponse">
+    <part name="S_APIAuthenticateUserReturn" type="tns1:UserStruct"/>
+  </message>
+  <message name="S_getColorSpaceFromChannelsRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIDeleteTaskRequest">
+    <part name="taskName" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="sendTestEmailRequest">
+    <part name="serverTest" type="xsd:boolean"/>
+    <part name="emailAddress" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="getProfilePathRequest">
+  </message>
+  <message name="S_APICloseSessionResponse">
+  </message>
+  <message name="S_APIGetNotesForObjectResponse">
+    <part name="S_APIGetNotesForObjectReturn" type="impl:ArrayOf_tns1_NoteStruct"/>
+  </message>
+  <message name="S_APIGetEmailLogRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_deleteUsersFromProofIDResponse">
+  </message>
+  <message name="S_getChannelForProofImage1Response">
+    <part name="S_getChannelForProofImage1Return" type="tns1:ChannelStruct"/>
+  </message>
+  <message name="S_updateServerPrefsResponse">
+  </message>
+  <message name="S_APIAddFileToProofIDResponse">
+    <part name="S_APIAddFileToProofIDReturn" type="xsd:int"/>
+  </message>
+  <message name="getRIPPathResponse">
+    <part name="getRIPPathReturn" type="xsd:string"/>
+  </message>
+  <message name="S_addRasterImageToProofIDRequest">
+    <part name="proofID" type="xsd:int"/>
+    <part name="imageFilePath" type="xsd:string"/>
+    <part name="proofProfPath" type="xsd:string"/>
+    <part name="humanName" type="xsd:string"/>
+    <part name="description" type="xsd:string"/>
+    <part name="renderingIntent" type="xsd:string"/>
+    <part name="version" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_deleteImagesRequest">
+    <part name="imageList" type="impl:ArrayOf_xsd_int"/>
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="clientSSLRequiredRequest">
+  </message>
+  <message name="getProfileListResponse">
+    <part name="getProfileListReturn" type="impl:ArrayOf_tns1_ProfileStruct"/>
+  </message>
+  <message name="S_getProof2Response">
+    <part name="S_getProof2Return" type="tns1:ProofStruct"/>
+  </message>
+  <message name="S_setChannelForProofImageResponse">
+  </message>
+  <message name="S_APIAddBuddiesRequest">
+    <part name="buddyUsernames" type="impl:ArrayOf_xsd_string"/>
+    <part name="buddyRoles" type="impl:ArrayOf_xsd_string"/>
+    <part name="createAdHocUser" type="xsd:boolean"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="extractEmbeddedProfileResponse">
+    <part name="extractEmbeddedProfileReturn" type="tns1:ProfileStruct"/>
+  </message>
+  <message name="S_updateUserPermissionsRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inUserList" type="impl:ArrayOf_tns1_ProofUserStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_reLicenseRIPResponse">
+    <part name="S_reLicenseRIPReturn" type="xsd:int"/>
+  </message>
+  <message name="S_closeProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="isRasterFormatResponse">
+    <part name="isRasterFormatReturn" type="xsd:boolean"/>
+  </message>
+  <message name="S_updateUserCalibration3Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inCalibrations" type="impl:ArrayOf_tns1_CalibrationStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIListBuddyGroupsResponse">
+    <part name="S_APIListBuddyGroupsReturn" type="impl:ArrayOf_tns1_BuddyGroupStruct"/>
+  </message>
+  <message name="S_APIGetSessionCallbacksRequest">
+    <part name="sessionID" type="xsd:int"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getRIPHostIDResponse">
+    <part name="S_getRIPHostIDReturn" type="xsd:string"/>
+  </message>
+  <message name="S_addProfileRecord2Response">
+    <part name="S_addProfileRecord2Return" type="xsd:int"/>
+  </message>
+  <message name="S_APIGetHotfoldersRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_addUsersToProofIDResponse">
+  </message>
+  <message name="S_setPDFPathRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="pdfPath" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIListFiltersResponse">
+    <part name="S_APIListFiltersReturn" type="xsd:string"/>
+  </message>
+  <message name="versionResponse">
+    <part name="versionReturn" type="xsd:string"/>
+  </message>
+  <message name="S_createAdministratorResponse">
+  </message>
+  <message name="S_getProofLogRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateFilterResponse">
+  </message>
+  <message name="S_setProofParamsRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="whitePoint1" type="xsd:int"/>
+    <part name="whitePoint2" type="xsd:int"/>
+    <part name="whitePoint3" type="xsd:int"/>
+    <part name="whitePoint4" type="xsd:int"/>
+    <part name="useMaxLum" type="xsd:boolean"/>
+    <part name="lumValue" type="xsd:float"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_isValidCalibrationResponse">
+    <part name="S_isValidCalibrationReturn" type="xsd:boolean"/>
+  </message>
+  <message name="S_addUsersAndPermissionsToProofResponse">
+  </message>
+  <message name="getProfilePathResponse">
+    <part name="getProfilePathReturn" type="xsd:string"/>
+  </message>
+  <message name="S_getInfoForProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_convertJP2toTOFResponse">
+  </message>
+  <message name="S_getProfilePathResponse">
+    <part name="S_getProfilePathReturn" type="xsd:string"/>
+  </message>
+  <message name="S_createProofRequest">
+    <part name="inProof" type="tns1:ProofStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetUsersForSessionRequest">
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIListBuddyGroupsRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIClearEmailLogRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APICloseSessionRequest">
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_updateProofImagesHint2Response">
+  </message>
+  <message name="S_updateServerPrefsRequest">
+    <part name="newPrefsXML" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIForceLogoutRequest">
+    <part name="uidToLogout" type="xsd:int"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getUsersForProofIDRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIAddFilesAndUsersToNewSessionRequest">
+    <part name="fileIDs" type="impl:ArrayOf_xsd_int"/>
+    <part name="usernames" type="impl:ArrayOf_xsd_string"/>
+    <part name="tasks" type="impl:ArrayOf_xsd_string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getProfileListForProofResponse">
+    <part name="S_getProfileListForProofReturn" type="impl:ArrayOf_tns1_ProfileStruct"/>
+  </message>
+  <message name="S_APISetBuddiesRequest">
+    <part name="inBuddies" type="impl:ArrayOf_tns1_UserStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIAddFileToProofIDRequest">
+    <part name="proofID" type="xsd:int"/>
+    <part name="imageFilePath" type="xsd:string"/>
+    <part name="humanName" type="xsd:string"/>
+    <part name="defaultRGBProfPath" type="xsd:string"/>
+    <part name="defaultCMYKProfPath" type="xsd:string"/>
+    <part name="defaultLabProfPath" type="xsd:string"/>
+    <part name="proofProfPath" type="xsd:string"/>
+    <part name="profileHandling" type="xsd:string"/>
+    <part name="ripDPI" type="xsd:int"/>
+    <part name="ripStartPage" type="xsd:int"/>
+    <part name="ripEndPage" type="xsd:int"/>
+    <part name="description" type="xsd:string"/>
+    <part name="renderingIntent" type="xsd:string"/>
+    <part name="antialiasing" type="xsd:boolean"/>
+    <part name="preserveSpotColors" type="xsd:boolean"/>
+    <part name="simulateSpots" type="xsd:boolean"/>
+    <part name="version" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setChannelsForProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inChannels" type="impl:ArrayOf_tns1_ChannelStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateUserResponse">
+  </message>
+  <message name="S_APIGetRolesRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetFilesForSessionResponse">
+    <part name="S_APIGetFilesForSessionReturn" type="impl:ArrayOf_tns1_FileStruct"/>
+  </message>
+  <message name="S_APIListSessionsRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIListAllUsersResponse">
+    <part name="S_APIListAllUsersReturn" type="impl:ArrayOf_tns1_UserStruct"/>
+  </message>
+  <message name="S_getProofImagesForUserResponse">
+    <part name="S_getProofImagesForUserReturn" type="impl:ArrayOf_tns1_ImageStruct2"/>
+  </message>
+  <message name="S_getChannelsForProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_IsValidTicketForProofResponse">
+    <part name="S_IsValidTicketForProofReturn" type="tns1:ReturnTicket"/>
+  </message>
+  <message name="S_APIUpdateNoteResponse">
+  </message>
+  <message name="S_APIAuthenticateTicketResponse">
+    <part name="S_APIAuthenticateTicketReturn" type="tns1:UserStruct"/>
+  </message>
+  <message name="S_APIGetBuddiesRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetHotfoldersResponse">
+    <part name="S_APIGetHotfoldersReturn" type="impl:ArrayOf_tns1_HotFolder"/>
+  </message>
+  <message name="S_APIGetPagesForSessionResponse">
+    <part name="S_APIGetPagesForSessionReturn" type="impl:ArrayOf_tns1_ImageStruct2"/>
+  </message>
+  <message name="S_restoreProofImageLockResponse">
+  </message>
+  <message name="S_APIReAuthenticateUserWithTicketResponse">
+    <part name="S_APIReAuthenticateUserWithTicketReturn" type="tns1:UserStruct"/>
+  </message>
+  <message name="S_prepareProofRequest">
+    <part name="proofName" type="xsd:string"/>
+    <part name="proofDescription" type="xsd:string"/>
+    <part name="tags" type="xsd:string"/>
+    <part name="proofType" type="xsd:string"/>
+    <part name="useMaxLum" type="xsd:boolean"/>
+    <part name="lumValue" type="xsd:int"/>
+    <part name="illuminant" type="xsd:string"/>
+    <part name="autoLockImages" type="xsd:boolean"/>
+    <part name="inkCoverage" type="xsd:int"/>
+    <part name="invitees" type="xsd:string"/>
+    <part name="seatInstructions" type="xsd:string"/>
+    <part name="permissions" type="xsd:string"/>
+    <part name="requireCalibration" type="xsd:boolean"/>
+    <part name="viewBooth" type="xsd:string"/>
+    <part name="lampType" type="xsd:string"/>
+    <part name="dueDate" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateUsersRequest">
+    <part name="userList" type="impl:ArrayOf_tns1_UserStruct"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APISetHotfoldersResponse">
+  </message>
+  <message name="S_getProfilePathRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIForceLogoutResponse">
+  </message>
+  <message name="S_cloneProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetAllNotesForAllFilePagesInSessionRequest">
+    <part name="sessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="getRIPLicenseRequest">
+  </message>
+  <message name="S_isValidSignoffRequest">
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="Username" type="xsd:string"/>
+    <part name="uid" type="xsd:int"/>
+    <part name="signoff" type="xsd:string"/>
+    <part name="srcProfID" type="xsd:int"/>
+    <part name="simProfID" type="xsd:int"/>
+    <part name="useSimProf" type="xsd:boolean"/>
+    <part name="signoffNote" type="xsd:string"/>
+    <part name="fingerprint" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetSignoffsForObjectIDRequest">
+    <part name="inObjectID" type="xsd:int"/>
+    <part name="inSignoffType" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetFilesForSessionRequest">
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getSeatInfoResponse">
+    <part name="S_getSeatInfoReturn" type="impl:ArrayOf_tns1_UserStruct"/>
+  </message>
+  <message name="S_deleteUsersFromProofIDRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="userList" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="clientSSLRequiredResponse">
+    <part name="clientSSLRequiredReturn" type="xsd:boolean"/>
+  </message>
+  <message name="S_getInfoForProofImageResponse">
+    <part name="S_getInfoForProofImageReturn" type="tns1:ImageStruct2"/>
+  </message>
+  <message name="S_APIDeleteFilterRequest">
+    <part name="filterID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="sendTestEmailResponse">
+  </message>
+  <message name="S_APIUpdateUsersResponse">
+  </message>
+  <message name="S_APIGetSignoffsForObjectIDResponse">
+    <part name="S_APIGetSignoffsForObjectIDReturn" type="impl:ArrayOf_tns1_NoteStruct"/>
+  </message>
+  <message name="S_APIListSessionsResponse">
+    <part name="S_APIListSessionsReturn" type="impl:ArrayOf_xsd_int"/>
+  </message>
+  <message name="S_APIAuthenticateUserRequest">
+    <part name="inUsername" type="xsd:string"/>
+    <part name="inPassword" type="xsd:string"/>
+  </message>
+  <message name="S_getProofImagesForUserRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetFilesForJobResponse">
+    <part name="S_APIGetFilesForJobReturn" type="impl:ArrayOf_tns1_FileStruct"/>
+  </message>
+  <message name="S_addUsersAndPermissionsToProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inUserList" type="impl:ArrayOf_tns1_ProofUserStruct"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setProofImageLockRequest">
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="lock" type="xsd:boolean"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APISetProofUserTaskResponse">
+  </message>
+  <message name="S_APIGetNotesForFileRequest">
+    <part name="inFileID" type="xsd:int"/>
+    <part name="inUsername" type="xsd:string"/>
+    <part name="afterTimeStamp" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_finishProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getColorSpaceFromChannelsResponse">
+    <part name="S_getColorSpaceFromChannelsReturn" type="xsd:int"/>
+  </message>
+  <message name="S_APICreateUserResponse">
+  </message>
+  <message name="S_installRIPLicenseRequest">
+    <part name="licenseString" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIAddBuddiesResponse">
+    <part name="S_APIAddBuddiesReturn" type="impl:ArrayOf_tns1_UserStruct"/>
+  </message>
+  <message name="S_APIAddFilesAndUsersToNewSessionResponse">
+    <part name="S_APIAddFilesAndUsersToNewSessionReturn" type="xsd:int"/>
+  </message>
+  <message name="S_addImageToProofIDRequest">
+    <part name="proofID" type="xsd:int"/>
+    <part name="imageServer" type="xsd:string"/>
+    <part name="imageFilePath" type="xsd:string"/>
+    <part name="defaultRGBProfPath" type="xsd:string"/>
+    <part name="defaultCMYKProfPath" type="xsd:string"/>
+    <part name="defaultLabProfPath" type="xsd:string"/>
+    <part name="proofProfPath" type="xsd:string"/>
+    <part name="profileHandling" type="xsd:string"/>
+    <part name="ripDPI" type="xsd:int"/>
+    <part name="ripStartPage" type="xsd:int"/>
+    <part name="ripEndPage" type="xsd:int"/>
+    <part name="description" type="xsd:string"/>
+    <part name="jpegQuality" type="xsd:float"/>
+    <part name="renderingIntent" type="xsd:string"/>
+    <part name="antialiasing" type="xsd:boolean"/>
+    <part name="preserveSpotColors" type="xsd:boolean"/>
+    <part name="password" type="xsd:string"/>
+    <part name="simulateSpots" type="xsd:boolean"/>
+    <part name="version" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setPDFPathResponse">
+  </message>
+  <message name="S_updateProofSettingsRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="fieldName" type="xsd:string"/>
+    <part name="strValue" type="xsd:string"/>
+    <part name="floatValue" type="xsd:float"/>
+    <part name="intValue" type="xsd:int"/>
+    <part name="boolValue" type="xsd:boolean"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_addRasterImageToProofIDResponse">
+  </message>
+  <message name="S_getRIPHostIDRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="sendForgottenPasswordEmailResponse">
+    <part name="sendForgottenPasswordEmailReturn" type="xsd:boolean"/>
+  </message>
+  <message name="S_profileFingerprintExistsRequest">
+    <part name="fingerprint" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getServerPrefsResponse">
+    <part name="S_getServerPrefsReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetUsersForSessionResponse">
+    <part name="S_APIGetUsersForSessionReturn" type="impl:ArrayOf_tns1_UserStruct"/>
+  </message>
+  <message name="S_putImageInProof3Request">
+    <part name="inProofImage" type="tns1:ImageStruct2"/>
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setProofParamsResponse">
+  </message>
+  <message name="S_deleteProofRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="versionRequest">
+  </message>
+  <message name="S_updateUserPermissionsResponse">
+  </message>
+  <message name="S_checkRIPLicenseRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateUserRequest">
+    <part name="theUser" type="tns1:UserStruct"/>
+    <part name="newPassword" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_convertJP2toTOFRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inImageID" type="xsd:int"/>
+    <part name="inSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_addUsersToProofIDRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="invitees" type="xsd:string"/>
+    <part name="instructionList" type="xsd:string"/>
+    <part name="permissionList" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="CallICSTilerResponse">
+    <part name="CallICSTilerReturn" type="tns1:ImageStruct2"/>
+  </message>
+  <message name="S_profileFingerprintExists2Response">
+    <part name="S_profileFingerprintExists2Return" type="tns1:ProfileStruct"/>
+  </message>
+  <message name="S_APIDeleteTaskResponse">
+  </message>
+  <message name="S_APIGetTaskDefinitionRequest">
+    <part name="taskName" type="xsd:string"/>
+  </message>
+  <message name="S_APICreateTaskResponse">
+  </message>
+  <message name="S_getCallbacksRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APICreateFilterRequest">
+    <part name="filterName" type="xsd:string"/>
+    <part name="combine" type="xsd:string"/>
+    <part name="comparisonList" type="impl:ArrayOf_tns1_FilterComparison"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_profileFingerprintExistsResponse">
+    <part name="S_profileFingerprintExistsReturn" type="xsd:int"/>
+  </message>
+  <message name="S_APIUpdateFileStatusRequest">
+    <part name="fileID" type="xsd:int"/>
+    <part name="status" type="xsd:string"/>
+    <part name="oemStatus" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getCallbacksResponse">
+    <part name="S_getCallbacksReturn" type="xsd:string"/>
+  </message>
+  <message name="S_setCallbackRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="callbackName" type="xsd:string"/>
+    <part name="callbackURL" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetPagesForFileResponse">
+    <part name="S_APIGetPagesForFileReturn" type="impl:ArrayOf_xsd_int"/>
+  </message>
+  <message name="S_APILogoutRequest">
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetFilesForJobRequest">
+    <part name="inJobID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetNotesForFileResponse">
+    <part name="S_APIGetNotesForFileReturn" type="impl:ArrayOf_tns1_NoteStruct"/>
+  </message>
+  <message name="S_APIReAuthenticateUserWithTicketRequest">
+    <part name="inUsername" type="xsd:string"/>
+    <part name="inPassword" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetAllNotesForAllFilePagesInJobRequest">
+    <part name="jobID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetNotesForObjectRequest">
+    <part name="inObjectID" type="xsd:int"/>
+    <part name="noteType" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_getChannelForProofImageResponse">
+    <part name="S_getChannelForProofImageReturn" type="tns1:ChannelStruct"/>
+  </message>
+  <message name="hasBeenConfiguredResponse">
+    <part name="hasBeenConfiguredReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APISetHotfoldersRequest">
+    <part name="inHotfolders" type="impl:ArrayOf_tns1_HotFolder"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_restoreProofImageLockRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="lock" type="xsd:boolean"/>
+    <part name="inDateLocked" type="xsd:string"/>
+    <part name="lockedBy_uid" type="xsd:int"/>
+    <part name="lockedBy_username" type="xsd:string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_reLicenseRIPRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIGetAllNotesForAllFilePagesInSessionResponse">
+    <part name="S_APIGetAllNotesForAllFilePagesInSessionReturn" type="impl:ArrayOf_tns1_NoteStruct"/>
+  </message>
+  <message name="sendAuditToTserverRequest">
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_addImageToProofIDResponse">
+    <part name="S_addImageToProofIDReturn" type="xsd:int"/>
+  </message>
+  <message name="S_APIGetEmailLogResponse">
+    <part name="S_APIGetEmailLogReturn" type="impl:ArrayOf_tns1_EmailLogStruct"/>
+  </message>
+  <message name="S_getChannelForProofImage1Request">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="inChannelIndex" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_prepareProofResponse">
+    <part name="S_prepareProofReturn" type="tns1:ProofStruct"/>
+  </message>
+  <message name="S_reserveImageIDResponse">
+    <part name="S_reserveImageIDReturn" type="xsd:int"/>
+  </message>
+  <message name="S_APISetBuddiesResponse">
+  </message>
+  <message name="S_getChannelsForProofImageRequest">
+    <part name="inProofID" type="xsd:int"/>
+    <part name="inProofImageID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="imageServerURLRequest">
+  </message>
+  <message name="getRIPLicenseResponse">
+    <part name="getRIPLicenseReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APISetSessionCallbacksRequest">
+    <part name="sessionID" type="xsd:int"/>
+    <part name="calibrationCallback" type="xsd:string"/>
+    <part name="noteCallback" type="xsd:string"/>
+    <part name="signoffCallback" type="xsd:string"/>
+    <part name="profileCallback" type="xsd:string"/>
+    <part name="openSessionCallback" type="xsd:string"/>
+    <part name="closeSessionCallback" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APICreateTaskRequest">
+    <part name="taskName" type="xsd:string"/>
+    <part name="taskXML" type="xsd:string"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIUpdateNoteRequest">
+    <part name="inNote" type="tns1:NoteStruct"/>
+    <part name="inSessionID" type="xsd:int"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIDeleteFilterResponse">
+  </message>
+  <message name="S_getSeatInfoRequest">
+    <part name="seatList" type="impl:ArrayOf_xsd_string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_APIDeleteNotesResponse">
+  </message>
+  <message name="digestToHexStringResponse">
+    <part name="digestToHexStringReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APIDeleteBuddiesRequest">
+    <part name="buddyUsernames" type="impl:ArrayOf_xsd_string"/>
+    <part name="securityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_setChannelsForProofImageResponse">
+  </message>
+  <message name="S_APIGetSessionCallbacksResponse">
+    <part name="S_APIGetSessionCallbacksReturn" type="impl:ArrayOf_xsd_string"/>
+  </message>
+  <message name="S_APISetRolesRequest">
+    <part name="newRoles" type="impl:ArrayOf_tns1_Role"/>
+    <part name="adminSecurityTicket" type="xsd:string"/>
+  </message>
+  <message name="S_deleteArchivedProofResponse">
+    <part name="S_deleteArchivedProofReturn" type="xsd:string"/>
+  </message>
+  <message name="S_APIExecFilterResponse">
+    <part name="S_APIExecFilterReturn" type="impl:ArrayOf_tns1_ProofStruct"/>
+  </message>
+  <portType name="RD3WS">
+    <operation name="version">
+      <input message="impl:versionRequest" name="versionRequest"/>
+      <output message="impl:versionResponse" name="versionResponse"/>
+    </operation>
+    <operation name="clientSSLRequired">
+      <input message="impl:clientSSLRequiredRequest" name="clientSSLRequiredRequest"/>
+      <output message="impl:clientSSLRequiredResponse" name="clientSSLRequiredResponse"/>
+    </operation>
+    <operation name="imageServerURL">
+      <input message="impl:imageServerURLRequest" name="imageServerURLRequest"/>
+      <output message="impl:imageServerURLResponse" name="imageServerURLResponse"/>
+    </operation>
+    <operation name="S_getColorSpaceFromChannels" parameterOrder="inProofID inProofImageID securityTicket">
+      <input message="impl:S_getColorSpaceFromChannelsRequest" name="S_getColorSpaceFromChannelsRequest"/>
+      <output message="impl:S_getColorSpaceFromChannelsResponse" name="S_getColorSpaceFromChannelsResponse"/>
+    </operation>
+    <operation name="extractEmbeddedProfile" parameterOrder="inPDFPath">
+      <input message="impl:extractEmbeddedProfileRequest" name="extractEmbeddedProfileRequest"/>
+      <output message="impl:extractEmbeddedProfileResponse" name="extractEmbeddedProfileResponse"/>
+    </operation>
+    <operation name="ExecuteHotfolder" parameterOrder="inFilePath inOriginalPath">
+      <input message="impl:ExecuteHotfolderRequest" name="ExecuteHotfolderRequest"/>
+      <output message="impl:ExecuteHotfolderResponse" name="ExecuteHotfolderResponse"/>
+    </operation>
+    <operation name="CallICSTiler" parameterOrder="inFile outFolder inProgressBasePath waitForReturn deleteInFile extractProfileTo invertSpots">
+      <input message="impl:CallICSTilerRequest" name="CallICSTilerRequest"/>
+      <output message="impl:CallICSTilerResponse" name="CallICSTilerResponse"/>
+    </operation>
+    <operation name="CallPSRIP" parameterOrder="inPDF outTIFF inProgressBasePath inDPI inSeps inFormat inPageRange inAntiAlias inPreserveSpots inProfilePaths iccOutProfilePath">
+      <input message="impl:CallPSRIPRequest" name="CallPSRIPRequest"/>
+      <output message="impl:CallPSRIPResponse" name="CallPSRIPResponse"/>
+    </operation>
+    <operation name="S_IsValidTicketForObject" parameterOrder="objectID objectType securityTicket">
+      <input message="impl:S_IsValidTicketForObjectRequest" name="S_IsValidTicketForObjectRequest"/>
+      <output message="impl:S_IsValidTicketForObjectResponse" name="S_IsValidTicketForObjectResponse"/>
+    </operation>
+    <operation name="S_IsValidTicketForProof" parameterOrder="ProofID ProofImageID securityTicket">
+      <input message="impl:S_IsValidTicketForProofRequest" name="S_IsValidTicketForProofRequest"/>
+      <output message="impl:S_IsValidTicketForProofResponse" name="S_IsValidTicketForProofResponse"/>
+    </operation>
+    <operation name="S_convertJP2toTOF" parameterOrder="inProofID inImageID inSecurityTicket">
+      <input message="impl:S_convertJP2toTOFRequest" name="S_convertJP2toTOFRequest"/>
+      <output message="impl:S_convertJP2toTOFResponse" name="S_convertJP2toTOFResponse"/>
+    </operation>
+    <operation name="isRasterFormat" parameterOrder="imageFilePath">
+      <input message="impl:isRasterFormatRequest" name="isRasterFormatRequest"/>
+      <output message="impl:isRasterFormatResponse" name="isRasterFormatResponse"/>
+    </operation>
+    <operation name="getRIPLicense">
+      <input message="impl:getRIPLicenseRequest" name="getRIPLicenseRequest"/>
+      <output message="impl:getRIPLicenseResponse" name="getRIPLicenseResponse"/>
+    </operation>
+    <operation name="S_getRIPHostID" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_getRIPHostIDRequest" name="S_getRIPHostIDRequest"/>
+      <output message="impl:S_getRIPHostIDResponse" name="S_getRIPHostIDResponse"/>
+    </operation>
+    <operation name="S_checkRIPLicense" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_checkRIPLicenseRequest" name="S_checkRIPLicenseRequest"/>
+      <output message="impl:S_checkRIPLicenseResponse" name="S_checkRIPLicenseResponse"/>
+    </operation>
+    <operation name="sendAuditToTserver" parameterOrder="adminSecurityTicket">
+      <input message="impl:sendAuditToTserverRequest" name="sendAuditToTserverRequest"/>
+      <output message="impl:sendAuditToTserverResponse" name="sendAuditToTserverResponse"/>
+    </operation>
+    <operation name="S_reserveImageID" parameterOrder="securityTicket">
+      <input message="impl:S_reserveImageIDRequest" name="S_reserveImageIDRequest"/>
+      <output message="impl:S_reserveImageIDResponse" name="S_reserveImageIDResponse"/>
+    </operation>
+    <operation name="S_updateUserCalibration2" parameterOrder="inProofID calibStatus illum statusFlags achievedLum lastCalib calibText securityTicket">
+      <input message="impl:S_updateUserCalibration2Request" name="S_updateUserCalibration2Request"/>
+      <output message="impl:S_updateUserCalibration2Response" name="S_updateUserCalibration2Response"/>
+    </operation>
+    <operation name="digestToHexString" parameterOrder="inDigest">
+      <input message="impl:digestToHexStringRequest" name="digestToHexStringRequest"/>
+      <output message="impl:digestToHexStringResponse" name="digestToHexStringResponse"/>
+    </operation>
+    <operation name="S_updateUserCalibration3" parameterOrder="inProofID inCalibrations securityTicket">
+      <input message="impl:S_updateUserCalibration3Request" name="S_updateUserCalibration3Request"/>
+      <output message="impl:S_updateUserCalibration3Response" name="S_updateUserCalibration3Response"/>
+    </operation>
+    <operation name="S_isValidCalibration" parameterOrder="inCalibration fingerprint">
+      <input message="impl:S_isValidCalibrationRequest" name="S_isValidCalibrationRequest"/>
+      <output message="impl:S_isValidCalibrationResponse" name="S_isValidCalibrationResponse"/>
+    </operation>
+    <operation name="S_isValidSignoff" parameterOrder="inProofImageID Username uid signoff srcProfID simProfID useSimProf signoffNote fingerprint">
+      <input message="impl:S_isValidSignoffRequest" name="S_isValidSignoffRequest"/>
+      <output message="impl:S_isValidSignoffResponse" name="S_isValidSignoffResponse"/>
+    </operation>
+    <operation name="S_getProofLog" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getProofLogRequest" name="S_getProofLogRequest"/>
+      <output message="impl:S_getProofLogResponse" name="S_getProofLogResponse"/>
+    </operation>
+    <operation name="S_updateUserPermissions" parameterOrder="inProofID inUserList securityTicket">
+      <input message="impl:S_updateUserPermissionsRequest" name="S_updateUserPermissionsRequest"/>
+      <output message="impl:S_updateUserPermissionsResponse" name="S_updateUserPermissionsResponse"/>
+    </operation>
+    <operation name="S_addUsersAndPermissionsToProof" parameterOrder="inProofID inUserList securityTicket">
+      <input message="impl:S_addUsersAndPermissionsToProofRequest" name="S_addUsersAndPermissionsToProofRequest"/>
+      <output message="impl:S_addUsersAndPermissionsToProofResponse" name="S_addUsersAndPermissionsToProofResponse"/>
+    </operation>
+    <operation name="S_createProof" parameterOrder="inProof securityTicket">
+      <input message="impl:S_createProofRequest" name="S_createProofRequest"/>
+      <output message="impl:S_createProofResponse" name="S_createProofResponse"/>
+    </operation>
+    <operation name="S_setCallback" parameterOrder="inProofID callbackName callbackURL securityTicket">
+      <input message="impl:S_setCallbackRequest" name="S_setCallbackRequest"/>
+      <output message="impl:S_setCallbackResponse" name="S_setCallbackResponse"/>
+    </operation>
+    <operation name="S_getCallbacks" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getCallbacksRequest" name="S_getCallbacksRequest"/>
+      <output message="impl:S_getCallbacksResponse" name="S_getCallbacksResponse"/>
+    </operation>
+    <operation name="S_deleteImages" parameterOrder="imageList inProofID securityTicket">
+      <input message="impl:S_deleteImagesRequest" name="S_deleteImagesRequest"/>
+      <output message="impl:S_deleteImagesResponse" name="S_deleteImagesResponse"/>
+    </operation>
+    <operation name="S_APIDeleteNotes" parameterOrder="notesList inSessionID securityTicket">
+      <input message="impl:S_APIDeleteNotesRequest" name="S_APIDeleteNotesRequest"/>
+      <output message="impl:S_APIDeleteNotesResponse" name="S_APIDeleteNotesResponse"/>
+    </operation>
+    <operation name="S_APIAppendNoteToObject" parameterOrder="inNote task inSessionID securityTicket">
+      <input message="impl:S_APIAppendNoteToObjectRequest" name="S_APIAppendNoteToObjectRequest"/>
+      <output message="impl:S_APIAppendNoteToObjectResponse" name="S_APIAppendNoteToObjectResponse"/>
+    </operation>
+    <operation name="S_APIUpdateNote" parameterOrder="inNote inSessionID securityTicket">
+      <input message="impl:S_APIUpdateNoteRequest" name="S_APIUpdateNoteRequest"/>
+      <output message="impl:S_APIUpdateNoteResponse" name="S_APIUpdateNoteResponse"/>
+    </operation>
+    <operation name="S_getSeatInfo" parameterOrder="seatList securityTicket">
+      <input message="impl:S_getSeatInfoRequest" name="S_getSeatInfoRequest"/>
+      <output message="impl:S_getSeatInfoResponse" name="S_getSeatInfoResponse"/>
+    </operation>
+    <operation name="S_APIGetPagesForSession" parameterOrder="inSessionID securityTicket">
+      <input message="impl:S_APIGetPagesForSessionRequest" name="S_APIGetPagesForSessionRequest"/>
+      <output message="impl:S_APIGetPagesForSessionResponse" name="S_APIGetPagesForSessionResponse"/>
+    </operation>
+    <operation name="S_APIGetUsersForSession" parameterOrder="inSessionID securityTicket">
+      <input message="impl:S_APIGetUsersForSessionRequest" name="S_APIGetUsersForSessionRequest"/>
+      <output message="impl:S_APIGetUsersForSessionResponse" name="S_APIGetUsersForSessionResponse"/>
+    </operation>
+    <operation name="S_APIAddFilesAndUsersToNewSession" parameterOrder="fileIDs usernames tasks adminSecurityTicket">
+      <input message="impl:S_APIAddFilesAndUsersToNewSessionRequest" name="S_APIAddFilesAndUsersToNewSessionRequest"/>
+      <output message="impl:S_APIAddFilesAndUsersToNewSessionResponse" name="S_APIAddFilesAndUsersToNewSessionResponse"/>
+    </operation>
+    <operation name="S_APISetSessionCallbacks" parameterOrder="sessionID calibrationCallback noteCallback signoffCallback profileCallback openSessionCallback closeSessionCallback adminSecurityTicket">
+      <input message="impl:S_APISetSessionCallbacksRequest" name="S_APISetSessionCallbacksRequest"/>
+      <output message="impl:S_APISetSessionCallbacksResponse" name="S_APISetSessionCallbacksResponse"/>
+    </operation>
+    <operation name="S_APIGetSessionCallbacks" parameterOrder="sessionID adminSecurityTicket">
+      <input message="impl:S_APIGetSessionCallbacksRequest" name="S_APIGetSessionCallbacksRequest"/>
+      <output message="impl:S_APIGetSessionCallbacksResponse" name="S_APIGetSessionCallbacksResponse"/>
+    </operation>
+    <operation name="S_APIDeleteSession" parameterOrder="sessionID adminSecurityTicket">
+      <input message="impl:S_APIDeleteSessionRequest" name="S_APIDeleteSessionRequest"/>
+      <output message="impl:S_APIDeleteSessionResponse" name="S_APIDeleteSessionResponse"/>
+    </operation>
+    <operation name="S_APIListSessions" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_APIListSessionsRequest" name="S_APIListSessionsRequest"/>
+      <output message="impl:S_APIListSessionsResponse" name="S_APIListSessionsResponse"/>
+    </operation>
+    <operation name="S_APIGetAllNotesForAllFilePagesInSession" parameterOrder="sessionID securityTicket">
+      <input message="impl:S_APIGetAllNotesForAllFilePagesInSessionRequest" name="S_APIGetAllNotesForAllFilePagesInSessionRequest"/>
+      <output message="impl:S_APIGetAllNotesForAllFilePagesInSessionResponse" name="S_APIGetAllNotesForAllFilePagesInSessionResponse"/>
+    </operation>
+    <operation name="S_APIGetFilesForSession" parameterOrder="inSessionID securityTicket">
+      <input message="impl:S_APIGetFilesForSessionRequest" name="S_APIGetFilesForSessionRequest"/>
+      <output message="impl:S_APIGetFilesForSessionResponse" name="S_APIGetFilesForSessionResponse"/>
+    </operation>
+    <operation name="S_finishProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_finishProofRequest" name="S_finishProofRequest"/>
+      <output message="impl:S_finishProofResponse" name="S_finishProofResponse"/>
+    </operation>
+    <operation name="S_deleteProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_deleteProofRequest" name="S_deleteProofRequest"/>
+      <output message="impl:S_deleteProofResponse" name="S_deleteProofResponse"/>
+    </operation>
+    <operation name="S_addUsersToProofID" parameterOrder="inProofID invitees instructionList permissionList securityTicket">
+      <input message="impl:S_addUsersToProofIDRequest" name="S_addUsersToProofIDRequest"/>
+      <output message="impl:S_addUsersToProofIDResponse" name="S_addUsersToProofIDResponse"/>
+    </operation>
+    <operation name="S_deleteUsersFromProofID" parameterOrder="inProofID userList securityTicket">
+      <input message="impl:S_deleteUsersFromProofIDRequest" name="S_deleteUsersFromProofIDRequest"/>
+      <output message="impl:S_deleteUsersFromProofIDResponse" name="S_deleteUsersFromProofIDResponse"/>
+    </operation>
+    <operation name="S_prepareProof" parameterOrder="proofName proofDescription tags proofType useMaxLum lumValue illuminant autoLockImages inkCoverage invitees seatInstructions permissions requireCalibration viewBooth lampType dueDate securityTicket">
+      <input message="impl:S_prepareProofRequest" name="S_prepareProofRequest"/>
+      <output message="impl:S_prepareProofResponse" name="S_prepareProofResponse"/>
+    </operation>
+    <operation name="S_addRasterImageToProofID" parameterOrder="proofID imageFilePath proofProfPath humanName description renderingIntent version securityTicket">
+      <input message="impl:S_addRasterImageToProofIDRequest" name="S_addRasterImageToProofIDRequest"/>
+      <output message="impl:S_addRasterImageToProofIDResponse" name="S_addRasterImageToProofIDResponse"/>
+    </operation>
+    <operation name="S_APIAddFileToProofID" parameterOrder="proofID imageFilePath humanName defaultRGBProfPath defaultCMYKProfPath defaultLabProfPath proofProfPath profileHandling ripDPI ripStartPage ripEndPage description renderingIntent antialiasing preserveSpotColors simulateSpots version securityTicket">
+      <input message="impl:S_APIAddFileToProofIDRequest" name="S_APIAddFileToProofIDRequest"/>
+      <output message="impl:S_APIAddFileToProofIDResponse" name="S_APIAddFileToProofIDResponse"/>
+    </operation>
+    <operation name="S_addImageToProofID" parameterOrder="proofID imageServer imageFilePath defaultRGBProfPath defaultCMYKProfPath defaultLabProfPath proofProfPath profileHandling ripDPI ripStartPage ripEndPage description jpegQuality renderingIntent antialiasing preserveSpotColors password simulateSpots version securityTicket">
+      <input message="impl:S_addImageToProofIDRequest" name="S_addImageToProofIDRequest"/>
+      <output message="impl:S_addImageToProofIDResponse" name="S_addImageToProofIDResponse"/>
+    </operation>
+    <operation name="S_setPDFPath" parameterOrder="inProofID inProofImageID pdfPath securityTicket">
+      <input message="impl:S_setPDFPathRequest" name="S_setPDFPathRequest"/>
+      <output message="impl:S_setPDFPathResponse" name="S_setPDFPathResponse"/>
+    </operation>
+    <operation name="S_getProfilePath" parameterOrder="securityTicket">
+      <input message="impl:S_getProfilePathRequest" name="S_getProfilePathRequest"/>
+      <output message="impl:S_getProfilePathResponse" name="S_getProfilePathResponse"/>
+    </operation>
+    <operation name="getProfilePath">
+      <input message="impl:getProfilePathRequest" name="getProfilePathRequest"/>
+      <output message="impl:getProfilePathResponse" name="getProfilePathResponse"/>
+    </operation>
+    <operation name="getRIPPath">
+      <input message="impl:getRIPPathRequest" name="getRIPPathRequest"/>
+      <output message="impl:getRIPPathResponse" name="getRIPPathResponse"/>
+    </operation>
+    <operation name="S_putImageInProof3" parameterOrder="inProofImage inProofID securityTicket">
+      <input message="impl:S_putImageInProof3Request" name="S_putImageInProof3Request"/>
+      <output message="impl:S_putImageInProof3Response" name="S_putImageInProof3Response"/>
+    </operation>
+    <operation name="S_restoreProofImageLock" parameterOrder="inProofID inProofImageID lock inDateLocked lockedBy_uid lockedBy_username securityTicket">
+      <input message="impl:S_restoreProofImageLockRequest" name="S_restoreProofImageLockRequest"/>
+      <output message="impl:S_restoreProofImageLockResponse" name="S_restoreProofImageLockResponse"/>
+    </operation>
+    <operation name="S_setProofImageLock" parameterOrder="inProofImageID lock securityTicket">
+      <input message="impl:S_setProofImageLockRequest" name="S_setProofImageLockRequest"/>
+      <output message="impl:S_setProofImageLockResponse" name="S_setProofImageLockResponse"/>
+    </operation>
+    <operation name="S_updateProofSettings" parameterOrder="inProofID fieldName strValue floatValue intValue boolValue securityTicket">
+      <input message="impl:S_updateProofSettingsRequest" name="S_updateProofSettingsRequest"/>
+      <output message="impl:S_updateProofSettingsResponse" name="S_updateProofSettingsResponse"/>
+    </operation>
+    <operation name="S_APIUpdateFileStatus" parameterOrder="fileID status oemStatus securityTicket">
+      <input message="impl:S_APIUpdateFileStatusRequest" name="S_APIUpdateFileStatusRequest"/>
+      <output message="impl:S_APIUpdateFileStatusResponse" name="S_APIUpdateFileStatusResponse"/>
+    </operation>
+    <operation name="S_updateProofImagesHint2" parameterOrder="inProofID inProofImageIDs fieldName strValue floatValue intValue boolValue securityTicket">
+      <input message="impl:S_updateProofImagesHint2Request" name="S_updateProofImagesHint2Request"/>
+      <output message="impl:S_updateProofImagesHint2Response" name="S_updateProofImagesHint2Response"/>
+    </operation>
+    <operation name="S_cloneProofImage" parameterOrder="inProofID inProofImageID securityTicket">
+      <input message="impl:S_cloneProofImageRequest" name="S_cloneProofImageRequest"/>
+      <output message="impl:S_cloneProofImageResponse" name="S_cloneProofImageResponse"/>
+    </operation>
+    <operation name="S_APIGetFilesForJob" parameterOrder="inJobID securityTicket">
+      <input message="impl:S_APIGetFilesForJobRequest" name="S_APIGetFilesForJobRequest"/>
+      <output message="impl:S_APIGetFilesForJobResponse" name="S_APIGetFilesForJobResponse"/>
+    </operation>
+    <operation name="S_APIGetPagesForFile" parameterOrder="inFileID securityTicket">
+      <input message="impl:S_APIGetPagesForFileRequest" name="S_APIGetPagesForFileRequest"/>
+      <output message="impl:S_APIGetPagesForFileResponse" name="S_APIGetPagesForFileResponse"/>
+    </operation>
+    <operation name="S_APIGetAllNotesForAllFilePagesInJob" parameterOrder="jobID securityTicket">
+      <input message="impl:S_APIGetAllNotesForAllFilePagesInJobRequest" name="S_APIGetAllNotesForAllFilePagesInJobRequest"/>
+      <output message="impl:S_APIGetAllNotesForAllFilePagesInJobResponse" name="S_APIGetAllNotesForAllFilePagesInJobResponse"/>
+    </operation>
+    <operation name="S_APIGetNotesForFile" parameterOrder="inFileID inUsername afterTimeStamp securityTicket">
+      <input message="impl:S_APIGetNotesForFileRequest" name="S_APIGetNotesForFileRequest"/>
+      <output message="impl:S_APIGetNotesForFileResponse" name="S_APIGetNotesForFileResponse"/>
+    </operation>
+    <operation name="S_APIGetNotesForObject" parameterOrder="inObjectID noteType securityTicket">
+      <input message="impl:S_APIGetNotesForObjectRequest" name="S_APIGetNotesForObjectRequest"/>
+      <output message="impl:S_APIGetNotesForObjectResponse" name="S_APIGetNotesForObjectResponse"/>
+    </operation>
+    <operation name="S_APIDeleteBuddies" parameterOrder="buddyUsernames securityTicket">
+      <input message="impl:S_APIDeleteBuddiesRequest" name="S_APIDeleteBuddiesRequest"/>
+      <output message="impl:S_APIDeleteBuddiesResponse" name="S_APIDeleteBuddiesResponse"/>
+    </operation>
+    <operation name="S_APICreateUser" parameterOrder="username password role adminSecurityTicket">
+      <input message="impl:S_APICreateUserRequest" name="S_APICreateUserRequest"/>
+      <output message="impl:S_APICreateUserResponse" name="S_APICreateUserResponse"/>
+    </operation>
+    <operation name="S_APIAddBuddies" parameterOrder="buddyUsernames buddyRoles createAdHocUser securityTicket">
+      <input message="impl:S_APIAddBuddiesRequest" name="S_APIAddBuddiesRequest"/>
+      <output message="impl:S_APIAddBuddiesResponse" name="S_APIAddBuddiesResponse"/>
+    </operation>
+    <operation name="S_APIListAllUsers" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_APIListAllUsersRequest" name="S_APIListAllUsersRequest"/>
+      <output message="impl:S_APIListAllUsersResponse" name="S_APIListAllUsersResponse"/>
+    </operation>
+    <operation name="S_APIUpdateUsers" parameterOrder="userList adminSecurityTicket">
+      <input message="impl:S_APIUpdateUsersRequest" name="S_APIUpdateUsersRequest"/>
+      <output message="impl:S_APIUpdateUsersResponse" name="S_APIUpdateUsersResponse"/>
+    </operation>
+    <operation name="S_APIListBuddyGroups" parameterOrder="securityTicket">
+      <input message="impl:S_APIListBuddyGroupsRequest" name="S_APIListBuddyGroupsRequest"/>
+      <output message="impl:S_APIListBuddyGroupsResponse" name="S_APIListBuddyGroupsResponse"/>
+    </operation>
+    <operation name="S_APIGetBuddies" parameterOrder="securityTicket">
+      <input message="impl:S_APIGetBuddiesRequest" name="S_APIGetBuddiesRequest"/>
+      <output message="impl:S_APIGetBuddiesResponse" name="S_APIGetBuddiesResponse"/>
+    </operation>
+    <operation name="S_APISetBuddies" parameterOrder="inBuddies securityTicket">
+      <input message="impl:S_APISetBuddiesRequest" name="S_APISetBuddiesRequest"/>
+      <output message="impl:S_APISetBuddiesResponse" name="S_APISetBuddiesResponse"/>
+    </operation>
+    <operation name="S_APISetProofUserTask" parameterOrder="username proofID taskName adminSecurityTicket">
+      <input message="impl:S_APISetProofUserTaskRequest" name="S_APISetProofUserTaskRequest"/>
+      <output message="impl:S_APISetProofUserTaskResponse" name="S_APISetProofUserTaskResponse"/>
+    </operation>
+    <operation name="S_APICreateTask" parameterOrder="taskName taskXML adminSecurityTicket">
+      <input message="impl:S_APICreateTaskRequest" name="S_APICreateTaskRequest"/>
+      <output message="impl:S_APICreateTaskResponse" name="S_APICreateTaskResponse"/>
+    </operation>
+    <operation name="S_APIDeleteTask" parameterOrder="taskName adminSecurityTicket">
+      <input message="impl:S_APIDeleteTaskRequest" name="S_APIDeleteTaskRequest"/>
+      <output message="impl:S_APIDeleteTaskResponse" name="S_APIDeleteTaskResponse"/>
+    </operation>
+    <operation name="S_APIGetTaskDefinition" parameterOrder="taskName">
+      <input message="impl:S_APIGetTaskDefinitionRequest" name="S_APIGetTaskDefinitionRequest"/>
+      <output message="impl:S_APIGetTaskDefinitionResponse" name="S_APIGetTaskDefinitionResponse"/>
+    </operation>
+    <operation name="S_APILogout" parameterOrder="securityTicket">
+      <input message="impl:S_APILogoutRequest" name="S_APILogoutRequest"/>
+      <output message="impl:S_APILogoutResponse" name="S_APILogoutResponse"/>
+    </operation>
+    <operation name="S_APIForceLogout" parameterOrder="uidToLogout adminSecurityTicket">
+      <input message="impl:S_APIForceLogoutRequest" name="S_APIForceLogoutRequest"/>
+      <output message="impl:S_APIForceLogoutResponse" name="S_APIForceLogoutResponse"/>
+    </operation>
+    <operation name="S_APIAuthenticateTicket" parameterOrder="securityTicket">
+      <input message="impl:S_APIAuthenticateTicketRequest" name="S_APIAuthenticateTicketRequest"/>
+      <output message="impl:S_APIAuthenticateTicketResponse" name="S_APIAuthenticateTicketResponse"/>
+    </operation>
+    <operation name="S_APIReAuthenticateUserWithTicket" parameterOrder="inUsername inPassword securityTicket">
+      <input message="impl:S_APIReAuthenticateUserWithTicketRequest" name="S_APIReAuthenticateUserWithTicketRequest"/>
+      <output message="impl:S_APIReAuthenticateUserWithTicketResponse" name="S_APIReAuthenticateUserWithTicketResponse"/>
+    </operation>
+    <operation name="S_APIAuthenticateUser" parameterOrder="inUsername inPassword">
+      <input message="impl:S_APIAuthenticateUserRequest" name="S_APIAuthenticateUserRequest"/>
+      <output message="impl:S_APIAuthenticateUserResponse" name="S_APIAuthenticateUserResponse"/>
+    </operation>
+    <operation name="S_APIUpdateUser" parameterOrder="theUser newPassword securityTicket">
+      <input message="impl:S_APIUpdateUserRequest" name="S_APIUpdateUserRequest"/>
+      <output message="impl:S_APIUpdateUserResponse" name="S_APIUpdateUserResponse"/>
+    </operation>
+    <operation name="S_APIListFilters" parameterOrder="securityTicket">
+      <input message="impl:S_APIListFiltersRequest" name="S_APIListFiltersRequest"/>
+      <output message="impl:S_APIListFiltersResponse" name="S_APIListFiltersResponse"/>
+    </operation>
+    <operation name="S_APIExecFilter" parameterOrder="filterID securityTicket">
+      <input message="impl:S_APIExecFilterRequest" name="S_APIExecFilterRequest"/>
+      <output message="impl:S_APIExecFilterResponse" name="S_APIExecFilterResponse"/>
+    </operation>
+    <operation name="S_APICreateFilter" parameterOrder="filterName combine comparisonList securityTicket">
+      <input message="impl:S_APICreateFilterRequest" name="S_APICreateFilterRequest"/>
+      <output message="impl:S_APICreateFilterResponse" name="S_APICreateFilterResponse"/>
+    </operation>
+    <operation name="S_APIUpdateFilter" parameterOrder="filterID filterName combine comparisonList securityTicket">
+      <input message="impl:S_APIUpdateFilterRequest" name="S_APIUpdateFilterRequest"/>
+      <output message="impl:S_APIUpdateFilterResponse" name="S_APIUpdateFilterResponse"/>
+    </operation>
+    <operation name="S_APIDeleteFilter" parameterOrder="filterID securityTicket">
+      <input message="impl:S_APIDeleteFilterRequest" name="S_APIDeleteFilterRequest"/>
+      <output message="impl:S_APIDeleteFilterResponse" name="S_APIDeleteFilterResponse"/>
+    </operation>
+    <operation name="S_getUsersForProofID" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getUsersForProofIDRequest" name="S_getUsersForProofIDRequest"/>
+      <output message="impl:S_getUsersForProofIDResponse" name="S_getUsersForProofIDResponse"/>
+    </operation>
+    <operation name="S_APIGetSignoffsForObjectID" parameterOrder="inObjectID inSignoffType securityTicket">
+      <input message="impl:S_APIGetSignoffsForObjectIDRequest" name="S_APIGetSignoffsForObjectIDRequest"/>
+      <output message="impl:S_APIGetSignoffsForObjectIDResponse" name="S_APIGetSignoffsForObjectIDResponse"/>
+    </operation>
+    <operation name="S_getChannelsForProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getChannelsForProofRequest" name="S_getChannelsForProofRequest"/>
+      <output message="impl:S_getChannelsForProofResponse" name="S_getChannelsForProofResponse"/>
+    </operation>
+    <operation name="S_getChannelsForProofImage" parameterOrder="inProofID inProofImageID securityTicket">
+      <input message="impl:S_getChannelsForProofImageRequest" name="S_getChannelsForProofImageRequest"/>
+      <output message="impl:S_getChannelsForProofImageResponse" name="S_getChannelsForProofImageResponse"/>
+    </operation>
+    <operation name="S_getChannelForProofImage1" parameterOrder="inProofID inProofImageID inChannelIndex securityTicket">
+      <input message="impl:S_getChannelForProofImage1Request" name="S_getChannelForProofImage1Request"/>
+      <output message="impl:S_getChannelForProofImage1Response" name="S_getChannelForProofImage1Response"/>
+    </operation>
+    <operation name="S_getChannelForProofImage" parameterOrder="inProofID inProofImageID name securityTicket">
+      <input message="impl:S_getChannelForProofImageRequest" name="S_getChannelForProofImageRequest"/>
+      <output message="impl:S_getChannelForProofImageResponse" name="S_getChannelForProofImageResponse"/>
+    </operation>
+    <operation name="S_setChannelForProofImage" parameterOrder="inProofID inChannel securityTicket">
+      <input message="impl:S_setChannelForProofImageRequest" name="S_setChannelForProofImageRequest"/>
+      <output message="impl:S_setChannelForProofImageResponse" name="S_setChannelForProofImageResponse"/>
+    </operation>
+    <operation name="S_setChannelsForProofImage" parameterOrder="inProofID inChannels securityTicket">
+      <input message="impl:S_setChannelsForProofImageRequest" name="S_setChannelsForProofImageRequest"/>
+      <output message="impl:S_setChannelsForProofImageResponse" name="S_setChannelsForProofImageResponse"/>
+    </operation>
+    <operation name="S_getImagesForProofID3" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getImagesForProofID3Request" name="S_getImagesForProofID3Request"/>
+      <output message="impl:S_getImagesForProofID3Response" name="S_getImagesForProofID3Response"/>
+    </operation>
+    <operation name="S_getProofImagesForUser" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getProofImagesForUserRequest" name="S_getProofImagesForUserRequest"/>
+      <output message="impl:S_getProofImagesForUserResponse" name="S_getProofImagesForUserResponse"/>
+    </operation>
+    <operation name="S_getInfoForProofImage" parameterOrder="inProofID inProofImageID securityTicket">
+      <input message="impl:S_getInfoForProofImageRequest" name="S_getInfoForProofImageRequest"/>
+      <output message="impl:S_getInfoForProofImageResponse" name="S_getInfoForProofImageResponse"/>
+    </operation>
+    <operation name="S_setProofParams" parameterOrder="inProofID whitePoint1 whitePoint2 whitePoint3 whitePoint4 useMaxLum lumValue securityTicket">
+      <input message="impl:S_setProofParamsRequest" name="S_setProofParamsRequest"/>
+      <output message="impl:S_setProofParamsResponse" name="S_setProofParamsResponse"/>
+    </operation>
+    <operation name="S_closeProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_closeProofRequest" name="S_closeProofRequest"/>
+      <output message="impl:S_closeProofResponse" name="S_closeProofResponse"/>
+    </operation>
+    <operation name="S_APICloseSession" parameterOrder="inSessionID securityTicket">
+      <input message="impl:S_APICloseSessionRequest" name="S_APICloseSessionRequest"/>
+      <output message="impl:S_APICloseSessionResponse" name="S_APICloseSessionResponse"/>
+    </operation>
+    <operation name="S_getProof2" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getProof2Request" name="S_getProof2Request"/>
+      <output message="impl:S_getProof2Response" name="S_getProof2Response"/>
+    </operation>
+    <operation name="S_addProfileRecord2" parameterOrder="inProfile unusedSecurityTicket">
+      <input message="impl:S_addProfileRecord2Request" name="S_addProfileRecord2Request"/>
+      <output message="impl:S_addProfileRecord2Response" name="S_addProfileRecord2Response"/>
+    </operation>
+    <operation name="getProfileList">
+      <input message="impl:getProfileListRequest" name="getProfileListRequest"/>
+      <output message="impl:getProfileListResponse" name="getProfileListResponse"/>
+    </operation>
+    <operation name="S_getProfileListForProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_getProfileListForProofRequest" name="S_getProfileListForProofRequest"/>
+      <output message="impl:S_getProfileListForProofResponse" name="S_getProfileListForProofResponse"/>
+    </operation>
+    <operation name="S_profileFingerprintExists" parameterOrder="fingerprint securityTicket">
+      <input message="impl:S_profileFingerprintExistsRequest" name="S_profileFingerprintExistsRequest"/>
+      <output message="impl:S_profileFingerprintExistsResponse" name="S_profileFingerprintExistsResponse"/>
+    </operation>
+    <operation name="S_profileFingerprintExists2" parameterOrder="fingerprint">
+      <input message="impl:S_profileFingerprintExists2Request" name="S_profileFingerprintExists2Request"/>
+      <output message="impl:S_profileFingerprintExists2Response" name="S_profileFingerprintExists2Response"/>
+    </operation>
+    <operation name="S_deleteArchivedProof" parameterOrder="inProofID securityTicket">
+      <input message="impl:S_deleteArchivedProofRequest" name="S_deleteArchivedProofRequest"/>
+      <output message="impl:S_deleteArchivedProofResponse" name="S_deleteArchivedProofResponse"/>
+    </operation>
+    <operation name="S_installRIPLicense" parameterOrder="licenseString adminSecurityTicket">
+      <input message="impl:S_installRIPLicenseRequest" name="S_installRIPLicenseRequest"/>
+      <output message="impl:S_installRIPLicenseResponse" name="S_installRIPLicenseResponse"/>
+    </operation>
+    <operation name="S_reLicenseRIP" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_reLicenseRIPRequest" name="S_reLicenseRIPRequest"/>
+      <output message="impl:S_reLicenseRIPResponse" name="S_reLicenseRIPResponse"/>
+    </operation>
+    <operation name="hasBeenConfigured">
+      <input message="impl:hasBeenConfiguredRequest" name="hasBeenConfiguredRequest"/>
+      <output message="impl:hasBeenConfiguredResponse" name="hasBeenConfiguredResponse"/>
+    </operation>
+    <operation name="S_createAdministrator" parameterOrder="username password">
+      <input message="impl:S_createAdministratorRequest" name="S_createAdministratorRequest"/>
+      <output message="impl:S_createAdministratorResponse" name="S_createAdministratorResponse"/>
+    </operation>
+    <operation name="S_APIGetRoles" parameterOrder="securityTicket">
+      <input message="impl:S_APIGetRolesRequest" name="S_APIGetRolesRequest"/>
+      <output message="impl:S_APIGetRolesResponse" name="S_APIGetRolesResponse"/>
+    </operation>
+    <operation name="S_APISetRoles" parameterOrder="newRoles adminSecurityTicket">
+      <input message="impl:S_APISetRolesRequest" name="S_APISetRolesRequest"/>
+      <output message="impl:S_APISetRolesResponse" name="S_APISetRolesResponse"/>
+    </operation>
+    <operation name="S_APIGetHotfolders" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_APIGetHotfoldersRequest" name="S_APIGetHotfoldersRequest"/>
+      <output message="impl:S_APIGetHotfoldersResponse" name="S_APIGetHotfoldersResponse"/>
+    </operation>
+    <operation name="S_APISetHotfolders" parameterOrder="inHotfolders adminSecurityTicket">
+      <input message="impl:S_APISetHotfoldersRequest" name="S_APISetHotfoldersRequest"/>
+      <output message="impl:S_APISetHotfoldersResponse" name="S_APISetHotfoldersResponse"/>
+    </operation>
+    <operation name="S_getServerPrefs" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_getServerPrefsRequest" name="S_getServerPrefsRequest"/>
+      <output message="impl:S_getServerPrefsResponse" name="S_getServerPrefsResponse"/>
+    </operation>
+    <operation name="S_updateServerPrefs" parameterOrder="newPrefsXML adminSecurityTicket">
+      <input message="impl:S_updateServerPrefsRequest" name="S_updateServerPrefsRequest"/>
+      <output message="impl:S_updateServerPrefsResponse" name="S_updateServerPrefsResponse"/>
+    </operation>
+    <operation name="sendForgottenPasswordEmail" parameterOrder="username">
+      <input message="impl:sendForgottenPasswordEmailRequest" name="sendForgottenPasswordEmailRequest"/>
+      <output message="impl:sendForgottenPasswordEmailResponse" name="sendForgottenPasswordEmailResponse"/>
+    </operation>
+    <operation name="sendTestEmail" parameterOrder="serverTest emailAddress securityTicket">
+      <input message="impl:sendTestEmailRequest" name="sendTestEmailRequest"/>
+      <output message="impl:sendTestEmailResponse" name="sendTestEmailResponse"/>
+    </operation>
+    <operation name="S_APIGetEmailLog" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_APIGetEmailLogRequest" name="S_APIGetEmailLogRequest"/>
+      <output message="impl:S_APIGetEmailLogResponse" name="S_APIGetEmailLogResponse"/>
+    </operation>
+    <operation name="S_APIClearEmailLog" parameterOrder="adminSecurityTicket">
+      <input message="impl:S_APIClearEmailLogRequest" name="S_APIClearEmailLogRequest"/>
+      <output message="impl:S_APIClearEmailLogResponse" name="S_APIClearEmailLogResponse"/>
+    </operation>
+  </portType>
+  <binding name="RD3WSSoapBinding" type="impl:RD3WS">
+    <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="version">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="versionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="versionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="clientSSLRequired">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="clientSSLRequiredRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="clientSSLRequiredResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="imageServerURL">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="imageServerURLRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="imageServerURLResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getColorSpaceFromChannels">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getColorSpaceFromChannelsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getColorSpaceFromChannelsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="extractEmbeddedProfile">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="extractEmbeddedProfileRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="extractEmbeddedProfileResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="ExecuteHotfolder">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="ExecuteHotfolderRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="ExecuteHotfolderResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="CallICSTiler">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="CallICSTilerRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="CallICSTilerResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="CallPSRIP">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="CallPSRIPRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="CallPSRIPResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_IsValidTicketForObject">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_IsValidTicketForObjectRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_IsValidTicketForObjectResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_IsValidTicketForProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_IsValidTicketForProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_IsValidTicketForProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_convertJP2toTOF">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_convertJP2toTOFRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_convertJP2toTOFResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="isRasterFormat">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="isRasterFormatRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="isRasterFormatResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="getRIPLicense">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="getRIPLicenseRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="getRIPLicenseResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getRIPHostID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getRIPHostIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getRIPHostIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_checkRIPLicense">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_checkRIPLicenseRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_checkRIPLicenseResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="sendAuditToTserver">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="sendAuditToTserverRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="sendAuditToTserverResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_reserveImageID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_reserveImageIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_reserveImageIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateUserCalibration2">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateUserCalibration2Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateUserCalibration2Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="digestToHexString">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="digestToHexStringRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="digestToHexStringResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateUserCalibration3">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateUserCalibration3Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateUserCalibration3Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_isValidCalibration">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_isValidCalibrationRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_isValidCalibrationResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_isValidSignoff">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_isValidSignoffRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_isValidSignoffResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getProofLog">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getProofLogRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getProofLogResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateUserPermissions">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateUserPermissionsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateUserPermissionsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_addUsersAndPermissionsToProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_addUsersAndPermissionsToProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_addUsersAndPermissionsToProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_createProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_createProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_createProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setCallback">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setCallbackRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setCallbackResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getCallbacks">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getCallbacksRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getCallbacksResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_deleteImages">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_deleteImagesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_deleteImagesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIDeleteNotes">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIDeleteNotesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIDeleteNotesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAppendNoteToObject">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAppendNoteToObjectRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAppendNoteToObjectResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIUpdateNote">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIUpdateNoteRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIUpdateNoteResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getSeatInfo">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getSeatInfoRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getSeatInfoResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetPagesForSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetPagesForSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetPagesForSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetUsersForSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetUsersForSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetUsersForSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAddFilesAndUsersToNewSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAddFilesAndUsersToNewSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAddFilesAndUsersToNewSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APISetSessionCallbacks">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APISetSessionCallbacksRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APISetSessionCallbacksResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetSessionCallbacks">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetSessionCallbacksRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetSessionCallbacksResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIDeleteSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIDeleteSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIDeleteSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIListSessions">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIListSessionsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIListSessionsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetAllNotesForAllFilePagesInSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetAllNotesForAllFilePagesInSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetAllNotesForAllFilePagesInSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetFilesForSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetFilesForSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetFilesForSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_finishProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_finishProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_finishProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_deleteProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_deleteProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_deleteProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_addUsersToProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_addUsersToProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_addUsersToProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_deleteUsersFromProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_deleteUsersFromProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_deleteUsersFromProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_prepareProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_prepareProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_prepareProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_addRasterImageToProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_addRasterImageToProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_addRasterImageToProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAddFileToProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAddFileToProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAddFileToProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_addImageToProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_addImageToProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_addImageToProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setPDFPath">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setPDFPathRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setPDFPathResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getProfilePath">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getProfilePathRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getProfilePathResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="getProfilePath">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="getProfilePathRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="getProfilePathResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="getRIPPath">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="getRIPPathRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="getRIPPathResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_putImageInProof3">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_putImageInProof3Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_putImageInProof3Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_restoreProofImageLock">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_restoreProofImageLockRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_restoreProofImageLockResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setProofImageLock">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setProofImageLockRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setProofImageLockResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateProofSettings">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateProofSettingsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateProofSettingsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIUpdateFileStatus">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIUpdateFileStatusRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIUpdateFileStatusResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateProofImagesHint2">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateProofImagesHint2Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateProofImagesHint2Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_cloneProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_cloneProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_cloneProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetFilesForJob">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetFilesForJobRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetFilesForJobResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetPagesForFile">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetPagesForFileRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetPagesForFileResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetAllNotesForAllFilePagesInJob">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetAllNotesForAllFilePagesInJobRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetAllNotesForAllFilePagesInJobResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetNotesForFile">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetNotesForFileRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetNotesForFileResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetNotesForObject">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetNotesForObjectRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetNotesForObjectResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIDeleteBuddies">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIDeleteBuddiesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIDeleteBuddiesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APICreateUser">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APICreateUserRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APICreateUserResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAddBuddies">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAddBuddiesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAddBuddiesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIListAllUsers">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIListAllUsersRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIListAllUsersResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIUpdateUsers">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIUpdateUsersRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIUpdateUsersResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIListBuddyGroups">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIListBuddyGroupsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIListBuddyGroupsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetBuddies">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetBuddiesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetBuddiesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APISetBuddies">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APISetBuddiesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APISetBuddiesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APISetProofUserTask">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APISetProofUserTaskRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APISetProofUserTaskResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APICreateTask">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APICreateTaskRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APICreateTaskResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIDeleteTask">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIDeleteTaskRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIDeleteTaskResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetTaskDefinition">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetTaskDefinitionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetTaskDefinitionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APILogout">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APILogoutRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APILogoutResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIForceLogout">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIForceLogoutRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIForceLogoutResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAuthenticateTicket">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAuthenticateTicketRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAuthenticateTicketResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIReAuthenticateUserWithTicket">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIReAuthenticateUserWithTicketRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIReAuthenticateUserWithTicketResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIAuthenticateUser">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIAuthenticateUserRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIAuthenticateUserResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIUpdateUser">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIUpdateUserRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIUpdateUserResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIListFilters">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIListFiltersRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIListFiltersResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIExecFilter">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIExecFilterRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIExecFilterResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APICreateFilter">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APICreateFilterRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APICreateFilterResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIUpdateFilter">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIUpdateFilterRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIUpdateFilterResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIDeleteFilter">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIDeleteFilterRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIDeleteFilterResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getUsersForProofID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getUsersForProofIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getUsersForProofIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetSignoffsForObjectID">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetSignoffsForObjectIDRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetSignoffsForObjectIDResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getChannelsForProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getChannelsForProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getChannelsForProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getChannelsForProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getChannelsForProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getChannelsForProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getChannelForProofImage1">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getChannelForProofImage1Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getChannelForProofImage1Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getChannelForProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getChannelForProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getChannelForProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setChannelForProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setChannelForProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setChannelForProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setChannelsForProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setChannelsForProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setChannelsForProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getImagesForProofID3">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getImagesForProofID3Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getImagesForProofID3Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getProofImagesForUser">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getProofImagesForUserRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getProofImagesForUserResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getInfoForProofImage">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getInfoForProofImageRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getInfoForProofImageResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_setProofParams">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_setProofParamsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_setProofParamsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_closeProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_closeProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_closeProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APICloseSession">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APICloseSessionRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APICloseSessionResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getProof2">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getProof2Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getProof2Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_addProfileRecord2">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_addProfileRecord2Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_addProfileRecord2Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="getProfileList">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="getProfileListRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="getProfileListResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getProfileListForProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getProfileListForProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getProfileListForProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_profileFingerprintExists">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_profileFingerprintExistsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_profileFingerprintExistsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_profileFingerprintExists2">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_profileFingerprintExists2Request">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_profileFingerprintExists2Response">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_deleteArchivedProof">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_deleteArchivedProofRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_deleteArchivedProofResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_installRIPLicense">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_installRIPLicenseRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_installRIPLicenseResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_reLicenseRIP">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_reLicenseRIPRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_reLicenseRIPResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="hasBeenConfigured">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="hasBeenConfiguredRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="hasBeenConfiguredResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_createAdministrator">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_createAdministratorRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_createAdministratorResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetRoles">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetRolesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetRolesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APISetRoles">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APISetRolesRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APISetRolesResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetHotfolders">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetHotfoldersRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetHotfoldersResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APISetHotfolders">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APISetHotfoldersRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APISetHotfoldersResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_getServerPrefs">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_getServerPrefsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_getServerPrefsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_updateServerPrefs">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_updateServerPrefsRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_updateServerPrefsResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="sendForgottenPasswordEmail">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="sendForgottenPasswordEmailRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="sendForgottenPasswordEmailResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="sendTestEmail">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="sendTestEmailRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="sendTestEmailResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIGetEmailLog">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIGetEmailLogRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIGetEmailLogResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+    <operation name="S_APIClearEmailLog">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="S_APIClearEmailLogRequest">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://ics" use="encoded"/>
+      </input>
+      <output name="S_APIClearEmailLogResponse">
+        <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://localhost/ICSProofServer/services/RD3WS" use="encoded"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="RD3WSService">
+    <port binding="impl:RD3WSSoapBinding" name="RD3WS">
+      <wsdlsoap:address location="http://localhost/ICSProofServer/services/RD3WS"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.alcatel-lucent.com/wsp/ns/2008/03/26/ics/frameworkService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://www.alcatel-lucent.com/wsp/ns/2008/03/26/ics/frameworkService" xmlns:intf="http://www.alcatel-lucent.com/wsp/ns/2008/03/26/ics/frameworkService" xmlns:tns1="http://www.alcatel-lucent.com/wsp/ns/2008/03/26/ics/frameworkSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://www.alcatel-lucent.com/wsp/ns/2008/03/26/ics/frameworkSchema" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="loginRequest">
+    <sequence>
+     <element name="loginName" type="xsd:string"/>
+     <element name="password" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="loginRequest" type="tns1:loginRequest"/>
+   <simpleType name="AlcResultCode">
+    <restriction base="xsd:string">
+     <enumeration value="SUCCESS"/>
+     <enumeration value="ERROR_AUTHENTICATION_FAILED"/>
+     <enumeration value="ERROR_DTA_CONNECTION"/>
+     <enumeration value="ERROR_BAD_FRAMEWORK_SESSION_IDENTIFIER"/>
+     <enumeration value="ERROR_INVALID_OPERATION"/>
+     <enumeration value="ERROR_LICENSE_REQUIRED"/>
+     <enumeration value="ERROR_LOGIN_REQUIRED"/>
+     <enumeration value="ERROR_SERVICE_UNAVAILABLE"/>
+     <enumeration value="ERROR_BAD_PARAMETER_VALUE"/>
+     <enumeration value="ERROR_UNAUTHORIZED"/>
+     <enumeration value="ERROR_SERVICE"/>
+     <enumeration value="ERROR_UNEXPECTED"/>
+    </restriction>
+   </simpleType>
+   <complexType name="AlcResult">
+    <sequence>
+     <element name="resultCode" type="tns1:AlcResultCode"/>
+     <element name="comment" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="loginResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence>
+       <element name="fwSessionId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="loginResponse" type="tns1:loginResponse"/>
+   <simpleType name="AlcApplicationType">
+    <restriction base="xsd:string">
+     <enumeration value="HOME_PAGE"/>
+     <enumeration value="MY_ASSISTANT"/>
+     <enumeration value="MY_MESSAGING"/>
+     <enumeration value="MY_PHONE"/>
+     <enumeration value="MY_TEAMWORK"/>
+     <enumeration value="MY_INSTANT_COMMUNICATOR"/>
+    </restriction>
+   </simpleType>
+   <simpleType name="AlcDeviceType">
+    <restriction base="xsd:string">
+     <enumeration value="EXTENSION"/>
+     <enumeration value="NOE"/>
+     <enumeration value="PDA"/>
+     <enumeration value="THICK"/>
+     <enumeration value="TUI"/>
+     <enumeration value="WEB"/>
+    </restriction>
+   </simpleType>
+   <complexType name="openFrameworkSessionRequest">
+    <sequence>
+     <element name="application" nillable="true" type="tns1:AlcApplicationType"/>
+     <element name="device" nillable="true" type="tns1:AlcDeviceType"/>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="openFrameworkSessionRequest" type="tns1:openFrameworkSessionRequest"/>
+   <complexType name="openFrameworkSessionResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="openFrameworkSessionResponse" type="tns1:openFrameworkSessionResponse"/>
+   <simpleType name="AlcUserIdType">
+    <restriction base="xsd:string">
+     <enumeration value="LOGIN_NAME"/>
+     <enumeration value="PHONE_NUMBER"/>
+     <enumeration value="EMAIL"/>
+    </restriction>
+   </simpleType>
+   <complexType name="loginSupervisorRequest">
+    <sequence>
+     <element name="supervisorLoginName" type="xsd:string"/>
+     <element name="supervisorPassword" type="xsd:string"/>
+     <element name="supervisedAccountId" type="xsd:string"/>
+     <element name="supervisedAccountIdType" type="tns1:AlcUserIdType"/>
+    </sequence>
+   </complexType>
+   <element name="loginSupervisorRequest" type="tns1:loginSupervisorRequest"/>
+   <complexType name="loginSupervisorResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence>
+       <element name="fwSessionId" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="loginSupervisorResponse" type="tns1:loginSupervisorResponse"/>
+   <complexType name="changePasswordRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+     <element name="oldPassword" type="xsd:string"/>
+     <element name="newPassword" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="changePasswordRequest" type="tns1:changePasswordRequest"/>
+   <complexType name="changePasswordResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="changePasswordResponse" type="tns1:changePasswordResponse"/>
+   <complexType name="logoutRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="logoutRequest" type="tns1:logoutRequest"/>
+   <complexType name="logoutResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="logoutResponse" type="tns1:logoutResponse"/>
+   <complexType name="getFrameworkAccountInfoRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getFrameworkAccountInfoRequest" type="tns1:getFrameworkAccountInfoRequest"/>
+   <complexType name="AlcFrameworkAccountInfo">
+    <sequence>
+     <element name="loginName" nillable="true" type="xsd:string"/>
+     <element name="firstName" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="language" nillable="true" type="xsd:string"/>
+     <element name="companyPhone" nillable="true" type="xsd:string"/>
+     <element name="companyDect" nillable="true" type="xsd:string"/>
+     <element name="mobilePhone" nillable="true" type="xsd:string"/>
+     <element name="email" nillable="true" type="xsd:string"/>
+     <element name="presenceId" nillable="true" type="xsd:string"/>
+     <element name="timeToLive" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="getFrameworkAccountInfoResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence>
+       <element name="accountInfo" nillable="true" type="tns1:AlcFrameworkAccountInfo"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="getFrameworkAccountInfoResponse" type="tns1:getFrameworkAccountInfoResponse"/>
+   <complexType name="getFrameworkAccountRightsRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getFrameworkAccountRightsRequest" type="tns1:getFrameworkAccountRightsRequest"/>
+   <complexType name="AlcDeviceRights">
+    <sequence>
+     <element name="applicationAuthorized" type="xsd:boolean"/>
+     <element name="extensionAuthorized" type="xsd:boolean"/>
+     <element name="noeAuthorized" type="xsd:boolean"/>
+     <element name="pdaAuthorized" type="xsd:boolean"/>
+     <element name="thickAuthorized" type="xsd:boolean"/>
+     <element name="tuiAuthorized" type="xsd:boolean"/>
+     <element name="webAuthorized" type="xsd:boolean"/>
+    </sequence>
+   </complexType>
+   <complexType name="AlcFrameworkAccountRights">
+    <sequence>
+     <element name="homePageDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+     <element name="myAssistantApiAuthorized" type="xsd:boolean"/>
+     <element name="myAssistantDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+     <element name="myManagementApiAuthorized" type="xsd:boolean"/>
+     <element name="myMessagingApiAuthorized" type="xsd:boolean"/>
+     <element name="myMessagingDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+     <element name="myPhoneApiAuthorized" type="xsd:boolean"/>
+     <element name="myPhoneDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+     <element name="myTeamworkDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+     <element name="myTeamworkApiAuthorized" type="xsd:boolean"/>
+     <element name="myInstantCommunicatorDeviceRights" nillable="true" type="tns1:AlcDeviceRights"/>
+    </sequence>
+   </complexType>
+   <complexType name="getFrameworkAccountRightsResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence>
+       <element name="accountRights" nillable="true" type="tns1:AlcFrameworkAccountRights"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="getFrameworkAccountRightsResponse" type="tns1:getFrameworkAccountRightsResponse"/>
+   <complexType name="setSessionTimerValueRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+     <element name="value" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <element name="setSessionTimerValueRequest" type="tns1:setSessionTimerValueRequest"/>
+   <complexType name="setSessionTimerValueResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="setSessionTimerValueResponse" type="tns1:setSessionTimerValueResponse"/>
+   <complexType name="restartSessionTimerRequest">
+    <sequence>
+     <element name="fwSessionId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="restartSessionTimerRequest" type="tns1:restartSessionTimerRequest"/>
+   <complexType name="restartSessionTimerResponse">
+    <complexContent>
+     <extension base="tns1:AlcResult">
+      <sequence/>
+     </extension>
+    </complexContent>
+   </complexType>
+   <element name="restartSessionTimerResponse" type="tns1:restartSessionTimerResponse"/>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="restartSessionTimerRequest">
+
+      <wsdl:part element="tns1:restartSessionTimerRequest" name="restartSessionTimerRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part element="tns1:loginResponse" name="loginResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setSessionTimerValueResponse">
+
+      <wsdl:part element="tns1:setSessionTimerValueResponse" name="setSessionTimerValueResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFrameworkAccountInfoRequest">
+
+      <wsdl:part element="tns1:getFrameworkAccountInfoRequest" name="getFrameworkAccountInfoRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logoutRequest">
+
+      <wsdl:part element="tns1:logoutRequest" name="logoutRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginSupervisorRequest">
+
+      <wsdl:part element="tns1:loginSupervisorRequest" name="loginSupervisorRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part element="tns1:loginRequest" name="loginRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="openFrameworkSessionRequest">
+
+      <wsdl:part element="tns1:openFrameworkSessionRequest" name="openFrameworkSessionRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFrameworkAccountRightsResponse">
+
+      <wsdl:part element="tns1:getFrameworkAccountRightsResponse" name="getFrameworkAccountRightsResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginSupervisorResponse">
+
+      <wsdl:part element="tns1:loginSupervisorResponse" name="loginSupervisorResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="restartSessionTimerResponse">
+
+      <wsdl:part element="tns1:restartSessionTimerResponse" name="restartSessionTimerResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFrameworkAccountInfoResponse">
+
+      <wsdl:part element="tns1:getFrameworkAccountInfoResponse" name="getFrameworkAccountInfoResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getFrameworkAccountRightsRequest">
+
+      <wsdl:part element="tns1:getFrameworkAccountRightsRequest" name="getFrameworkAccountRightsRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="logoutResponse">
+
+      <wsdl:part element="tns1:logoutResponse" name="logoutResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="changePasswordRequest">
+
+      <wsdl:part element="tns1:changePasswordRequest" name="changePasswordRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="setSessionTimerValueRequest">
+
+      <wsdl:part element="tns1:setSessionTimerValueRequest" name="setSessionTimerValueRequest"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="changePasswordResponse">
+
+      <wsdl:part element="tns1:changePasswordResponse" name="changePasswordResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="openFrameworkSessionResponse">
+
+      <wsdl:part element="tns1:openFrameworkSessionResponse" name="openFrameworkSessionResponse"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AlcApiFrameworkPortType">
+
+      <wsdl:operation name="login" parameterOrder="loginRequest">
+
+         <wsdl:input message="impl:loginRequest" name="loginRequest"/>
+
+         <wsdl:output message="impl:loginResponse" name="loginResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="openFrameworkSession" parameterOrder="openFrameworkSessionRequest">
+
+         <wsdl:input message="impl:openFrameworkSessionRequest" name="openFrameworkSessionRequest"/>
+
+         <wsdl:output message="impl:openFrameworkSessionResponse" name="openFrameworkSessionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginSupervisor" parameterOrder="loginSupervisorRequest">
+
+         <wsdl:input message="impl:loginSupervisorRequest" name="loginSupervisorRequest"/>
+
+         <wsdl:output message="impl:loginSupervisorResponse" name="loginSupervisorResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="changePassword" parameterOrder="changePasswordRequest">
+
+         <wsdl:input message="impl:changePasswordRequest" name="changePasswordRequest"/>
+
+         <wsdl:output message="impl:changePasswordResponse" name="changePasswordResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logout" parameterOrder="logoutRequest">
+
+         <wsdl:input message="impl:logoutRequest" name="logoutRequest"/>
+
+         <wsdl:output message="impl:logoutResponse" name="logoutResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFrameworkAccountInfo" parameterOrder="getFrameworkAccountInfoRequest">
+
+         <wsdl:input message="impl:getFrameworkAccountInfoRequest" name="getFrameworkAccountInfoRequest"/>
+
+         <wsdl:output message="impl:getFrameworkAccountInfoResponse" name="getFrameworkAccountInfoResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFrameworkAccountRights" parameterOrder="getFrameworkAccountRightsRequest">
+
+         <wsdl:input message="impl:getFrameworkAccountRightsRequest" name="getFrameworkAccountRightsRequest"/>
+
+         <wsdl:output message="impl:getFrameworkAccountRightsResponse" name="getFrameworkAccountRightsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setSessionTimerValue" parameterOrder="setSessionTimerValueRequest">
+
+         <wsdl:input message="impl:setSessionTimerValueRequest" name="setSessionTimerValueRequest"/>
+
+         <wsdl:output message="impl:setSessionTimerValueResponse" name="setSessionTimerValueResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="restartSessionTimer" parameterOrder="restartSessionTimerRequest">
+
+         <wsdl:input message="impl:restartSessionTimerRequest" name="restartSessionTimerRequest"/>
+
+         <wsdl:output message="impl:restartSessionTimerResponse" name="restartSessionTimerResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AlcApiFrameworkPortSoapBinding" type="impl:AlcApiFrameworkPortType">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction="login"/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="openFrameworkSession">
+
+         <wsdlsoap:operation soapAction="openFrameworkSession"/>
+
+         <wsdl:input name="openFrameworkSessionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="openFrameworkSessionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="loginSupervisor">
+
+         <wsdlsoap:operation soapAction="loginSupervisor"/>
+
+         <wsdl:input name="loginSupervisorRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginSupervisorResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="changePassword">
+
+         <wsdlsoap:operation soapAction="changePassword"/>
+
+         <wsdl:input name="changePasswordRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="changePasswordResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logout">
+
+         <wsdlsoap:operation soapAction="logout"/>
+
+         <wsdl:input name="logoutRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="logoutResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFrameworkAccountInfo">
+
+         <wsdlsoap:operation soapAction="getFrameworkAccountInfo"/>
+
+         <wsdl:input name="getFrameworkAccountInfoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFrameworkAccountInfoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getFrameworkAccountRights">
+
+         <wsdlsoap:operation soapAction="getFrameworkAccountRights"/>
+
+         <wsdl:input name="getFrameworkAccountRightsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getFrameworkAccountRightsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setSessionTimerValue">
+
+         <wsdlsoap:operation soapAction="setSessionTimerValue"/>
+
+         <wsdl:input name="setSessionTimerValueRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setSessionTimerValueResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="restartSessionTimer">
+
+         <wsdlsoap:operation soapAction="restartSessionTimer"/>
+
+         <wsdl:input name="restartSessionTimerRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="restartSessionTimerResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AlcApiFrameworkService">
+
+      <wsdl:port binding="impl:AlcApiFrameworkPortSoapBinding" name="AlcApiFrameworkPort">
+
+         <wsdlsoap:address location="https://ics-alpha-1.lungma.alcatel-lucent.com/api/services/AlcApiFrameworkPort"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

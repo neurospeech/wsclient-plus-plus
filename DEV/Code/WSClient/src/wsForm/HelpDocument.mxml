@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					creationComplete="self_creationCompleteHandler(event)"
+					label="Help"
+					>
+	<s:layout>
+		<s:VerticalLayout paddingLeft="5"/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function self_creationCompleteHandler(event:FlexEvent):void
+			{
+				try{
+					var f:File = File.applicationDirectory.resolvePath("helpDocument.html");
+					htmlContainer.location = "file://" + f.nativePath;
+				}catch(e:Error){
+					Alert.show(e.toString());
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:HTML width="100%" height="100%" id="htmlContainer">
+		
+	</mx:HTML>
+</s:NavigatorContent>

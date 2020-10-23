@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IOrderService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:3143/OrderService.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IOrderService" contract="Orders.IOrderService"
+                name="BasicHttpBinding_IOrderService" />
+        </client>
+    </system.serviceModel>
+</configuration>

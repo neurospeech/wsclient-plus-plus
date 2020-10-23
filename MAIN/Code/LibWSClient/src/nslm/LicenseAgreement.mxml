@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+				width="700" height="500"
+				creationComplete="genericform1_creationCompleteHandler(event)"
+				 showCloseButton="false" title="End User License Agreement">
+	<mx:Script>
+		<![CDATA[
+			import flash.filesystem.File;
+			
+			import mx.controls.Alert;
+			import mx.core.Application;
+			import mx.core.WindowedApplication;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var license:LicenseInfo = null;
+			
+			protected function genericform1_creationCompleteHandler(event:FlexEvent):void
+			{
+				try{
+					var f:File = File.applicationDirectory.resolvePath("licenseAgreement.html");
+					htmlContainer.location = "file://" + f.nativePath;
+				}catch(e:Error){
+					Alert.show(e.toString());
+				}
+			}
+
+
+			protected function buttonDiagree_clickHandler(event:MouseEvent):void
+			{
+				var app:WindowedApplication = Application.application as WindowedApplication;
+				app.exit();
+			}
+
+
+			protected function buttonAgree_clickHandler(event:MouseEvent):void
+			{
+				license.licenseAgreed = true;
+				license.save();
+				this.closeForm();
+			}
+
+		]]>
+	</mx:Script>
+	
+	
+	<mx:HTML id="htmlContainer"
+			 width="100%"
+			 height="100%"
+			 />
+	<mx:HBox horizontalAlign="right" width="100%">
+		<ns:CommandButton
+			id="buttonAgree"
+			label="I Agree"
+			click="buttonAgree_clickHandler(event)"
+			/>
+		<ns:CommandButton
+			id="buttonDiagree"
+			label="I Disagree"
+			click="buttonDiagree_clickHandler(event)"
+			/>
+	</mx:HBox>
+</ns:GenericForm>

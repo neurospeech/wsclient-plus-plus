@@ -1,0 +1,1053 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="DPCL"
+ targetNamespace="urn:dpcl:wsdl:2010-01-19"
+ xmlns:tns="urn:dpcl:wsdl:2010-01-19"
+ xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+ xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:DPCLMagStripe="urn:dpcl:magstripe:2010-01-19"
+ xmlns:DPCLSensors="urn:dpcl:sensors:2010-01-19"
+ xmlns:DPCLSettings="urn:dpcl:settings:2010-01-19"
+ xmlns:xop="http://www.w3.org/2004/08/xop/include"
+ xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+ xmlns:DPCL="urn:dpcl:wsdl:2010-01-19"
+ xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap12/"
+ xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+ xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+ xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+ xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+ <schema targetNamespace="urn:dpcl:magstripe:2010-01-19"
+  xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:DPCLMagStripe="urn:dpcl:magstripe:2010-01-19"
+  xmlns:DPCLSensors="urn:dpcl:sensors:2010-01-19"
+  xmlns:DPCLSettings="urn:dpcl:settings:2010-01-19"
+  xmlns:xop="http://www.w3.org/2004/08/xop/include"
+  xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+  xmlns:DPCL="urn:dpcl:wsdl:2010-01-19"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://www.w3.org/2003/05/soap-envelope"/>
+  <import namespace="http://www.w3.org/2003/05/soap-encoding"/>
+  <import namespace="urn:dpcl:sensors:2010-01-19"/>
+  <import namespace="urn:dpcl:settings:2010-01-19"/>
+  <import namespace="http://www.w3.org/2004/08/xop/include" schemaLocation="http://www.w3.org/2004/08/xop/include"/>
+  <import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <import namespace="urn:dpcl:wsdl:2010-01-19"/>
+
+  <complexType name="Track">
+   <sequence>
+    <choice>
+     <element name="stringData" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="true"/>
+     <element name="base64Data" type="xsd:base64Binary" minOccurs="1" maxOccurs="1" nillable="true"/>
+    </choice>
+   </sequence>
+     <attribute name="number" type="xsd:unsignedInt" use="required"/>
+  </complexType>
+  <complexType name="MagStripe">
+   <sequence>
+     <element name="track" type="DPCLMagStripe:Track" minOccurs="0" maxOccurs="3" nillable="true"/>
+   </sequence>
+  </complexType>
+  <element name="magstripe" type="DPCLMagStripe:MagStripe"/>
+ </schema>
+
+ <schema targetNamespace="urn:dpcl:sensors:2010-01-19"
+  xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:DPCLMagStripe="urn:dpcl:magstripe:2010-01-19"
+  xmlns:DPCLSensors="urn:dpcl:sensors:2010-01-19"
+  xmlns:DPCLSettings="urn:dpcl:settings:2010-01-19"
+  xmlns:xop="http://www.w3.org/2004/08/xop/include"
+  xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+  xmlns:DPCL="urn:dpcl:wsdl:2010-01-19"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://www.w3.org/2003/05/soap-envelope"/>
+  <import namespace="http://www.w3.org/2003/05/soap-encoding"/>
+  <import namespace="urn:dpcl:magstripe:2010-01-19"/>
+  <import namespace="urn:dpcl:settings:2010-01-19"/>
+  <import namespace="http://www.w3.org/2004/08/xop/include" schemaLocation="http://www.w3.org/2004/08/xop/include"/>
+  <import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <import namespace="urn:dpcl:wsdl:2010-01-19"/>
+
+  <complexType name="Status">
+   <sequence>
+     <element name="currentValue" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="historyValue" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+     <attribute name="name" type="xsd:string" use="required"/>
+  </complexType>
+  <complexType name="Sensors">
+   <sequence>
+     <element name="status" type="DPCLSensors:Status" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+   </sequence>
+  </complexType>
+  <element name="sensors" type="DPCLSensors:Sensors"/>
+ </schema>
+
+ <schema targetNamespace="urn:dpcl:settings:2010-01-19"
+  xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:DPCLMagStripe="urn:dpcl:magstripe:2010-01-19"
+  xmlns:DPCLSensors="urn:dpcl:sensors:2010-01-19"
+  xmlns:DPCLSettings="urn:dpcl:settings:2010-01-19"
+  xmlns:xop="http://www.w3.org/2004/08/xop/include"
+  xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+  xmlns:DPCL="urn:dpcl:wsdl:2010-01-19"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://www.w3.org/2003/05/soap-envelope"/>
+  <import namespace="http://www.w3.org/2003/05/soap-encoding"/>
+  <import namespace="urn:dpcl:magstripe:2010-01-19"/>
+  <import namespace="urn:dpcl:sensors:2010-01-19"/>
+  <import namespace="http://www.w3.org/2004/08/xop/include" schemaLocation="http://www.w3.org/2004/08/xop/include"/>
+  <import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <import namespace="urn:dpcl:wsdl:2010-01-19"/>
+
+  <simpleType name="ValueType">
+   <restriction base="xsd:QName">
+    <enumeration value="DPCLSettings:String"/><!-- enum const = 0 -->
+    <enumeration value="DPCLSettings:EnumeratedList"/><!-- enum const = 1 -->
+    <enumeration value="DPCLSettings:Integer"/><!-- enum const = 2 -->
+    <enumeration value="DPCLSettings:UnsignedInteger"/><!-- enum const = 3 -->
+    <enumeration value="DPCLSettings:FloatingPoint"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="Category">
+   <restriction base="xsd:QName">
+    <enumeration value="DPCLSettings:PrintJob"/><!-- enum const = 0 -->
+    <enumeration value="DPCLSettings:Calibration"/><!-- enum const = 1 -->
+    <enumeration value="DPCLSettings:Configuration"/><!-- enum const = 2 -->
+    <enumeration value="DPCLSettings:Behavior"/><!-- enum const = 3 -->
+   </restriction>
+  </simpleType>
+  <complexType name="Attributes">
+   <sequence>
+     <element name="range" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="valueType" type="DPCLSettings:ValueType" minOccurs="1" maxOccurs="1"/>
+     <element name="category" type="DPCLSettings:Category" minOccurs="1" maxOccurs="1"/>
+     <element name="units" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="writable" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="authorized" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="defVal" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="accessLevel" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="Authorization">
+   <sequence>
+     <element name="code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="Element">
+   <sequence>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="attributes" type="DPCLSettings:Attributes" minOccurs="0" maxOccurs="1" nillable="true"/>
+     <element name="authorization" type="DPCLSettings:Authorization" minOccurs="0" maxOccurs="1" nillable="true"/>
+   </sequence>
+     <attribute name="name" type="xsd:string" use="required"/>
+  </complexType>
+  <complexType name="Subsystem">
+   <sequence>
+     <element name="element" type="DPCLSettings:Element" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+   </sequence>
+     <attribute name="name" type="xsd:string" use="required"/>
+  </complexType>
+  <complexType name="Module">
+   <sequence>
+     <element name="subsystem" type="DPCLSettings:Subsystem" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+   </sequence>
+     <attribute name="name" type="xsd:string" use="required"/>
+  </complexType>
+  <complexType name="Source">
+   <sequence>
+     <element name="serialNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="settingsGroup" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+   </sequence>
+  </complexType>
+  <complexType name="Settings">
+   <sequence>
+     <element name="module" type="DPCLSettings:Module" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="source" type="DPCLSettings:Source" minOccurs="0" maxOccurs="1" nillable="true"/>
+   </sequence>
+  </complexType>
+  <element name="settings" type="DPCLSettings:Settings"/>
+ </schema>
+
+ <schema targetNamespace="urn:dpcl:wsdl:2010-01-19"
+  xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:DPCLMagStripe="urn:dpcl:magstripe:2010-01-19"
+  xmlns:DPCLSensors="urn:dpcl:sensors:2010-01-19"
+  xmlns:DPCLSettings="urn:dpcl:settings:2010-01-19"
+  xmlns:xop="http://www.w3.org/2004/08/xop/include"
+  xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+  xmlns:DPCL="urn:dpcl:wsdl:2010-01-19"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <import namespace="http://www.w3.org/2003/05/soap-envelope"/>
+  <import namespace="http://www.w3.org/2003/05/soap-encoding"/>
+  <import namespace="urn:dpcl:magstripe:2010-01-19"/>
+  <import namespace="urn:dpcl:sensors:2010-01-19"/>
+  <import namespace="urn:dpcl:settings:2010-01-19"/>
+  <import namespace="http://www.w3.org/2004/08/xop/include" schemaLocation="http://www.w3.org/2004/08/xop/include"/>
+  <import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+
+  <simpleType name="ConditionSeverity">
+   <restriction base="xsd:string">
+    <enumeration value="Emergency"/><!-- enum const = 0 -->
+    <enumeration value="Alert"/><!-- enum const = 1 -->
+    <enumeration value="Critical"/><!-- enum const = 2 -->
+    <enumeration value="Error"/><!-- enum const = 3 -->
+    <enumeration value="Warning"/><!-- enum const = 4 -->
+    <enumeration value="Notice"/><!-- enum const = 5 -->
+    <enumeration value="Information"/><!-- enum const = 6 -->
+    <enumeration value="Debug"/><!-- enum const = 7 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="StatusTrigger">
+   <restriction base="xsd:string">
+    <enumeration value="Expired"/><!-- enum const = 0 -->
+    <enumeration value="Triggered"/><!-- enum const = 1 -->
+    <enumeration value="Superseded"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="PrinterMode">
+   <restriction base="xsd:string">
+    <enumeration value="Factory"/><!-- enum const = 0 -->
+    <enumeration value="Production"/><!-- enum const = 1 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="JobType">
+   <restriction base="xsd:string">
+    <enumeration value="Print"/><!-- enum const = 0 -->
+    <enumeration value="Exception"/><!-- enum const = 1 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ParameterValueType">
+   <restriction base="xsd:string">
+    <enumeration value="String"/><!-- enum const = 0 -->
+    <enumeration value="EnumeratedList"/><!-- enum const = 1 -->
+    <enumeration value="Integer"/><!-- enum const = 2 -->
+    <enumeration value="UnsignedInteger"/><!-- enum const = 3 -->
+    <enumeration value="FloatingPoint"/><!-- enum const = 4 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="PrinterState">
+   <restriction base="xsd:string">
+    <enumeration value="Idle"/><!-- enum const = 0 -->
+    <enumeration value="Busy"/><!-- enum const = 1 -->
+    <enumeration value="Suspended"/><!-- enum const = 2 -->
+    <enumeration value="Paused"/><!-- enum const = 3 -->
+    <enumeration value="Initialize"/><!-- enum const = 4 -->
+    <enumeration value="Shutdown"/><!-- enum const = 5 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="JobState">
+   <restriction base="xsd:string">
+    <enumeration value="Queued"/><!-- enum const = 0 -->
+    <enumeration value="Held"/><!-- enum const = 1 -->
+    <enumeration value="Running"/><!-- enum const = 2 -->
+    <enumeration value="Blocked"/><!-- enum const = 3 -->
+    <enumeration value="Succeeded"/><!-- enum const = 4 -->
+    <enumeration value="Failed"/><!-- enum const = 5 -->
+    <enumeration value="Cancelled"/><!-- enum const = 6 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ActionState">
+   <restriction base="xsd:string">
+    <enumeration value="Submitted"/><!-- enum const = 0 -->
+    <enumeration value="Requesting"/><!-- enum const = 1 -->
+    <enumeration value="PrepRequest"/><!-- enum const = 2 -->
+    <enumeration value="Ready"/><!-- enum const = 3 -->
+    <enumeration value="Active"/><!-- enum const = 4 -->
+    <enumeration value="Pending"/><!-- enum const = 5 -->
+    <enumeration value="Responding"/><!-- enum const = 6 -->
+    <enumeration value="PrepResponse"/><!-- enum const = 7 -->
+    <enumeration value="Completed"/><!-- enum const = 8 -->
+    <enumeration value="Terminated"/><!-- enum const = 9 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="DataState">
+   <restriction base="xsd:string">
+    <enumeration value="Transferred"/><!-- enum const = 0 -->
+    <enumeration value="Prepared"/><!-- enum const = 1 -->
+    <enumeration value="Released"/><!-- enum const = 2 -->
+   </restriction>
+  </simpleType>
+  <simpleType name="ConditionState">
+   <restriction base="xsd:string">
+    <enumeration value="Unresolved"/><!-- enum const = 0 -->
+    <enumeration value="Resolved"/><!-- enum const = 1 -->
+   </restriction>
+  </simpleType>
+  <complexType name="Attachment">
+   <sequence>
+    <choice>
+     <element ref="xop:Include" minOccurs="1" maxOccurs="1"/>
+     <element name="base64" type="xsd:base64Binary" minOccurs="1" maxOccurs="1" nillable="true"/>
+    </choice>
+   </sequence>
+     <attribute ref="xmime5:contentType" use="optional"/>
+  </complexType>
+  <complexType name="Counter">
+   <sequence>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="Parameter">
+   <sequence>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="Option">
+   <sequence>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="Serialization">
+   <sequence>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="Version">
+   <sequence>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="Condition">
+   <sequence>
+     <element name="code" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="severity" type="DPCL:ConditionSeverity" minOccurs="1" maxOccurs="1"/>
+     <element name="state" type="DPCL:ConditionState" minOccurs="1" maxOccurs="1"/>
+     <element name="module" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="actionId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="dataId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="startMarker" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="endMarker" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="primary" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="SupplyStatus">
+   <sequence>
+     <element name="actionSequence" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="installed" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="supported" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="supplyCode" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="productCode" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="specialCode" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="regionCode" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="mfgCode" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="module" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="percentRemain" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="percentReady" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="maxLength" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="partNumber" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="lotCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="serialNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="DataStatus">
+   <sequence>
+     <element name="parameter" type="DPCL:Parameter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="id" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="state" type="DPCL:DataState" minOccurs="1" maxOccurs="1"/>
+     <element name="queuePosition" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="ActionStatus">
+   <sequence>
+     <element name="parameter" type="DPCL:Parameter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="requestData" type="DPCL:DataStatus" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="respondData" type="DPCL:DataStatus" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="id" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="module" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="queuePosition" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="state" type="DPCL:ActionState" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="JobStatus">
+   <sequence>
+     <element name="action" type="DPCL:ActionStatus" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="id" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="state" type="DPCL:JobState" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="DPCL:JobType" minOccurs="1" maxOccurs="1"/>
+     <element name="queuePosition" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+     <element name="settingsGroup" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="settingsHash" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="restartCount" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="takingActions" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="PrinterStatus">
+   <sequence>
+     <element name="counter" type="DPCL:Counter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="condition" type="DPCL:Condition" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="supply" type="DPCL:SupplyStatus" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="job" type="DPCL:JobStatus" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="mode" type="DPCL:PrinterMode" minOccurs="1" maxOccurs="1"/>
+     <element name="state" type="DPCL:PrinterState" minOccurs="1" maxOccurs="1"/>
+     <element name="secondsOn" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="optionsHash" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="ParameterInfo">
+   <sequence>
+     <element name="valueList" type="xsd:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="valueType" type="DPCL:ParameterValueType" minOccurs="1" maxOccurs="1"/>
+     <element name="valueDefault" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="DataInfo">
+   <sequence>
+     <element name="parameter" type="DPCL:ParameterInfo" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="ActionInfo">
+   <sequence>
+     <element name="parameter" type="DPCL:ParameterInfo" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="requestData" type="DPCL:DataInfo" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="respondData" type="DPCL:DataInfo" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="StartJobInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="settingsGroup" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="exceptionJob" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="StartJobOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="millisecondsToWait" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="optionsHash" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="settingsHash" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="EndJobInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="EndJobOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="CancelJobInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="CancelJobOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="ResumeJobInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="ResumeJobOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="RestartJobInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="RestartJobOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="SubmitActionInput">
+   <sequence>
+     <element name="parameter" type="DPCL:Parameter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="actionId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="type" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="SubmitActionOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="SubmitDataInput">
+   <sequence>
+     <element name="parameter" type="DPCL:Parameter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="actionId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="dataId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="attachment" type="DPCL:Attachment" minOccurs="0" maxOccurs="1" nillable="true"/>
+     <element name="moreData" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="SubmitDataOutput">
+   <sequence>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="RetrieveDataInput">
+   <sequence>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="actionId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="RetrieveDataOutput">
+   <sequence>
+     <element name="parameter" type="DPCL:Parameter" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="success" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="checkStatus" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <element name="attachment" type="DPCL:Attachment" minOccurs="0" maxOccurs="1" nillable="true"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="WaitForStatusInput">
+   <sequence>
+     <element name="maxSeconds" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="minMarker" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="minSeverity" type="DPCL:ConditionSeverity" minOccurs="1" maxOccurs="1"/>
+     <element name="client" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="jobId" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="jobHistory" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="WaitForStatusOutput">
+   <sequence>
+     <element name="trigger" type="DPCL:StatusTrigger" minOccurs="1" maxOccurs="1"/>
+     <element name="nextMarker" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1"/>
+     <element name="status" type="DPCL:PrinterStatus" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="DiscoverPrinterInput">
+   <sequence>
+     <element name="includeActions" type="xsd:boolean" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <complexType name="DiscoverPrinterOutput">
+   <sequence>
+     <element name="action" type="DPCL:ActionInfo" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="option" type="DPCL:Option" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="serialization" type="DPCL:Serialization" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="version" type="DPCL:Version" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+     <element name="manufacturer" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="model" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <element name="agencyModel" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+     <any processContents="lax" minOccurs="0" maxOccurs="unbounded"/><!-- member __any -->
+   </sequence>
+     <anyAttribute processContents="lax"/><!-- member __anyAttribute -->
+  </complexType>
+  <!-- operation request element -->
+  <element name="StartJob">
+   <complexType>
+    <sequence>
+     <element name="StartJobInput" type="DPCL:StartJobInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="StartJobResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:StartJobOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="EndJob">
+   <complexType>
+    <sequence>
+     <element name="EndJobInput" type="DPCL:EndJobInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="EndJobResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:EndJobOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="CancelJob">
+   <complexType>
+    <sequence>
+     <element name="CancelJobInput" type="DPCL:CancelJobInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="CancelJobResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:CancelJobOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="ResumeJob">
+   <complexType>
+    <sequence>
+     <element name="ResumeJobInput" type="DPCL:ResumeJobInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="ResumeJobResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:ResumeJobOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="RestartJob">
+   <complexType>
+    <sequence>
+     <element name="RestartJobInput" type="DPCL:RestartJobInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="RestartJobResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:RestartJobOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SubmitAction">
+   <complexType>
+    <sequence>
+     <element name="SubmitActionInput" type="DPCL:SubmitActionInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SubmitActionResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:SubmitActionOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="SubmitData">
+   <complexType>
+    <sequence>
+     <element name="SubmitDataInput" type="DPCL:SubmitDataInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="SubmitDataResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:SubmitDataOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="RetrieveData">
+   <complexType>
+    <sequence>
+     <element name="RetrieveDataInput" type="DPCL:RetrieveDataInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="RetrieveDataResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:RetrieveDataOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="WaitForStatus">
+   <complexType>
+    <sequence>
+     <element name="WaitForStatusInput" type="DPCL:WaitForStatusInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="WaitForStatusResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:WaitForStatusOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation request element -->
+  <element name="DiscoverPrinter">
+   <complexType>
+    <sequence>
+     <element name="DiscoverPrinterInput" type="DPCL:DiscoverPrinterInput"/>
+    </sequence>
+   </complexType>
+  </element>
+  <!-- operation response element -->
+  <element name="DiscoverPrinterResponse">
+   <complexType>
+    <sequence>
+     <element name="output" type="DPCL:DiscoverPrinterOutput" minOccurs="1" maxOccurs="1"/>
+    </sequence>
+   </complexType>
+  </element>
+ </schema>
+
+</types>
+
+<message name="StartJob">
+ <part name="parameters" element="DPCL:StartJob"/>
+</message>
+
+<message name="StartJobResponse">
+ <part name="parameters" element="DPCL:StartJobResponse"/>
+</message>
+
+<message name="EndJob">
+ <part name="parameters" element="DPCL:EndJob"/>
+</message>
+
+<message name="EndJobResponse">
+ <part name="parameters" element="DPCL:EndJobResponse"/>
+</message>
+
+<message name="CancelJob">
+ <part name="parameters" element="DPCL:CancelJob"/>
+</message>
+
+<message name="CancelJobResponse">
+ <part name="parameters" element="DPCL:CancelJobResponse"/>
+</message>
+
+<message name="ResumeJob">
+ <part name="parameters" element="DPCL:ResumeJob"/>
+</message>
+
+<message name="ResumeJobResponse">
+ <part name="parameters" element="DPCL:ResumeJobResponse"/>
+</message>
+
+<message name="RestartJob">
+ <part name="parameters" element="DPCL:RestartJob"/>
+</message>
+
+<message name="RestartJobResponse">
+ <part name="parameters" element="DPCL:RestartJobResponse"/>
+</message>
+
+<message name="SubmitAction">
+ <part name="parameters" element="DPCL:SubmitAction"/>
+</message>
+
+<message name="SubmitActionResponse">
+ <part name="parameters" element="DPCL:SubmitActionResponse"/>
+</message>
+
+<message name="SubmitData">
+ <part name="parameters" element="DPCL:SubmitData"/>
+</message>
+
+<message name="SubmitDataResponse">
+ <part name="parameters" element="DPCL:SubmitDataResponse"/>
+</message>
+
+<message name="RetrieveData">
+ <part name="parameters" element="DPCL:RetrieveData"/>
+</message>
+
+<message name="RetrieveDataResponse">
+ <part name="parameters" element="DPCL:RetrieveDataResponse"/>
+</message>
+
+<message name="WaitForStatus">
+ <part name="parameters" element="DPCL:WaitForStatus"/>
+</message>
+
+<message name="WaitForStatusResponse">
+ <part name="parameters" element="DPCL:WaitForStatusResponse"/>
+</message>
+
+<message name="DiscoverPrinter">
+ <part name="parameters" element="DPCL:DiscoverPrinter"/>
+</message>
+
+<message name="DiscoverPrinterResponse">
+ <part name="parameters" element="DPCL:DiscoverPrinterResponse"/>
+</message>
+
+<portType name="DPCLPort">
+ <operation name="StartJob">
+  <documentation>Service definition of function DPCL__StartJob</documentation>
+  <input message="tns:StartJob"/>
+  <output message="tns:StartJobResponse"/>
+ </operation>
+ <operation name="EndJob">
+  <documentation>Service definition of function DPCL__EndJob</documentation>
+  <input message="tns:EndJob"/>
+  <output message="tns:EndJobResponse"/>
+ </operation>
+ <operation name="CancelJob">
+  <documentation>Service definition of function DPCL__CancelJob</documentation>
+  <input message="tns:CancelJob"/>
+  <output message="tns:CancelJobResponse"/>
+ </operation>
+ <operation name="ResumeJob">
+  <documentation>Service definition of function DPCL__ResumeJob</documentation>
+  <input message="tns:ResumeJob"/>
+  <output message="tns:ResumeJobResponse"/>
+ </operation>
+ <operation name="RestartJob">
+  <documentation>Service definition of function DPCL__RestartJob</documentation>
+  <input message="tns:RestartJob"/>
+  <output message="tns:RestartJobResponse"/>
+ </operation>
+ <operation name="SubmitAction">
+  <documentation>Service definition of function DPCL__SubmitAction</documentation>
+  <input message="tns:SubmitAction"/>
+  <output message="tns:SubmitActionResponse"/>
+ </operation>
+ <operation name="SubmitData">
+  <documentation>Service definition of function DPCL__SubmitData</documentation>
+  <input message="tns:SubmitData"/>
+  <output message="tns:SubmitDataResponse"/>
+ </operation>
+ <operation name="RetrieveData">
+  <documentation>Service definition of function DPCL__RetrieveData</documentation>
+  <input message="tns:RetrieveData"/>
+  <output message="tns:RetrieveDataResponse"/>
+ </operation>
+ <operation name="WaitForStatus">
+  <documentation>Service definition of function DPCL__WaitForStatus</documentation>
+  <input message="tns:WaitForStatus"/>
+  <output message="tns:WaitForStatusResponse"/>
+ </operation>
+ <operation name="DiscoverPrinter">
+  <documentation>Service definition of function DPCL__DiscoverPrinter</documentation>
+  <input message="tns:DiscoverPrinter"/>
+  <output message="tns:DiscoverPrinterResponse"/>
+ </operation>
+</portType>
+
+<binding name="DPCLHTTPBinding" type="tns:DPCLPort">
+ <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="StartJob">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="EndJob">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="CancelJob">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="ResumeJob">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="RestartJob">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="SubmitAction">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="SubmitData">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="RetrieveData">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="WaitForStatus">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+ <operation name="DiscoverPrinter">
+  <SOAP:operation/>
+  <input>
+     <SOAP:body parts="parameters" use="literal"/>
+  </input>
+  <output>
+     <SOAP:body parts="parameters" use="literal"/>
+  </output>
+ </operation>
+</binding>
+
+<service name="DPCL">
+ <documentation>Web services for the printer PDL "application/vnd.dpcl.wsdl+xml".</documentation>
+ <port name="DPCLPort" binding="tns:DPCLHTTPBinding">
+  <SOAP:address location="http://localhost:9100"/>
+ </port>
+</service>
+
+</definitions>

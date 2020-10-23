@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   width="500" 
+			   height="300" 
+			   xmlns:licenseservice="services.licenseservice.*"
+			   creationComplete="onCreationComplete(event)" xmlns:nslm="nslm.*"
+			   >
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.AsyncToken;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import valueObjects.LicenseResult;
+			
+			import wsClasses.License;
+			
+			public var applicationName:String = "";
+			public var applicationVersion:String = "";
+			
+			public var quitAfterValidation:Boolean = false;
+			
+			
+			[Bindable]
+			public var computerName:String = "";
+			
+			[Bindable]
+			public var productUID:String = "";
+			
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				PopUpManager.centerPopUp(this);
+				
+				var descriptor:XML = NativeApplication.nativeApplication.applicationDescriptor;
+				var ns:Namespace = descriptor.namespaceDeclarations()[0];
+				applicationName = descriptor.ns::name;
+				applicationVersion = descriptor.ns::versionNumber;
+				productUID = descriptor.ns::id;
+				License.productUID = productUID;
+				License.version = applicationVersion;
+				
+				this.title = applicationName + " (" + License.version + ")"; 
+				
+				WSClient.current.title = this.title;
+				
+				host.getHostName();
+			}
+			
+			protected function hostNameFound(event:Event):void
+			{
+				computerName = host.hostName;				
+				
+				licenseFile = File.applicationStorageDirectory.resolvePath("wsclient.as3");
+				if(!licenseFile.exists){
+					// demo mode...
+					License.demo = true;
+				}else{
+					License.demo = false;
+					verifyLicense();
+				}
+				
+				
+			}
+			
+			private var licenseFile:File=null; 
+			
+			private function verifyLicense():void
+			{
+				var ns:NSLicense = new NSLicense();
+				ns.loadFrom(licenseFile);
+				if(ns.isVerified()){
+					if(quitAfterValidation){
+						License.features = ns.FeatureSet;
+						PopUpManager.removePopUp(this);
+					}
+				}else{
+					startTimer();
+				}
+			}
+			
+			private var timeOut:int = 10;
+			
+			protected function onStartDemoClicked(event:MouseEvent):void
+			{
+				startTimer();		
+				
+			}
+			
+			private var timer:Timer = null;
+			
+			private function startTimer():void
+			{
+				timer = new Timer(1000,10);
+				timer.addEventListener(TimerEvent.TIMER, updateCount,false,0,true);
+				timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerComplete,false,0,true);
+				timer.start();
+				this.enabled = false;
+			}
+			
+			private function updateCount(e:TimerEvent):void
+			{
+				statusText.text = "Starting in " + (10- timer.currentCount).toString() + " seconds";
+			}
+			
+			private function timerComplete(e:TimerEvent):void
+			{
+				timer = null;
+				License.demo = true;
+				PopUpManager.removePopUp(this);
+				WSClient.current.showDemo();
+			}
+			
+			
+			protected function onActivateClicked(event:MouseEvent):void
+			{
+				quitAfterValidation = true;
+				GetLicenseResult.token = WS.GetLicense(productUID,License.version,  emailAddress.text, licenseCode.text, upgradeCode.text, computerName);				
+			}
+			
+			protected function onLicenseFound(event:ResultEvent):void
+			{
+				var lr:LicenseResult = GetLicenseResult.lastResult;
+				if(!lr.Success){
+					Alert.show(lr.Message);
+					return;
+				}
+				var lic:String = lr.Result;
+				
+				if(lic==null){
+					Alert.show("Unable to issue license, please check if you have correct version installed");
+					return;
+				}
+				
+				var ls:FileStream = new FileStream();
+				ls.open(licenseFile,FileMode.WRITE);
+				ls.writeUTF(lic);
+				ls.close();
+				
+				this.verifyLicense();
+			}
+			
+			protected function onDeactivateClicked(event:MouseEvent):void
+			{
+				DeactivateResult.token = WS.Deactivate(License.features.OrderID, computerName);				
+			}
+			
+			protected function onDeactivateResult(event:ResultEvent):void
+			{
+				var lr:LicenseResult = DeactivateResult.lastResult;
+				if(!lr.Success){
+					Alert.show(lr.Message);
+					return;
+				}
+				Alert.show("License has been removed from this machine.");
+				licenseFile.deleteFile();
+				WSClient.current.close();
+			}
+			
+			protected function WS_faultHandler(event:FaultEvent):void
+			{
+				Alert.show(event.toString(),event.fault.faultString);				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+		<licenseservice:LicenseService
+			wsdl="https://neurospeech-store.800casting.com/Service/LicenseService.asmx?WSDL"
+			id="WS"
+			fault="WS_faultHandler(event)"
+			/>
+		<s:CallResponder id="GetLicenseResult" result="onLicenseFound(event)" />
+		<s:CallResponder id="DeactivateResult" result="onDeactivateResult(event)" />
+		
+		<nslm:HostNameProvider id="host" exit="hostNameFound(event)" />
+		
+		
+		
+	</fx:Declarations>
+	<s:controlBarContent>
+		<s:Button label="Activate" click="onActivateClicked(event)"/>
+		<s:Button label="Start Demo" click="onStartDemoClicked(event)"/>
+		<s:Button label="Deactivate" enabled="{!License.demo}" click="onDeactivateClicked(event)"/>
+		<mx:Text id="statusText"/>
+	</s:controlBarContent>
+	<s:Form width="100%">
+		<s:FormItem width="100%" label="Email Address:">
+			<s:TextInput id="emailAddress"  width="100%"/>
+		</s:FormItem>
+		<s:FormItem width="100%" label="License Code:">
+			<s:TextInput id="licenseCode" width="100%"/>
+		</s:FormItem>
+		<s:FormItem width="100%" label="Upgrade License Code:">
+			<s:TextInput id="upgradeCode" width="100%"/>
+			<mx:Text width="100%"
+					 text="If you are upgrading from previous version or extending your subscription, please enter Latest License Code here"/>
+		</s:FormItem>
+	</s:Form>
+</s:TitleWindow>

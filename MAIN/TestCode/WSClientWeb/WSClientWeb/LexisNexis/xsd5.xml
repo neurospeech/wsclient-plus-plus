@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://www.lexisnexis.com/PM/Contact" elementFormDefault="qualified" targetNamespace="http://www.lexisnexis.com/PM/Contact" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="/LexisNexis/xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="/LexisNexis/xsd6.xml" namespace="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" />
+  <xs:complexType name="AddressContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q1:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddressID" type="ser:guid" />
+          <xs:element minOccurs="0" name="AddressLine1" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AddressLine2" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AddressLine3" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AddressTypeCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CityName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="ContactAddresses" nillable="true" type="tns:ArrayOfContactAddressContract" />
+          <xs:element minOccurs="0" name="Country" nillable="true" type="tns:CountryContract" />
+          <xs:element minOccurs="0" name="CountryID" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="State" nillable="true" type="tns:StateContract" />
+          <xs:element minOccurs="0" name="StateID" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="StateName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ZipCodeExtension" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AddressContract" nillable="true" type="tns:AddressContract" />
+  <xs:complexType name="CodeValueContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q2:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Addresses" nillable="true" type="tns:ArrayOfAddressContract" />
+          <xs:element minOccurs="0" name="Clients" nillable="true" type="tns:ArrayOfClientContract" />
+          <xs:element minOccurs="0" name="CodeType" nillable="true" type="tns:CodeTypeContract" />
+          <xs:element minOccurs="0" name="CodeTypeID" type="xs:short" />
+          <xs:element minOccurs="0" name="CodeValueDisplayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValueID" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValueName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ConstantLookupValue" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ContactCommunications" nillable="true" type="tns:ArrayOfContactCommunicationContract" />
+          <xs:element minOccurs="0" name="ContactCommunications1" nillable="true" type="tns:ArrayOfContactCommunicationContract" />
+          <xs:element minOccurs="0" name="Contacts" nillable="true" type="tns:ArrayOfContactContract" />
+          <xs:element minOccurs="0" name="Contacts1" nillable="true" type="tns:ArrayOfContactContract" />
+          <xs:element minOccurs="0" name="Contacts2" nillable="true" type="tns:ArrayOfContactContract" />
+          <xs:element minOccurs="0" name="Contacts3" nillable="true" type="tns:ArrayOfContactContract" />
+          <xs:element minOccurs="0" name="Contacts4" nillable="true" type="tns:ArrayOfContactContract" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:short" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CodeValueContract" nillable="true" type="tns:CodeValueContract" />
+  <xs:complexType name="ArrayOfAddressContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AddressContract" nillable="true" type="tns:AddressContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAddressContract" nillable="true" type="tns:ArrayOfAddressContract" />
+  <xs:complexType name="ArrayOfClientContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ClientContract" nillable="true" type="tns:ClientContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClientContract" nillable="true" type="tns:ArrayOfClientContract" />
+  <xs:complexType name="ClientContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q3:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActiveIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ClientStatusCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ClientContract" nillable="true" type="tns:ClientContract" />
+  <xs:complexType name="ContactContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q4:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActiveIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+          <xs:element minOccurs="0" name="BarNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CityError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Client" nillable="true" type="tns:ClientContract" />
+          <xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue2" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue3" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue4" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="ContactAddresses" nillable="true" type="tns:ArrayOfContactAddressContract" />
+          <xs:element minOccurs="0" name="ContactAssignments" nillable="true" type="tns:ArrayOfContactAssignmentContract" />
+          <xs:element minOccurs="0" name="ContactClientStatus" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="ContactCommunications" nillable="true" type="tns:ArrayOfContactCommunicationContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ContactNotes" nillable="true" type="tns:ArrayOfContactNoteContract" />
+          <xs:element minOccurs="0" name="ContactRelationships" nillable="true" type="tns:ArrayOfContactRelationshipContract" />
+          <xs:element minOccurs="0" name="ContactRelationships1" nillable="true" type="tns:ArrayOfContactRelationshipContract" />
+          <xs:element minOccurs="0" name="ContactTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="CountryError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DeceasedIndicator" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" name="EmailAddressError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstNameError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GenderCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IsDuplicate" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDuplicateClientID" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDuplicateConfirmed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDuplicateIndividualContact" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsDuplicateOrganizationContact" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsFirstNameEmpty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsLastNameEmpty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsOrganizationNameEmpty" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsValidClientID" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsValidFirstName" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsValidLastName" type="xs:boolean" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LastNameError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MaidenName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Managed" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MiddleNameError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganizationNameError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganizationShortName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PhoneNumberError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PreferredName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrefixCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="PrefixError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrefixText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PrivateIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ProfessionCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="ProfessionText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SelectedOrganizationID" type="ser:guid" />
+          <xs:element minOccurs="0" name="StateError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StreetAddress1Error" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StreetAddress2Error" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SuffixCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="SuffixError" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SuffixText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TaxID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="WebURLText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ZipCodeError" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactContract" nillable="true" type="tns:ContactContract" />
+  <xs:complexType name="ArrayOfContactAddressContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactAddressContract" nillable="true" type="tns:ContactAddressContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactAddressContract" nillable="true" type="tns:ArrayOfContactAddressContract" />
+  <xs:complexType name="ContactAddressContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q5:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressContract" />
+          <xs:element minOccurs="0" name="AddressID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SameAsMailingIndicator" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactAddressContract" nillable="true" type="tns:ContactAddressContract" />
+  <xs:complexType name="ArrayOfContactAssignmentContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactAssignmentContract" nillable="true" type="tns:ContactAssignmentContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactAssignmentContract" nillable="true" type="tns:ArrayOfContactAssignmentContract" />
+  <xs:complexType name="ContactAssignmentContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q6:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessedOn" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+          <xs:element minOccurs="0" name="AssignedToUserID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignmentTypeCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactAssignmentID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SharedOn" nillable="true" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactAssignmentContract" nillable="true" type="tns:ContactAssignmentContract" />
+  <xs:complexType name="ArrayOfContactCommunicationContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactCommunicationContract" nillable="true" type="tns:ContactCommunicationContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactCommunicationContract" nillable="true" type="tns:ArrayOfContactCommunicationContract" />
+  <xs:complexType name="ContactCommunicationContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q7:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodeValue" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CodeValue1" nillable="true" type="tns:CodeValueContract" />
+          <xs:element minOccurs="0" name="CommunicationCategoryCode" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="CommunicationCategoryText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CommunicationExtensionText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CommunicationID" type="ser:guid" />
+          <xs:element minOccurs="0" name="CommunicationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CommunicationTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Country" nillable="true" type="tns:CountryContract" />
+          <xs:element minOccurs="0" name="CountryID" nillable="true" type="xs:short" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PreferredIndicator" type="xs:boolean" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="SequenceNumber" type="xs:short" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactCommunicationContract" nillable="true" type="tns:ContactCommunicationContract" />
+  <xs:complexType name="CountryContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q8:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Addresses" nillable="true" type="tns:ArrayOfAddressContract" />
+          <xs:element minOccurs="0" name="ContactCommunications" nillable="true" type="tns:ArrayOfContactCommunicationContract" />
+          <xs:element minOccurs="0" name="CountryCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CountryDisplayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CountryID" type="xs:short" />
+          <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="States" nillable="true" type="tns:ArrayOfStateContract" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CountryContract" nillable="true" type="tns:CountryContract" />
+  <xs:complexType name="ArrayOfStateContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StateContract" nillable="true" type="tns:StateContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStateContract" nillable="true" type="tns:ArrayOfStateContract" />
+  <xs:complexType name="StateContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q9:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Addresses" nillable="true" type="tns:ArrayOfAddressContract" />
+          <xs:element minOccurs="0" name="Country" nillable="true" type="tns:CountryContract" />
+          <xs:element minOccurs="0" name="CountryID" type="xs:short" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="StateCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StateDisplayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StateID" type="xs:short" />
+          <xs:element minOccurs="0" name="StateName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StateContract" nillable="true" type="tns:StateContract" />
+  <xs:complexType name="ArrayOfContactNoteContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactNoteContract" nillable="true" type="tns:ContactNoteContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactNoteContract" nillable="true" type="tns:ArrayOfContactNoteContract" />
+  <xs:complexType name="ContactNoteContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q10:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ContactNoteID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="NoteText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactNoteContract" nillable="true" type="tns:ContactNoteContract" />
+  <xs:complexType name="ArrayOfContactRelationshipContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactRelationshipContract" nillable="true" type="tns:ContactRelationshipContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactRelationshipContract" nillable="true" type="tns:ArrayOfContactRelationshipContract" />
+  <xs:complexType name="ContactRelationshipContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q11="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q11:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddAsContact" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ApplicationID" type="xs:short" />
+          <xs:element minOccurs="0" name="Contact" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="Contact1" nillable="true" type="tns:ContactContract" />
+          <xs:element minOccurs="0" name="ContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ContactRelationshipID" type="ser:guid" />
+          <xs:element minOccurs="0" name="ContactTypeCode" type="xs:int" />
+          <xs:element minOccurs="0" name="DisplayText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsUnManaged" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RelatedContactID" type="ser:guid" />
+          <xs:element minOccurs="0" name="RelationshipText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ContactRelationshipContract" nillable="true" type="tns:ContactRelationshipContract" />
+  <xs:complexType name="CodeTypeContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q12="http://schemas.datacontract.org/2004/07/LxNx.OLS.PM.ContactService.Contracts.DataContracts" base="q12:ContactBaseContract">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodeTypeID" type="xs:short" />
+          <xs:element minOccurs="0" name="CodeTypeName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodeValues" nillable="true" type="tns:ArrayOfCodeValueContract" />
+          <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ModifiedDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RowChangeTimestamp" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CodeTypeContract" nillable="true" type="tns:CodeTypeContract" />
+  <xs:complexType name="ArrayOfCodeValueContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CodeValueContract" nillable="true" type="tns:CodeValueContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCodeValueContract" nillable="true" type="tns:ArrayOfCodeValueContract" />
+  <xs:complexType name="ArrayOfContactContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ContactContract" nillable="true" type="tns:ContactContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfContactContract" nillable="true" type="tns:ArrayOfContactContract" />
+</xs:schema>

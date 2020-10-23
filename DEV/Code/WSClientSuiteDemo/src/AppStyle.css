@@ -1,0 +1,49 @@
+/* CSS file */
+WindowedApplication
+{
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingBottom: 0;
+	paddingTop: 0;
+}
+	
+TitleWindow
+{
+	borderColor: #464646;
+	borderAlpha: 1.0;
+	titleStyleName: titleWindowTitle;
+	roundedBottomCorners: true;
+	
+}
+TabNavigator
+{
+	tabStyleName: tabNavigatorTab;
+}
+.tabNavigatorTab
+{
+	fillAlphas: 1.0, 1.0, 1.0, 1.0;
+	fillColors: #CAE5FF, #97C3FF, #FFFFFF, #FFFFFF;
+}
+Alert
+{
+	backgroundColor: #FFFFFF;
+	controlBarStyleName: alertControlBar;
+	color: #000000;
+	titleStyleName: alertTitle;
+	borderColor: #464646;
+}
+.alertControlBar
+{
+}
+.alertTitle
+{
+	color: #FFFFFF;
+}
+.titleWindowTitle
+{
+	color: #FFFFFF;
+}
+
+
+
+

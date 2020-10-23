@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml" 
+				xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+				width="400" 
+				height="300" 
+				creationComplete="genericform1_creationCompleteHandler(event)"
+				xmlns:updater="http://updater.riaspace.com/"
+				 title="WSClient++ Update Manager">
+
+	<mx:Script>
+		<![CDATA[
+			import air.update.events.DownloadErrorEvent;
+			import air.update.events.StatusUpdateEvent;
+			import air.update.events.UpdateEvent;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			import nslm.LicenseInfo;
+			
+			[Bindable]
+			public var currentVersion:String = "";
+			
+			[Bindable]
+			public var updateVersion:String = "";
+			
+			[Bindable]
+			public var updateMessage:String = "Checking....";
+
+			protected function updater_checkForUpdateHandler(event:UpdateEvent):void
+			{
+				if(updater.isNewerVersionFunction(updater.currentVersion,updater.updateVersion)){
+					this.currentState = "updateAvailable";
+				}
+				currentVersion = updater.currentVersion;
+				updateVersion = updater.updateVersion;
+			}
+
+
+			protected function downloadButton_clickHandler(event:MouseEvent):void
+			{
+				this.currentState = "downloading";
+				updater.downloadUpdate();
+			}
+
+
+			protected function updater_downloadCompleteHandler(event:UpdateEvent):void
+			{
+				updater.installUpdate();
+			}
+
+
+			protected function updater_downloadErrorHandler(event:DownloadErrorEvent):void
+			{
+				Alert.show(event.text,"Download Error");
+			}
+
+			protected function genericform1_creationCompleteHandler(event:FlexEvent):void
+			{
+				updater.initialize();
+			}
+
+
+			protected function updater_initializedHandler(event:UpdateEvent):void
+			{
+				updater.checkNow();
+			}
+
+
+			protected function updater_updateStatusHandler(event:StatusUpdateEvent):void
+			{
+				if(!event.available){
+					Alert.show("Your application is up to date!");
+					this.closeForm();
+				}
+				event.preventDefault();
+				
+				updateMessage = "New Version " + updater.updateVersion + " is available";
+			}
+
+		]]>
+	</mx:Script>
+	<ns:states>
+		<mx:State name="updateAvailable">
+			<mx:SetProperty target="{downloadButton}" name="visible" value="true"/>
+			<mx:SetProperty target="{downloadButton}" name="includeInLayout" value="true"/>
+		</mx:State>
+		<mx:State name="downloading">
+			<mx:SetProperty target="{downloadProgressBar}" name="includeInLayout" value="true"/>
+			<mx:SetProperty target="{downloadProgressBar}" name="visible" value="true"/>
+			<mx:SetProperty name="showCloseButton" value="false"/>
+		</mx:State>
+	</ns:states>
+
+	<updater:NativeApplicationUpdater 
+		id="updater"
+		initialized="updater_initializedHandler(event)"
+		updateStatus="updater_updateStatusHandler(event)"
+		checkForUpdate="updater_checkForUpdateHandler(event)"
+		downloadComplete="updater_downloadCompleteHandler(event)"
+		downloadError="updater_downloadErrorHandler(event)"
+		updateURL="http://account.neurospeech.com/Update/NativeAirUpdate.ashx?EditionUID={LicenseInfo.globalEditionUID}"
+		/>
+	
+	<mx:Form width="100%">
+		<mx:FormItem label="Latest Version:">
+			<mx:Text text="{updateMessage}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Your Version:">
+			<mx:Text text="{currentVersion}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Download" width="100%">
+			<mx:Button label="Install Update" includeInLayout="false" visible="false" id="downloadButton" click="downloadButton_clickHandler(event)"/>
+			<mx:ProgressBar source="{updater}" width="100%" includeInLayout="false" visible="false" id="downloadProgressBar"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+</ns:GenericForm>

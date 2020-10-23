@@ -1,0 +1,20 @@
+package wsClasses
+{
+	public class SoapMember
+	{
+		public function SoapMember()
+		{
+		}
+	
+		public var name:String = "";
+		public var publicName:String = "";
+		public var upName:String = "";
+		public var type:SoapType = new SoapType();
+		
+		public var bAttribute:Boolean = false;
+		
+		public var fieldName:String = "";
+		
+
+	}
+}

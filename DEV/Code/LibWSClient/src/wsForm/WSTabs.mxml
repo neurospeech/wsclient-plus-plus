@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:AdvanceTabNavigator xmlns:mx="http://www.adobe.com/2006/mxml"
+						xmlns:fx=""
+						xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+						xmlns:wsForm="wsForm.*"
+						tabCloseEnable="true"
+						>
+	
+	<mx:Script>
+		<![CDATA[
+			import air.update.ApplicationUpdaterUI;
+			import air.update.events.UpdateEvent;
+			
+			import com.neuro.command.CommandResultEvent;
+			import com.neuro.command.GenericCommand;
+			import com.neuro.controls.BubbleCommandEvent;
+			
+			import flash.desktop.NativeApplication;
+			import flash.filesystem.File;
+			
+			import mx.controls.Alert;
+			import mx.controls.Menu;
+			import mx.core.Application;
+			import mx.core.WindowedApplication;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			
+			import nslm.ActivateLicense;
+			import nslm.CSDemoLicense;
+			import nslm.DeactivateLicense;
+			import nslm.DemoLicense;
+			import nslm.LicenseInfo;
+			import nslm.TempLicense;
+			
+			public var args:Array = null;
+			
+			public var app:WindowedApplication = null;
+			
+			public function setupMenus(w:WindowedApplication):void
+			{
+				
+				this.addChild(new HelpDocument());
+				
+				this.fixFirst = 0;
+				
+				app = w;				
+				GenericCommand.globalDisplayFault = true;
+				
+				// setup version name...
+				var descriptor:XML = NativeApplication.nativeApplication.applicationDescriptor;
+				var ns:Namespace = descriptor.namespaceDeclarations()[0];
+				w.title += descriptor.ns::name + " - Version " + descriptor.ns::version;
+				LicenseInfo.globalEditionUID = descriptor.ns::id;
+				
+				w.addEventListener(Event.CLOSING, onClosing,false,0,true);		
+				
+				
+				
+			}
+			
+			private var verifyClose:Boolean = true;
+			private function onClosing(e:Event):void
+			{
+				if(verifyClose){
+					for each(var child:Object in this.getChildren()){
+						var w:WSProject = child as WSProject;
+						if(w==null)
+							continue;
+						if(!w.isSaved()){
+							Alert.show("There are some unsaved files in this window, are you sure you want to exit?","Exit", Alert.YES + Alert.NO, this, onCloseSelected, null, Alert.NO);
+							e.preventDefault();
+							e.stopImmediatePropagation();
+							e.stopPropagation();
+							return;
+						}
+					}
+				}
+				
+			}
+			
+			private function onCloseSelected(ce:CloseEvent):void
+			{
+				if(ce.detail == Alert.YES){
+					verifyClose = false;
+					app.close();
+				}
+			}
+			
+			private var nm:NativeMenu = null;
+			public function get nativeMenu():NativeMenu{
+				if(nm)
+					return nm;
+				nm = new NativeMenu();
+				
+				createMenu(
+					nm,
+					"File",
+					[
+						createMenuItem("New", onNewFile),
+						createMenuItem("Open", null, cmdOpen),
+						createMenuItem("Save", onSaveFile),
+						createMenuItem("Save as", null, cmdSave),
+						createMenuItem("Close",onCloseFile),
+						new NativeMenuItem("",true),
+						createMenuItem("Quit",onQuit)
+					]);
+				
+				
+				if(LICENSE::demo){
+					createMenu(
+						nm,
+						"Help",
+						[
+							createMenuItem("Update",null,cmdUpdate),
+							createMenuItem("About",null,cmdAbout)
+						]);
+				}else{
+					createMenu(
+						nm,
+						"Help",
+						[
+							createMenuItem("Update",null,cmdNativeUpdate),
+							createMenuItem("Deactivate",null,cmdDeactivate),
+							createMenuItem("About",null,cmdAbout)
+						]);
+				}
+				
+				return nm;
+			}
+			
+			private function onNewFile(e:Event):void
+			{
+				var wp:WSProject = new WSProject();
+				wp.label = "Untitled...";
+				this.addChild(wp);
+				this.selectedIndex = this.numChildren - 1;
+			}
+			
+			private function onSaveFile(e:Event):void
+			{
+				var p:WSProject = this.selectedChild as WSProject;
+				if(p.currentFile == null)
+					cmdSave.invokeCommand();
+				else
+					p.save(p.currentFile);
+			}
+
+			private function onCloseFile(e:Event):void
+			{
+				
+			}
+
+			private function onQuit(e:Event):void
+			{
+				//NativeApplication.nativeApplication.exit(0);
+				app.close();
+			}
+			
+			private function createMenu(root:NativeMenu, label:String, items:Array):void
+			{
+				var nm:NativeMenu = new NativeMenu();
+				nm.items = items;
+				root.addSubmenu(nm,label);
+			}
+			
+			private function createMenuItem(label:String, f:Function, cmd:GenericCommand = null):NativeMenuItem
+			{
+				var ni:NativeMenuItem;
+				if(cmd){
+					ni = new CommandNativeMenuItem(label,false,cmd);
+					return ni;
+				}
+				ni = new NativeMenuItem(label);
+				ni.addEventListener(Event.SELECT,f);
+				return ni;
+			}
+			
+			
+			public function openFile(f:File):void
+			{
+				// is already open??
+				var i:int = 0; 
+				for each(var child:Object in this.getChildren()){
+					var p1:WSProject = child as WSProject;
+					if(p1==null)
+						continue;
+					if(p1.currentFile != null && p1.currentFile.nativePath == f.nativePath)
+					{
+						// select index...
+						this.selectedIndex = i;
+						return;
+					}
+					i++;
+				}
+				
+				var prj:WSProject = new WSProject();
+				prj.load(f);
+				this.addChild(prj);
+				
+				this.selectedIndex = this.numChildren-1;
+			}
+			
+
+			protected function cmdOpen_resultHandler(event:Event):void
+			{
+				openFile(cmdOpen.lastFile);
+			}
+
+			protected function cmdLicense_resultHandler(event:CommandResultEvent):void
+			{
+				
+				if(NativeApplication.supportsMenu){
+					NativeApplication.nativeApplication.menu = nativeMenu; 
+				}else{
+					//Alert.show("No menus supported !!");
+					app.nativeWindow.menu = nativeMenu;
+				}
+				
+				if(args!=null && args.length>0){
+					openFile(new File(args[0]));
+				}else{
+					//this.addChild(new WSProject());
+				}
+			}
+
+
+			protected function cmdSave_resultHandler(event:CommandResultEvent):void
+			{
+				var p:WSProject = this.selectedChild as WSProject;
+				var f:File = cmdSave.lastFile;
+				p.rebind();
+				if(f.extension != "wsclient")
+					f = new File(f.nativePath + ".wsclient");
+				p.save(f);
+			}
+
+
+			protected function closeWindowBubble_commandHandler(event:BubbleCommandEvent):void
+			{
+				this.removeChild(event.data as DisplayObject);
+				if(this.numChildren==0){
+					this.addChild(new WSProject());
+				}
+			}
+
+		]]>
+	</mx:Script>
+	
+	
+	
+	<ns:BubbleCatcher
+		commandName="closeWindow"
+		command="closeWindowBubble_commandHandler(event)"
+		/>
+	
+	<ns:BubbleCatcher
+		commandName="createNew"
+		command="onNewFile(event)"
+		/>
+	
+	<ns:BubbleCatcher
+		commandName="saveFile"
+		command="onSaveFile(event)"
+		/>
+	
+	<wsForm:OpenFileCommand
+		id="cmdOpen"
+		watchBubble="openFile"
+		result="cmdOpen_resultHandler(event)"
+		/>
+	
+	<wsForm:SaveFileCommand
+		id="cmdSave"
+		result="cmdSave_resultHandler(event)"
+		/>
+	
+	<wsForm:UpdateAppCommand
+		id="cmdUpdate"
+		/>
+	
+	<ns:FormCommand
+		id="cmdAbout"
+		formClass="{AboutWindow}"
+		/>
+	
+	<ns:FormCommand
+		id="cmdNativeUpdate"
+		formClass="{UpdateForm}"
+		/>
+	
+	<ns:FormCommand
+		id="cmdLicense"
+		formClass="{ LICENSE::demo ? (LICENSE::csdemo ? CSDemoLicense : DemoLicense) : (LICENSE::edition==11 ? TempLicense : ActivateLicense)}"
+		callOnInit="true"
+		result="cmdLicense_resultHandler(event)"
+		/>
+	
+	<ns:FormCommand
+		id="cmdDeactivate"
+		formClass="{LICENSE::demo ? null : DeactivateLicense}"
+		/>
+	
+</ns:AdvanceTabNavigator>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns:GenericForm xmlns:mx="http://www.adobe.com/2006/mxml" 
+				width="520" height="350"
+				title="WSClient++ Demo License"
+				showCloseButton="false"
+				xmlns:ns="http://ns.neurospeech.com/neuro/flex/lib" 
+				xmlns:nsl="nsl.*"
+				creationComplete="init(event)"
+				>
+	<mx:Script>
+		<![CDATA[
+
+			
+			import com.adobe.utils.StringUtil;
+			import com.neuro.command.CommandResultEvent;
+			import com.neuro.controls.Time;
+			import com.neuro.utils.MD5;
+			
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function cmdRequest_resultHandler(event:CommandResultEvent):void
+			{
+				Alert.show(cmdRequest.lastMessage,'Successful');
+				// save..
+				licence.emailAddress = form_Email.text;
+				licence.save();
+			}
+			
+			[Bindable]
+			private var licence:LicenseInfo = new LicenseInfo();
+			
+			
+			protected function init(event:FlexEvent):void
+			{
+				LicenseInfo.globalEditionUID = "com.neurospeech.wsclient.suite";
+				
+				if(loadLicense()){
+					//startTimer();
+					saveStartButton.label = "Start";
+					return;
+				}
+				
+			}
+			
+			private function loadLicense():Boolean
+			{
+				if(licence.demoCode!=null && licence.demoCode!="")
+					return true;
+				return false;
+			}
+			
+			
+			private var timer:Timer = null;
+			
+			private function startTimer():void
+			{
+				timer = new Timer(1000,10);
+				timer.addEventListener(TimerEvent.TIMER, updateCount,false,0,true);
+				timer.addEventListener(TimerEvent.TIMER_COMPLETE, timerComplete,false,0,true);
+				timer.start();
+				theForm.enabled = false;
+			}
+			
+			private function updateCount(e:TimerEvent):void
+			{
+				savePanel.label = (10- timer.currentCount).toString();
+			}
+			
+			private function timerComplete(e:TimerEvent):void
+			{
+				timer = null;
+				this.closeForm();
+			}
+			
+			protected function saveAndStart_clickHandler(event:MouseEvent):void
+			{
+				licence.emailAddress = form_Email.text;
+				licence.demoCode = StringUtil.trim(form_Code.text);
+				licence.subscribe = form_Subscribe.selected;
+				if(!licence.verifyDemo())
+				{
+					Alert.show("Invalid demo code","Error");
+					return;
+				}
+				
+				licence.save();
+				
+				startTimer();
+			}
+			
+			
+		]]>
+	</mx:Script>
+	
+	
+	
+	<mx:Form width="100%" height="100%"
+			 label="Request Demo"
+			 id="theForm"
+			 >
+		<mx:FormItem label="Email Address:" required="true">
+			<ns:RequiredEmailAddress isRequired="true" id="form_Email" text="{licence.emailAddress}"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:CheckBox id="form_Subscribe" label="Subscribe to Newsletter to receive Product Updates" selected="{licence.subscribe}"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<ns:SubmitButton label="Request Demo License" width="180" command="{cmdRequest}"/>
+		</mx:FormItem>
+		<mx:FormItem required="true" width="100%">
+			<mx:Text text="If you have downloaded this application from RegNow for first time, then please click on menu 'Help\Update' to get latest version." width="100%"/>
+		</mx:FormItem>
+		<mx:HRule width="100%"/>
+		<mx:FormItem label="Demo Activation Code:" width="100%">
+			<ns:RequiredTextInput id="form_Code" width="100%" text="{licence.demoCode}"/>
+		</mx:FormItem>
+		<mx:FormItem id="savePanel">
+			<ns:UpdateButton id="saveStartButton" label="Save and Start" width="180"
+							 click="saveAndStart_clickHandler(event)"
+							 />
+		</mx:FormItem>
+		<mx:HRule width="100%"/>
+		<mx:FormItem>
+			<ns:NSHyperLink label="Purchase WSClient++ Starting at only $499" navigateUrl="http://wsclient.neurospeech.com/purchase"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<nsl:LicenseService id="WS">
+		<nsl:Request_RequestTrialLicense>
+			<nsl:Request_LicenseService_RequestTrialLicense>
+				<nsl:emailAddress>{form_Email.text}</nsl:emailAddress>
+				<nsl:editionUID>{LicenseInfo.globalEditionUID}</nsl:editionUID>
+				<nsl:subscribe>{form_Subscribe.selected}</nsl:subscribe>
+			</nsl:Request_LicenseService_RequestTrialLicense>
+		</nsl:Request_RequestTrialLicense>
+	</nsl:LicenseService>
+	
+	<ns:NSWSCommand id="cmdRequest"
+					commandInvoke="{event.token = WS.RequestTrialLicense_send()}"
+					validationRootComponent="{form_Email}"
+					result="cmdRequest_resultHandler(event)"
+					/>
+	
+	<ns:FormCommand id="cmdAgreement"
+					callOnInit="{!licence.licenseAgreed}"
+					formClass="{LicenseAgreement}"
+					formDataObject="{{license:licence}}"
+					/>
+	
+</ns:GenericForm>

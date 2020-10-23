@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					label="Update"
+					creationComplete="onCreationComplete(event)"
+					>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import wsClasses.License;
+			
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				var str:String = "<html><body>";
+				str += "<form action='https://neurospeech-store.800casting.com/app/update' method='POST'>";
+				str += "<input type='hidden' name='ProductUID' value='"+ License.productUID +"'/>";
+				str += "<input type='hidden' name='OrderID' value='"+ License.features.OrderID +"'/>";
+				str += "<input type='hidden' name='VersionID' value='"+ License.version +"'/>";
+				str += "<input type='hidden' value='Please Click Here to Check for Update'>";
+				str += "</form>";
+				str += "<script type='text/javascript'>\r\n";
+				str += "document.forms[0].submit();";
+				str += "</script>";
+				str += "</body></html>";
+				
+				var url:String = "https://neurospeech-store.800casting.com/app/update/index/" + License.productUID;
+				url += "?OrderID=" + License.features.OrderID;
+				url += "&VersionID=" + License.version;
+				
+				htmlContainer.location=url;
+				
+				htmlContainer.htmlLoader.navigateInSystemBrowser = true;
+				
+			}
+			
+			protected function onCancelClicked(event:MouseEvent):void
+			{
+				WSClient.closeProject(this);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:HTML id="htmlContainer" width="100%" height="100%"/>
+	<s:HGroup width="100%" horizontalAlign="right">
+		<s:Button label="Cancel" click="onCancelClicked(event)"/>
+	</s:HGroup>
+</s:NavigatorContent>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="/scripts/jquery-1.11.1.min.js"></script>
+    <script src="/scripts/atoms.min.js"></script>
+    <link href="/scripts/style/atoms.css" rel="stylesheet" />
+</head>
+<body>
+    <div atom-type="AtomApplication" atom-render-as-page="true">
+        <h1>WSClient-Admin</h1>
+        <div 
+            atom-type="AtomForm"
+            atom-post-url="/admin/user/login"
+            atom-next="[$data.RedirectUrl]"
+            atom-data="{ { RememberMe: false, RedirectUrl: '/admin/' } }">
+
+            <h3>Username</h3>
+            <input 
+                type="text" 
+                placeholder="Username" 
+                atom-value="$[data.Username]" />
+            <h3>Password</h3>
+            <input 
+                type="password" 
+                placeholder="Password" 
+                atom-value="$[data.Password]" />
+            <input type="checkbox" atom-checked="$[data.RememberMe]" />
+            <span>Remember</span>
+            <button type="submit">Login</button>
+        </div>
+    </div>
+</body>
+</html>

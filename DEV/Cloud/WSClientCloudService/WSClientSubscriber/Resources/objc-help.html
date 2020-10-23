@@ -1,0 +1,151 @@
+﻿
+<html>
+<head>
+<title>WSClient++ Documentation</title>
+<style type="text/css">
+body
+{
+    font-family:Verdana;
+    font-size:10pt;
+}
+    .style1
+    {
+        color: #33CC33;
+    }
+	.style2
+	{
+		color: #FF0000;
+	}
+</style>
+</head>
+<body>
+    <a id="top"></a>
+
+    <ul>
+        <li><a href="#program">WSClient++ iOS/Mac SDK</a></li>
+        <li><a href="#baseurl">Web Service BaseURL</a></li>
+		<li> For iPhone/iOS
+			<ul>
+				<li><a href="#cocoa">Cocoa Synchronous Sample Code</a></li>
+				<li><a href="#cocoa-async">Cocoa Asynchronous Sample Code</a></li>
+				<li><a href="#cocoa-timeout">Cocoa Http Timeout</a></li>
+				<li><a href="#cocoa-headers">Cocoa Custom Http Headers</a></li>
+			</ul>
+		</li>
+    </ul>
+    <h3>
+        <a id="program">WSClient++ </a>iOS/MAC SDK</h3>
+    <p>
+        WSClient++ SDK provides SOAP Client Stubs to connect to XML SOAP Web Services on Android/Blackberry and any other Java based Mobile Platforms. Once the source code is generated, you can include generated files in your project to get started.</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3><a id="baseurl">Web Service Base URL</a></h3>
+    <p>
+        There are two properties available in each of the client, Base Url and Global 
+        Base Url. In the application start up code of your project, you must specify 
+        Base Url as mentioned below. Base Url can be set two ways.</p>
+    <ol>
+        <li>You can set service.baseUrl to each instance of service.</li>
+        <li>Or you can set SoapWebService.globalBaseUrl property only once, that will be 
+            used to connect to your server.</li>
+    </ol>
+    <p>
+        If you have specified SoapWebService.globalBaseUrl, you can still override this 
+        behaviour in each service instance by setting service.baseUrl property.</p>
+    <p>
+        Base URL must only contain (http) or (https) and domain name as specified below. 
+        No additional slash after the domain name, you can include the port number if 
+        its not 80.</p>
+    <p>
+        http://myHost.myServer.com<br />
+        https://myHost.myServer.com<br />
+        http://myHost.myServer.com:99<br />
+        https://myHost.myServer.com:99</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="cocoa">Cocoa Synchronous Sample Code</a></h3>
+    <p>
+        MyWebService* ws = [MyWebService service];<br /><br />
+		<span class="style1">// [ws setHttpTimeout: 3000];</span><br />
+		<br />
+        <span class="style1">// // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">// [SoapWebService setGlobalBaseUrl: @&quot;http://domain.com&quot;];
+        </span>
+        <br class="style1" />
+        <span class="style1">// //set base url only for this service</span><br 
+            class="style1" />
+        <span class="style1">//
+        [ws setBaseUrl: @&quot;http://domain.com&quot;];</span><br />
+        NSError* error = nil;<br />
+        Result* rs = [ws callMethod: p1 param2:p2 error:&amp;error];<br />
+        if(error != nil){<br />
+&nbsp;&nbsp; // process error message....<br />
+        &nbsp;&nbsp; NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultString&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultCode&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultDetail&quot;]); <br />
+&nbsp;&nbsp;         SoapResponse* sr = [[error userInfo] valueForKey:@&quot;soapResponse&quot;]; <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[sr rawHttpResponse]);<br />
+&nbsp;&nbsp; return....<br />
+        }<br />
+        .. use Result</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+    <h3>
+        <a id="cocoa-async">Cocoa Asynchronous Sample Code</a></h3>
+    <p>
+        -(void) onError: (NSError*) error{<br />
+&nbsp;&nbsp; ... process error...<br />
+        &nbsp;&nbsp; NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultString&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultCode&quot;]); <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[[error userInfo] valueForKey:@&quot;faultDetail&quot;]); <br />
+&nbsp;&nbsp;         SoapResponse* sr = [[error userInfo] valueForKey:@&quot;soapResponse&quot;]; <br />
+&nbsp;&nbsp;         NSLog(@&quot;%@&quot;,[sr rawHttpResponse]);<br />
+        }<br />
+        <br />
+        -(void) onCallMethod:(MyWebServiceAsync*)service 
+        result:(Result*) r{
+        &nbsp;&nbsp;<br /> ... process result... 
+        you will get returned header here...<br />
+        }<br />
+        <br />
+        -(void) callService{<br />
+&nbsp;&nbsp; MyWebServiceAsync* ws = [MyWebServiceAsync service];<br />
+        <span class="style1">&nbsp;&nbsp; // // set base url for entire application</span><br 
+            class="style1" />
+        <span class="style1">&nbsp;&nbsp; // [SoapWebService setGlobalBaseUrl: 
+        @&quot;http://domain.com&quot;]; </span>
+        <br class="style1" />
+        <span class="style1">&nbsp;&nbsp; // //set base url only for this service</span><br 
+            class="style1" />
+        <span class="style1">&nbsp;&nbsp; //
+        [ws setBaseUrl: @&quot;http://domain.com&quot;];</span><br />
+&nbsp;&nbsp; [ws setDelegate: self]; // dont forget to set delegate<br />
+&nbsp;&nbsp; [ws callMethod: p1 parame2:p2];<br />
+        }</p>
+    <p>
+        <a href="#top">^ Top</a></p>
+	<h3><a id="cocoa-timeout">Cocoa Http Timeout</a></h3>
+	<p>
+		In order to set Http Timeout value, call setHttpTimeout method on your webservice instance as shown below. 
+		For more information, please check NSMutableHttpRequest.setHttpTimeout method.
+		<p>
+			[ws setHttpTimeout: 3000];
+		</p>
+	</p>
+	<p>
+	<a href="#top">^ Top</a>
+	</p>
+	<h3><a id="cocoa-headers">Cocoa Custom Http Headers</a></h3>
+	<p>
+		In order to send custom Http Headers (for Basic Auth in HTTP etc), please set a dictionary with headers on your web service as shown below.
+		<p>
+			NSMutableDictionary headers = [[[NSMutableDictionary alloc] init] autorelease];<br />
+			[headers setObject: <span class="style2">@"myUsername"</span> forKey: <span class="style2">@"username"</span>];<br />
+			<span class="style1">// Password should be encoded using Base64 for Basic AUTH</span><br />
+			[headers setObject: <span class="style2">@"myPassword"</span> forKey: <span class="style2">@"password"</span>];<br />
+			[ws setHttpHeaders: headers];<br />
+		</p>
+	</body>
+</html>

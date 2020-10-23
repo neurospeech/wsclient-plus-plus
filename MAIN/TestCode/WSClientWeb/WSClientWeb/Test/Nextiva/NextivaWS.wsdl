@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="Service" targetNamespace="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://schemas.verint.com/2010/04/12/NextivaWS/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://tempuri.org/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex">
+  <wsdl:import namespace="http://tempuri.org/" location="wsdl0.xml"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://schemas.verint.com/2010/04/12/NextivaWS/Imports">
+      <xsd:import schemaLocation="xsd0.xml" namespace="http://schemas.verint.com/2010/04/12/NextivaWS/"/>
+      <xsd:import schemaLocation="xsd1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="xsd2.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService_PtzGetAbsolutePosition_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetAbsolutePosition"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetAbsolutePosition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetAbsolutePositionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetAbsolutePosition_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAbsolutePosition_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetAbsolutePosition"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAbsolutePosition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetAbsolutePositionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAbsolutePosition_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzReboot_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzReboot"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzReboot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzRebootResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzReboot_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:LiveMediaQuery"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaQuery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LiveMediaQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaQuery_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaStreamToMonitor_InputMessage">
+    <wsdl:part name="parameters" element="tns:LiveMediaStreamToMonitor"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaStreamToMonitor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LiveMediaStreamToMonitorResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_LiveMediaStreamToMonitor_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TourMediaQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:TourMediaQuery"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TourMediaQuery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TourMediaQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TourMediaQuery_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PlaybackMediaQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlaybackMediaQuery"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PlaybackMediaQuery_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlaybackMediaQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PlaybackMediaQuery_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionKeepAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:SessionKeepAlive"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionKeepAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SessionKeepAliveResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionKeepAlive_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionGetTimeToLive_InputMessage">
+    <wsdl:part name="parameters" element="tns:SessionGetTimeToLive"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionGetTimeToLive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SessionGetTimeToLiveResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SessionGetTimeToLive_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTimeZoneInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimeZoneInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTimeZoneInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTimeZoneInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTimeZoneInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkspaceInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetWorkspaceInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveWorkspace_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveWorkspace"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveWorkspace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveWorkspaceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveWorkspace_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteWorkspace_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkspace"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteWorkspace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteWorkspaceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteWorkspace_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGuardtourBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGuardtourBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGuardtourInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGuardtourInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetGuardtourInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveGuardtour_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveGuardtour"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveGuardtour_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveGuardtourResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_SaveGuardtour_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteGuardtour_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGuardtour"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteGuardtour_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGuardtourResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteGuardtour_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzControl_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzControl"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzControl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzControlResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzControl_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGenericControl_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGenericControl"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGenericControl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGenericControlResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGenericControl_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzAllStop_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzAllStop"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzAllStop_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzAllStopResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzAllStop_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzLock_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzLock"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzLock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzLockResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzLock_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUnlock_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUnlock"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUnlock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUnlockResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUnlock_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIsLocked_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzIsLocked"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIsLocked_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzIsLockedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIsLocked_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFocus_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzFocus"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFocus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzFocusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFocus_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIris_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzIris"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIris_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzIrisResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzIris_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetFeatureMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetFeatureMode"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetFeatureMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetFeatureModeResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetFeatureMode_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMenu_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzMenu"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMenu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzMenuResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMenu_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetCapabilities_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetCapabilities"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetCapabilities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetCapabilitiesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetCapabilities_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_IsPtzCapabilitySupported_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsPtzCapabilitySupported"/>
+  </wsdl:message>
+  <wsdl:message name="IService_IsPtzCapabilitySupported_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsPtzCapabilitySupportedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_IsPtzCapabilitySupported_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPresetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetPresetInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPresetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetPresetInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPresetInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePresetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzCreateAndSavePresetInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePresetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzCreateAndSavePresetInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePresetInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePresetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUpdatePresetInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePresetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUpdatePresetInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePresetInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePreset_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzDeletePreset"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePreset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzDeletePresetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePreset_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPreset_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedPreset"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPreset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedPresetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPreset_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGotoPreset_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGotoPreset"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGotoPreset_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGotoPresetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGotoPreset_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPatternInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetPatternInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPatternInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetPatternInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetPatternInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePatternInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzCreateAndSavePatternInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePatternInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzCreateAndSavePatternInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzCreateAndSavePatternInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePatternInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUpdatePatternInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePatternInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzUpdatePatternInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzUpdatePatternInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzDeletePattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzDeletePatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzDeletePattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedPattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedPattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStartRecordingPattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStartRecordingPattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStartRecordingPattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStartRecordingPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStartRecordingPattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopRecordingPattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStopRecordingPattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopRecordingPattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStopRecordingPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopRecordingPattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzRunPattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzRunPattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzRunPattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzRunPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzRunPattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopPattern_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStopPattern"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopPattern_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzStopPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzStopPattern_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedAuxiliaries_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedAuxiliaries"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedAuxiliaries_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzGetNumberOfSupportedAuxiliariesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzGetNumberOfSupportedAuxiliaries_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAuxiliary_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetAuxiliary"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAuxiliary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzSetAuxiliaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzSetAuxiliary_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzClearAuxiliary_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzClearAuxiliary"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzClearAuxiliary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzClearAuxiliaryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzClearAuxiliary_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMoveToHomePosition_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzMoveToHomePosition"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMoveToHomePosition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzMoveToHomePositionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzMoveToHomePosition_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFlip180Degrees_InputMessage">
+    <wsdl:part name="parameters" element="tns:PtzFlip180Degrees"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFlip180Degrees_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PtzFlip180DegreesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_PtzFlip180Degrees_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Ping_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetEncryptionKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptionKey"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetEncryptionKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEncryptionKeyResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetEncryptionKey_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Login_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TokenLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:TokenLogin"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TokenLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TokenLoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_TokenLogin_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_WindowsLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:WindowsLogin"/>
+  </wsdl:message>
+  <wsdl:message name="IService_WindowsLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WindowsLoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_WindowsLogin_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Logout_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraStatus"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStatus_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStillImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraStillImage"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStillImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraStillImageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraStillImage_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonitorBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonitorBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonitorInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonitorInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonitorInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraGroupBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraGroupBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraGroupInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCameraGroupInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetCameraGroupInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Export_InputMessage">
+    <wsdl:part name="parameters" element="tns:Export"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Export_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExportResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_Export_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportUpdateStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExportUpdateStatus"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportUpdateStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExportUpdateStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportUpdateStatus_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportDisposeServerResources_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExportDisposeServerResources"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportDisposeServerResources_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExportDisposeServerResourcesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_ExportDisposeServerResources_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_CreateAndSaveBookmark_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAndSaveBookmark"/>
+  </wsdl:message>
+  <wsdl:message name="IService_CreateAndSaveBookmark_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAndSaveBookmarkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_CreateAndSaveBookmark_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteBookmark_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBookmark"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteBookmark_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBookmarkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_DeleteBookmark_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetBookmark_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookmark"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetBookmark_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookmarkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetBookmark_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetUser_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_HasAccessRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasAccessRight"/>
+  </wsdl:message>
+  <wsdl:message name="IService_HasAccessRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasAccessRightResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_HasAccessRight_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccessRights_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccessRights"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccessRights_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccessRightsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccessRights_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmImageAttachmentData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmImageAttachmentData"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmImageAttachmentData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlarmImageAttachmentDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetAlarmImageAttachmentData_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeAlarm_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeAlarm"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeAlarm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeAlarmResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeAlarm_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeMultipleAlarms_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeMultipleAlarms"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeMultipleAlarms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcknowledgeMultipleAlarmsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_AcknowledgeMultipleAlarms_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeAlarm_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnAcknowledgeAlarm"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeAlarm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnAcknowledgeAlarmResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeAlarm_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeMultipleAlarms_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnAcknowledgeMultipleAlarms"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeMultipleAlarms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnAcknowledgeMultipleAlarmsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_UnAcknowledgeMultipleAlarms_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourBasicInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTourBasicInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourBasicInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTourBasicInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourBasicInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTourInfo"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTourInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IService_GetTourInfo_NextivaWSFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:NextivaWSFault"/>
+  </wsdl:message>
+  <wsdl:portType name="IService">
+    <wsdl:operation name="PtzGetAbsolutePosition">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetAbsolutePosition" message="tns:IService_PtzGetAbsolutePosition_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetAbsolutePositionResponse" message="tns:IService_PtzGetAbsolutePosition_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetAbsolutePositionNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetAbsolutePosition_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetAbsolutePosition">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAbsolutePosition" message="tns:IService_PtzSetAbsolutePosition_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAbsolutePositionResponse" message="tns:IService_PtzSetAbsolutePosition_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAbsolutePositionNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzSetAbsolutePosition_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzReboot">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzReboot" message="tns:IService_PtzReboot_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRebootResponse" message="tns:IService_PtzReboot_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRebootNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzReboot_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="LiveMediaQuery">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaQuery" message="tns:IService_LiveMediaQuery_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaQueryResponse" message="tns:IService_LiveMediaQuery_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaQueryNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_LiveMediaQuery_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="LiveMediaStreamToMonitor">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaStreamToMonitor" message="tns:IService_LiveMediaStreamToMonitor_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaStreamToMonitorResponse" message="tns:IService_LiveMediaStreamToMonitor_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LiveMediaStreamToMonitorNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_LiveMediaStreamToMonitor_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="TourMediaQuery">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TourMediaQuery" message="tns:IService_TourMediaQuery_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TourMediaQueryResponse" message="tns:IService_TourMediaQuery_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TourMediaQueryNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_TourMediaQuery_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PlaybackMediaQuery">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PlaybackMediaQuery" message="tns:IService_PlaybackMediaQuery_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PlaybackMediaQueryResponse" message="tns:IService_PlaybackMediaQuery_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PlaybackMediaQueryNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PlaybackMediaQuery_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SessionKeepAlive">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionKeepAlive" message="tns:IService_SessionKeepAlive_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionKeepAliveResponse" message="tns:IService_SessionKeepAlive_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionKeepAliveNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_SessionKeepAlive_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SessionGetTimeToLive">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionGetTimeToLive" message="tns:IService_SessionGetTimeToLive_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionGetTimeToLiveResponse" message="tns:IService_SessionGetTimeToLive_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SessionGetTimeToLiveNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_SessionGetTimeToLive_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetTimeZoneInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTimeZoneInfo" message="tns:IService_GetTimeZoneInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTimeZoneInfoResponse" message="tns:IService_GetTimeZoneInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTimeZoneInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetTimeZoneInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkspaceBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceBasicInfo" message="tns:IService_GetWorkspaceBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceBasicInfoResponse" message="tns:IService_GetWorkspaceBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetWorkspaceBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkspaceInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceInfo" message="tns:IService_GetWorkspaceInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceInfoResponse" message="tns:IService_GetWorkspaceInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetWorkspaceInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetWorkspaceInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWorkspace">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveWorkspace" message="tns:IService_SaveWorkspace_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveWorkspaceResponse" message="tns:IService_SaveWorkspace_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveWorkspaceNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_SaveWorkspace_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteWorkspace">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteWorkspace" message="tns:IService_DeleteWorkspace_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteWorkspaceResponse" message="tns:IService_DeleteWorkspace_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteWorkspaceNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_DeleteWorkspace_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuardtourBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourBasicInfo" message="tns:IService_GetGuardtourBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourBasicInfoResponse" message="tns:IService_GetGuardtourBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetGuardtourBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetGuardtourInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourInfo" message="tns:IService_GetGuardtourInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourInfoResponse" message="tns:IService_GetGuardtourInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetGuardtourInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetGuardtourInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveGuardtour">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveGuardtour" message="tns:IService_SaveGuardtour_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveGuardtourResponse" message="tns:IService_SaveGuardtour_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/SaveGuardtourNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_SaveGuardtour_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGuardtour">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteGuardtour" message="tns:IService_DeleteGuardtour_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteGuardtourResponse" message="tns:IService_DeleteGuardtour_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteGuardtourNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_DeleteGuardtour_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzControl">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzControl" message="tns:IService_PtzControl_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzControlResponse" message="tns:IService_PtzControl_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzControlNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzControl_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGenericControl">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGenericControl" message="tns:IService_PtzGenericControl_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGenericControlResponse" message="tns:IService_PtzGenericControl_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGenericControlNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGenericControl_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzAllStop">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzAllStop" message="tns:IService_PtzAllStop_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzAllStopResponse" message="tns:IService_PtzAllStop_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzAllStopNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzAllStop_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzLock">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzLock" message="tns:IService_PtzLock_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzLockResponse" message="tns:IService_PtzLock_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzLockNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzLock_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUnlock">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUnlock" message="tns:IService_PtzUnlock_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUnlockResponse" message="tns:IService_PtzUnlock_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUnlockNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzUnlock_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzIsLocked">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIsLocked" message="tns:IService_PtzIsLocked_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIsLockedResponse" message="tns:IService_PtzIsLocked_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIsLockedNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzIsLocked_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzFocus">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFocus" message="tns:IService_PtzFocus_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFocusResponse" message="tns:IService_PtzFocus_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFocusNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzFocus_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzIris">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIris" message="tns:IService_PtzIris_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIrisResponse" message="tns:IService_PtzIris_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzIrisNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzIris_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetFeatureMode">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetFeatureMode" message="tns:IService_PtzSetFeatureMode_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetFeatureModeResponse" message="tns:IService_PtzSetFeatureMode_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetFeatureModeNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzSetFeatureMode_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzMenu">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMenu" message="tns:IService_PtzMenu_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMenuResponse" message="tns:IService_PtzMenu_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMenuNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzMenu_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetCapabilities">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetCapabilities" message="tns:IService_PtzGetCapabilities_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetCapabilitiesResponse" message="tns:IService_PtzGetCapabilities_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetCapabilitiesNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetCapabilities_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="IsPtzCapabilitySupported">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/IsPtzCapabilitySupported" message="tns:IService_IsPtzCapabilitySupported_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/IsPtzCapabilitySupportedResponse" message="tns:IService_IsPtzCapabilitySupported_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/IsPtzCapabilitySupportedNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_IsPtzCapabilitySupported_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetPresetInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPresetInfo" message="tns:IService_PtzGetPresetInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPresetInfoResponse" message="tns:IService_PtzGetPresetInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPresetInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetPresetInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzCreateAndSavePresetInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePresetInfo" message="tns:IService_PtzCreateAndSavePresetInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePresetInfoResponse" message="tns:IService_PtzCreateAndSavePresetInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePresetInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzCreateAndSavePresetInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUpdatePresetInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePresetInfo" message="tns:IService_PtzUpdatePresetInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePresetInfoResponse" message="tns:IService_PtzUpdatePresetInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePresetInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzUpdatePresetInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzDeletePreset">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePreset" message="tns:IService_PtzDeletePreset_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePresetResponse" message="tns:IService_PtzDeletePreset_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePresetNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzDeletePreset_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedPreset">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPreset" message="tns:IService_PtzGetNumberOfSupportedPreset_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPresetResponse" message="tns:IService_PtzGetNumberOfSupportedPreset_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPresetNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetNumberOfSupportedPreset_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGotoPreset">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGotoPreset" message="tns:IService_PtzGotoPreset_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGotoPresetResponse" message="tns:IService_PtzGotoPreset_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGotoPresetNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGotoPreset_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetPatternInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPatternInfo" message="tns:IService_PtzGetPatternInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPatternInfoResponse" message="tns:IService_PtzGetPatternInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetPatternInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetPatternInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzCreateAndSavePatternInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePatternInfo" message="tns:IService_PtzCreateAndSavePatternInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePatternInfoResponse" message="tns:IService_PtzCreateAndSavePatternInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzCreateAndSavePatternInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzCreateAndSavePatternInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzUpdatePatternInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePatternInfo" message="tns:IService_PtzUpdatePatternInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePatternInfoResponse" message="tns:IService_PtzUpdatePatternInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzUpdatePatternInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzUpdatePatternInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzDeletePattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePattern" message="tns:IService_PtzDeletePattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePatternResponse" message="tns:IService_PtzDeletePattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzDeletePatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzDeletePattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedPattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPattern" message="tns:IService_PtzGetNumberOfSupportedPattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPatternResponse" message="tns:IService_PtzGetNumberOfSupportedPattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedPatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetNumberOfSupportedPattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStartRecordingPattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStartRecordingPattern" message="tns:IService_PtzStartRecordingPattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStartRecordingPatternResponse" message="tns:IService_PtzStartRecordingPattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStartRecordingPatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzStartRecordingPattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStopRecordingPattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopRecordingPattern" message="tns:IService_PtzStopRecordingPattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopRecordingPatternResponse" message="tns:IService_PtzStopRecordingPattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopRecordingPatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzStopRecordingPattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzRunPattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRunPattern" message="tns:IService_PtzRunPattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRunPatternResponse" message="tns:IService_PtzRunPattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzRunPatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzRunPattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzStopPattern">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopPattern" message="tns:IService_PtzStopPattern_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopPatternResponse" message="tns:IService_PtzStopPattern_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzStopPatternNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzStopPattern_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzGetNumberOfSupportedAuxiliaries">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedAuxiliaries" message="tns:IService_PtzGetNumberOfSupportedAuxiliaries_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedAuxiliariesResponse" message="tns:IService_PtzGetNumberOfSupportedAuxiliaries_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzGetNumberOfSupportedAuxiliariesNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzGetNumberOfSupportedAuxiliaries_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzSetAuxiliary">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAuxiliary" message="tns:IService_PtzSetAuxiliary_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAuxiliaryResponse" message="tns:IService_PtzSetAuxiliary_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzSetAuxiliaryNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzSetAuxiliary_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzClearAuxiliary">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzClearAuxiliary" message="tns:IService_PtzClearAuxiliary_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzClearAuxiliaryResponse" message="tns:IService_PtzClearAuxiliary_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzClearAuxiliaryNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzClearAuxiliary_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzMoveToHomePosition">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMoveToHomePosition" message="tns:IService_PtzMoveToHomePosition_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMoveToHomePositionResponse" message="tns:IService_PtzMoveToHomePosition_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzMoveToHomePositionNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzMoveToHomePosition_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PtzFlip180Degrees">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFlip180Degrees" message="tns:IService_PtzFlip180Degrees_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFlip180DegreesResponse" message="tns:IService_PtzFlip180Degrees_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PtzFlip180DegreesNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_PtzFlip180Degrees_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Ping" message="tns:IService_Ping_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PingResponse" message="tns:IService_Ping_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/PingNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_Ping_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetEncryptionKey">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetEncryptionKey" message="tns:IService_GetEncryptionKey_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetEncryptionKeyResponse" message="tns:IService_GetEncryptionKey_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetEncryptionKeyNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetEncryptionKey_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Login" message="tns:IService_Login_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LoginResponse" message="tns:IService_Login_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LoginNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_Login_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="TokenLogin">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TokenLogin" message="tns:IService_TokenLogin_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TokenLoginResponse" message="tns:IService_TokenLogin_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/TokenLoginNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_TokenLogin_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="WindowsLogin">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/WindowsLogin" message="tns:IService_WindowsLogin_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/WindowsLoginResponse" message="tns:IService_WindowsLogin_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/WindowsLoginNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_WindowsLogin_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Logout" message="tns:IService_Logout_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LogoutResponse" message="tns:IService_Logout_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/LogoutNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_Logout_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraBasicInfo" message="tns:IService_GetCameraBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraBasicInfoResponse" message="tns:IService_GetCameraBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraInfo" message="tns:IService_GetCameraInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraInfoResponse" message="tns:IService_GetCameraInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraStatus">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStatus" message="tns:IService_GetCameraStatus_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStatusResponse" message="tns:IService_GetCameraStatus_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStatusNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraStatus_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraStillImage">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStillImage" message="tns:IService_GetCameraStillImage_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStillImageResponse" message="tns:IService_GetCameraStillImage_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraStillImageNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraStillImage_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorBasicInfo" message="tns:IService_GetMonitorBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorBasicInfoResponse" message="tns:IService_GetMonitorBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetMonitorBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonitorInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorInfo" message="tns:IService_GetMonitorInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorInfoResponse" message="tns:IService_GetMonitorInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetMonitorInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetMonitorInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraGroupBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupBasicInfo" message="tns:IService_GetCameraGroupBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupBasicInfoResponse" message="tns:IService_GetCameraGroupBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraGroupBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCameraGroupInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupInfo" message="tns:IService_GetCameraGroupInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupInfoResponse" message="tns:IService_GetCameraGroupInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetCameraGroupInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetCameraGroupInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Export">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/Export" message="tns:IService_Export_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportResponse" message="tns:IService_Export_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_Export_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportUpdateStatus">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportUpdateStatus" message="tns:IService_ExportUpdateStatus_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportUpdateStatusResponse" message="tns:IService_ExportUpdateStatus_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportUpdateStatusNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_ExportUpdateStatus_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportDisposeServerResources">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportDisposeServerResources" message="tns:IService_ExportDisposeServerResources_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportDisposeServerResourcesResponse" message="tns:IService_ExportDisposeServerResources_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/ExportDisposeServerResourcesNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_ExportDisposeServerResources_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAndSaveBookmark">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/CreateAndSaveBookmark" message="tns:IService_CreateAndSaveBookmark_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/CreateAndSaveBookmarkResponse" message="tns:IService_CreateAndSaveBookmark_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/CreateAndSaveBookmarkNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_CreateAndSaveBookmark_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBookmark">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteBookmark" message="tns:IService_DeleteBookmark_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteBookmarkResponse" message="tns:IService_DeleteBookmark_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/DeleteBookmarkNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_DeleteBookmark_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmark">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetBookmark" message="tns:IService_GetBookmark_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetBookmarkResponse" message="tns:IService_GetBookmark_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetBookmarkNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetBookmark_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetUser" message="tns:IService_GetUser_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetUserResponse" message="tns:IService_GetUser_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetUserNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetUser_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="HasAccessRight">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/HasAccessRight" message="tns:IService_HasAccessRight_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/HasAccessRightResponse" message="tns:IService_HasAccessRight_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/HasAccessRightNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_HasAccessRight_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccessRights">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAccessRights" message="tns:IService_GetAccessRights_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAccessRightsResponse" message="tns:IService_GetAccessRights_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAccessRightsNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetAccessRights_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmBasicInfo" message="tns:IService_GetAlarmBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmBasicInfoResponse" message="tns:IService_GetAlarmBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetAlarmBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmInfo" message="tns:IService_GetAlarmInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmInfoResponse" message="tns:IService_GetAlarmInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetAlarmInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmImageAttachmentData">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmImageAttachmentData" message="tns:IService_GetAlarmImageAttachmentData_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmImageAttachmentDataResponse" message="tns:IService_GetAlarmImageAttachmentData_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetAlarmImageAttachmentDataNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetAlarmImageAttachmentData_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeAlarm">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeAlarm" message="tns:IService_AcknowledgeAlarm_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeAlarmResponse" message="tns:IService_AcknowledgeAlarm_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeAlarmNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_AcknowledgeAlarm_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="AcknowledgeMultipleAlarms">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeMultipleAlarms" message="tns:IService_AcknowledgeMultipleAlarms_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeMultipleAlarmsResponse" message="tns:IService_AcknowledgeMultipleAlarms_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/AcknowledgeMultipleAlarmsNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_AcknowledgeMultipleAlarms_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UnAcknowledgeAlarm">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeAlarm" message="tns:IService_UnAcknowledgeAlarm_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeAlarmResponse" message="tns:IService_UnAcknowledgeAlarm_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeAlarmNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_UnAcknowledgeAlarm_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UnAcknowledgeMultipleAlarms">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeMultipleAlarms" message="tns:IService_UnAcknowledgeMultipleAlarms_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeMultipleAlarmsResponse" message="tns:IService_UnAcknowledgeMultipleAlarms_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/UnAcknowledgeMultipleAlarmsNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_UnAcknowledgeMultipleAlarms_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetTourBasicInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourBasicInfo" message="tns:IService_GetTourBasicInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourBasicInfoResponse" message="tns:IService_GetTourBasicInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourBasicInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetTourBasicInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetTourInfo">
+      <wsdl:input wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourInfo" message="tns:IService_GetTourInfo_InputMessage"/>
+      <wsdl:output wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourInfoResponse" message="tns:IService_GetTourInfo_OutputMessage"/>
+      <wsdl:fault wsaw:Action="http://schemas.verint.com/2010/04/12/NextivaWS/IService/GetTourInfoNextivaWSFaultFault" name="NextivaWSFaultFault" message="tns:IService_GetTourInfo_NextivaWSFaultFault_FaultMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="Service">
+    <wsdl:port name="BasicHttpBinding_IService" binding="i0:BasicHttpBinding_IService">
+      <soap:address location="http://10.161.42.77:7005/NextivaWS/Service/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

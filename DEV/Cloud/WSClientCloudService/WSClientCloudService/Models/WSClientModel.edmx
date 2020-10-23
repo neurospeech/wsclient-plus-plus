@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx" Version="2.0">
+  <edmx:Runtime>
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WSClientModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
+        <EntityContainer Name="WSClientModelStoreContainer">
+          <EntitySet Name="Settings" EntityType="WSClientModel.Store.Settings" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WSJobs" EntityType="WSClientModel.Store.WSJobs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WSUsers" EntityType="WSClientModel.Store.WSUsers" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_WSJobs_WSUsers" Association="WSClientModel.Store.FK_WSJobs_WSUsers">
+            <End Role="WSUsersUserID" EntitySet="WSUsers" />
+            <End Role="WSJobsOwnerID" EntitySet="WSJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WSJobs_WSUsers1" Association="WSClientModel.Store.FK_WSJobs_WSUsers1">
+            <End Role="WSUsersUserID" EntitySet="WSUsers" />
+            <End Role="WSJobsAssigneeID" EntitySet="WSJobs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="varchar" Nullable="false" MaxLength="900" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WSJobs">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WSDLUrl" Type="nvarchar" MaxLength="1024" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="JobStatus" Type="varchar" MaxLength="10" />
+          <Property Name="ResultUrl" Type="varchar" MaxLength="900" />
+          <Property Name="IsDemo" Type="bit" Nullable="false" />
+          <Property Name="OutputType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="400" />
+          <Property Name="AssigneeID" Type="nvarchar" MaxLength="400" />
+          <Property Name="Usage" Type="int" Nullable="false" />
+          <Property Name="OutputTarget" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OutputPackage" Type="nvarchar" MaxLength="50" />
+          <Property Name="OutputPrefix" Type="nvarchar" MaxLength="50" />
+          <Property Name="TriggerEmail" Type="nvarchar(max)" />
+          <Property Name="TriggerUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WSUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" Nullable="false" MaxLength="400" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="400" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_WSJobs_WSUsers">
+          <End Role="WSUsersUserID" Type="WSClientModel.Store.WSUsers" Multiplicity="0..1" />
+          <End Role="WSJobsOwnerID" Type="WSClientModel.Store.WSJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WSUsersUserID">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WSJobsOwnerID">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WSJobs_WSUsers1">
+          <End Role="WSUsersUserID" Type="WSClientModel.Store.WSUsers" Multiplicity="0..1" />
+          <End Role="WSJobsAssigneeID" Type="WSClientModel.Store.WSJobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WSUsersUserID">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WSJobsAssigneeID">
+              <PropertyRef Name="AssigneeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" Namespace="WSClientModel" Alias="Self">
+        <EntityContainer Name="WSClientModelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Settings" EntityType="WSClientModel.Setting" />
+          <EntitySet Name="WSJobs" EntityType="WSClientModel.WSJob" />
+          <EntitySet Name="WSUsers" EntityType="WSClientModel.WSUser" />
+          <AssociationSet Name="FK_WSJobs_WSUsers" Association="WSClientModel.FK_WSJobs_WSUsers">
+            <End Role="WSUsersUserID" EntitySet="WSUsers" />
+            <End Role="WSJobsOwnerID" EntitySet="WSJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WSJobs_WSUsers1" Association="WSClientModel.FK_WSJobs_WSUsers1">
+            <End Role="WSUsersUserID" EntitySet="WSUsers" />
+            <End Role="WSJobsAssigneeID" EntitySet="WSJobs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="900" Unicode="false" FixedLength="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WSJob">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WSDLUrl" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" />
+          <Property Name="JobStatus" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ResultUrl" Type="String" MaxLength="900" Unicode="false" FixedLength="false" />
+          <Property Name="IsDemo" Type="Boolean" Nullable="false" />
+          <Property Name="OutputType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OwnerID" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+          <Property Name="AssigneeID" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+          <Property Name="Usage" Type="Int32" Nullable="false" />
+          <Property Name="OutputTarget" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OutputPackage" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OutputPrefix" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TriggerEmail" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TriggerUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Owner" Relationship="WSClientModel.FK_WSJobs_WSUsers" FromRole="WSJobsOwnerID" ToRole="WSUsersUserID" />
+          <NavigationProperty Name="Assignee" Relationship="WSClientModel.FK_WSJobs_WSUsers1" FromRole="WSJobsAssigneeID" ToRole="WSUsersUserID" />
+        </EntityType>
+        <EntityType Name="WSUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="400" Unicode="true" FixedLength="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="400" Unicode="true" FixedLength="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WSJobOwners" Relationship="WSClientModel.FK_WSJobs_WSUsers" FromRole="WSUsersUserID" ToRole="WSJobsOwnerID" />
+          <NavigationProperty Name="WSJobAssignees" Relationship="WSClientModel.FK_WSJobs_WSUsers1" FromRole="WSUsersUserID" ToRole="WSJobsAssigneeID" />
+        </EntityType>
+        <Association Name="FK_WSJobs_WSUsers">
+          <End Type="WSClientModel.WSUser" Role="WSUsersUserID" Multiplicity="0..1" />
+          <!--WSJobOwners-->
+          <End Type="WSClientModel.WSJob" Role="WSJobsOwnerID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WSUsersUserID">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WSJobsOwnerID">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WSJobs_WSUsers1">
+          <End Type="WSClientModel.WSUser" Role="WSUsersUserID" Multiplicity="0..1" />
+          <!--WSJobAssignees-->
+          <End Type="WSClientModel.WSJob" Role="WSJobsAssigneeID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WSUsersUserID">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WSJobsAssigneeID">
+              <PropertyRef Name="AssigneeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <EntityContainerMapping StorageEntityContainer="WSClientModelStoreContainer" CdmEntityContainer="WSClientModelEntities">
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="WSClientModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WSJobs">
+            <EntityTypeMapping TypeName="WSClientModel.WSJob">
+              <MappingFragment StoreEntitySet="WSJobs">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="WSDLUrl" ColumnName="WSDLUrl" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
+                <ScalarProperty Name="ResultUrl" ColumnName="ResultUrl" />
+                <ScalarProperty Name="IsDemo" ColumnName="IsDemo" />
+                <ScalarProperty Name="OutputType" ColumnName="OutputType" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="AssigneeID" ColumnName="AssigneeID" />
+                <ScalarProperty Name="Usage" ColumnName="Usage" />
+                <ScalarProperty Name="OutputTarget" ColumnName="OutputTarget" />
+                <ScalarProperty Name="OutputPackage" ColumnName="OutputPackage" />
+                <ScalarProperty Name="OutputPrefix" ColumnName="OutputPrefix" />
+                <ScalarProperty Name="TriggerEmail" ColumnName="TriggerEmail" />
+                <ScalarProperty Name="TriggerUrl" ColumnName="TriggerUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WSUsers">
+            <EntityTypeMapping TypeName="WSClientModel.WSUser">
+              <MappingFragment StoreEntitySet="WSUsers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="True" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams />
+  </edmx:Designer>
+</edmx:Edmx>

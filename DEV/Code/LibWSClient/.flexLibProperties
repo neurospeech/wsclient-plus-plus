@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="wsClasses.WSLicense"/>
+    <classEntry path="wsForm.WSTabs"/>
+    <classEntry path="wsForm.OpenFileCommand"/>
+    <classEntry path="wsForm.CommandNativeMenuItem"/>
+    <classEntry path="nslm.LicenseInfo"/>
+    <classEntry path="nslm.DemoLicense"/>
+    <classEntry path="wsClasses.WSGenerator"/>
+    <classEntry path="nslm.ActivateLicense"/>
+    <classEntry path="nslm.HostNameProvider"/>
+    <classEntry path="nslm.StringHelper"/>
+    <classEntry path="wsForm.UpdateAppCommand"/>
+    <classEntry path="wsForm.AboutWindow"/>
+    <classEntry path="wsForm.WSApplication"/>
+    <classEntry path="nslm.DeactivateLicense"/>
+    <classEntry path="wsForm.SaveFileCommand"/>
+    <classEntry path="nslm.TempLicense"/>
+    <classEntry path="wsForm.HelpDocument"/>
+    <classEntry path="nslm.LicenseAgreement"/>
+    <classEntry path="wsClasses.CSharpWCFGenerator"/>
+    <classEntry path="wsClasses.SoapRestriction"/>
+    <classEntry path="wsForm.SchemaLoader"/>
+    <classEntry path="wsClasses.SoapSchema"/>
+    <classEntry path="wsClasses.SoapSimpleType"/>
+    <classEntry path="wsClasses.SoapEnumerator"/>
+    <classEntry path="wsForm.UpdateForm"/>
+    <classEntry path="wsClasses.SoapOperation"/>
+    <classEntry path="wsClasses.WSType"/>
+    <classEntry path="wsClasses.WSTypeMember"/>
+    <classEntry path="wsClasses.WSTypeName"/>
+    <classEntry path="wsClasses.XmlHelper"/>
+    <classEntry path="wsClasses.WSMethod"/>
+    <classEntry path="wsClasses.ServiceWriter"/>
+    <classEntry path="wsClasses.PackageWriter"/>
+    <classEntry path="wsClasses.WSElementType"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

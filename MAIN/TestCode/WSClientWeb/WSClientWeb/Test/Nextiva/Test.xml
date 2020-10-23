@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.bigonline.pt/m" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.bigonline.pt/m" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.bigonline.pt/m">
+      <s:element name="PrepareAuthorization">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="req" type="tns:AuthorizationRequest" />
+          </s:sequence>
+        </s:complexType>
+
+      </s:element>
+      <s:complexType name="AuthorizationRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:TokenedRequest">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Product" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Operation" type="s:string" />
+            </s:sequence>
+          </s:extension>
+
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TokenedRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:attribute name="AccountId" type="s:unsignedInt" use="required" />
+            <s:attribute name="DeviceId" type="s:string" />
+            <s:attribute name="Token" type="s:string" />
+          </s:extension>
+
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Request">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Message">
+            <s:attribute name="Username" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+
+      <s:complexType name="Message">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="timestamp" type="s:long" />
+        </s:sequence>
+        <s:attribute name="Timestamp" type="s:long" use="required" />
+      </s:complexType>
+      <s:complexType name="Response">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Message">
+
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorMessages" type="tns:ArrayOfString" />
+            </s:sequence>
+            <s:attribute name="ErrorCode" type="s:int" use="required" />
+            <s:attribute name="ErrorMessage" type="s:string" />
+            <s:attribute name="Time" type="s:int" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AuthorizationResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Response">
+            <s:sequence>
+
+              <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Positions" type="tns:ArrayOfInt" />
+              <s:element minOccurs="1" maxOccurs="1" name="FailedCount" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="PrepareAuthorizationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PrepareAuthorizationResult" type="tns:AuthorizationResponse" />
+          </s:sequence>
+
+        </s:complexType>
+      </s:element>
+      <s:element name="GetToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:TokenRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+
+      <s:complexType name="TokenRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:SignedRequest">
+            <s:attribute name="AppVersion" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SignedRequest">
+        <s:complexContent mixed="false">
+
+          <s:extension base="tns:TokenedRequest" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTokenResult" type="tns:TokenResponse" />
+          </s:sequence>
+        </s:complexType>
+
+      </s:element>
+      <s:complexType name="TokenResponse">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Response">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LastToken" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentToken" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="NewKey" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Accounts" type="tns:UserAccounts" />
+
+              <s:element minOccurs="0" maxOccurs="1" name="AvailableUpdates" type="tns:AccountUpdates" />
+            </s:sequence>
+            <s:attribute name="AccountId" type="s:unsignedInt" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserAccounts">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Main" type="tns:ArrayOfUserAccount" />
+
+          <s:element minOccurs="0" maxOccurs="1" name="CoOwned" type="tns:ArrayOfUserAccount" />
+          <s:element minOccurs="0" maxOccurs="1" name="Authorizations" type="tns:ArrayOfUserAccount" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserAccount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserAccount" nillable="true" type="tns:UserAccount" />
+        </s:sequence>
+      </s:complexType>
+
+      <s:complexType name="UserAccount">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:unsignedInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountUpdates">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccounts" type="s:boolean" />
+
+          <s:element minOccurs="1" maxOccurs="1" name="Products" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AuthenticationData" type="tns:SignatureSoapHeader" />
+      <s:complexType name="SignatureSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Signature" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+        </s:sequence>
+
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="RevokeDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:SignedRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+
+      <s:element name="RevokeDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RevokeDeviceResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+
+  <wsdl:message name="PrepareAuthorizationSoapIn">
+    <wsdl:part name="parameters" element="tns:PrepareAuthorization" />
+  </wsdl:message>
+  <wsdl:message name="PrepareAuthorizationSoapOut">
+    <wsdl:part name="parameters" element="tns:PrepareAuthorizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetToken" />
+  </wsdl:message>
+
+  <wsdl:message name="GetTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTokenAuthenticationData">
+    <wsdl:part name="AuthenticationData" element="tns:AuthenticationData" />
+  </wsdl:message>
+  <wsdl:message name="RevokeDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:RevokeDevice" />
+  </wsdl:message>
+
+  <wsdl:message name="RevokeDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:RevokeDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="RevokeDeviceAuthenticationData">
+    <wsdl:part name="AuthenticationData" element="tns:AuthenticationData" />
+  </wsdl:message>
+  <wsdl:portType name="AuthenticationSoap">
+    <wsdl:operation name="PrepareAuthorization">
+      <wsdl:input message="tns:PrepareAuthorizationSoapIn" />
+
+      <wsdl:output message="tns:PrepareAuthorizationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetToken">
+      <wsdl:input message="tns:GetTokenSoapIn" />
+      <wsdl:output message="tns:GetTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RevokeDevice">
+      <wsdl:input message="tns:RevokeDeviceSoapIn" />
+      <wsdl:output message="tns:RevokeDeviceSoapOut" />
+
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthenticationSoap" type="tns:AuthenticationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="PrepareAuthorization">
+      <soap:operation soapAction="http://www.bigonline.pt/m/PrepareAuthorization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetToken">
+      <soap:operation soapAction="http://www.bigonline.pt/m/GetToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTokenAuthenticationData" part="AuthenticationData" use="literal" />
+
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RevokeDevice">
+      <soap:operation soapAction="http://www.bigonline.pt/m/RevokeDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+
+        <soap:header message="tns:RevokeDeviceAuthenticationData" part="AuthenticationData" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthenticationSoap12" type="tns:AuthenticationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="PrepareAuthorization">
+      <soap12:operation soapAction="http://www.bigonline.pt/m/PrepareAuthorization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetToken">
+      <soap12:operation soapAction="http://www.bigonline.pt/m/GetToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTokenAuthenticationData" part="AuthenticationData" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+
+    </wsdl:operation>
+    <wsdl:operation name="RevokeDevice">
+      <soap12:operation soapAction="http://www.bigonline.pt/m/RevokeDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RevokeDeviceAuthenticationData" part="AuthenticationData" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Authentication">
+    <wsdl:port name="AuthenticationSoap" binding="tns:AuthenticationSoap">
+      <soap:address location="https://localhost/m/api/v1/services/authentication.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthenticationSoap12" binding="tns:AuthenticationSoap12">
+      <soap12:address location="https://localhost/m/api/v1/services/authentication.asmx" />
+
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

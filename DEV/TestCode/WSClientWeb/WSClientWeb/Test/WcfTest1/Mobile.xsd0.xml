@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://Florence.BusinessServiceLayer.Model/2011/Mobile" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://Florence.BusinessServiceLayer.Model/2011/Mobile">
+  <xs:element name="GetOffersRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer"/>
+        <xs:element minOccurs="0" name="MobileRequestHeader" nillable="true" type="tns:MobileRequestHeader"/>
+        <xs:element minOccurs="0" name="Store" nillable="true" type="tns:Store"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Accounts" nillable="true" type="tns:Accounts"/>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address"/>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer"/>
+  <xs:complexType name="Accounts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Account" nillable="true" type="tns:Account"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Accounts" nillable="true" type="tns:Accounts"/>
+  <xs:complexType name="Account">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LoyaltyID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="ThirdPartyID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer"/>
+      <xs:element minOccurs="0" name="Program" nillable="true" type="tns:Program"/>
+      <xs:element minOccurs="0" name="AccountID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Account" nillable="true" type="tns:Account"/>
+  <xs:complexType name="Program">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProgramID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Program" nillable="true" type="tns:Program"/>
+  <xs:complexType name="Address">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Line1" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Line2" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Address" nillable="true" type="tns:Address"/>
+  <xs:complexType name="MobileRequestHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProgramID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MobileRequestHeader" nillable="true" type="tns:MobileRequestHeader"/>
+  <xs:complexType name="Store">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="StoreNumber" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:Address"/>
+      <xs:element minOccurs="0" name="StoreID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Store" nillable="true" type="tns:Store"/>
+  <xs:element name="GetOffersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MobileResponseHeader" nillable="true" type="tns:MobileResponseHeader"/>
+        <xs:element minOccurs="0" name="Offers" nillable="true" type="tns:Accounts"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="MobileResponseHeader">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ProgramID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string"/>
+      <xs:element minOccurs="0" name="LoyaltyID" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MobileResponseHeader" nillable="true" type="tns:MobileResponseHeader"/>
+  <xs:element name="CreateLoyaltyAccountRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="LoyaltyID" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="MobileRequestHeader" nillable="true" type="tns:MobileRequestHeader"/>
+        <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="ThirdPartyID" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateLoyaltyAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account"/>
+        <xs:element minOccurs="0" name="AccountMessage" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer"/>
+        <xs:element minOccurs="0" name="MobileResponseHeader" nillable="true" type="tns:MobileResponseHeader"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateOfferRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MobileRequestHeader" nillable="true" type="tns:MobileRequestHeader"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateOfferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MobileResponseHeader" nillable="true" type="tns:MobileResponseHeader"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CustomerLoginRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="ProgramID" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CustomerLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Customer" nillable="true" type="tns:Customer"/>
+        <xs:element minOccurs="0" name="LoginMessage" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="MobileResponseHeader" nillable="true" type="tns:MobileResponseHeader"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string"/>
+        <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/">
+  <xs:import schemaLocation="/Test/Sepialine/xsd2.xml" namespace="http://schemas.datacontract.org/2004/07/Sepialine.Argos.AppServer.Communication.Interfaces"/>
+  <xs:element name="PostRawPaperJobs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="newRawJobs" nillable="true" type="q1:ArrayOfRawPaperJob" xmlns:q1="http://schemas.datacontract.org/2004/07/Sepialine.Argos.AppServer.Communication.Interfaces"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostRawPaperJobsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PostRawPaperJobsResult" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostRawPhoneJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="rawPhoneJob" nillable="true" type="q2:RawPhoneJob" xmlns:q2="http://schemas.datacontract.org/2004/07/Sepialine.Argos.AppServer.Communication.Interfaces"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PostRawPhoneJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PostRawPhoneJobResult" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

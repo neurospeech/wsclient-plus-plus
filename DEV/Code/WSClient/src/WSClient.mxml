@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:wsForm="wsForm.*"
+					   creationComplete="window_creationCompleteHandler(event)"
+					   closing="onWindowClosing(event)"
+					   >
+	<fx:Style source="WSClient.css"/>
+	<s:layout>
+		<s:VerticalLayout gap="4" paddingBottom="4" paddingLeft="4" paddingRight="4" paddingTop="4"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			import nslm.DemoView;
+			import nslm.LicenseAgreement;
+			import nslm.LicenseManager;
+			import nslm.UpdateView;
+			
+			import wsClasses.License;
+			
+			import wsForm.WSProjectView;
+
+			
+			public static function closeProject(p:UIComponent):void
+			{
+				for each(var n:UIComponent in current.nav.getChildren()){
+					if(n==p){
+						current.nav.removeChild(p);
+					}
+				}
+			}
+			
+			public static var current:WSClient = null;
+			
+			protected function window_creationCompleteHandler(event:FlexEvent):void
+			{
+				var lm:LicenseAgreement  = new LicenseAgreement();
+				PopUpManager.addPopUp(lm,this,true);
+				current = this;				
+			}
+			
+			protected function createNewClicked(event:MouseEvent):void
+			{
+				var p:WSProjectView = new WSProjectView();
+				p.label = "Undefined";
+				nav.addElement(p);
+				nav.selectedIndex = nav.getChildIndex(p);
+			}
+			
+			private function openProject(event:Event):void
+			{
+				var file:File = event.target as File;
+				for each(var p:UIComponent in nav.getChildren()){
+					var project:WSProjectView = p as WSProjectView;
+					if(project==null)
+						continue;
+					if(project.currentFile && project.currentFile.nativePath == file.nativePath)
+					{
+						nav.selectedIndex = nav.getChildIndex(p);
+						return;
+					}
+				}
+				
+				var p1:WSProjectView = new WSProjectView();
+				p1.currentFile = file;
+				p1.project.load(file);
+				p1.label = file.name;
+				nav.addElement(p1);
+				nav.selectedIndex = nav.getChildIndex(p1);
+			}
+			
+			protected function openConfigurationClicked(event:MouseEvent):void
+			{
+				
+				var f:File = File.documentsDirectory;
+				f.addEventListener(Event.SELECT, openProject, false, 0, true);
+				f.browseForOpen("Open",
+					[
+						new FileFilter("WSClient++ Configuration Settings (*.wsclient)","*.wsclient",null),
+						new FileFilter("All Files (*.*)","*.*",null)
+					]);
+			}
+			
+			protected function checkUpdateClicked(event:MouseEvent):void
+			{
+				var u:UpdateView = new UpdateView();
+				nav.addElement(u);
+				nav.selectedIndex = nav.getItemIndex(u);
+			}
+			
+			private var verifyClose:Boolean = true;
+			public function showDemo():void
+			{
+				var p:DemoView = new DemoView();
+				nav.addElement(p);
+				nav.selectedIndex = nav.getItemIndex(p);
+			}
+			protected function onWindowClosing(e:Event):void
+			{
+				if(!verifyClose)
+					return;
+				for each(var child:Object in nav.getChildren()){
+					var w:WSProjectView = child as WSProjectView;
+					if(w==null)
+						continue;
+					if(w.project.isModified()){
+						Alert.show("There are some unsaved files in this window, are you sure you want to exit?","Exit", Alert.YES + Alert.NO, this, onCloseSelected, null, Alert.NO);
+						e.preventDefault();
+						e.stopImmediatePropagation();
+						e.stopPropagation();
+						return;
+					}
+				}
+			}
+			
+			private function onCloseSelected(ce:CloseEvent):void
+			{
+				if(ce.detail == Alert.YES){
+					verifyClose = false;
+					this.close();
+				}
+			}
+			
+			protected function onLicenseManagerClicked(event:MouseEvent):void
+			{
+				var lm:LicenseManager = new LicenseManager();
+				PopUpManager.addPopUp(lm,this,true);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<s:HGroup>
+		<s:Button label="Create New Configuration File" icon="AddIcon.png" click="createNewClicked(event)"/>
+		<s:Button label="Open Configuration File" icon="OpenIcon.png" click="openConfigurationClicked(event)"/>
+		<s:Button label="Check for Update" icon="MoveUp.png" click="checkUpdateClicked(event)"/>
+		<s:Spacer width="100%" height="100%"/>
+		<s:Button label="License Manager" click="onLicenseManagerClicked(event)"
+				  icon="base_lock.png"/>
+	</s:HGroup>
+	<mx:TabNavigator width="100%" height="100%" id="nav">
+		<wsForm:HelpDocument/>
+	</mx:TabNavigator>
+</s:WindowedApplication>

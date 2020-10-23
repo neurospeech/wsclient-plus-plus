@@ -1,0 +1,2940 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Tab size 2, replace tabs with 2 spaces -->
+<!--
+
+    Webservice definition for communication
+    between ebanking mobile (client)
+    and BAWAG PSK Host/ESB (server).
+
+    History:
+
+    2011-05-15  H.Ivanov/BAWAG/ITAD 
+            draft Creation 
+    ________________________________________
+    Copyright (c) 2011  BAWAG PSK AG
+-->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="urn:selfservicemobile.bawag.com/ws/v0100-draft03"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="urn:selfservicemobile.bawag.com/ws/v0100-draft03"
+  name="SelfServiceMobile.01.00.">
+
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:selfservicemobile.bawag.com/ws/v0100-draft03">
+
+      <!-- Common types (used in miscellaneous requests/responses) -->
+
+      <xsd:simpleType name="AccountNumber">
+        <xsd:annotation>
+          <xsd:documentation>
+            Austrian bank account number
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length value="11" />
+          <xsd:pattern value="\d{11}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="BankCode">
+        <xsd:annotation>
+          <xsd:documentation>
+            Austrian bank code (&quot;BLZ&quot;)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="5"/>
+          <xsd:pattern value="\d{5}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="Account">
+        <xsd:annotation>
+          <xsd:documentation>
+            Bank code + account number,
+            identifies an Austrian bank account
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="BankCode" type="tns:BankCode"/>
+          <xsd:element name="AccountNumber" type="tns:AccountNumber"/>
+          <xsd:element name="AccountCurrency" type="tns:CurrencyCode"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Product">
+        <xsd:annotation>
+          <xsd:documentation>
+            Product - an internal Account (=account of BAWAG/PSK/EASYBANK/SPARDA).
+            The Product is included in the Login response.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:Account">
+            <xsd:sequence>
+              <xsd:element name="ProductId" type="tns:ProductId"/>
+              <xsd:element name="IsCollective">
+                <xsd:simpleType >
+                  <xsd:annotation>
+                    <xsd:documentation>
+                      if this flag is true then transactions
+                      must be signed from all collective signer disposers.
+                    </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:restriction base="xsd:boolean">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="IsReadOnly">
+                <xsd:simpleType >
+                  <xsd:annotation>
+                    <xsd:documentation>
+                      if this is a Read Only product.
+                    </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:restriction base="xsd:boolean">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="HasCorrespondingAccount">
+                <xsd:simpleType >
+                  <xsd:annotation>
+                    <xsd:documentation>
+                      if this product has a corresponding account.
+                    </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:restriction base="xsd:boolean">
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+
+              <xsd:element name="CorrespondingAccount" type="tns:Account" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    There is a Corresponding Account
+                    only if HasCorrespondingAccount is true.
+                  </xsd:documentation>
+                </xsd:annotation>
+              </xsd:element>
+
+              <xsd:element name="Alias" minOccurs="0">
+                <xsd:simpleType >
+                  <xsd:annotation>
+                    <xsd:documentation>
+                      The product Alias Name.
+                    </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="30"/>
+                    <!-- TODO
+                      <xsd:pattern value="[A-Z_]{1,30}"/>
+                    -->
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="Products">
+        <xsd:annotation>
+          <xsd:documentation>
+            A Product List as returned from the host on Login request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Product" type="tns:Product" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="ProductId">
+        <xsd:annotation>
+          <xsd:documentation>
+            the ProductId identifies the corporate bank account
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductType" type="tns:ProductType"/>
+          <xsd:element name="ProductCode" type="tns:ProductCode" minOccurs="0"/>
+          <xsd:element name="AccountNumber" type="tns:AccountNumber"/>
+          <xsd:element name="FinancialInstitute" type="tns:FinancialInstitute"/>
+          <xsd:element name="AccountOwner" type="tns:AccountOwner" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ProductIdList">
+        <xsd:annotation>
+          <xsd:documentation>
+            A ProductId List.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="CurrencyCode">
+        <xsd:annotation>
+          <xsd:documentation>
+            ISO 4217 three letter currency code.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="3"/>
+          <xsd:pattern value="[A-Z]{3}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ProductType">
+        <xsd:annotation>
+          <xsd:documentation>
+            ProductType.
+            example: CHECKING|BROKERAGE|SAVINGS|LOAN|CREDIT_CARD
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="20"/>
+          <xsd:pattern value="[A-Z_]{1,20}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ProductCode">
+        <xsd:annotation>
+          <xsd:documentation>
+            ProductCode.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="4"/>
+          <!-- TODO pattern ?-->
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="BIC">
+        <xsd:annotation>
+          <xsd:documentation>
+            BIC.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="8"/>
+          <xsd:pattern value="[A-Z0-9]{8}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="FinancialInstitute">
+        <xsd:annotation>
+          <xsd:documentation>
+            FinancialInstitute identifies a corporate bank (BAWAG, PSK, EASYBANK, SPARDA)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="BankCode" type="tns:BankCode"/>
+          <xsd:element name="BIC" type="tns:BIC" minOccurs="0"/>
+          <xsd:element name="Code" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  the Financial Institute Code (the allegro entity code)
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:length  value="4"/>
+                <xsd:pattern value="\d{4}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ShortName">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Financial Institute Short Name.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="20"/>
+                <xsd:pattern value="[A-Z_]{1,20}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="BasicAccountInfo">
+        <xsd:annotation>
+          <xsd:documentation>
+            Basic Account information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:Product">
+            <xsd:sequence>
+              <xsd:element name="BranchCode" minOccurs="0">
+                <xsd:simpleType >
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="20"/>
+                    <!-- TODO check pattern -->
+                    <xsd:pattern value="[A-Z0-9_]{1,20}"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="AccountName" type="tns:AccountName" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="AccountInfo">
+        <xsd:annotation>
+          <xsd:documentation>
+            Account information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:BasicAccountInfo">
+            <xsd:sequence>
+              <xsd:element name="CurrentBalance" type="tns:CurrencyAmount"/>
+              <xsd:element name="DisposableBalance" type="tns:CurrencyAmount" minOccurs="0"/>
+              <xsd:element name="AverageBalance" type="tns:CurrencyAmount" minOccurs="0"/>
+              <xsd:element name="AverageBalanceDate"  type="xsd:date" minOccurs="0"/>
+              <xsd:element name="IsAccountStatements"  type="xsd:boolean"/>
+              <xsd:element name="IsOffline"  type="xsd:boolean"/>
+              <xsd:element name="LastAccountStatementNumber" minOccurs="0">
+                <xsd:simpleType >
+                  <xsd:restriction base="xsd:normalizedString">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="20"/>
+                    <!-- TODO check pattern and length-->
+                    <xsd:pattern value="[A-Z0-9/-_]{1,20}"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
+              <xsd:element name="LastAccountStatementDate"  type="xsd:date" minOccurs="0"/>
+              <xsd:element name="LastAccountStatementBalance" type="tns:CurrencyAmount"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:complexType name="BrokerageAccountInfo">
+        <xsd:annotation>
+          <xsd:documentation>
+            Account information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:BasicAccountInfo">
+            <xsd:sequence>
+              <xsd:element name="SettlementAccountInfo" type="tns:BasicAccountInfo"/>
+              <xsd:element name="SettlementAccountCurrentBalance" type="tns:CurrencyAmount"/>
+              <xsd:element name="SettlementAccountDisposableBalance" type="tns:CurrencyAmount"/>
+              <xsd:element name="CurrentBalance" type="tns:CurrencyAmount"/>
+              <xsd:element name="Profit" type="tns:CurrencyAmount"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="AccountInformationListItem">
+        <xsd:annotation>
+          <xsd:documentation>
+            an Item of Account Information List.
+            can content both Brokerage and non Brokerage Account Information
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:choice>
+            <xsd:element name="AccountInfo"  type="tns:AccountInfo"/>
+            <xsd:element name="BrokerageAccountInfo"  type="tns:BrokerageAccountInfo"/>
+          </xsd:choice>
+          <xsd:element name="ResponseMessage" type="tns:ResponseMessage" maxOccurs="70"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="DisposerNumber">
+        <xsd:annotation>
+          <xsd:documentation>
+            electronic Banking Disposer Number
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length value="17" />
+          <xsd:pattern value="\d{17}" />
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="DisposerContext">
+        <xsd:annotation>
+          <xsd:documentation>
+            the Disposer with the disposer information and the list of his products
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="DisposerNumber" type="tns:DisposerNumber"/>
+          <xsd:element name="FinancialInstitute" type="tns:FinancialInstitute"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DisposerInformation">
+        <xsd:annotation>
+          <xsd:documentation>
+            the disposer information
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="MTanStatus">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  the MTan Status 1= active.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:integer">
+                <xsd:totalDigits value="1"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="IsInitialPIN">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  the IsInitialPIN flag.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="PhoneNumber" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Disposer PhoneNumber.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="50"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="Gender" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Disposer Gender.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="20"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="Title" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Disposer Title.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="50"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="FirstName" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Disposer FirstName.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="50"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="LastName" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  Disposer LastName.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="50"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+
+          <xsd:element name="LastSuccessfulLoginDate" type="xsd:date" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>
+                Disposer Last Successful Login Date.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+
+      </xsd:complexType>
+
+      <xsd:complexType name="Disposer">
+        <xsd:annotation>
+          <xsd:documentation>
+            the Disposer with the disposer information and the list of his products
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="DisposerContext" type="tns:DisposerContext"/>
+          <xsd:element name="DisposerInformation" type="tns:DisposerInformation"/>
+          <xsd:element name="Products" type="tns:Products"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Context">
+        <xsd:annotation>
+          <xsd:documentation>
+            the requst context
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Channel" type="tns:Channel"/>
+          <xsd:element name="Language" type="tns:Language"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="Channel">
+        <xsd:annotation>
+          <xsd:documentation>
+            The client Channel.
+            example: MOBILE|SB
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="25"/>
+          <xsd:pattern value="[A-Z_]{1,25}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="Pin">
+        <xsd:annotation>
+          <xsd:documentation>
+            electronic Banking Disposer Pin
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="5"/>
+          <xsd:maxLength value="16"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="Authentication">
+        <xsd:annotation>
+          <xsd:documentation>
+            electronic Banking Disposer Authentication
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Pin" type="tns:Pin"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="Language">
+        <xsd:annotation>
+          <xsd:documentation>
+            The Language according to ISO 3166. (DE|EN)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="2"/>
+          <xsd:pattern value="[A-Z]{2}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ImageId">
+        <xsd:annotation>
+          <xsd:documentation>
+            ImageId.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="256"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ImageContent">
+        <xsd:annotation>
+          <xsd:documentation>
+            ImageContent.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="Image">
+        <xsd:annotation>
+          <xsd:documentation>
+            Image.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ImageId" minOccurs="0"/>
+          <xsd:element name="ImageContent" type="tns:ImageContent"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ResponseMessage">
+        <xsd:annotation>
+          <xsd:documentation>
+            A error message as returned from the host.
+
+            The client will use it for logging.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Id">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="70"/>
+                <xsd:pattern value="[A-Z0-9_]{1,70}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Code">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="7"/>
+                <xsd:pattern value="[A-Z_]{1,7}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Text">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="4000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Failure">
+        <xsd:sequence>
+          <xsd:element name="ResponseMessageList" type="tns:ResponseMessageList" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ResponseMessageList">
+        <xsd:annotation>
+          <xsd:documentation>
+            A response message List as returned from the host.
+            The client will use it for logging and displaying.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ResponseMessage" type="tns:ResponseMessage" maxOccurs="70"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="CurrencyAmount">
+        <xsd:annotation>
+          <xsd:documentation>
+            Amount with currency.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Amount" type="xsd:decimal"/>
+          <xsd:element name="Currency" type="tns:CurrencyCode"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="NumberOfRecentMessages">
+        <xsd:annotation>
+          <xsd:documentation>
+            Defines how many recent messages should be returned.
+            (0=all Messages)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:int">
+          <xsd:minInclusive value="0"/>
+          <xsd:maxInclusive value="999"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="TANNumber">
+        <xsd:annotation>
+          <xsd:documentation>
+            TAN Number
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:int">
+          <xsd:minInclusive value="0"/>
+          <xsd:maxInclusive value="95"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="TANItem">
+        <xsd:annotation>
+          <xsd:documentation>
+            TAN Item
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length value="5"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="TANCheckDigit">
+        <xsd:annotation>
+          <xsd:documentation>
+            TAN Check digit
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length value="1"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="TAN">
+        <xsd:annotation>
+          <xsd:documentation>
+            TAN Transaction Authorization Number
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="TANNumber" type="tns:TANNumber"/>
+          <xsd:element name="TANItem" type="tns:TANItem"/>
+          <xsd:element name="TANCheckDigit" type="tns:TANCheckDigit"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Signature">
+        <xsd:annotation>
+          <xsd:documentation>
+            Signature for transaction signing
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="TAN" type="tns:TAN"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <xsd:complexType name="SMSData">
+        <xsd:annotation>
+          <xsd:documentation>
+            the SMS Data to be sent
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="OrderType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="100"/>
+                <xsd:pattern value="[A-Za-z0-9_]"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="PropertiesList" type="tns:PropertiesList" minOccurs="1"  maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PropertiesList">
+        <xsd:annotation>
+          <xsd:documentation>
+            Properties List.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Properties" type="tns:Properties" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="Properties">
+        <xsd:annotation>
+          <xsd:documentation>
+            Properties data
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Name" minOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="100"/>
+                <xsd:pattern value="[A-Za-z0-9_]"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Value" minOccurs="1">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="1000"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="EditorInformation">
+        <xsd:annotation>
+          <xsd:documentation>
+            Information on the editor of the transfer.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="LastUpdate" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="Editor">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="30"/>
+                <xsd:pattern value="[A-Z_]{1,30}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="CreatorInformation">
+        <xsd:annotation>
+          <xsd:documentation>
+            Information on the creator of the transfer.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="CreationDate" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="Creator">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="30"/>
+                <xsd:pattern value="[A-Z_]{1,30}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="TransferType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Predefined transfer types. (e.g.: DOM | TAX | EUB | AZV)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="3"/>
+          <xsd:pattern value="[A-Z]{3}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="StatusText">
+        <xsd:annotation>
+          <xsd:documentation>
+            The text on status of the result of a transaction.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="15"/>
+          <xsd:pattern value="[A-Z]{15}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="CustomerData">
+        <xsd:annotation>
+          <xsd:documentation>
+            transfer CustomerData.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="12"/>
+          <!-- todo pattern ?-->
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="Usage">
+        <xsd:annotation>
+          <xsd:documentation>
+            transfer Usage.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="28"/>
+          <!-- todo pattern ?-->
+        </xsd:restriction>
+      </xsd:simpleType>
+
+
+      <xsd:simpleType name="iBAN">
+        <xsd:annotation>
+          <xsd:documentation>
+            Represents International Bank Account Number (IBAN).
+            As described in ISO 13616-1:2007.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="31"/>
+          <xsd:pattern value="[A-Z]{2}[0-9]{2}[A-Z0-9]{10,26}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="DomesticRecipient">
+        <xsd:annotation>
+          <xsd:documentation>
+            Represents recipient of domestic
+            transfer transaction
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="RecipientName">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="30"/>
+                <xsd:pattern value="[A-Z_]{1,30}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="BankCode" type="tns:BankCode"/>
+          <xsd:element name="AccountNumber" type="tns:AccountNumber"/>
+          <xsd:element name="iBAN" type="tns:iBAN" minOccurs="0"/>
+          <xsd:element name="BIC" type="tns:BIC" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BasicTransfer">
+        <xsd:annotation>
+          <xsd:documentation>
+            Base type for transfer transactions
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="TransferId" type="xsd:long" minOccurs="0"/>
+          <xsd:element name="TransferType" type="tns:TransferType"/>
+          <xsd:element name="SettlementAccount" type="tns:ProductId"/>
+          <xsd:element name="IsReceipt" type="xsd:boolean"/>
+          <xsd:element name="CurrencyAmount" type="tns:CurrencyAmount" minOccurs="0"/>
+          <xsd:element name="DueDate"  type="xsd:date" minOccurs="0"/>
+          <xsd:element name="EditorInformation" type="tns:EditorInformation" minOccurs="0"/>
+          <xsd:element name="CreatorInformation" type="tns:CreatorInformation" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BasicDomesticTransfer">
+        <xsd:annotation>
+          <xsd:documentation>
+            Basic Domestic Transfer for domestic transfer entities
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:BasicTransfer">
+            <xsd:sequence>
+              <xsd:element name="DomesticRecipient" type="tns:DomesticRecipient"/>
+              <xsd:element name="CustomerData" type="tns:CustomerData" minOccurs="0"/>
+              <xsd:element name="Usage" type="tns:Usage" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:simpleType name="Text">
+        <xsd:annotation>
+          <xsd:documentation>
+            The text with arbitrary information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="256"/>
+          <xsd:pattern value="[A-Z]{256}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="TextList">
+        <xsd:annotation>
+          <xsd:documentation>
+            A Test List.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Text" type="tns:Text" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="AOC">
+        <xsd:annotation>
+          <xsd:documentation>
+            The text with arbitrary information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="26"/>
+          <xsd:pattern value="[A-Z]{26}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="CreditKey">
+        <xsd:annotation>
+          <xsd:documentation>
+            The text with arbitrary information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="25"/>
+          <xsd:pattern value="[A-Z]{25}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="Paymentreference">
+        <xsd:annotation>
+          <xsd:documentation>
+            The text with arbitrary information.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length  value="256"/>
+          <xsd:pattern value="[A-Z]{256}"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="DomesticTransfer">
+        <xsd:annotation>
+          <xsd:documentation>
+            Domestic Transfer for domestic transfer transactions
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+          <xsd:extension base="tns:BasicDomesticTransfer">
+            <xsd:sequence>
+              <xsd:element name="TransferState" type="tns:TransferStatus" minOccurs="0"/>
+              <xsd:element name="AdditionalTextList" type="tns:TextList" minOccurs="0"/>
+              <xsd:element name="IsAccountNumberCheck" type="xsd:boolean" minOccurs="0"/>
+              <xsd:element name="AOC" type="tns:AOC" minOccurs="0"/>
+              <xsd:element name="CreditKey" type="tns:CreditKey" minOccurs="0"/>
+              <xsd:element name="Paymentreference" type="tns:Paymentreference" minOccurs="0"/>
+            </xsd:sequence>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+
+      <xsd:simpleType name="TransferStatus">
+        <xsd:annotation>
+          <xsd:documentation>
+            TransferStatus.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:enumeration value="accepted"/>
+          <xsd:enumeration value="Error"/>
+          <xsd:enumeration value="forwarded"/>
+          <xsd:enumeration value="fully-signed"/>
+          <xsd:enumeration value="unsigned"/>
+          <xsd:enumeration value="partially-signed"/>
+          <xsd:enumeration value="performed"/>
+          <xsd:enumeration value="dubios"/>
+          <xsd:enumeration value="cancelled"/>
+          <xsd:enumeration value="Template"/>
+          <xsd:enumeration value="deleted"/>
+          <xsd:enumeration value="archived"/>
+          <xsd:enumeration value="in-process"/>
+          <xsd:enumeration value="executed"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="TransferResult">
+        <xsd:annotation>
+          <xsd:documentation>
+            the TransferResult after transfer transaction
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="TransferStatus" type="tns:TransferStatus"/>
+          <xsd:element name="StatusText" type="tns:StatusText"/>
+          <xsd:element name="TransferId" type="xsd:long" minOccurs="0"/>
+          <xsd:element name="EditorInformation" type="tns:EditorInformation" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DomesticTransferTemplate">
+        <xsd:annotation>
+          <xsd:documentation>
+            Domestic Transfer Template for domestic transfer transactions
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="TemplateName" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  transfer Usage.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="20"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="TransferTemplateId" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  transfer Usage.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="20"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="SettlementAccount" type="tns:ProductId"/>
+          <xsd:element name="IsReceipt" type="xsd:boolean"/>
+          <xsd:element name="Amount" type="tns:CurrencyAmount"  minOccurs="0"/>
+          <xsd:element name="DomesticRecipient" type="tns:DomesticRecipient"/>
+          <xsd:element name="DueDate" type="xsd:date"  minOccurs="0"/>
+          <xsd:element name="CustomerData" type="tns:CustomerData" minOccurs="0"/>
+          <xsd:element name="Usage" type="tns:Usage" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="StatementSearchCriteria">
+        <xsd:annotation>
+          <xsd:documentation>
+            StatementSearchCriteria
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="MinDatePosted" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="MaxDatePosted" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="MinAmount" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="MaxAmount" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="SortingAsc" type="xsd:boolean" minOccurs="0"/>
+          <xsd:element name="SortingColumn">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:enumeration value="BOOKING_DATE"/>
+                <xsd:enumeration value="BOOKING_TEXT"/>
+                <xsd:enumeration value="VALUE_DATE"/>
+                <xsd:enumeration value="AMOUNT"/>
+                <xsd:enumeration value="STATEMENT_NUMBER"/>
+                <xsd:enumeration value="IMAGE"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="TransactionType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:enumeration value="ALL"/>
+                <xsd:enumeration value="CREDITS"/>
+                <xsd:enumeration value="DEBITS"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Note" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:annotation>
+                <xsd:documentation>
+                  Note.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="120"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="AccountStatementItem">
+        <xsd:annotation>
+          <xsd:documentation>
+            AccountStatementItem
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Amount" type="tns:CurrencyAmount"/>
+          <xsd:element name="BookingDate" type="xsd:date"/>
+          <xsd:element name="ValueDate" type="xsd:date"/>
+          <xsd:element name="TextLines" type="tns:TextList"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="ISIN">
+        <xsd:annotation>
+          <xsd:documentation>
+            ISIN used for BrokerageAccountStatement Security Item.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:length value="8"/>
+          <!--  TODO   check for the pattern -->
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="Security">
+        <xsd:annotation>
+          <xsd:documentation>
+            Security used for BrokerageAccountStatement.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ISIN" type="tns:ISIN"/>
+          <xsd:element name="Title">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="5"/>
+                <xsd:maxLength value="50"/>
+                <xsd:pattern value="[A-Za-z]{5,50}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="MarketName">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="4"/>
+                <xsd:maxLength value="15"/>
+                <xsd:pattern value="[A-Za-z]{4,15}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="NominalValue" type="tns:CurrencyAmount"/>
+          <xsd:element name="MarketValue" type="tns:CurrencyAmount"/>
+          <xsd:element name="Price" type="tns:CurrencyAmount"/>
+          <xsd:element name="PriceUpdate" type="xsd:date"/>
+          <xsd:element name="SecurityType">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="3"/>
+                <xsd:maxLength value="10"/>
+                <xsd:pattern value="[A-Za-z]{3,10}"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="SecurityList">
+        <xsd:annotation>
+          <xsd:documentation>
+            List holding the Security items.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Security" type="tns:Security" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BrokerageAccountStatement">
+        <xsd:annotation>
+          <xsd:documentation>
+            BrokerageAccountStatement
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Account" type="tns:BasicAccountInfo"/>
+          <xsd:element name="Securities" type="tns:SecurityList"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BankDataList">
+        <xsd:annotation>
+          <xsd:documentation>
+            A Bank Data List.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="BankData" type="tns:BankData" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BankData">
+        <xsd:annotation>
+          <xsd:documentation>
+            identifies the bank code data
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="BankCode" type="tns:BankCode" minOccurs="0"/>
+          <xsd:element name="BankName" minOccurs="0">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="300"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Street">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="300"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="PostalCode">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="30"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="City">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="MailboxMessage">
+        <xsd:annotation>
+          <xsd:documentation>
+            MailboxMessage
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="MailboxMessageType" type="tns:MailboxMessageType"/>
+          <xsd:element name="Id" type="xsd:long"/>
+          <xsd:element name="Read">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  if this flag is true then transactions
+                  must be signed from all collective signer disposers.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Urgent">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  if this flag is true then this mailbox message is urgent.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Deleteable">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  if this flag is true then transactions
+                  must be signed from all collective signer disposers.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Signed">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  if this flag is true then transactions
+                  must be signed from all collective signer disposers.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ShowInMaintanence">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  if this flag is true then transactions
+                  must be signed from all collective signer disposers.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:boolean">
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ValidFrom" type="xsd:date"/>
+          <xsd:element name="ValidTo" type="xsd:date"/>
+          <xsd:element name="MailSubject" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  email subject.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="120"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="MailBody" minOccurs="0">
+            <xsd:simpleType >
+              <xsd:annotation>
+                <xsd:documentation>
+                  email message body.
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:normalizedString">
+                <xsd:minLength value="1"/>
+                <xsd:maxLength value="2000"/>
+                <!-- todo pattern ?-->
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="MailboxMessageList">
+        <xsd:annotation>
+          <xsd:documentation>
+            List of MailboxMessage
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="MailboxMessage" type="tns:MailboxMessage" maxOccurs="999"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:simpleType name="Timestamp">
+        <xsd:annotation>
+          <xsd:documentation>
+            Time in milliseconds since 1970-01-01 00:00:00 UTC.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:long"/>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="AccountName">
+        <xsd:annotation>
+          <xsd:documentation>
+            "Konto-Wortlaut"  Name of a bank account. This is not necessarily
+            the name of the AccountOwner, but also not the type of account or so.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:maxLength value="70"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="AccountOwner">
+        <xsd:annotation>
+          <xsd:documentation>
+            Owner of a bank account. This is usually the complete name
+            String including first name, (space), and last as well as title
+            or other factors. An algorithm is in place on the host side to make
+            sure the name fits into the field.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:maxLength value="35"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="MailboxMessageType">
+        <xsd:annotation>
+          <xsd:documentation>
+            The MailboxMessage Type.
+            (I=Incomming, O=Outcomming, M=Maintanance)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:enumeration value="I"/>
+          <xsd:enumeration value="O"/>
+          <xsd:enumeration value="M"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="AccountType">
+        <xsd:annotation>
+          <xsd:documentation>
+            Account type from the smart card.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:enumeration value="Private"/>
+          <xsd:enumeration value="Commercial"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="ServerSessionID">
+        <xsd:annotation>
+          <xsd:documentation>
+            Session ID generated by the server at the login.
+          </xsd:documentation>
+        </xsd:annotation>
+
+        <xsd:restriction base="xsd:normalizedString">
+          <!-- BASE 64 ? -->
+          <xsd:maxLength value="128"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name='Binary'>
+        <xsd:restriction base='xsd:base64Binary'/>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="TextLine">
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="28"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:simpleType name="DisposerGreetingText">
+        <xsd:restriction base="xsd:normalizedString">
+          <xsd:minLength value="1"/>
+          <xsd:maxLength value="200"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+
+      <xsd:complexType name="UserProfile">
+        <xsd:annotation>
+          <xsd:documentation>
+            UserProfile
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="DisposerGreetingText"  type="tns:DisposerGreetingText"/>
+          <xsd:element name="ProfilePictureId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="IsShowTotalAmount" type="xsd:boolean"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+
+      <!--- ============== Request/Response pairs ============ -->
+
+      <!-- Login  -->
+
+      <xsd:complexType name="LoginRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Login Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="DisposerContext" type="tns:DisposerContext"/>
+          <xsd:element name="Context" type="tns:Context"/>
+          <xsd:element name="Authentication" type="tns:Authentication"/>
+          <xsd:element name="isIncludeLoginImage" type="xsd:boolean"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="LoginResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of Login Request.
+
+            Failure:
+            ERR_NO_PRODUCTS
+            ERR_DISPOSER_DEACTIVATED
+            ERR_LOGIN
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Disposer"  type="tns:Disposer"/>
+                <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+                <xsd:element name="ActualBookingDate"  type="xsd:date"/>
+                <xsd:element name="UserProfile"  type="tns:UserProfile"/>
+                <xsd:element name="LoginImageContent" type="tns:ImageContent" minOccurs="0"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- Logout  -->
+
+      <xsd:complexType name="LogoutRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Logout Request.
+
+            Failure:
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="LogoutResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of Logout request
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ResponseMessageList" type="tns:ResponseMessageList" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- PING/HelloWorld  -->
+
+      <xsd:complexType name="PingRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Request data of the Ping operation.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Context" type="tns:Context"/>
+          <xsd:element name="RequestTimestamp" type="tns:Timestamp"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="PingResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of the Ping operation.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="RequestTimestamp"  type="tns:Timestamp"/>
+          <xsd:element name="ResponseTimestamp" type="tns:Timestamp"/>
+          <xsd:element name="QualityOfService">
+            <xsd:simpleType>
+              <xsd:annotation>
+                <xsd:documentation>
+                  A number giving the quality of service:
+                  0: bad, 100: good
+                </xsd:documentation>
+              </xsd:annotation>
+              <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0"/>
+                <xsd:maxInclusive value="100"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="ReadyForOperation" type="xsd:boolean"/>
+          <xsd:element name="ResponseMessageList" type="tns:ResponseMessageList" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- GetAccountInformation  -->
+
+      <xsd:complexType name="GetAccountInformationRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns the balance and limit information for the given productId.
+            Use this method for the non BROKERAGE product types like
+            CHECKING, SAVINGS, LOAN, CREDIT_CARD.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetAccountInformationResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetAccountInformation Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_OFFLINE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="AccountInfo"  type="tns:AccountInfo"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- GetBrokerageAccountInformation  -->
+
+      <xsd:complexType name="GetBrokerageAccountInformationRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns the brokerage account market value and
+            settlement account balance information for the given productId.
+            Use this method for the ProductType BROKERAGE only.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetBrokerageAccountInformationResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetBrokerageAccountInformation Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_OFFLINE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="BrokerageAccountInfo"  type="tns:BrokerageAccountInfo"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- GetAccountInformationList  -->
+
+      <xsd:complexType name="GetAccountInformationListRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns the balance and limit information for the given list of productId.
+            Use this method both for Brokerage and non Brokerage product types
+            (like CHECKING, SAVINGS, LOAN, CREDIT_CARD etc.)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductIdList" type="tns:ProductIdList"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetAccountInformationListResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetAccountInformation Request.
+            Return List of AccountInformationListItem
+            (=Brokerage and non Brokerage Account information as item)
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="AccountInformationListItem" type="tns:AccountInformationListItem" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- GetBrokerageAccountStatement  -->
+
+      <xsd:complexType name="GetBrokerageAccountStatementRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns the brokerage account statement (e.g. the list of
+            securities belonging to the specified brokerage account)
+            for the specified productid.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetBrokerageAccountStatementResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetBrokerageAccountStatement Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_OFFLINE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="BrokerageAccountStatement"  type="tns:BrokerageAccountStatement"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- GetAccountStatementItems  -->
+
+      <xsd:complexType name="GetAccountStatementItemsRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId"/>
+          <xsd:element name="StatementSearchCriteria" type="tns:StatementSearchCriteria" minOccurs="0"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetAccountStatementItemsResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetAccountStatementItems Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:annotation>
+              <xsd:documentation>
+                return a List of AccountStatementItem
+              </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="AccountStatementItem"  type="tns:AccountStatementItem" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- DoDomesticTransfer  -->
+
+      <xsd:complexType name="DoDomesticTransferRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            DoDomesticTransfer Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="DomesticTransfer" type="tns:DomesticTransfer"/>
+          <xsd:element name="Signature" type="tns:Signature"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DoDomesticTransferResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of DoDomesticTransfer Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_ACC_NO_ONLINEBANKING_RIGHTS
+            ERR_TAN_INVALID
+            ERR_TAN_USED
+            ERR_PROCESSING
+            further messages codes come on TransferFailedException
+            from TransferFailedException.getTransferFailedStatus()
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="TransferResult"  type="tns:TransferResult"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- GetDomesticTransferTemplates  -->
+
+      <xsd:complexType name="GetDomesticTransferTemplatesRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            GetDomesticTransferTemplates Request.
+
+            if ProductId is specified then only the templates
+            of this product will be returned.
+            otherwise all templates of the disposer will be returned.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId" minOccurs="0"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetDomesticTransferTemplatesResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetDomesticTransferTemplates Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:annotation>
+              <xsd:documentation>
+                return a List of DomesticTransferTemplate
+              </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="DomesticTransferTemplate"  type="tns:DomesticTransferTemplate" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- GetNextITANNumber  -->
+
+      <xsd:complexType name="GetNextITANNumberRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Get Next iTAN Number Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="GetNextITANNumberResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetNextITANNumberRequest Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_NEXT_ITAN_NOT_AVAILABLE
+            ERR_PROCESSING
+
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="TANNumber"  type="tns:TANNumber"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- sendMTan  -->
+
+      <xsd:complexType name="SendMTanRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            send MTan Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+          <xsd:element name="SMSData" type="tns:SMSData"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+
+      <xsd:complexType name="SendMTanResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of SendMTanRequest.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_NEXT_ITAN_NOT_AVAILABLE
+            ERR_PROCESSING
+            .. TODO .. define the rest of the codes
+
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ResponseMessageList" type="tns:ResponseMessageList" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- BankCodeSearchRequest -->
+
+      <xsd:complexType name="BankCodeSearchRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            BankCodeSearch.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="BankDataSearch" type="tns:BankData"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="BankCodeSearchResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="BankDataList"  type="tns:BankDataList"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- GetCorrespondingAccount  -->
+
+      <xsd:complexType name="GetCorrespondingAccountRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            GetCorrespondingAccount Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ProductId" type="tns:ProductId"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetCorrespondingAccountResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetCorrespondingAccount Request.
+
+            Failure:
+            ERR_DISPOSER_DEACTIVATED
+            ERR_DISPOSER_NOT_AVAILABLE
+            ERR_ACCOUNT_INFORMATION_NOT_AVAILABLE
+            ERR_CORRESPONDING_ACCOUNT_EMPTY
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="ProductId"  type="tns:ProductId"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- GetMailInBoxMessages  -->
+
+      <xsd:complexType name="GetMailInBoxMessagesRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns a List of all active (valid) disposer mail inbox in messages.
+
+            Element NumberOfRecentMessages defines how many
+            recent messages should be returned.
+            (0=all Messages)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="NumberOfRecentMessages" type="tns:NumberOfRecentMessages"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetMailInBoxMessagesResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetMailInBoxMessages Request.
+
+            Failure:
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="MailboxMessageList"  type="tns:MailboxMessageList"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- GetMailOutBoxMessages  -->
+
+      <xsd:complexType name="GetMailOutBoxMessagesRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns a List of all active (valid) disposer mail out box messages.
+
+            Element NumberOfRecentMessages defines how many
+            recent messages should be returned.
+            (0=all Messages)
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="NumberOfRecentMessages" type="tns:NumberOfRecentMessages"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetMailOutBoxMessagesResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetMailOutBoxMessages Request.
+
+            Failure:
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="MailboxMessageList"  type="tns:MailboxMessageList"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+
+      <!-- GetMailBoxMessage  -->
+
+      <xsd:complexType name="GetMailBoxMessageRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            Returns the message with its message Chain as List of MailBoxMessage
+
+            MailboxMessageType (I=Incomming, O=Outcomming, M=Maintanance)
+            on MailboxMessageType M the MessageID is obsolete
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="MessageID" type="xsd:long" minOccurs="0"/>
+          <xsd:element name="MailboxMessageType" type="tns:MailboxMessageType"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetMailBoxMessageResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetMailBoxMessage Request.
+
+            Failure:
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="MailboxMessageList"  type="tns:MailboxMessageList"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+
+      <!-- Login  -->
+
+      <xsd:complexType name="GetImageRequest">
+        <xsd:annotation>
+          <xsd:documentation>
+            GetImage Request.
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ImageId" type="tns:ImageId"/>
+          <xsd:element name="ServerSessionID" type="tns:ServerSessionID"/>
+          <xsd:element name="Context" type="tns:Context"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="GetImageResponse">
+        <xsd:annotation>
+          <xsd:documentation>
+            Response data of GetImage Request.
+
+            Failure:
+            ERR_IMAGE_NOT_AVAILABLE
+            ERR_IMAGE_NOT_FOUND
+            ERR_PROCESSING
+          </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+          <xsd:element name="OK">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Image" type="tns:Image"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+
+          <xsd:element name="Failure" type="tns:Failure"/>
+        </xsd:choice>
+      </xsd:complexType>
+      <!-- ##################################################################################### -->
+      <xsd:element
+        name="LoginRequest"
+        type="tns:LoginRequest"
+        id="LoginRequest"/>
+      <xsd:element
+        name="LoginResponse"
+        type="tns:LoginResponse"
+        id="LoginResponse"/>
+
+      <xsd:element
+        name="LogoutRequest"
+        type="tns:LogoutRequest"
+        id="LogoutRequest"/>
+      <xsd:element
+        name="LogoutResponse"
+        type="tns:LogoutResponse"
+        id="LogoutResponse"/>
+
+      <xsd:element
+        name="GetAccountInformationRequest"
+        type="tns:GetAccountInformationRequest"
+        id="GetAccountInformationRequest"/>
+      <xsd:element
+        name="GetAccountInformationResponse"
+        type="tns:GetAccountInformationResponse"
+        id="GetAccountInformationResponse"/>
+
+      <xsd:element
+        name="GetBrokerageAccountInformationRequest"
+        type="tns:GetBrokerageAccountInformationRequest"
+        id="GetBrokerageAccountInformationRequest"/>
+      <xsd:element
+        name="GetBrokerageAccountInformationResponse"
+        type="tns:GetBrokerageAccountInformationResponse"
+        id="GetBrokerageAccountInformationResponse"/>
+
+      <xsd:element
+        name="GetAccountInformationListRequest"
+        type="tns:GetAccountInformationListRequest"
+        id="GetAccountInformationListRequest"/>
+      <xsd:element
+        name="GetAccountInformationListResponse"
+        type="tns:GetAccountInformationListResponse"
+        id="GetAccountInformationListResponse"/>
+
+      <xsd:element
+        name="GetBrokerageAccountStatementRequest"
+        type="tns:GetBrokerageAccountStatementRequest"
+        id="GetBrokerageAccountStatementRequest"/>
+      <xsd:element
+        name="GetBrokerageAccountStatementResponse"
+        type="tns:GetBrokerageAccountStatementResponse"
+        id="GetBrokerageAccountStatementResponse"/>
+
+      <xsd:element
+        name="GetAccountStatementItemsRequest"
+        type="tns:GetAccountStatementItemsRequest"
+        id="GetAccountStatementItemsRequest"/>
+      <xsd:element
+        name="GetAccountStatementItemsResponse"
+        type="tns:GetAccountStatementItemsResponse"
+        id="GetAccountStatementItemsResponse"/>
+
+      <xsd:element
+        name="DoDomesticTransferRequest"
+        type="tns:DoDomesticTransferRequest"
+        id="DoDomesticTransferRequest"/>
+      <xsd:element
+        name="DoDomesticTransferResponse"
+        type="tns:DoDomesticTransferResponse"
+        id="DoDomesticTransferResponse"/>
+
+      <xsd:element
+        name="GetDomesticTransferTemplatesRequest"
+        type="tns:GetDomesticTransferTemplatesRequest"
+        id="GetDomesticTransferTemplatesRequest"/>
+      <xsd:element
+        name="GetDomesticTransferTemplatesResponse"
+        type="tns:GetDomesticTransferTemplatesResponse"
+        id="GetDomesticTransferTemplatesResponse"/>
+
+      <xsd:element
+        name="GetNextITANNumberRequest"
+        type="tns:GetNextITANNumberRequest"
+        id="GetNextITANNumberRequest"/>
+      <xsd:element
+        name="GetNextITANNumberResponse"
+        type="tns:GetNextITANNumberResponse"
+        id="GetNextITANNumberResponse"/>
+
+      <xsd:element
+        name="SendMTanRequest"
+        type="tns:SendMTanRequest"
+        id="SendMTanRequest"/>
+      <xsd:element
+        name="SendMTanResponse"
+        type="tns:SendMTanResponse"
+        id="SendMTanResponse"/>
+
+      <xsd:element
+        name="BankCodeSearchRequest"
+        type="tns:BankCodeSearchRequest"
+        id="BankCodeSearchRequest"/>
+      <xsd:element
+        name="BankCodeSearchResponse"
+        type="tns:BankCodeSearchResponse"
+        id="BankCodeSearchResponse"/>
+
+      <xsd:element
+        name="GetCorrespondingAccountRequest"
+        type="tns:GetCorrespondingAccountRequest"
+        id="GetCorrespondingAccountRequest"/>
+      <xsd:element
+        name="GetCorrespondingAccountResponse"
+        type="tns:GetCorrespondingAccountResponse"
+        id="GetCorrespondingAccountResponse"/>
+
+      <xsd:element
+        name="GetMailInBoxMessagesRequest"
+        type="tns:GetMailInBoxMessagesRequest"
+        id="GetMailInBoxMessagesRequest"/>
+      <xsd:element
+        name="GetMailInBoxMessagesResponse"
+        type="tns:GetMailInBoxMessagesResponse"
+        id="GetMailInBoxMessagesResponse"/>
+
+      <xsd:element
+        name="GetMailOutBoxMessagesRequest"
+        type="tns:GetMailOutBoxMessagesRequest"
+        id="GetMailOutBoxMessagesRequest"/>
+      <xsd:element
+        name="GetMailOutBoxMessagesResponse"
+        type="tns:GetMailOutBoxMessagesResponse"
+        id="GetMailOutBoxMessagesResponse"/>
+
+      <xsd:element
+        name="GetMailBoxMessageRequest"
+        type="tns:GetMailBoxMessageRequest"
+        id="GetMailBoxMessageRequest"/>
+      <xsd:element
+        name="GetMailBoxMessageResponse"
+        type="tns:GetMailBoxMessageResponse"
+        id="GetMailBoxMessageResponse"/>
+
+      <xsd:element
+        name="PingRequest"
+        type="tns:PingRequest"
+        id="PingRequest"/>
+      <xsd:element
+        name="PingResponse"
+        type="tns:PingResponse"
+        id="PingResponse"/>
+
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- Messages ##################################################################################### -->
+
+  <wsdl:message name="LoginRequest">
+    <wsdl:part name="LoginRequest"
+      element="tns:LoginRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="LoginResponse">
+    <wsdl:part name="LoginResponse"
+      element="tns:LoginResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="LogoutRequest">
+    <wsdl:part name="LogoutRequest"
+      element="tns:LogoutRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="LogoutResponse">
+    <wsdl:part name="LogoutResponse"
+      element="tns:LogoutResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountInformationRequest">
+    <wsdl:part name="GetAccountInformationRequest"
+      element="tns:GetAccountInformationRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountInformationResponse">
+    <wsdl:part name="GetAccountInformationResponse"
+      element="tns:GetAccountInformationResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetBrokerageAccountInformationRequest">
+    <wsdl:part name="GetBrokerageAccountInformationRequest"
+      element="tns:GetBrokerageAccountInformationRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetBrokerageAccountInformationResponse">
+    <wsdl:part name="GetBrokerageAccountInformationResponse"
+      element="tns:GetBrokerageAccountInformationResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountInformationListRequest">
+    <wsdl:part name="GetAccountInformationListRequest"
+      element="tns:GetAccountInformationListRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountInformationListResponse">
+    <wsdl:part name="GetAccountInformationListResponse"
+      element="tns:GetAccountInformationListResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetBrokerageAccountStatementRequest">
+    <wsdl:part name="GetBrokerageAccountStatementRequest"
+      element="tns:GetBrokerageAccountStatementRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetBrokerageAccountStatementResponse">
+    <wsdl:part name="GetBrokerageAccountStatementResponse"
+      element="tns:GetBrokerageAccountStatementResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountStatementItemsRequest">
+    <wsdl:part name="GetAccountStatementItemsRequest"
+      element="tns:GetAccountStatementItemsRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetAccountStatementItemsResponse">
+    <wsdl:part name="GetAccountStatementItemsResponse"
+      element="tns:GetAccountStatementItemsResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="DoDomesticTransferRequest">
+    <wsdl:part name="DoDomesticTransferRequest"
+      element="tns:DoDomesticTransferRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="DoDomesticTransferResponse">
+    <wsdl:part name="DoDomesticTransferResponse"
+      element="tns:DoDomesticTransferResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetDomesticTransferTemplatesRequest">
+    <wsdl:part name="GetDomesticTransferTemplatesRequest"
+      element="tns:GetDomesticTransferTemplatesRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetDomesticTransferTemplatesResponse">
+    <wsdl:part name="GetDomesticTransferTemplatesResponse"
+      element="tns:GetDomesticTransferTemplatesResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetNextITANNumberRequest">
+    <wsdl:part name="GetNextITANNumberRequest"
+      element="tns:GetNextITANNumberRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetNextITANNumberResponse">
+    <wsdl:part name="GetNextITANNumberResponse"
+      element="tns:GetNextITANNumberResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="SendMTanRequest">
+    <wsdl:part name="SendMTanRequest"
+      element="tns:SendMTanRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="SendMTanResponse">
+    <wsdl:part name="SendMTanResponse"
+      element="tns:SendMTanResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="BankCodeSearchRequest">
+    <wsdl:part name="BankCodeSearchRequest"
+      element="tns:BankCodeSearchRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="BankCodeSearchResponse">
+    <wsdl:part name="BankCodeSearchResponse"
+      element="tns:BankCodeSearchResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetCorrespondingAccountRequest">
+    <wsdl:part name="GetCorrespondingAccountRequest"
+      element="tns:GetCorrespondingAccountRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetCorrespondingAccountResponse">
+    <wsdl:part name="GetCorrespondingAccountResponse"
+      element="tns:GetCorrespondingAccountResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetMailInBoxMessagesRequest">
+    <wsdl:part name="GetMailInBoxMessagesRequest"
+      element="tns:GetMailInBoxMessagesRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetMailInBoxMessagesResponse">
+    <wsdl:part name="GetMailInBoxMessagesResponse"
+      element="tns:GetMailInBoxMessagesResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetMailOutBoxMessagesRequest">
+    <wsdl:part name="GetMailOutBoxMessagesRequest"
+      element="tns:GetMailOutBoxMessagesRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetMailOutBoxMessagesResponse">
+    <wsdl:part name="GetMailOutBoxMessagesResponse"
+      element="tns:GetMailOutBoxMessagesResponse"/>
+  </wsdl:message>
+
+
+  <wsdl:message name="GetMailBoxMessageRequest">
+    <wsdl:part name="GetMailBoxMessageRequest"
+      element="tns:GetMailBoxMessageRequest"/>
+  </wsdl:message>
+
+  <wsdl:message name="GetMailBoxMessageResponse">
+    <wsdl:part name="GetMailBoxMessageResponse"
+      element="tns:GetMailBoxMessageResponse"/>
+  </wsdl:message>
+
+  <wsdl:message name="PingRequest">
+    <wsdl:part name="PingRequest"
+      element="tns:PingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="PingResponse">
+    <wsdl:part name="PingResponse"
+      element="tns:PingResponse"/>
+  </wsdl:message>
+
+  <!-- portType ##################################################################################### -->
+
+  <wsdl:portType name="SelfServiceMobile">
+
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginRequest"/>
+      <wsdl:output message="tns:LoginResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="Logout">
+      <wsdl:input message="tns:LogoutRequest"/>
+      <wsdl:output message="tns:LogoutResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetAccountInformation">
+      <wsdl:input message="tns:GetAccountInformationRequest"/>
+      <wsdl:output message="tns:GetAccountInformationResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetBrokerageAccountInformation">
+      <wsdl:input message="tns:GetBrokerageAccountInformationRequest"/>
+      <wsdl:output message="tns:GetBrokerageAccountInformationResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetAccountInformationList">
+      <wsdl:input message="tns:GetAccountInformationListRequest"/>
+      <wsdl:output message="tns:GetAccountInformationListResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetBrokerageAccountStatement">
+      <wsdl:input message="tns:GetBrokerageAccountStatementRequest"/>
+      <wsdl:output message="tns:GetBrokerageAccountStatementResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetAccountStatementItems">
+      <wsdl:input message="tns:GetAccountStatementItemsRequest"/>
+      <wsdl:output message="tns:GetAccountStatementItemsResponse"/>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="DoDomesticTransfer">
+      <wsdl:input message="tns:DoDomesticTransferRequest"/>
+      <wsdl:output message="tns:DoDomesticTransferResponse"/>
+    </wsdl:operation>
+
+
+
+    <wsdl:operation name="GetDomesticTransferTemplates">
+      <wsdl:input message="tns:GetDomesticTransferTemplatesRequest"/>
+      <wsdl:output message="tns:GetDomesticTransferTemplatesResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetNextITANNumber">
+      <wsdl:input message="tns:GetNextITANNumberRequest"/>
+      <wsdl:output message="tns:GetNextITANNumberResponse"/>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="SendMTan">
+      <wsdl:input message="tns:SendMTanRequest"/>
+      <wsdl:output message="tns:SendMTanResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="BankCodeSearch">
+      <wsdl:input message="tns:BankCodeSearchRequest"/>
+      <wsdl:output message="tns:BankCodeSearchResponse"/>
+    </wsdl:operation>
+
+
+
+    <wsdl:operation name="GetCorrespondingAccount">
+      <wsdl:input message="tns:GetCorrespondingAccountRequest"/>
+      <wsdl:output message="tns:GetCorrespondingAccountResponse"/>
+    </wsdl:operation>
+
+
+
+    <wsdl:operation name="GetMailInBoxMessages">
+      <wsdl:input message="tns:GetMailInBoxMessagesRequest"/>
+      <wsdl:output message="tns:GetMailInBoxMessagesResponse"/>
+    </wsdl:operation>
+
+
+
+    <wsdl:operation name="GetMailOutBoxMessages">
+      <wsdl:input message="tns:GetMailOutBoxMessagesRequest"/>
+      <wsdl:output message="tns:GetMailOutBoxMessagesResponse"/>
+    </wsdl:operation>
+
+
+
+    <wsdl:operation name="GetMailBoxMessage">
+      <wsdl:input message="tns:GetMailBoxMessageRequest"/>
+      <wsdl:output message="tns:GetMailBoxMessageResponse"/>
+    </wsdl:operation>
+
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingRequest"/>
+      <wsdl:output message="tns:PingResponse"/>
+    </wsdl:operation>
+
+
+  </wsdl:portType>
+
+
+  <!-- binding ##################################################################################### -->
+
+  <wsdl:binding name="SelfServiceMobileSOAPBinding" type="tns:SelfServiceMobile">
+
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="urn:login"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="urn:logout"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetAccountInformation">
+      <soap:operation soapAction="urn:getAccountInformation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetBrokerageAccountInformation">
+      <soap:operation soapAction="urn:getBrokerageAccountInformation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetAccountInformationList">
+      <soap:operation soapAction="urn:getAccountInformationList"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetBrokerageAccountStatement">
+      <soap:operation soapAction="urn:getBrokerageAccountStatement"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetAccountStatementItems">
+      <soap:operation soapAction="urn:getAccountStatementItems"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="DoDomesticTransfer">
+      <soap:operation soapAction="urn:doDomesticTransfer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetDomesticTransferTemplates">
+      <soap:operation soapAction="urn:getDomesticTransferTemplates"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="GetNextITANNumber">
+      <soap:operation soapAction="urn:getNextITANNumber"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="SendMTan">
+      <soap:operation soapAction="urn:sendMTan"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="BankCodeSearch">
+      <soap:operation soapAction="urn:BankCodeSearch"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetCorrespondingAccount">
+      <soap:operation soapAction="urn:getCorrespondingAccount"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetMailInBoxMessages">
+      <soap:operation soapAction="urn:getMailInBoxMessages"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetMailOutBoxMessages">
+      <soap:operation soapAction="urn:getMailOutBoxMessages"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+
+    <wsdl:operation name="GetMailBoxMessage">
+      <soap:operation soapAction="urn:getMailBoxMessage"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="urn:ping"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="SelfServiceMobileService">
+    <wsdl:port name="SelfServiceMobileSOAPPort" binding="tns:SelfServiceMobileSOAPBinding">
+      <soap:address location="http://localhost:7001/ebanking.mobile/SelfServiceMobileService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

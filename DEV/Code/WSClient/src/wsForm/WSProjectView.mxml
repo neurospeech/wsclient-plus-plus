@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 label="{fileName}" xmlns:wsForm="wsForm.*"
+		 currentState="{getState(project ? project.generateType : 'State1')}"
+		 >
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="cocoa"/>
+		<s:State name="java"/>
+		<s:State name="flex"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			
+			import wsClasses.AS3Generator;
+			import wsClasses.AS4Generator;
+			import wsClasses.JavaGenerator;
+			import wsClasses.License;
+			import wsClasses.ObjCGenerator;
+			import wsClasses.WSGenerator;
+			
+			[Bindable]
+			public var project:WSProjectProperties = new WSProjectProperties();
+			
+			private function toList(v:Array):ArrayCollection
+			{
+				if(v && v.length>0)
+					return new ArrayCollection(v);
+				return null;
+			}
+			
+			private function getState(p:String):String
+			{
+				switch(p){
+					case "objC":
+						return "cocoa";
+					case "java":
+						return "java";
+					case "flex3":
+					case "flex4":
+						return "flex";
+				}
+				return "State1";
+			}
+
+			public var currentFile:File = null;
+			
+			[Bindable("refresh")]
+			public function get fileName():String{
+				if(currentFile==null)
+					return "Untitled..";
+				return currentFile.name;
+			}
+			
+			
+			private static var _ac:ArrayCollection = null; 
+			private function get availableTypes():ArrayCollection{
+				if(_ac!=null)
+					return _ac;
+				_ac = new ArrayCollection();
+				
+				if(License.demo || License.features.hasFeature("wsclient.cocoa")){
+					_ac.addItem({ label:"Cocoa (Obj-C)", data:"objC" , type: wsClasses.ObjCGenerator , target: [
+						{label:"Mac", type:"mac", file:"libMac"},
+						{label:"iOS (iPhone)", type:"iphone", file:"libMac"}
+					] });
+				}
+				if(License.demo || License.features.hasFeature("wsclient.java")){
+					_ac.addItem({ label:"Java", data:"java" , type: wsClasses.JavaGenerator , target:[
+						{label:"JDK",type:"jdk", file:"libJava"},
+						{label:"Android",type:"android", file:"libJavaAndroid"},
+						{label:"Blackberry",type:"blackberry", file:"libJavaBlackberry"}
+					]});
+				}
+				if(License.demo || License.features.hasFeature("wsclient.flex")){
+					_ac.addItem({ label:"Flex 3", data:"flex3" , type: wsClasses.AS3Generator, target:[] , file:"libFlash" });
+					_ac.addItem({ label:"Flex 4", data:"flex4" , type: wsClasses.AS4Generator, target:[] , file:"libFlash" });
+				}
+				return _ac;				
+			}			
+			
+			
+			private function getFullPath(file:String):String
+			{
+				if(file==null)
+					return null;
+				var f:File = File.applicationDirectory.resolvePath(file);
+				return f.nativePath;
+			}
+			
+			
+			protected function browseFolderClick(event:MouseEvent):void
+			{
+				var f:File = File.documentsDirectory;
+				f.browseForDirectory("Folder for Generated Files");
+				f.addEventListener(Event.SELECT, 
+					function(e:Event):void{
+						var d:File = e.target as File;
+						project.folderPath = d.nativePath;
+					});
+			}
+			
+			protected function closeButtonClicked(event:MouseEvent):void
+			{
+				var caller:WSProjectView = this;
+				if(project.isModified()){
+					Alert.show(
+						"The file is not saved, you sure you want to close it?",
+						"Close", Alert.YES + Alert.NO, caller, function(ce:CloseEvent):void{
+							if(ce.detail == Alert.YES){
+								WSClient.closeProject(caller);
+							}
+						}, null, Alert.NO);
+					return;
+				}
+				WSClient.closeProject(caller);
+			}
+			
+			
+			
+			protected function sourceAndLibraryLinkClicked(event:MouseEvent):void
+			{
+				var f:File = new File(fileSource.text);
+				f.openWithDefaultApplication();				
+			}
+			
+			protected function saveButtonClicked(event:MouseEvent):void
+			{
+				saveProject();		
+			}
+			
+			public function saveProject():void{
+				if(this.currentFile==null){
+					var f:File = File.documentsDirectory;
+					f.addEventListener(Event.SELECT, function(e:Event):void{
+						currentFile = e.target as File;
+						if(currentFile.extension != "wsclient")
+							currentFile = new File(currentFile.nativePath + ".wsclient");
+						project.save(currentFile);
+					});
+					f.browseForSave("Save WSClient++ Configuration");
+				}else{
+					project.save(currentFile);
+				}	
+			}
+			
+			protected function onGenerateClicked(event:MouseEvent):void
+			{
+				var cls:Class = form_Type.selectedItem.type as Class;
+				var clf:ClassFactory = new ClassFactory(cls);
+				var gen:WSGenerator = clf.newInstance() as WSGenerator;
+				
+				project.forAndroid = false;
+				project.forBlackberry = false;
+				project.forIPhone = false;
+				project.forSilverlight = false;
+				
+				// set according to target...
+				switch(project.target){
+					case "iphone":
+						project.forIPhone = true;
+						break;
+					case "android":
+						project.forAndroid = true;
+						break;
+					case "blackberry":
+						project.forBlackberry = true;
+						break;
+					case "silverlight":
+						project.forSilverlight = true;
+						break;
+				}
+				
+				project.generateFiles(gen);			
+			}
+			
+		]]>
+	</fx:Script>
+	<s:Scroller  height="100%" width="100%">
+		<s:VGroup height="100%" width="100%">
+			<s:Form id="form1" width="100%">
+				<s:FormItem width="100%" label="WSDL Urls:">
+					<s:TextArea width="100%" text="@{project.wsdlUrl}"/>
+					<mx:Text text="You can add multiple URLs on new line"/>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Client Type:">
+					<s:layout>
+						<s:HorizontalLayout/>
+					</s:layout>
+					<wsForm:DataList id="form_Type" width="100%" data="@{project.generateType}"
+									 dataProvider="{availableTypes}" labelField="label">
+						<wsForm:layout>
+							<s:HorizontalLayout/>
+						</wsForm:layout>
+					</wsForm:DataList>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Target:"
+							visible.flex="false" includeInLayout.flex="false">
+					<wsForm:DataList id="form_Target" width="100%" data="@{project.target}" dataField="type" dataProvider="{toList(form_Type.selectedItem.target)}" labelField="label">
+						<wsForm:layout>
+							<s:HorizontalLayout/>
+						</wsForm:layout>
+					</wsForm:DataList>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Package Name:"
+							label.cocoa="Class Prefix:">
+					<s:TextInput width="100%"
+								 text="@{project.localNamespace}"
+								 prompt="Java Package Name of classes and must conform to folder name as well"
+								 prompt.cocoa="Cocoa/iOS does not support namespaces, you can use prefix to escape class names"/>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Generate Filename:"
+							visible.java="false" includeInLayout.java="false">
+					<s:TextInput width="100%" prompt="Filename without extension" text="@{project.generateFilename}"/>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Folder to Store:">
+					<s:layout>
+						<s:HorizontalLayout/>
+					</s:layout>
+					<s:TextInput width="100%" prompt="Folder to generate files in" text="@{project.folderPath}"/>
+					<s:Button label="Browse" icon="OpenIcon.png" click="browseFolderClick(event)"/>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Platform Libraries:">
+					<s:Label width="100%"
+							 text="You need to add source files in your project that is included in following &quot;Source and Library&quot; link, please click here to open it."/>
+					<mx:LinkButton label="Source and Library" color="#1531FF" fontSize="14"
+								   click="sourceAndLibraryLinkClicked(event)"
+								   textDecoration="underline"/>
+					<s:Label text="If link above does not open, please find the files at following location."/>
+					<s:TextInput id="fileSource" width="100%" text="{getFullPath(form_Target.selectedItem ? form_Target.selectedItem.file : form_Type.selectedItem.file)}"/>
+				</s:FormItem>
+				<s:FormItem width="100%">
+					<s:layout>
+						<s:HorizontalLayout/>
+					</s:layout>
+					<s:Button label="Generate" icon="WSClient.16.png" click="onGenerateClicked(event)"/>
+					<s:Button label="Save Settings" icon="SaveIcon.png" click="saveButtonClicked(event)"/>
+					<s:Button label="Close" icon="DeleteIcon.png" click="closeButtonClicked(event)"/>
+				</s:FormItem>
+				<s:FormItem width="100%" label="Log:">
+					<s:TextArea width="100%" text="{project.log}"/>
+				</s:FormItem>
+			</s:Form>
+		</s:VGroup>
+	</s:Scroller>
+</s:NavigatorContent>

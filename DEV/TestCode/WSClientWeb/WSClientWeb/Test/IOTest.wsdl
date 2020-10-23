@@ -1,0 +1,70 @@
+<definitions name='HolaBeanWS' targetNamespace='http://bean.hola.sl.com/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://bean.hola.sl.com/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://bean.hola.sl.com/' version='1.0' xmlns:tns='http://bean.hola.sl.com/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:complexType name='userDataVO'>
+    <xs:complexContent>
+     <xs:extension base='tns:userDataVOBase'>
+      <xs:sequence/>
+     </xs:extension>
+    </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType abstract='true' name='userDataVOBase'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='address' type='xs:string'/>
+     <xs:element minOccurs='0' name='city' type='xs:string'/>
+     <xs:element name='countryId' type='xs:int'/>
+     <xs:element minOccurs='0' name='postalCode' type='xs:string'/>
+     <xs:element name='userId' type='xs:int'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='HolaBeanWSName_getUserNameByIdResponse'>
+  <part name='return' type='xsd:string'></part>
+ </message>
+ <message name='HolaBeanWSName_getUserDataByIdResponse'>
+  <part name='return' type='tns:userDataVO'></part>
+ </message>
+ <message name='HolaBeanWSName_getUserNameById'>
+  <part name='arg0' type='xsd:int'></part>
+ </message>
+ <message name='HolaBeanWSName_getUserDataById'>
+  <part name='arg0' type='xsd:int'></part>
+ </message>
+ <portType name='HolaBeanWSName'>
+  <operation name='getUserDataById' parameterOrder='arg0'>
+   <input message='tns:HolaBeanWSName_getUserDataById'></input>
+   <output message='tns:HolaBeanWSName_getUserDataByIdResponse'></output>
+  </operation>
+  <operation name='getUserNameById' parameterOrder='arg0'>
+   <input message='tns:HolaBeanWSName_getUserNameById'></input>
+   <output message='tns:HolaBeanWSName_getUserNameByIdResponse'></output>
+  </operation>
+ </portType>
+ <binding name='HolaBeanWSNameBinding' type='tns:HolaBeanWSName'>
+  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='getUserDataById'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body namespace='http://bean.hola.sl.com/' use='literal'/>
+   </input>
+   <output>
+    <soap:body namespace='http://bean.hola.sl.com/' use='literal'/>
+   </output>
+  </operation>
+  <operation name='getUserNameById'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body namespace='http://bean.hola.sl.com/' use='literal'/>
+   </input>
+   <output>
+    <soap:body namespace='http://bean.hola.sl.com/' use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='HolaBeanWS'>
+  <port binding='tns:HolaBeanWSNameBinding' name='HolaBeanWSNamePort'>
+   <soap:address location='http://46-29-142-254.boly.hu:8080/sl_hola_server_0.1.0-sl_hola_server_0.1.0/HolaBean'/>
+  </port>
+ </service>
+</definitions>
